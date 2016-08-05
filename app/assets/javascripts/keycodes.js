@@ -36,7 +36,7 @@ var query_row = '\
             </div>\
             <div class="col-xs-1">\
                 <div class="btn btn-danger" onclick="remove_row(\'query-row-NUMBER\')">\
-                  <i class="fa fa-minus-square-o fa-lg"></i>\
+                  <i class="">AA</i>\
                 </div>\
             </div>\
         </div>';
@@ -92,8 +92,12 @@ function add_new_row(){
 
 function change_name_of_input_field(second_select_id){
     console.log(second_select_id);
-    var new_name = "input-" + second_select_id.split("-")[2];
-    $('#' + new_name).prop("name", new_name);
+    var number = second_select_id.split("-")[2];
+    var new_id = "#input-" + number;
+    var new_name = $("#first-parameter-" + number).val() + "--" + $("#second-parameter-" + number).val();
+    console.log("#first-parameter-" + number);
+    console.log($("#first-parameter-" + number));
+    $(new_id).prop("name", new_name);
 }
 
 function remove_row(row_id){
