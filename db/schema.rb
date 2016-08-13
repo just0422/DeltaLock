@@ -11,18 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160702193521) do
+ActiveRecord::Schema.define(version: 20160808160326) do
 
   create_table "end_users", force: :cascade do |t|
     t.string   "name",         limit: 255
     t.string   "address",      limit: 255
     t.string   "email",        limit: 255
     t.string   "phone",        limit: 255
-    t.string   "detpartment",  limit: 255
+    t.string   "department",   limit: 255
     t.integer  "store_number", limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "group_id",     limit: 4
   end
+
+  add_index "end_users", ["group_id"], name: "index_end_users_on_group_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -30,9 +33,7 @@ ActiveRecord::Schema.define(version: 20160702193521) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "keys", force: :cascade do |t|
-    t.integer  "key_hash",    limit: 4,   null: false
-    t.integer  "primary_key", limit: 4,   null: false
+  create_table "keys", primary_key: "key_hash", force: :cascade do |t|
     t.string   "key",         limit: 255
     t.string   "master_key",  limit: 255
     t.string   "control_key", limit: 255
@@ -52,14 +53,17 @@ ActiveRecord::Schema.define(version: 20160702193521) do
   add_index "po_ks", ["key_id"], name: "index_po_ks_on_key_id", using: :btree
   add_index "po_ks", ["purchase_order_id"], name: "index_po_ks_on_purchase_order_id", using: :btree
 
-  create_table "purchase_orders", force: :cascade do |t|
-    t.integer  "so_number",   limit: 4
-    t.integer  "primary_key", limit: 4
-    t.integer  "po_number",   limit: 4
+  create_table "purchase_orders", primary_key: "so_number", force: :cascade do |t|
+    t.integer  "po_number",    limit: 4
     t.date     "date_order"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "purchaser_id", limit: 4
+    t.integer  "end_user_id",  limit: 4
   end
+
+  add_index "purchase_orders", ["end_user_id"], name: "index_purchase_orders_on_end_user_id", using: :btree
+  add_index "purchase_orders", ["purchaser_id"], name: "index_purchase_orders_on_purchaser_id", using: :btree
 
   create_table "purchasers", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -71,4 +75,7 @@ ActiveRecord::Schema.define(version: 20160702193521) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "end_users", "groups"
+  add_foreign_key "purchase_orders", "end_users"
+  add_foreign_key "purchase_orders", "purchasers"
 end

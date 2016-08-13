@@ -14,3 +14,12 @@
 //= require bootstrap
 //= require jquery_ujs
 //= require_tree .
+//
+$(document).ready(function(){
+    $("li[data-link]").click(function() {
+          window.location = $(this).data("link");
+    });
+    $("tr[data-link]").click(function() {
+          window.location = $(this).data("link");
+    });
+});

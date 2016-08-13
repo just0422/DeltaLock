@@ -1,12 +1,22 @@
-<div id="homepage-vertical-align" class="container">
-	<div id="homepage-container">
-		<h1 id="homepage-logo-text"> DeltaLock </h1>
-		
-		<div id="buttons">
-			<a href="/keycodes" class="thumbnail col-sm-4">
-				<h1>Search for keycodes</h1>
-			</a>
-		</div>
-	</div>		
-</div>
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DeltaLock</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+    <%= csrf_meta_tags %>
+</head>
+<body>
+    <div id="homepage-vertical-align" class="container">
+        <div id="homepage-container">
+            <h1 id="homepage-logo-text"> DeltaLock </h1>
+            
+            <div id="buttons">
+                <a href="/keycodes" class="thumbnail col-sm-4">
+                    <h1>Search for keycodes</h1>
+                </a>
+            </div>
+        </div>		
+    </div>
+</body>
+</html>

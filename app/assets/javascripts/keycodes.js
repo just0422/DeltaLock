@@ -44,6 +44,8 @@ var query_row = '\
 
 $(document).ready(function(){
     add_new_row();
+
+
 })
 // var searchbar_template = 
 
