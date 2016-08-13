@@ -1,7 +1,7 @@
 class CreatePoKs < ActiveRecord::Migration
   def change
     create_table :po_ks do |t|
-      t.integer :quanitity      
+      t.integer :quantity      
       t.belongs_to :key, index: true
       t.belongs_to :purchase_order, index: true
 

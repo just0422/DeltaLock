@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20160808160326) do
     t.string   "address",      limit: 255
     t.string   "email",        limit: 255
     t.string   "phone",        limit: 255
-    t.string   "department",   limit: 255
+    t.string   "detpartment",  limit: 255
     t.integer  "store_number", limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false

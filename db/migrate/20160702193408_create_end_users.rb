@@ -5,7 +5,7 @@ class CreateEndUsers < ActiveRecord::Migration
       t.string :address
       t.string :email
       t.string :phone
-      t.string :detpartment
+      t.string :department
       t.integer :store_number
 
       t.timestamps null: false
