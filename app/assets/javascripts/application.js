@@ -23,3 +23,16 @@ $(document).ready(function(){
           window.location = $(this).data("link");
     });
 });
+
+function toggle_edit_save(button){
+	var id = $(button).attr('id').split('-')[0];
+
+	if ($(button).html() == 'Edit'){
+		$(button).css('display', 'none');
+		$("#" + id + "-submit").css('display', 'block');
+	}
+	else{
+		$(button).css('display', 'none');
+		$("#" + id + "-edit").css('display', 'block');
+	}
+}

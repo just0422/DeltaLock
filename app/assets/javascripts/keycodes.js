@@ -28,11 +28,11 @@ var query_row = '\
                 </select>\
             </div>\
             <div class="col-xs-2">\
-                <select class="form-control" id="second-parameter-NUMBER" disabled onchange="change_name_of_input_field(this.id)">\
+                <select class="form-control" id="second-parameter-NUMBER" disabled>\
                 </select>\
             </div>\
             <div class="col-xs-7">\
-                <input type="text" class="form-control" id="input-NUMBER" placeholder name>\
+                <input type="text" class="form-control" id="input-NUMBER" placeholder name onchange="change_name_of_input_field(this.id)">\
             </div>\
             <div class="col-xs-1">\
                 <div class="btn btn-danger" onclick="remove_row(\'query-row-NUMBER\')">\
@@ -94,7 +94,7 @@ function add_new_row(){
 
 function change_name_of_input_field(second_select_id){
     console.log(second_select_id);
-    var number = second_select_id.split("-")[2];
+    var number = second_select_id.split("-")[1];
     var new_id = "#input-" + number;
     var new_name = $("#first-parameter-" + number).val() + "--" + $("#second-parameter-" + number).val();
     console.log("#first-parameter-" + number);

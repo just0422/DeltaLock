@@ -1,5 +1,6 @@
 class KeycodesController < ApplicationController
-    def index
+	respond_to :html, :js
+	def index
     end
 
     def show

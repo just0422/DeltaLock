@@ -1,13 +1,16 @@
 <div class="row">
     <div class = "col-xs-6">
-        <ul class="list-group">
-            <% Rails.logger.debug(@enduser["id"]) %>
+		<ul class="list-group" id="enduser-list">
             <% EndUser.column_names.each do |title| %>
-                <% Rails.logger.debug(title) %>
-                <% Rails.logger.debug(@enduser[title]) %>
-                <li class="list-group-item"><strong><%= title %> : </strong><%= @enduser[title] %></li>
+				<li class="list-group-item"><strong><%= title %> : </strong><%= @enduser[title] %> <input type="button" value="Click Me" style="float: right;"></li>
             <% end %>
-        </ul>
+		</ul>
+		<div id="enduser-edit" onclick="toggle_edit_save(this)" class="btn" style="display:block;">Edit</div>
+		<div id="enduser-submit" onclick="toggle_edit_save(this)" class="btn" style="display:none;">
+			<%# link_to edit_end_user_path(@end_user), remote: true %>
+				Save
+			<%# end %>
+		</div>
     </div>
     <div class = "col-xs-6">
         <h2>Associated Purchase Order(s)</h2>
