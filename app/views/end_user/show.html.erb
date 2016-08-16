@@ -1,16 +1,16 @@
+<h1>End Users</h1>
+
 <div class="row">
     <div class = "col-xs-6">
-		<ul class="list-group" id="enduser-list">
-            <% EndUser.column_names.each do |title| %>
-				<li class="list-group-item"><strong><%= title %> : </strong><%= @enduser[title] %> <input type="button" value="Click Me" style="float: right;"></li>
-            <% end %>
-		</ul>
-		<div id="enduser-edit" onclick="toggle_edit_save(this)" class="btn" style="display:block;">Edit</div>
-		<div id="enduser-submit" onclick="toggle_edit_save(this)" class="btn" style="display:none;">
-			<%# link_to edit_end_user_path(@end_user), remote: true %>
-				Save
-			<%# end %>
-		</div>
+		<div id="enduser-form" style="display;none;"></div>
+		<div id="enduser-edit">
+			<ul id="enduser">
+				<%= render 'enduserinfo' %>
+			</ul>
+			<%= link_to edit_end_user_path(@enduser), remote: true do %>
+				<button>Save</button>
+			<% end %>
+		
     </div>
     <div class = "col-xs-6">
         <h2>Associated Purchase Order(s)</h2>

@@ -10,8 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery_ujs
 //= require jquery
+//= require jquery_ujs
 //= require bootstrap
 //= require_tree .
 //
@@ -25,14 +25,31 @@ $(document).ready(function(){
 });
 
 function toggle_edit_save(button){
-	var id = $(button).attr('id').split('-')[0];
+	var id = '#' + $(button).attr('id').split('-')[0];
+	var cl = '.' + $(button).attr('id').split('-')[0];
+	labels = $(cl + '-label');
+	inputs = $(cl + '-input');
 
 	if ($(button).html() == 'Edit'){
 		$(button).css('display', 'none');
-		$("#" + id + "-submit").css('display', 'block');
+		$(id + "-submit").css('display', 'block');
+
+		for (var i = 0; i < labels.length; i++){
+			$(labels[i]).css('display', 'none');
+			$(inputs[i]).css('display', 'block');
+			
+			$(inputs[i]).find('input').val($(labels[i]).find('span').html());
+		}
 	}
 	else{
 		$(button).css('display', 'none');
-		$("#" + id + "-edit").css('display', 'block');
+		$(id + "-edit").css('display', 'block');
+		
+		for (var i = 0; i < labels.length; i++){
+			$(labels[i]).css('display', 'block');
+			$(inputs[i]).css('display', 'none');
+			
+			$(labels[i]).find('span').html($(inputs[i]).find('input').val());
+		}
 	}
 }
