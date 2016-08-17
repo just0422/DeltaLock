@@ -50,7 +50,7 @@ Key.create!([{
 EndUser.create!([{
     id: 1,
     name: "asdf",
-    address: "aa",
+    address: "100 Spear st, San Francisco, CA",
     email: ";lkj",
     phone: "234",
     department: "asdf",
@@ -59,7 +59,7 @@ EndUser.create!([{
 {
     id: 2,
     name: "sdf",
-    address: "fdaasdf",
+    address: "101 Spear st, San Francisco, CA",
     email: "jjjjjj",
     phone: "2344",
     department: "as",
