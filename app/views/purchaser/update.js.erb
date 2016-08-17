@@ -1,0 +1,5 @@
+
+$("#purchaser-list").html("<%= j (render 'purchaserinfo') %>");
+$("#purchaser-form").fadeOut(300, function(){
+	$('#purchaser-list').fadeIn(300);
+});

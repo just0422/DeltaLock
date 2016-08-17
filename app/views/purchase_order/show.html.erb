@@ -1,10 +1,11 @@
+<h1>Purchase Order</h1>
+
 <div class = "row">
-    <div class = "col-xs-6">
-        <ul class = "list-group">
-            <% PurchaseOrder.column_names.each do |po| %>
-                <li class = list-group-item><strong> <%= po %> : </strong><%= @purchaseorder[po] %></li>
-            <% end %>
-        </ul>
+	<div class = "col-xs-6">
+		<ul id="purchaseorder-form" class="list-group" style="display:none;"></ul>
+		<div id="purchaseorder-list">
+			<%= render 'purchaseorderinfo' %>
+		</div>
     </div>
     <div class = "col-xs-6">
         <h2>End User:</h2>

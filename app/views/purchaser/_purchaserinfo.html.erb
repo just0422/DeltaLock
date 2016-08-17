@@ -1,0 +1,13 @@
+<ul class="list-group">
+	<% Purchaser.column_names.each do |title| %>
+		<li class="list-group-item">
+			<div class="purchaser-label">
+				<strong><%= title %> : </strong>
+				<span><%= @purchaser[title] %></span>
+			</div>
+		</li>
+	<% end %>
+</ul>
+<%= link_to edit_purchaser_path(@purchaser), remote: true do %>
+	<button class="btn">Edit</button>
+<% end %>

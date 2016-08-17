@@ -1,0 +1,8 @@
+<%= form_for @purchaser, remote: true do |f| %>
+	<li class="list-group-item"><%= f.label :name %>		 :	<%= f.text_field :name %></br></li>
+	<li class="list-group-item"><%= f.label :address %>		 :	<%= f.text_field :address %></br></li>
+	<li class="list-group-item"><%= f.label :email %>		 :	<%= f.text_field :email %></br></li>
+	<li class="list-group-item"><%= f.label :phone %>		 :	<%= f.text_field :phone %></br></li>
+	<li class="list-group-item"><%= f.label :fax %>	 		 : 	<%= f.text_field :fax %></br></li>
+	<%= f.button :submit %>
+<% end %>

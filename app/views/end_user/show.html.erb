@@ -1,13 +1,10 @@
-<h1>End Users</h1>
+<h1>End User</h1>
 
 <div class="row">
     <div class = "col-xs-6">
 		<ul id="enduser-form" class="list-group" style="display:none;"></ul>
 		<div id="enduser-list">
 			<%= render 'enduserinfo' %>
-			<%= link_to edit_end_user_path(@enduser), remote: true do %>
-				<button class="btn">Edit</button>
-			<% end %>
 		</div>	
     </div>
     <div class = "col-xs-6">
