@@ -1,13 +1,14 @@
-
-            <% EndUser.column_names.each do |title| %>
-				<li class="list-group-item">
-					<div class="enduser-label">
-						<strong><%= title %> : </strong>
-						<span><%= @enduser[title] %></span>
-					</div>
-					<div class="enduser-input" style="display:none;">
-						<label for="enduser-label" style="display: inline;"><%= title %> :</label>
-						<input type="text" val="<%= @enduser[title] %>">
-					</div>
-				</li>
-            <% end %>
+<ul class="list-group">
+	<% EndUser.column_names.each do |title| %>
+		<li class="list-group-item">
+			<div class="enduser-label">
+				<strong><%= title %> : </strong>
+				<span><%= @enduser[title] %></span>
+			</div>
+			<div class="enduser-input" style="display:none;">
+				<label for="enduser-label" style="display: inline;"><%= title %> :</label>
+				<input type="text" val="<%= @enduser[title] %>">
+			</div>
+		</li>
+	<% end %>
+</ul>

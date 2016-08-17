@@ -1,3 +1,5 @@
 
-$('#enduser-form').html("<%= j (render 'form') %>");
-$('#enduser-form').slideDown(300);
+$('#enduser-list').fadeOut(300, function(){
+	$('#enduser-form').html("<%= j (render 'form') %>");
+	$('#enduser-form').fadeIn(300);
+});

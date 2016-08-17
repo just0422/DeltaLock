@@ -1,2 +1,5 @@
+
 $("#enduser").html("<%= j (render 'enduserinfo') %>");
-$("#enduser-form").slideUp(300);
+$("#enduser-form").fadeOut(300, function(){
+	$('#enduser-list').fadeIn(300);
+});
