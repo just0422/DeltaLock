@@ -1,9 +1,9 @@
 <ul class="list-group">
-	<% EndUser.column_names.each do |title| %>
+	<% Key.column_names.each do |title| %>
 		<li class="list-group-item">
-			<div class="enduser-label">
+			<div class="key-label">
 				<strong><%= title %> : </strong>
-				<span><%= @enduser[title] %></span>
+				<span><%= @key[title] %></span>
 			</div>
 		</li>
 	<% end %>

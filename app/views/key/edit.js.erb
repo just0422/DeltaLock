@@ -1,0 +1,5 @@
+
+$('#key-list').fadeOut(300, function(){
+	$('#key-form').html("<%= j (render 'form') %>");
+	$('#key-form').fadeIn(300);
+});
