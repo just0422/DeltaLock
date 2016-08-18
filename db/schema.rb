@@ -11,18 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808160326) do
+ActiveRecord::Schema.define(version: 20160817185432) do
 
   create_table "end_users", force: :cascade do |t|
     t.string   "name",         limit: 255
     t.string   "address",      limit: 255
     t.string   "email",        limit: 255
     t.string   "phone",        limit: 255
-    t.string   "detpartment",  limit: 255
+    t.string   "department",   limit: 255
     t.integer  "store_number", limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.integer  "group_id",     limit: 4
+    t.float    "lat",          limit: 24
+    t.float    "lng",          limit: 24
   end
 
   add_index "end_users", ["group_id"], name: "index_end_users_on_group_id", using: :btree
@@ -43,7 +45,7 @@ ActiveRecord::Schema.define(version: 20160808160326) do
   end
 
   create_table "po_ks", force: :cascade do |t|
-    t.integer  "quanitity",         limit: 4
+    t.integer  "quantity",          limit: 4
     t.integer  "key_id",            limit: 4
     t.integer  "purchase_order_id", limit: 4
     t.datetime "created_at",                  null: false

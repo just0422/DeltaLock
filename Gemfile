@@ -4,6 +4,7 @@ gem 'responders'
 gem 'geokit-rails'
 gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails'
+gem 'gmaps4rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

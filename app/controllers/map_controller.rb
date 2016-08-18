@@ -1,7 +1,16 @@
 class MapController < ApplicationController
-    def index
-        @enduser = EndUser.find(1)
+	before_action :set_enduser, only: [:show]
+	def index
+        @enduser = EndUser.find(3)
 
-        EndUser.within(5, :origin => [37.792,-122.393])
+		@end_users = EndUser.within(5000, :origin => @enduser[:address])
     end
+
+	def show
+	end
+
+	private 
+	def set_enduser
+		@enduser = EndUser.find(params[:id])
+	end
 end

@@ -7,6 +7,10 @@ class EndUserController < ApplicationController
     end
 	
 	def update
+		geo = EndUser.geocode(params[:end_user][:address])
+		@enduser[:lat] = geo.lat
+		@enduser[:lng] = geo.lng
+
 		@enduser.update_attributes(enduser_params)
 	end
 

@@ -42,7 +42,7 @@ class KeycodesController < ApplicationController
             when "Key Codes"
                 case column
                 when "Key Code"
-                    @key_codes_list += Key.where("key like ?", "%#{val}%")
+                    @key_codes_list += Key.where("`key` like ?", "%#{val}%")
                 when "Master Key"
                     @key_codes_list += Key.where("master_key like ?", "%#{val}%")
                 when "Control Key"
@@ -59,7 +59,7 @@ class KeycodesController < ApplicationController
                 when "S.O. Number"
                     @purchase_orders_list += PurchaseOrder.where("so_number like ?", "%#{val}%")
                 when "P.O. Number"
-                    @purchase_orders_list += PurchaseOrder.where("master_key like ?", "%#{val}%")
+                    @purchase_orders_list += PurchaseOrder.where("po_number like ?", "%#{val}%")
                 when "Date Ordered"
                     @purchase_orders_list += PurchaseOrder.where("date_order like ?", "%#{val}%")
                 else
