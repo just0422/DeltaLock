@@ -33,6 +33,8 @@ $(document).ready(function(){
 			red_slider.slider('setValue', parseInt($('#red-slider').val()));
 			$('#red-slider-value').val(parseInt($('#red-slider').val()));
 		}
+		
+		resetMarkerColors();
 	});
 	$('#red-slider').slider({
 		formatter: function(value) {
@@ -42,6 +44,8 @@ $(document).ready(function(){
 	$('#red-slider').on('slide', function(slider){
 		red_circle.setRadius(parseInt(slider.value) * MILE);
 		$('#red-slider-value').val(slider.value);
+
+		resetMarkerColors();
 	});
 });
 
@@ -91,4 +95,24 @@ function setYellowMax(value){
 		red_slider.slider("setAttribute", "max", maxValMiles);
 		red_slider.slider('setValue', maxValMiles);
 	}
+}
+
+function resetMarkerColors(){
+	for (var i = 0; i < red_markers.length; i++)
+		checkMarker(red_markers[i]);
+	for (var i = 0; i < yellow_markers.length; i++)
+		checkMarker(yellow_markers[i]);
+	for (var i = 0; i < green_markers.length; i++)
+		checkMarker(green_markers[i]);
+}
+function checkMarker(marker){
+		if (checkCircle(marker, red_circle))
+			marker.setIcon(red_icon);
+		else if (checkCircle(marker, yellow_circle))
+			marker.setIcon(yellow_icon);
+		else
+			marker.setIcon(green_icon);
+}
+function checkCircle(marker, circle){
+	return google.maps.geometry.spherical.computeDistanceBetween(circle.getCenter(), marker.position) <= circle.getRadius();
 }

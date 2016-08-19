@@ -66,9 +66,45 @@ EndUser.create!([{
     store_number: 1
 },
 {
+    id: 7,
+    name: "New London",
+    address: "49 Washington St, New London, CT 06320",
+    email: "jj",
+    phone: "2344",
+    department: "as",
+    store_number: 1
+},
+{
+    id: 6,
+    name: "Church",
+    address: "64-34 Myrtle Ave, Glendale, NY 11385",
+    email: "jj",
+    phone: "2344",
+    department: "as",
+    store_number: 1
+},
+{
+    id: 5,
+    name: "Luhi",
+    address: "131 Brookville Rd, Glen Head, NY 11545",
+    email: "jj",
+    phone: "2344",
+    department: "as",
+    store_number: 1
+},
+{
+    id: 4,
+    name: "asdf",
+    address: "715 Todt Hill Rd, Staten Island, NY 10304",
+    email: "asdfa",
+    phone: "2344444",
+    department: "as",
+    store_number: 1
+},
+{
     id: 3,
     name: "asdfasdf",
-    address: "fdssssaa",
+    address: "112 Ocean Avenue, Amytiville, NY",
     email: "ffdsas",
     phone: "64221",
     department: "asdf",
