@@ -60,6 +60,7 @@ function setRedSliderValue(value){
 		red_circle.setRadius(parseInt(sliderVal) * MILE);
 		red_slider.slider('setValue', sliderVal);
 	}
+	resetMarkerColors();
 }
 function setYellowSliderValue(value){
 	var sliderVal = parseInt(value);
@@ -72,6 +73,7 @@ function setYellowSliderValue(value){
 		yellow_circle.setRadius(sliderVal * MILE);
 		yellow_slider.slider('setValue', sliderVal);
 	}
+	resetMarkerColors();
 }
 function setYellowMax(value){
 	var maxValMeters = Math.floor(parseInt(value) * MILE);
