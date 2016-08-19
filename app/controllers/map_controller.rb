@@ -1,5 +1,7 @@
 class MapController < ApplicationController
 	before_action :set_enduser, only: [:show]
+	respond_to :html, :js
+
 	def index
         @enduser = EndUser.find(3)
 

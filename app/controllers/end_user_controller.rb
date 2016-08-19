@@ -16,7 +16,7 @@ class EndUserController < ApplicationController
 
 	private
 	def enduser_params
-		params.require(:end_user).permit(:name, :address, :phone, :department, :store_number, :group)
+		params.require(:end_user).permit(:name, :email, :address, :phone, :department, :store_number, :group)
 	end
 
 	def set_enduser
