@@ -12,17 +12,21 @@ class MapController < ApplicationController
 		if not params.key?("red")
 			params[:red] = 25
 			params[:yellow] = 50
+			params[:green] = 100
 		end
 
-		if Integer(params[:yellow]) > 100
-			params[:max] = params[:yellow]
-		else
-			params[:max] = 100
+		if Integer(params[:yellow]) > Integer(params[:green])
+			params[:green] = params[:yellow]
 		end
 
 		@end_users_red = EndUser.within(params[:red], :origin => @enduser[:address]);
 		@end_users_yellow = EndUser.in_range(params[:red]..params[:yellow], :origin => @enduser[:address]);
 		@end_users_green = EndUser.beyond(params[:yellow], :origin => @enduser[:address]);
+
+		
+		@end_users_red.to_a.delete(@enduser)	
+		@end_users_yellow.to_a.delete(@enduser)	
+		@end_users_green.to_a.delete(@enduser)	
 
 		@red_key_codes = get_associated_keys(@end_users_red)
 		@yellow_key_codes = get_associated_keys(@end_users_yellow)

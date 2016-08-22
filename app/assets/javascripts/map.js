@@ -8,9 +8,6 @@ var MILE = 1609.34;
 $(document).ready(function(){
 	red_slider =  $("#red-slider").slider();
 	yellow_slider =  $("#yellow-slider").slider();
-	$("#yellow-slider-value").val(parseInt(yellow_slider.val()));
-	$('#red-slider-value').val(parseInt(red_slider.val()));
-	$("#yellow-slider-max").val(yellow_slider.slider("getAttribute", "max"));
 
 	$('#yellow-slider').slider({
 		formatter: function(value) {
@@ -81,7 +78,7 @@ function setYellowMax(value){
 	var currentYellowValue = parseInt(yellow_slider.val());
 	var currentRedValue = parseInt(yellow_slider.val());
 
-	yellow_slider.slider('setAttribute', 'max', maxValMeters);
+	yellow_slider.slider('setAttribute', 'max', maxValMiles);
 
 	if (currentYellowValue >= maxValMiles){
 		yellow_slider.slider('setValue', maxValMiles);

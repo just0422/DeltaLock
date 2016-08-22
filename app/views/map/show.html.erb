@@ -10,22 +10,29 @@
 			   data-slider-handle="round"/>
 		<input id="red-slider-value"
 			   name="red" 
-			   type="text" onchange="setRedSliderValue(this.value)"/>
+			   type="text" 
+			   value="<%= params[:red] %>" 
+			   onchange="setRedSliderValue(this.value)"/>
 
 		<input id="yellow-slider" 
 			   type="text" 
 			   data-slider-min="0" 
-			   data-slider-max="<%= params[:max] %>" 
+			   data-slider-max="<%= params[:green] %>" 
 			   data-slider-step="1" 
 			   data-slider-value="<%= params[:yellow] %>" 
 			   data-slider-id="yellow-data-slider" 
 			   data-slider-handle="round"/>
 		<input id="yellow-slider-value" 
 			   name="yellow" 
-			   type="text" 
+			   type="text"
+			   value="<%= params[:yellow] %>" 
 			   onchange="setYellowSliderValue(this.value)"/>
 
-		<input id="yellow-slider-max" type"text" onchange="setYellowMax(this.value)"/>
+		<input id="yellow-slider-max" 
+			   type="text" 
+			   name="green" 
+			   value="<%= params[:green] %>" 
+			   onchange="setYellowMax(this.value)"/>
 		<%= submit_tag "Refresh" %>
 	<% end %>
 </div>
@@ -42,7 +49,8 @@
 
 				map = new google.maps.Map(document.getElementById('map'), {
 					center: endUserCenter,
-					zoom: 8
+					zoom: 8,
+					radius: <%= Integer(params[:yellow]) * 1609.34 %>
 					});
 
 				yellow_circle = new google.maps.Circle({
@@ -77,12 +85,10 @@
 				var green_icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
 
 				<% @end_users_red.each do |eur| %>
-					<% unless eur[:address] == @enduser[:address] %>
-						var eurLocation = new google.maps.LatLng(<%= eur[:lat] %>, <%= eur[:lng] %>);
-						var mark = new google.maps.Marker({ position: eurLocation, map: map });
-						red_markers.unshift(mark);
-						red_markers[0].setIcon(red_icon);
-					<% end %>
+					var eurLocation = new google.maps.LatLng(<%= eur[:lat] %>, <%= eur[:lng] %>);
+					var mark = new google.maps.Marker({ position: eurLocation, map: map });
+					red_markers.unshift(mark);
+					red_markers[0].setIcon(red_icon);
 				<% end %>
 				<% @end_users_yellow.each do |euy| %>
 					var euyLocation = new google.maps.LatLng(<%= euy[:lat] %>, <%= euy[:lng] %>);
@@ -107,45 +113,15 @@
 				var bounds = yellow_circle.getBounds();
 
 				map.fitBounds(bounds);
-/*
-				var handler = Gmaps.build('Google');
-				var yellow, green, red;
-				handler.buildMap({ internal: {id: 'map'}}, function(){
-					var markers = handler.addMarkers([
-						{ lat: 43, lng: 3.5},
-						{ lat: 45, lng: 4},
-						{ lat: 47, lng: 3},
-						{ lat: 49, lng: 4},
-						{ lat: 51, lng: 3.5}
-						],
-						{ strokeColor: '#00FF00' });
 
-					green = handler.addCircles(
-						[{ lat: 47, lng: 3, radius: 500000}],
-						{
-							strokeColor: '#00FF00',
-							fillColor: '#00FF00',
-							fillOpacity: '0.1'
-						});
-					yellow = handler.addCircles(
-						[{ lat: 47, lng: 3, radius: 250000}],
-						{
-							strokeColor: '#FFFF00',
-							fillColor: '#FFFF00',
-							fillOpacity: '0.1'
-						});
-					red = handler.addCircles(
-						[{ lat: 47, lng: 3, radius: 100000}],
-						{
-							strokeColor: '#FF0000',
-							fillColor: '#FF0000',
-							fillOpacity: '0.1'
-						});
-
-					handler.bounds.extendWith(markers);
-					handler.fitMapToBounds();
+				$(document).ready(function() {
+					$(window).keydown(function(event){
+						if(event.keyCode == 13) {
+							event.preventDefault();
+							return false;
+						}
+					});
 				});
-				yellow.setRadius(1000);*/
 			</script>
 		</div>	  
 	</div>
