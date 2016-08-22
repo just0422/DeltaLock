@@ -1,9 +1,33 @@
 <div>
-	<input id="red-slider" type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="25" data-slider-id="red-data-slider" data-slider-handle="round"/>
-	<input id="red-slider-value" type="text" onchange="setRedSliderValue(this.value)"/>
-	<input id="yellow-slider" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50" data-slider-id="yellow-data-slider" data-slider-handle="round"/>
-	<input id="yellow-slider-value" type="text" onchange="setYellowSliderValue(this.value)"/>
-	<input id="yellow-slider-max" type"text" onchange="setYellowMax(this.value)"/>
+	<%= form_tag map_path(params[:id]), :method => :get do %>
+		<input id="red-slider" 
+			   type="text" 
+			   data-slider-min="0" 
+			   data-slider-max="<%= params[:yellow] %>" 
+			   data-slider-step="1" 
+			   data-slider-value="<%= params[:red] %>" 
+			   data-slider-id="red-data-slider" 
+			   data-slider-handle="round"/>
+		<input id="red-slider-value"
+			   name="red" 
+			   type="text" onchange="setRedSliderValue(this.value)"/>
+
+		<input id="yellow-slider" 
+			   type="text" 
+			   data-slider-min="0" 
+			   data-slider-max="<%= params[:max] %>" 
+			   data-slider-step="1" 
+			   data-slider-value="<%= params[:yellow] %>" 
+			   data-slider-id="yellow-data-slider" 
+			   data-slider-handle="round"/>
+		<input id="yellow-slider-value" 
+			   name="yellow" 
+			   type="text" 
+			   onchange="setYellowSliderValue(this.value)"/>
+
+		<input id="yellow-slider-max" type"text" onchange="setYellowMax(this.value)"/>
+		<%= submit_tag "Refresh" %>
+	<% end %>
 </div>
 
 <div class="row">
@@ -26,7 +50,7 @@
 					strokeWeight: 5,
 					fillColor: '#FFFF00',
 					fillOpacity: '0.1',
-					radius: 80467,
+					radius: <%= Integer(params[:yellow]) * 1609.34 %>,
 					center: endUserCenter,
 					map: map,
 					clickable: false
@@ -36,11 +60,11 @@
 					strokeWeight: 5,
 					fillColor: '#FF0000',
 					fillOpacity: '0.1',
-					radius: 40233,
+					radius: <%= Integer(params[:red]) * 1609.34 %>,
 					center: endUserCenter,
 					map: map,
 					clickable: false
-					});
+				});
 				
 						//'http://maps.google.com/mapfiles/kml/paddle/wht-stars.png');
 						//http://maps.google.com/mapfiles/ms/icons/green-dot.png')
@@ -80,7 +104,7 @@
 				marker.setIcon("http://maps.google.com/mapfiles/kml/paddle/blu-stars-lv.png");
 
 
-				var bounds = red_circle.getBounds();
+				var bounds = yellow_circle.getBounds();
 
 				map.fitBounds(bounds);
 /*
@@ -124,5 +148,20 @@
 				yellow.setRadius(1000);*/
 			</script>
 		</div>	  
+	</div>
+	<div class='col-xs-4'>
+		<div class="panel-group" id="accordion">
+			<% @current_keys = @green_key_codes %>
+			<% @uid = "green-key-codes" %>
+			<%= render 'list' %>
+
+			<% @current_keys = @yellow_key_codes %>
+			<% @uid = "yellow-key-codes" %>
+			<%= render 'list' %>
+
+			<% @current_keys = @red_key_codes %>
+			<% @uid = "red-key-codes" %>
+			<%= render 'list' %>
+		</div>
 	</div>
 </div>

@@ -1,0 +1,16 @@
+<% if @current_keys %>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#<%= @uid %>"><%= @uid.split('-')[0].capitalize %></a>
+			</h4>
+		</div>
+		<div id="<%= @uid %>" class="panel-collapse collapse in">
+			<ul class="list-group">
+				<% @current_keys.each do |ck| %>
+					<li class="list-group-item"><%= ck[:key] %></li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+<% end %>
