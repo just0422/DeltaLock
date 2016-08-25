@@ -1,21 +1,22 @@
 class KeycodesController < ApplicationController
-	respond_to :html, :js
+	before_action :set_arrays
+	after_action :uniq_arrays
+
 	def index
     end
 
+	def get_purchasers
+		params.each do |key, val|
+            column = key.split('--')[1]
+			@purchasers_list += purchaser_check(column, val)
+		end	
+        @purchasers_list = @purchasers_list.uniq
+		respond_to do |format|
+			format.js
+		end
+	end
+
     def show
-        Rails.logger.debug(params)
-
-        end_user_params = Hash.new
-        key_codes_params = Hash.new
-        purchase_orders_params = Hash.new
-        purchases_params = Hash.new
-
-        @end_users_list = Array.new
-        @key_codes_list = Array.new
-        @purchase_orders_list = Array.new
-        @purchasers_list = Array.new
-
         params.each do |key, val|
             table = key.split('--')[0]
             column = key.split('--')[1]
@@ -68,36 +69,48 @@ class KeycodesController < ApplicationController
                     Rails.logger.debug(val)
                 end
             when "Purchasers"
-                case column
-                when "Name"
-                    @purchasers_list += Purchaser.where("name like ?", "%#{val}%")
-                when "Address"
-                    @purchasers_list += Purchaser.where("address like ?", "%#{val}%")
-                when "Email"
-                    @purchasers_list += Purchaser.where("email like ?", "%#{val}%")
-                when "Phone"
-                    @purchasers_list += Purchaser.where("phone like ?", "%#{val}%")
-                when "Fax"
-                    @purchasers_list += Purchaser.where("fax like ?", "%#{val}%")
-                else
-                    Rails.logger.debug("** ERROR -- Did not match any Purchase Fields")
-                    Rails.logger.debug(key)
-                    Rails.logger.debug(val)
-                end
+				Rails.logger.debug(purchaser_check(column, val).class)
+				@purchasers_list += purchaser_check(column, val)
             else
                 Rails.logger.debug ("SOMETHING WENT WRONG ==> " + key)
             end
         end
-        Rails.logger.debug("** PARAMETERS **")
-        Rails.logger.debug(@end_users_list)
-        Rails.logger.debug(@key_codes_list)
-        Rails.logger.debug(@purchase_orders_list)
-        Rails.logger.debug(@purchases_list)
-
-        @end_users_list = @end_users_list.uniq
-        @key_codes_list = @key_codes_list.uniq
-        @purchase_orders_list = @purchase_orders_list.uniq
-        @purchasers_list = @purchasers_list.uniq
 
     end
+
+	private
+	def purchaser_check(key, val)
+		case key
+		when "Name"
+			return Purchaser.where("name like ?", "%#{val}%")
+		when "Address"
+			return Purchaser.where("address like ?", "%#{val}%")
+		when "Email"
+			return Purchaser.where("email like ?", "%#{val}%")
+		when "Phone"
+			return Purchaser.where("phone like ?", "%#{val}%")
+		when "Fax"
+			return Purchaser.where("fax like ?", "%#{val}%")
+		else
+			Rails.logger.debug("** ERROR -- Did not match any Purchaser Fields")
+			Rails.logger.debug(key)
+			Rails.logger.debug(val)
+			return []
+		end
+
+	end
+
+	def set_arrays
+        @end_users_list = Array.new
+        @key_codes_list = Array.new
+        @purchase_orders_list = Array.new
+        @purchasers_list = Array.new
+	end
+
+	def uniq_arrays
+        @end_users_list = @end_users_list.uniq.compact
+        @key_codes_list = @key_codes_list.uniq.compact
+        @purchase_orders_list = @purchase_orders_list.uniq.compact
+        @purchasers_list = @purchasers_list.uniq.compact
+	end
 end

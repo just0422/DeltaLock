@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   get '' => 'pages#index'
+  get '/fetch_purchasers' => 'keycodes#get_purchasers', as: 'fetch_purchasers'
 
   resources :key
   resources :end_user  
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   resources :purchaser
   resources :purchase_order
   resources :map
+  resources :assign
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

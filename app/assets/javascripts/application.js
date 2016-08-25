@@ -26,6 +26,16 @@ $(document).ready(function(){
     $("tr[data-link]").click(function() {
           window.location = $(this).data("link");
     });
+
+	$("tbody>tr").hover(function () {
+		if (!$(this).hasClass("bg-primary"))
+			$(this).toggleClass("bg-info");
+	});
+	$("tbody>tr").click(function(){
+		$("tr").removeClass("bg-info");
+		$("tr").removeClass("bg-primary");
+		$(this).addClass("bg-primary");
+	});
 });
 
 function toggle_edit_save(button){
@@ -57,3 +67,4 @@ function toggle_edit_save(button){
 		}
 	}
 }
+

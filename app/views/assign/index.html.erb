@@ -1,0 +1,49 @@
+<h1>Assign Keycode</h1>
+
+<div id="assignExistingPurchaser">
+	<h2>Is this a new Purchaser?</h2>
+	<div class="row">
+		<div class="col-xs-6">
+			<%= link_to 'Yes', new_purchaser_path, remote:true %>
+		</div>
+		<div class="col-xs-6">
+			<button onclick="existingPurchaser()">NO</button>
+		</div>
+	</div>
+</div>
+
+<div id="purchaser-form" style="display:none;"></div>
+<div id="searchbar-list" style="display:none;"></div>
+
+<div id="purchaser-table" style="display:none;"></div>
+
+<script>
+
+	function existingPurchaser(){
+		$('#assignExistingPurchaser').fadeOut(200, function(){
+			$("#searchbar-list").fadeIn(200);
+			$('#searchbar-list').html('<h2>Find Existing Purchaser</h2>'+
+			'<%= j ( render '/keycodes/searchone') %>');
+		});
+	}
+
+</script>
+<!--
+<div class="row" id="query-row-NUMBER">
+	<div class="col-xs-4">
+		<select class="form-control">
+			<option value="Name">Name</option>
+			<option value="Address">Address</option>
+			<option value="Email">Email</option>
+			<option value="Phone">Phone</option>
+			<option value="Department">Department</option>
+			<option value="Store Number">Store Number</option>
+		</select>
+		<div class="col-xs-7">
+			<input type="text" class="form-control" id="input-NUMBER" placeholder name onchange="change_name_of_input_field(thi    s.id)">
+		</div>
+		<div class="btn btn-danger" onclick="remove_row(\'query-row-NUMBER\')">
+			<i class="">AA</i>
+		</div>
+	</div>
+</div>-->

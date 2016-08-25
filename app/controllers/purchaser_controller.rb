@@ -10,6 +10,14 @@ class PurchaserController < ApplicationController
 		@purchaser.update_attributes(purchaser_params)
 	end
 
+	def new
+		@purchaser = Purchaser.new
+	end
+
+	def create
+		@purchaser = Purchaser.create(purchaser_params)
+	end
+
 
 	private
 	def purchaser_params

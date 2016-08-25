@@ -43,6 +43,7 @@
     </table>
 <% end %>
 
+
 <% if @purchase_orders_list.length > 0 %>
     <h1>Purchase Orders</h1>
     <table class="table table-striped">
@@ -65,24 +66,4 @@
     </table>
 <% end %>
 
-<% if @purchasers_list.length > 0 %>
-    <h1>Purchasers</h1>
-    <table class="table table-striped">
-        <thead class="thead-inverse">
-            <tr>
-                <% Purchaser.column_names.each do |title| %>
-                    <th><%= title %></th>
-                <% end %>
-            </tr>
-        </thead>
-        <tbody>
-            <% @purchasers_list.each do |entry| %>
-                <tr data-link="<%= purchaser_path(entry["id"]) %>">
-                    <% Purchaser.column_names.each do |column| %>
-                        <td><%= entry[column] %></td>
-                    <% end %>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
-<% end %>
+<%= render 'purchasers' %>

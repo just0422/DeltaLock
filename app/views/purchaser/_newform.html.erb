@@ -1,0 +1,5 @@
+<h2>New Purchaser</h2>
+
+<%= form_for @purchaser, url: {:controller => :purchaser, action: :create}, remote: true do |f| %>
+	<%= render 'form', f: f %>
+<% end %>

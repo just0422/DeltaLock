@@ -1,0 +1,5 @@
+
+$('#searchbar-list').fadeOut(300, function(){
+	$('#purchaser-table').html("<%= j (render '/keycodes/purchasers') %>");
+	$('#purchaser-table').fadeIn(300);
+});

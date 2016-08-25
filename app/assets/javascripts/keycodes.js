@@ -16,7 +16,7 @@ var table_columns = {
 }
 var original_tc = table_columns;
 
-var query_row = '\
+var query_row_group = '\
         <div class="row" id="query-row-NUMBER">\
             <div class="col-xs-2">\
                 <select class="form-control" onchange="activate_list_two(this.value, this.id)" id="first-parameter-NUMBER">\
@@ -27,8 +27,13 @@ var query_row = '\
                     <option value="Purchasers">Purchasers</option>\
                 </select>\
             </div>\
-            <div class="col-xs-2">\
-                <select class="form-control" id="second-parameter-NUMBER" disabled>\
+			<div class="col-xs-2">\
+            <select class="form-control" id="second-parameter-NUMBER" disabled>';
+var query_row_no_group = '\
+		<div class="row" id="query-row-NUMBER">\
+			<div class="col-xs-4">\
+            <select class="form-control" id="second-parameter-NUMBER">';
+var query_row_field ='\
                 </select>\
             </div>\
             <div class="col-xs-7">\
@@ -44,8 +49,6 @@ var query_row = '\
 
 $(document).ready(function(){
     add_new_row();
-
-
 })
 // var searchbar_template = 
 
@@ -73,7 +76,7 @@ function activate_list_two(column, identity){
 }
 
 function add_new_row(){
-
+	var query_row = query_row_group + query_row_field;
     var query_row_complete = query_row
                         .replace("NUMBER", rows)
                         .replace("NUMBER", rows)
@@ -86,6 +89,20 @@ function add_new_row(){
 
     // $('#add-another-field').prop("disabled", true);
 }
+function add_new_row_single_category(){
+	var query_row = query_row_no_group + query_row_field;
+    var query_row_complete = query_row
+                        .replace("NUMBER", rows)
+                        .replace("NUMBER", rows)
+                        .replace("NUMBER", rows)
+                        .replace("NUMBER", rows);
+    $(".searchbars-list").append(query_row_complete);
+	activate_list_two("Purchasers", "--" + rows);
+    rows++;
+
+}
+
+
 
 // function enable_add_more(value){
 //  if (value.length > 0)
@@ -93,12 +110,9 @@ function add_new_row(){
 // }
 
 function change_name_of_input_field(second_select_id){
-    console.log(second_select_id);
     var number = second_select_id.split("-")[1];
     var new_id = "#input-" + number;
     var new_name = $("#first-parameter-" + number).val() + "--" + $("#second-parameter-" + number).val();
-    console.log("#first-parameter-" + number);
-    console.log($("#first-parameter-" + number));
     $(new_id).prop("name", new_name);
 }
 
