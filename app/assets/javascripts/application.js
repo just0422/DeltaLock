@@ -27,15 +27,15 @@ $(document).ready(function(){
           window.location = $(this).data("link");
     });
 
-	$("#purchaser-table").on("mouseleave",".purchaser-row",function(){
+	$(".table").on("mouseleave","tbody tr",function(){
 		if (!$(this).hasClass("bg-primary"))
 			$(this).removeClass("bg-info");
 	});
-	$("#purchaser-table").on("mouseenter",".purchaser-row",function(){
+	$(".table").on("mouseenter","tbody tr",function(){
 		if (!$(this).hasClass("bg-primary"))
 			$(this).addClass("bg-info");
 	});
-	$("#purchaser-table").on("click",".purchaser-row",function(){
+	$(".table").on("click","tbody tr",function(){
 		var selected = $(this).hasClass("bg-primary");
 		$("tr").removeClass("bg-info");
 		$("tr").removeClass("bg-primary");
