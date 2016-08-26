@@ -27,14 +27,22 @@ $(document).ready(function(){
           window.location = $(this).data("link");
     });
 
-	$("tbody>tr").hover(function () {
+	$("#purchaser-table").on("mouseleave",".purchaser-row",function(){
 		if (!$(this).hasClass("bg-primary"))
-			$(this).toggleClass("bg-info");
+			$(this).removeClass("bg-info");
 	});
-	$("tbody>tr").click(function(){
+	$("#purchaser-table").on("mouseenter",".purchaser-row",function(){
+		if (!$(this).hasClass("bg-primary"))
+			$(this).addClass("bg-info");
+	});
+	$("#purchaser-table").on("click",".purchaser-row",function(){
+		var selected = $(this).hasClass("bg-primary");
 		$("tr").removeClass("bg-info");
 		$("tr").removeClass("bg-primary");
-		$(this).addClass("bg-primary");
+		if (selected)
+			$(this).removeClass("bg-primary");
+		else
+			$(this).addClass("bg-primary");
 	});
 });
 

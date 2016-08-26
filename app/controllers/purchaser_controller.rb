@@ -16,6 +16,16 @@ class PurchaserController < ApplicationController
 
 	def create
 		@purchaser = Purchaser.create(purchaser_params)
+
+		@purchaser_columns = "<thead><tr>"
+		@purchaser_info = "<tbody><tr>"
+		Purchaser.column_names.each do |title|
+			@purchaser_columns += "<th>" + title + "</th>"
+			@purchaser_info += "<td>" + @purchaser[title].to_s + "</td>"
+		end
+		@purchaser_columns += "</tr></thead>"
+		@purchaser_info += "</tr></tbody>"
+
 	end
 
 

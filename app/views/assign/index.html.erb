@@ -1,4 +1,4 @@
-<h1>Assign Keycode</h1>
+<div id="header-information"><h1>Assign Keycode</h1></div>
 
 <div id="assignExistingPurchaser">
 	<h2>Is this a new Purchaser?</h2>
@@ -13,20 +13,50 @@
 </div>
 
 <div id="purchaser-form" style="display:none;"></div>
-<div id="searchbar-list" style="display:none;"></div>
-
+<div id="purchaser-searchbar-list" style="display:none;"></div>
 <div id="purchaser-table" style="display:none;"></div>
+
+
+<div id="assignExistingEndUser" style="display:none;">
+	<h2>Is this a new End User?</h2>
+	<div class="row">
+		<div class="col-xs-6">
+			<%= link_to 'Yes', new_end_user_path, remote:true %>
+		</div>
+		<div class="col-xs-6">
+			<button onclick="existingEnduser()">NO</button>
+		</div>
+	</div>
+</div>
+
+<div id="enduser-form" style="display:none;"></div>
+<div id="enduser-searchbar-list" style="display:none;"></div>
+<div id="enduser-table" style="display:none;"></div>
 
 <script>
 
 	function existingPurchaser(){
 		$('#assignExistingPurchaser').fadeOut(200, function(){
 			$("#searchbar-list").fadeIn(200);
-			$('#searchbar-list').html('<h2>Find Existing Purchaser</h2>'+
+			$('#searchbar-list').prepend('<h2>Find Existing Purchaser</h2>'+
 			'<%= j ( render '/keycodes/searchone') %>');
 		});
 	}
 
+	function selectPurchaser(){
+		console.log($(".bg-primary")[0]);
+		var table_open = '<table class="table">';
+		var table_head = '<thead>' + $('thead').html() + '</thead>';
+		var table_body = '<tbody><tr>' + $('.bg-primary').html() + '</tr></tbody>';
+		var table_close = '</table>';
+
+		var selected_row = table_open + table_head + table_body + table_close;
+
+		$("#purchaser-table").fadeOut(200, function(){
+			$("#header-information").append(selected_row);
+			//$("#assignExistingEndUser").fadeIn(200);
+		});
+	}
 </script>
 <!--
 <div class="row" id="query-row-NUMBER">
