@@ -1,5 +1,5 @@
 
-$('#enduser-searchbar-list').fadeOut(300, function(){
+$('#purchaser-searchbar-list').fadeOut(300, function(){
 	$('#purchaser-table').prepend("<%= j (render '/keycodes/purchasers') %>");
 	$("#purchaser-table").append("<button onclick='selectPurchaser()'>Select</button>");
 	$('#purchaser-table').fadeIn(300);

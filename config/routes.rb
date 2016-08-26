@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # Example of regular route:
   get '' => 'pages#index'
   get '/fetch_purchasers' => 'keycodes#get_purchasers', as: 'fetch_purchasers'
+  get '/fetch_endusers' => 'keycodes#get_endusers', as: 'fetch_endusers'
 
   resources :key
   resources :end_user  

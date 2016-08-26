@@ -70,7 +70,6 @@ function activate_list_two(column, identity){
     // call functin to return html of new options
     for (i = 0; i < table_columns[column].length; i++){
         var opt = table_columns[column][i];
-		console.log(opt);
         $(new_id).append('<option value="' + opt + '">' + opt + '</option>');
     }
     // var 

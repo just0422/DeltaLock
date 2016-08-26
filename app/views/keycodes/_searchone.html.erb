@@ -1,11 +1,10 @@
-<%= form_tag fetch_purchasers_path, method: "get", remote: true %>
-	<div class="searchbars-list">
-	</div>
+<div class="searchbars-list">
+</div>
+<script>rows = 0</script>
 
-	<div class="row">
-		<button id="add-another-field" class=" btn col-xs-3 col-xs-offset-2" onclick="add_new_row_single_category()" type="button">
-			Add another field
-		</button>  
-		<button class="btn col-xs-3 col-xs-offset-2" type="submit">Submit</button>
-	</div>
-</form>
+<div class="row">
+	<button id="add-another-field" class=" btn col-xs-3 col-xs-offset-2" onclick="add_new_row_single_category('<%= category %>')" type="button">
+		Add another field
+	</button>  
+	<button class="btn col-xs-3 col-xs-offset-2" type="submit">Submit</button>
+</div>

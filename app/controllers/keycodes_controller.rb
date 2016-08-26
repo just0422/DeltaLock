@@ -5,16 +5,6 @@ class KeycodesController < ApplicationController
 	def index
     end
 
-	def get_purchasers
-		params.each do |key, val|
-            column = key.split('--')[1]
-			@purchasers_list += purchaser_check(column, val)
-		end	
-        @purchasers_list = @purchasers_list.uniq
-		respond_to do |format|
-			format.js
-		end
-	end
 
     def show
         params.each do |key, val|
@@ -22,24 +12,8 @@ class KeycodesController < ApplicationController
             column = key.split('--')[1]
             case table
             when "End User"
-                case column
-                when "Name"
-                    @end_users_list += EndUser.where("name like ?", "%#{val}%")
-                when "Address"
-                    @end_users_list += EndUser.where("address like ?", "%#{val}%")
-                when "Email"
-                    @end_users_list += EndUser.where("email like ?", "%#{val}%")
-                when "Department"
-                    @end_users_list += EndUser.where("department like ?", "%#{val}%")
-                when "Store Number"
-                    @end_users_list += EndUser.where("store_number like ?", "%#{val}%")
-                when "Phone"
-                    @end_users_list += EndUser.where("phone like ?", "%#{val}%")
-                else
-                    Rails.logger.debug("** ERROR -- Did not match any End User Fields")
-                    Rails.logger.debug(key)
-                    Rails.logger.debug(val)
-                end
+				@end_users_list += enduser_check(column, val)
+				Rails.logger.debug(@end_users_list)
             when "Key Codes"
                 case column
                 when "Key Code"
@@ -69,7 +43,6 @@ class KeycodesController < ApplicationController
                     Rails.logger.debug(val)
                 end
             when "Purchasers"
-				Rails.logger.debug(purchaser_check(column, val).class)
 				@purchasers_list += purchaser_check(column, val)
             else
                 Rails.logger.debug ("SOMETHING WENT WRONG ==> " + key)
@@ -77,6 +50,29 @@ class KeycodesController < ApplicationController
         end
 
     end
+	
+	
+	def get_purchasers
+		params.each do |key, val|
+            column = key.split('--')[1]
+			@purchasers_list += purchaser_check(column, val)
+		end	
+        @purchasers_list = @purchasers_list.uniq
+		respond_to do |format|
+			format.js
+		end
+	end
+
+	def get_endusers
+		params.each do |key, val|
+            column = key.split('--')[1]
+			@endusers_list += enduser_check(column, val)
+		end	
+		@endusers_list = @endusers_list.uniq
+		respond_to do |format|
+			format.js
+		end
+	end
 
 	private
 	def purchaser_check(key, val)
@@ -97,7 +93,27 @@ class KeycodesController < ApplicationController
 			Rails.logger.debug(val)
 			return []
 		end
-
+	end
+	
+	def enduser_check(key, val)
+		case key 
+		when "Name"
+			return EndUser.where("name like ?", "%#{val}%")
+		when "Address"
+			return EndUser.where("address like ?", "%#{val}%")
+		when "Email"
+			return EndUser.where("email like ?", "%#{val}%")
+		when "Department"
+			return EndUser.where("department like ?", "%#{val}%")
+		when "Store Number"
+			return EndUser.where("store_number like ?", "%#{val}%")
+		when "Phone"
+			return EndUser.where("phone like ?", "%#{val}%")
+		else
+			Rails.logger.debug("** ERROR -- Did not match any End User Fields")
+			Rails.logger.debug(key)
+			Rails.logger.debug(val)
+		end
 	end
 
 	def set_arrays
