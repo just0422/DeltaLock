@@ -1,13 +1,13 @@
 <div id="header-information"><h1>Assign Keycode</h1></div>
 
-<div id="assignExistingPurchaser">
+<div id="assign-purchaser">
 	<h2>Is this a new Purchaser?</h2>
 	<div class="row">
 		<div class="col-xs-6">
 			<%= link_to 'Yes', new_purchaser_path, remote:true %>
 		</div>
 		<div class="col-xs-6">
-			<button onclick="existingPurchaser()">NO</button>
+			<button onclick="existing('End User', 'purchaser')">NO</button>
 		</div>
 	</div>
 </div>
@@ -17,14 +17,14 @@
 <div id="purchaser-table" style="display:none;"></div>
 
 
-<div id="assignExistingEndUser" style="display:none;">
+<div id="assign-enduser" style="display:none;">
 	<h2>Is this a new End User?</h2>
 	<div class="row">
 		<div class="col-xs-6">
 			<%= link_to 'Yes', new_end_user_path, remote:true %>
 		</div>
 		<div class="col-xs-6">
-			<button onclick="existingEnduser()">NO</button>
+			<button onclick="existing('End User', 'enduser')">NO</button>
 		</div>
 	</div>
 </div>
@@ -35,16 +35,25 @@
 
 <script>
 
-	function existingPurchaser(){
-		$('#assignExistingPurchaser').fadeOut(200, function(){
-			$("#searchbar-list").fadeIn(200);
-			$('#searchbar-list').prepend('<h2>Find Existing Purchaser</h2>'+
-			'<%= j ( render '/keycodes/searchone') %>');
+	function existing(category, id){
+		var category_search;
+		switch(category){
+			case "Purchasers":
+				category_search = '<%= j ( render '/keycodes/searchpurchaser', category: "Purchasers") %>';
+				break;
+			case "End User":
+				category_search = '<%= j ( render '/keycodes/searchenduser', category: "End User") %>';
+				break;
+		}
+
+		$('#assign-' + id).fadeOut(200, function(){
+			$("#" + id + "-searchbar-list").fadeIn(200);
+			$('#' + id + '-searchbar-list').html('<h2>Find Existing ' + category + '</h2>'+ category_search);
 		});
 	}
 
+
 	function selectPurchaser(){
-		console.log($(".bg-primary")[0]);
 		var table_open = '<table class="table">';
 		var table_head = '<thead>' + $('thead').html() + '</thead>';
 		var table_body = '<tbody><tr>' + $('.bg-primary').html() + '</tr></tbody>';
@@ -54,9 +63,18 @@
 
 		$("#purchaser-table").fadeOut(200, function(){
 			$("#header-information").append(selected_row);
-			//$("#assignExistingEndUser").fadeIn(200);
+			$("#assign-enduser").fadeIn(200);
+			destroy("purchaser");
 		});
 	}
+
+	function destroy(elements){
+		$("#purchaser-table").remove();
+		$("#purchaser-form").remove();
+		$("#purchaser-searchbar-list").remove();
+		$("#assign-purchaser").remove();
+	}
+
 </script>
 <!--
 <div class="row" id="query-row-NUMBER">

@@ -70,6 +70,7 @@ function activate_list_two(column, identity){
     // call functin to return html of new options
     for (i = 0; i < table_columns[column].length; i++){
         var opt = table_columns[column][i];
+		console.log(opt);
         $(new_id).append('<option value="' + opt + '">' + opt + '</option>');
     }
     // var 
@@ -89,7 +90,7 @@ function add_new_row(){
 
     // $('#add-another-field').prop("disabled", true);
 }
-function add_new_row_single_category(){
+function add_new_row_single_category(category){
 	var query_row = query_row_no_group + query_row_field;
     var query_row_complete = query_row
                         .replace("NUMBER", rows)
@@ -97,7 +98,8 @@ function add_new_row_single_category(){
                         .replace("NUMBER", rows)
                         .replace("NUMBER", rows);
     $(".searchbars-list").append(query_row_complete);
-	activate_list_two("Purchasers", "--" + rows);
+	activate_list_two(category, "--" + rows);
+	console.log(category);
     rows++;
 
 }
