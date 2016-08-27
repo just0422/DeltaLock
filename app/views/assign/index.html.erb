@@ -7,14 +7,14 @@
 			<%= link_to 'Yes', new_purchaser_path, remote:true %>
 		</div>
 		<div class="col-xs-6">
-			<button onclick="existing('End User', 'purchaser')">NO</button>
+			<button onclick="existing('Purchasers', 'purchaser')">NO</button>
 		</div>
 	</div>
 </div>
 
 <div id="purchaser-form" style="display:none;"></div>
 <div id="purchaser-searchbar-list" style="display:none;"></div>
-<div id="purchaser-table" style="display:none;"></div>
+<div id="purchaser-table" class="all-tables" style="display:none;"></div>
 
 
 <div id="assign-enduser" style="display:none;">
@@ -31,7 +31,7 @@
 
 <div id="enduser-form" style="display:none;"></div>
 <div id="enduser-searchbar-list" style="display:none;"></div>
-<div id="enduser-table" style="display:none;"></div>
+<div id="enduser-table" class="all-tables" style="display:none;"></div>
 
 <script>
 
@@ -39,10 +39,10 @@
 		var category_search;
 		switch(category){
 			case "Purchasers":
-				category_search = '<%= j ( render '/keycodes/searchpurchaser', category: "Purchasers") %>';
+				category_search = '<%= j ( render '/keycodes/fetch_purchasers', category: "Purchasers") %>';
 				break;
 			case "End User":
-				category_search = '<%= j ( render '/keycodes/searchenduser', category: "End User") %>';
+				category_search = '<%= j ( render '/keycodes/fetch_endusers', category: "End User") %>';
 				break;
 		}
 
@@ -51,20 +51,31 @@
 			$('#' + id + '-searchbar-list').html('<h2>Find Existing ' + category + '</h2>'+ category_search);
 		});
 	}
-
-
-	function selectPurchaser(){
+	function getHighlightedRow(){
 		var table_open = '<table class="table">';
 		var table_head = '<thead>' + $('thead').html() + '</thead>';
 		var table_body = '<tbody><tr>' + $('.bg-primary').html() + '</tr></tbody>';
 		var table_close = '</table>';
 
-		var selected_row = table_open + table_head + table_body + table_close;
+		return table_open + table_head + table_body + table_close;
+	}
+
+
+	function selectPurchaser(){
+		var selected_row = getHighlightedRow();
 
 		$("#purchaser-table").fadeOut(200, function(){
 			$("#header-information").append(selected_row);
 			$("#assign-enduser").fadeIn(200);
 			destroy("purchaser");
+		});
+	}
+	function selectEndUser(){
+		var selected_row = getHighlightedRow();
+
+		$("#enduser-table").fadeOut(200, function(){
+			$("#header-information").append(selected_row);
+			destroy("enduser");
 		});
 	}
 

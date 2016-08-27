@@ -27,15 +27,15 @@ $(document).ready(function(){
           window.location = $(this).data("link");
     });
 
-	$(".table").on("mouseleave","tbody tr",function(){
+	$(".all-tables").on("mouseleave","tbody tr",function(){
 		if (!$(this).hasClass("bg-primary"))
 			$(this).removeClass("bg-info");
 	});
-	$(".table").on("mouseenter","tbody tr",function(){
+	$(".all-tables").on("mouseenter","tbody tr",function(){
 		if (!$(this).hasClass("bg-primary"))
 			$(this).addClass("bg-info");
 	});
-	$(".table").on("click","tbody tr",function(){
+	$(".all-tables").on("click","tbody tr",function(){
 		var selected = $(this).hasClass("bg-primary");
 		$("tr").removeClass("bg-info");
 		$("tr").removeClass("bg-primary");

@@ -25,9 +25,7 @@ class KeycodesController < ApplicationController
                 when "Stamp Code"
                     @key_codes_list += Key.where("stamp_code like ?", "%#{val}%")
                 else
-                    Rails.logger.debug("** ERROR -- Did not match any Key Code Fields")
-                    Rails.logger.debug(key)
-                    Rails.logger.debug(val)
+					print_debug(key, val, "Key")
                 end
             when "Purchase Orders"
                 case column
@@ -38,9 +36,7 @@ class KeycodesController < ApplicationController
                 when "Date Ordered"
                     @purchase_orders_list += PurchaseOrder.where("date_order like ?", "%#{val}%")
                 else
-                    Rails.logger.debug("** ERROR -- Did not match any Purchase ORder Fields")
-                    Rails.logger.debug(key)
-                    Rails.logger.debug(val)
+					print_debug(key, val, "Purchase Order")
                 end
             when "Purchasers"
 				@purchasers_list += purchaser_check(column, val)
@@ -66,9 +62,9 @@ class KeycodesController < ApplicationController
 	def get_endusers
 		params.each do |key, val|
             column = key.split('--')[1]
-			@endusers_list += enduser_check(column, val)
+			@end_users_list += enduser_check(column, val)
 		end	
-		@endusers_list = @endusers_list.uniq
+		@end_users_list = @end_users_list.uniq
 		respond_to do |format|
 			format.js
 		end
@@ -88,9 +84,7 @@ class KeycodesController < ApplicationController
 		when "Fax"
 			return Purchaser.where("fax like ?", "%#{val}%")
 		else
-			Rails.logger.debug("** ERROR -- Did not match any Purchaser Fields")
-			Rails.logger.debug(key)
-			Rails.logger.debug(val)
+			print_debug(key, val, "Purchaser")
 			return []
 		end
 	end
@@ -110,9 +104,8 @@ class KeycodesController < ApplicationController
 		when "Phone"
 			return EndUser.where("phone like ?", "%#{val}%")
 		else
-			Rails.logger.debug("** ERROR -- Did not match any End User Fields")
-			Rails.logger.debug(key)
-			Rails.logger.debug(val)
+			print_debug(key, val, "End User")
+			return []
 		end
 	end
 
@@ -128,5 +121,10 @@ class KeycodesController < ApplicationController
         @key_codes_list = @key_codes_list.uniq.compact
         @purchase_orders_list = @purchase_orders_list.uniq.compact
         @purchasers_list = @purchasers_list.uniq.compact
+	end
+
+	def print_debug(key, val, table)
+		Rails.logger.debug("** ERROR -- Did not match any " + table + " fields")
+		Rails.logger.debug(key.to_s + " ---- " + val.to_s)
 	end
 end
