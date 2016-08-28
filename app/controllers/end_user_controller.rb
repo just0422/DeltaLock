@@ -13,6 +13,23 @@ class EndUserController < ApplicationController
 
 		@enduser.update_attributes(enduser_params)
 	end
+	
+	def new 
+		@enduser = EndUser.new
+	end
+
+	def create
+		@enduser = EndUser.create(enduser_params)
+
+		@enduser_columns = "<thead><tr>"
+		@enduser_info = "<tbody><tr>"
+		EndUser.column_names.each do |title|
+			@enduser_columns += "<th>" + title + "</th>"
+			@enduser_info += "<td>" + @enduser[title].to_s + "</td>"
+		end
+		@enduser_columns += "</tr></thead>"
+		@enduser_info += "</tr></tbody"
+	end
 
 	private
 	def enduser_params

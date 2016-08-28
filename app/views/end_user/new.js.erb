@@ -1,0 +1,4 @@
+$("#assign-enduser").fadeOut(200, function(){
+	$("#enduser-form").html('<%= j ( render 'newenduser') %>');
+	$("#enduser-form").fadeIn(200);
+});

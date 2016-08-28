@@ -1,9 +1,7 @@
-<%= form_for @enduser, remote: true do |f| %>
-	<li class="list-group-item"><%= f.label :name %>		 :	<%= f.text_field :name %></br></li>
-	<li class="list-group-item"><%= f.label :address %>		 :	<%= f.text_field :address %></br></li>
-	<li class="list-group-item"><%= f.label :email %>		 :	<%= f.text_field :email %></br></li>
-	<li class="list-group-item"><%= f.label :phone %>		 :	<%= f.text_field :phone %></br></li>
-	<li class="list-group-item"><%= f.label :department %>	 : 	<%= f.text_field :department %></br></li>
-	<li class="list-group-item"><%= f.label :store_number %> : 	<%= f.text_field :store_number %></br></li>
-	<%= f.button :submit %>
-<% end %>
+<li class="list-group-item"><%= f.label :name %>		 :	<%= f.text_field :name %></br></li>
+<li class="list-group-item"><%= f.label :address %>		 :	<%= f.text_field :address %></br></li>
+<li class="list-group-item"><%= f.label :email %>		 :	<%= f.text_field :email %></br></li>
+<li class="list-group-item"><%= f.label :phone %>		 :	<%= f.text_field :phone %></br></li>
+<li class="list-group-item"><%= f.label :department %>	 : 	<%= f.text_field :department %></br></li>
+<li class="list-group-item"><%= f.label :store_number %> : 	<%= f.text_field :store_number %></br></li>
+<%= f.button :submit %>
