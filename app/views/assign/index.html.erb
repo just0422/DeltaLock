@@ -42,8 +42,12 @@
 		<button>Search for key</button>
 	</div>
 	<div class="col-xs-4">
-		<button>Import keys</button>
+		<%= link_to "Import Keys", new_key_upload_path, remote: true %>
 	</div>
+</div>
+
+<div id="key-upload" style="display:none;"></div>
+
 <script>
 
 	function existing(category, id){
@@ -62,6 +66,7 @@
 			$('#' + id + '-searchbar-list').html('<h2>Find Existing ' + category + '</h2>'+ category_search);
 		});
 	}
+
 	function getHighlightedRow(){
 		var table_open = '<table class="table">';
 		var table_head = '<thead>' + $('thead').html() + '</thead>';
@@ -86,7 +91,7 @@
 
 		$("#enduser-table").fadeOut(200, function(){
 			$("#header-information").append(selected_row);
-			//$("#assign-enduser").fadeIn(200);
+			$("#assign-key").fadeIn(200);
 			destroy("enduser");
 		});
 	}
@@ -96,6 +101,9 @@
 		$("#purchaser-form").remove();
 		$("#purchaser-searchbar-list").remove();
 		$("#assign-purchaser").remove();
+	}
+
+	function view_upload_keys(){
 	}
 
 </script>

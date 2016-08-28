@@ -1,0 +1,4 @@
+$("#assign-key").fadeOut(200, function(){
+	$("#key-upload").html("<%= j ( render '/key_upload/upload_key_form' ) %>");
+	$("#key-upload").fadeIn(200);
+});
