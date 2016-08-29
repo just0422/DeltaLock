@@ -3,7 +3,16 @@ class KeyUploadController < ApplicationController
 	end
 
 	def create
-		Rails.logger.debug(params[:keyfile])
+		Key.import(params[:key][:keyfile])
+
+		#Rails.logger.debug("PARAMS[keyfile] --> " + params[:key][:eyfile].to_s)
+			
+		#Rails.logger.debug("FILE\n")
+		#File.open(params[:key][:keyfile].path, 'r') do |f1|
+		#	while line = f1.gets  
+		#		Rails.logger.debug(line)  
+		#	end  
+		#end  
 		#@key = Key.new(key_params)
 	end
 
