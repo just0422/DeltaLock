@@ -1,7 +1,5 @@
-<%= form_for @key, remote: true do |f| %>
-	<li class="list-group-item"><%= f.label :key %>		 	 :	<%= f.text_field :key %></br></li>
-	<li class="list-group-item"><%= f.label :master_key %>	 :	<%= f.text_field :master_key %></br></li>
-	<li class="list-group-item"><%= f.label :control_key %>	 :	<%= f.text_field :control_key %></br></li>
-	<li class="list-group-item"><%= f.label :stamp_code %>	 :	<%= f.text_field :stamp_code %></br></li>
-	<%= f.button :submit %>
-<% end %>
+<li class="list-group-item"><%= f.label :key %>		 	 :	<%= f.text_field :key %></br></li>
+<li class="list-group-item"><%= f.label :master_key %>	 :	<%= f.text_field :master_key %></br></li>
+<li class="list-group-item"><%= f.label :control_key %>	 :	<%= f.text_field :control_key %></br></li>
+<li class="list-group-item"><%= f.label :stamp_code %>	 :	<%= f.text_field :stamp_code %></br></li>
+<%= f.button :submit %>

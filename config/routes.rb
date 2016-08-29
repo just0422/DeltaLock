@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '' => 'pages#index'
   get '/fetch_purchasers' => 'keycodes#get_purchasers', as: 'fetch_purchasers'
   get '/fetch_endusers' => 'keycodes#get_endusers', as: 'fetch_endusers'
+  get '/fetch_keys' => 'keycodes#get_keys', as: 'fetch_keys'
 
   resources :key
   resources :end_user  

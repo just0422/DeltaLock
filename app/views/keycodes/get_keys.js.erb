@@ -1,0 +1,6 @@
+
+$('#key-searchbar-list').fadeOut(300, function(){
+	$('#key-table').prepend("<%= j (render '/keycodes/keys') %>");
+	$("#key-table").append("<button onclick='selectKey()'>Select</button>");
+	$('#key-table').fadeIn(300);
+});

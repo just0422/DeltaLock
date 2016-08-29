@@ -13,20 +13,8 @@ class KeycodesController < ApplicationController
             case table
             when "End User"
 				@end_users_list += enduser_check(column, val)
-				Rails.logger.debug(@end_users_list)
             when "Key Codes"
-                case column
-                when "Key Code"
-                    @key_codes_list += Key.where("`key` like ?", "%#{val}%")
-                when "Master Key"
-                    @key_codes_list += Key.where("master_key like ?", "%#{val}%")
-                when "Control Key"
-                    @key_codes_list += Key.where("control_key like ?", "%#{val}%")
-                when "Stamp Code"
-                    @key_codes_list += Key.where("stamp_code like ?", "%#{val}%")
-                else
-					print_debug(key, val, "Key")
-                end
+				@key_codes_list += keycodes_check(column, val)
             when "Purchase Orders"
                 case column
                 when "S.O. Number"
@@ -108,6 +96,22 @@ class KeycodesController < ApplicationController
 			return []
 		end
 	end
+
+	def keycodes_check(key, val)
+		case column
+		when "Key Code"
+			return Key.where("`key` like ?", "%#{val}%")
+		when "Master Key"
+			return Key.where("master_key like ?", "%#{val}%")
+		when "Control Key"
+			return Key.where("control_key like ?", "%#{val}%")
+		when "Stamp Code"
+			return Key.where("stamp_code like ?", "%#{val}%")
+		else
+			print_debug(key, val, "Key")
+		end
+	end
+
 
 	def set_arrays
         @end_users_list = Array.new

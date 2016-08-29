@@ -9,6 +9,23 @@ class KeyController < ApplicationController
 	def update
 		@key.update_attributes(key_params)
 	end
+	
+	def new
+		@key = Key.new
+	end
+
+	def create
+		@key = Key.new(key_params)
+
+		@key_columns = "<thead><tr>"
+		@key_info = "<tbody><tr>"
+		EndUser.column_names.each do |title|
+			@key_columns += "<th>" + title + "</th>"
+			@key_info += "<td>" + @key[title].to_s + "</td>"
+		end
+		@key_columns += "</tr></thead>"
+		@key_info += "</tr></tbody"
+	end
 
 	private
 	def key_params
