@@ -33,11 +33,11 @@
 <div id="enduser-searchbar-list" style="display:none;"></div>
 <div id="enduser-table" class="all-tables" style="display:none;"></div>
 
+
 <div id="assign-key" style="display:none;">
 	<h2>How would you like to assign a key?</h2>
 	<div class="col-xs-4">
 		<%= link_to 'Manual Key Import', new_key_path, remote:true %>
-		<button>Manual Key</button>
 	</div>
 	<div class="col-xs-4">
 		<button onclick="existing('Key Codes', 'key')">Search for keys</button>
@@ -63,7 +63,7 @@
 			case "End User":
 				category_search = '<%= j ( render '/keycodes/fetch_endusers', category: "End User") %>';
 				break;
-			case "Key":
+			case "Key Codes":
 				category_search = '<%= j ( render '/keycodes/fetch_keys', category: "Key Codes") %>';
 				break;
 		}
@@ -76,7 +76,7 @@
 
 	function getHighlightedRow(){
 		var table_open = '<table class="table">';
-		var table_head = '<thead>' + $('thead').html() + '</thead>';
+		var table_head = '<thead>' + $('.all-tables thead').html() + '</thead>';
 		var table_body = '<tbody><tr>' + $('.bg-primary').html() + '</tr></tbody>';
 		var table_close = '</table>';
 
@@ -113,8 +113,8 @@
 	}
 
 	function destroy(elements){
-		$("#" + elements + "purchaser-table").remove();
-		$("#" + elements + "purchaser-form").remove();
+		$("#" + elements + "-table").remove();
+		$("#" + elements + "-form").remove();
 		$("#" + elements + "-searchbar-list").remove();
 		$("#assign-" + elements).remove();
 	}

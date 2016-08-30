@@ -41,7 +41,7 @@ class KeycodesController < ApplicationController
             column = key.split('--')[1]
 			@purchasers_list += purchaser_check(column, val)
 		end	
-        @purchasers_list = @purchasers_list.uniq
+        @purchasers_list = @purchasers_list.uniq.compact
 		respond_to do |format|
 			format.js
 		end
@@ -52,7 +52,18 @@ class KeycodesController < ApplicationController
             column = key.split('--')[1]
 			@end_users_list += enduser_check(column, val)
 		end	
-		@end_users_list = @end_users_list.uniq
+		@end_users_list = @end_users_list.uniq.compact
+		respond_to do |format|
+			format.js
+		end
+	end
+
+	def get_keys
+		params.each do |key, val|
+			column = key.split('--')[1]
+			@key_codes_list += keycodes_check(column, val)
+		end
+		@key_codes_list = @key_codes_list.uniq.compact
 		respond_to do |format|
 			format.js
 		end
@@ -98,7 +109,7 @@ class KeycodesController < ApplicationController
 	end
 
 	def keycodes_check(key, val)
-		case column
+		case key 
 		when "Key Code"
 			return Key.where("`key` like ?", "%#{val}%")
 		when "Master Key"
@@ -109,6 +120,7 @@ class KeycodesController < ApplicationController
 			return Key.where("stamp_code like ?", "%#{val}%")
 		else
 			print_debug(key, val, "Key")
+			return []
 		end
 	end
 

@@ -19,7 +19,7 @@ class KeyController < ApplicationController
 
 		@key_columns = "<thead><tr>"
 		@key_info = "<tbody><tr>"
-		EndUser.column_names.each do |title|
+		Key.column_names.each do |title|
 			@key_columns += "<th>" + title + "</th>"
 			@key_info += "<td>" + @key[title].to_s + "</td>"
 		end
