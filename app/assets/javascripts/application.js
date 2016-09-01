@@ -19,6 +19,9 @@
 //= require gmaps/google
 //= require_tree .
 //
+
+const FADE_TIME = 200;
+
 $(document).ready(function(){
     $("li[data-link]").click(function() {
           window.location = $(this).data("link");
@@ -26,24 +29,9 @@ $(document).ready(function(){
     $("tr[data-link]").click(function() {
           window.location = $(this).data("link");
     });
+	
+	enable_all_tables_highlights();
 
-	$(".all-tables").on("mouseleave","tbody tr",function(){
-		if (!$(this).hasClass("bg-primary"))
-			$(this).removeClass("bg-info");
-	});
-	$(".all-tables").on("mouseenter","tbody tr",function(){
-		if (!$(this).hasClass("bg-primary"))
-			$(this).addClass("bg-info");
-	});
-	$(".all-tables").on("click","tbody tr",function(){
-		var selected = $(this).hasClass("bg-primary");
-		$("tr").removeClass("bg-info");
-		$("tr").removeClass("bg-primary");
-		if (selected)
-			$(this).removeClass("bg-primary");
-		else
-			$(this).addClass("bg-primary");
-	});
 });
 
 function toggle_edit_save(button){
@@ -76,3 +64,23 @@ function toggle_edit_save(button){
 	}
 }
 
+
+function enable_all_tables_highlights(){
+	$(".all-tables").on("mouseleave","tbody tr",function(){
+		if (!$(this).hasClass("bg-primary"))
+			$(this).removeClass("bg-info");
+	});
+	$(".all-tables").on("mouseenter","tbody tr",function(){
+		if (!$(this).hasClass("bg-primary"))
+			$(this).addClass("bg-info");
+	});
+	$(".all-tables").on("click","tbody tr",function(){
+		var selected = $(this).hasClass("bg-primary");
+		$("tr").removeClass("bg-info");
+		$("tr").removeClass("bg-primary");
+		if (selected)
+			$(this).removeClass("bg-primary");
+		else
+			$(this).addClass("bg-primary");
+	});
+}

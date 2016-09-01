@@ -1,6 +1,7 @@
 
-$('#purchaser-searchbar-list').fadeOut(300, function(){
-	$('#purchaser-table').prepend("<%= j (render '/keycodes/purchasers') %>");
+$('#purchaser-searchbar-list').fadeOut(FADE_TIME, function(){
+	$('#purchaser-table').prepend("<%= j (render '/keycodes/tables/purchasers') %>");
 	$("#purchaser-table").append("<button onclick='selectPurchaser()'>Select</button>");
-	$('#purchaser-table').fadeIn(300);
+	$('#purchaser-table').fadeIn(FADE_TIME);
+	enable_all_tables_highlights();
 });

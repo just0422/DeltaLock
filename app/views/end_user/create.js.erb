@@ -6,7 +6,6 @@ var selected_row = table_open + table_head + table_body + table_close;
 
 
 $("#enduser-form").fadeOut(200, function(){
-	console.log(table_head);
 	$("#header-information").append(selected_row);
 	$("#assign-key").fadeIn(200);
 	destroy("enduser");

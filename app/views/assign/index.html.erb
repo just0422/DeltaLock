@@ -12,10 +12,6 @@
 	</div>
 </div>
 
-<div id="purchaser-form" style="display:none;"></div>
-<div id="purchaser-searchbar-list" style="display:none;"></div>
-<div id="purchaser-table" class="all-tables" style="display:none;"></div>
-
 
 <div id="assign-enduser" style="display:none;">
 	<h2>Is this a new End User?</h2>
@@ -28,10 +24,6 @@
 		</div>
 	</div>
 </div>
-
-<div id="enduser-form" style="display:none;"></div>
-<div id="enduser-searchbar-list" style="display:none;"></div>
-<div id="enduser-table" class="all-tables" style="display:none;"></div>
 
 
 <div id="assign-key" style="display:none;">
@@ -47,14 +39,24 @@
 	</div>
 </div>
 
+
 <div id="key-upload" style="display:none;"></div>
-<div id="key-form" style="display:none;"></div>
-<div id="key-searchbar-list" style="display:none;"></div>
-<div id="key-table" class="all-tables" style="display:none;"></div>
+
+<div id="assign-or-new-key" style="display:none;">
+	<h2>Would you like to add another key or assign to PO?</h2>
+	<div class="col-xs-6">
+		<button onclick="reset_keys()">Add another key</button>
+	</div>
+	<div class="col-xs-6">
+		<%= link_to 'New Purchase Order', new_purchase_order_path, remote: true %>
+	</div>
+</div>
 
 <script>
 
 	function existing(category, id){
+		create_list_and_table(id);
+
 		var category_search;
 		switch(category){
 			case "Purchasers":
@@ -68,56 +70,9 @@
 				break;
 		}
 
-		$('#assign-' + id).fadeOut(200, function(){
-			$("#" + id + "-searchbar-list").fadeIn(200);
+		$('#assign-' + id).fadeOut(FADE_TIME, function(){
+			$("#" + id + "-searchbar-list").fadeIn(FADE_TIME);
 			$('#' + id + '-searchbar-list').html('<h2>Find Existing ' + category + '</h2>'+ category_search);
 		});
 	}
-
-	function getHighlightedRow(){
-		var table_open = '<table class="table">';
-		var table_head = '<thead>' + $('.all-tables thead').html() + '</thead>';
-		var table_body = '<tbody><tr>' + $('.bg-primary').html() + '</tr></tbody>';
-		var table_close = '</table>';
-
-		return table_open + table_head + table_body + table_close;
-	}
-
-
-	function selectPurchaser(){
-		var selected_row = getHighlightedRow();
-
-		$("#purchaser-table").fadeOut(200, function(){
-			$("#header-information").append(selected_row);
-			$("#assign-enduser").fadeIn(200);
-			destroy("purchaser");
-		});
-	}
-	function selectEndUser(){
-		var selected_row = getHighlightedRow();
-
-		$("#enduser-table").fadeOut(200, function(){
-			$("#header-information").append(selected_row);
-			$("#assign-key").fadeIn(200);
-			destroy("enduser");
-		});
-	}
-	function selectKey(){
-		var selected_row = getHighlightedRow();
-
-		$("#key-table").fadeOut(200, function(){
-			$("#header-information").append(selected_row);
-			//$("#assign-key").fadeIn(200);
-			destroy("key");
-		});
-	}
-
-	function destroy(elements){
-		$("#" + elements + "-table").remove();
-		$("#" + elements + "-form").remove();
-		$("#" + elements + "-searchbar-list").remove();
-		$("#assign-" + elements).remove();
-	}
-
-
 </script>

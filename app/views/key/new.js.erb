@@ -1,4 +1,5 @@
 $("#assign-key").fadeOut(200, function(){
+	create_form("key");
 	$("#key-form").html('<%= j ( render 'newkey') %>');
 	$("#key-form").fadeIn(200);
 });

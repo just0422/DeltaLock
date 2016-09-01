@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <% @purchasers_list.each do |entry| %>
-				<tr class="purchaser-row"><!--data-link="<%= purchaser_path(entry["id"]) %>">-->
+				<tr class="purchaser-row" data-link="<%= purchaser_path(entry["id"]) %>">
                     <% Purchaser.column_names.each do |column| %>
                         <td><%= entry[column] %></td>
                     <% end %>
