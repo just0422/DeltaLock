@@ -1,5 +1,5 @@
-$("#assign-purchaser").fadeOut(200, function(){
+$("#assign-purchaser").fadeOut(FADE_TIME, function(){
 	create_form("purchaser");
 	$('#purchaser-form').html('<%= j ( render 'newform') %>');
-	$('#purchaser-form').fadeIn(200);
+	$('#purchaser-form').fadeIn(FADE_TIME);
 });
