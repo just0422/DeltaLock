@@ -50,14 +50,14 @@ function selectKey(){
 			$("#key-header-table").append(getNewRow());
 		else
 			$("#header-information").append(getHighlightedRow("key"));
-		$("#assign-or-new-key").fadeIn(FADE_TIME);
+		$("#assign-purchaseorder").fadeIn(FADE_TIME);
 		destroy("key");
 	});
 }
 
 function reset_keys(){
-	$("#assign-or-new-key").fadeOut(FADE_TIME, function(){
-		assign_key.insertAfter("#assign-or-new-key");
+	$("#assign-purchaseorder").fadeOut(FADE_TIME, function(){
+		assign_key.insertAfter("#assign-purchaseorder");
 		$("#assign-key").fadeIn(FADE_TIME);
 	});
 }
@@ -67,4 +67,12 @@ function destroy(elements){
 	$("#" + elements + "-form").remove();
 	$("#" + elements + "-searchbar-list").remove();
 	$("#assign-" + elements).remove();
+}
+
+function generate_new_purchase_order(){
+	var table_open = '<table class="table" id="' + category + '-header-table">';
+	var table_head = '<thead>' + $('.all-tables thead').html() + '</thead>';
+	var table_body = '<tbody><tr>' + $('.bg-primary').html() + '</tr></tbody>';
+	var table_close = '</table>';
+	
 }

@@ -18,6 +18,17 @@ class PurchaseOrderController < ApplicationController
 		@purchaseorder.update_attributes(purchaseorder_params)
 	end
 
+	def new
+		@purchaseorder = PurchaseOrder.new
+	end
+
+	def create
+		purchaser = params[:purchaser]
+		enduser = params[:enduser]
+
+		keys = Array.new
+	end
+
 	private
 	def purchaseorder_params
 		params.require(:purchase_order).permit(:po_unmber, :date_order, :so_number)

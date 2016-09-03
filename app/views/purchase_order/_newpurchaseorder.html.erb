@@ -1,0 +1,7 @@
+<h2>New Purchase Order</h2>
+
+<%= form_for @purchaseorder, url: {:controller => :purchase_order, action: :create}, remote: true do |f| %>
+	<%= render 'form', f: f %>
+
+	<button onclick="generate_new_purchase_order()">save</button>
+<% end %>
