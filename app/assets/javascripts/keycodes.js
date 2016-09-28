@@ -98,7 +98,6 @@ function add_new_row_single_category(category){
                         .replace("NUMBER", rows);
     $(".searchbars-list").append(query_row_complete);
 	activate_list_two(category, "--" + rows);
-	console.log(category);
     rows++;
 
 }

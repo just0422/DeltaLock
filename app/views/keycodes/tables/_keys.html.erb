@@ -4,16 +4,14 @@
         <thead class="thead-inverse">
             <tr>
                 <% Key.column_names.each do |title| %>
-                    <th><%= title %></th>
+					<%= render '/keycodes/tables/header', title:title %>
                 <% end %>
             </tr>
         </thead>
         <tbody>
             <% @key_codes_list.each do |entry| %>
                 <tr data-link="<%= key_path(entry["id"]) %>">
-                    <% Key.column_names.each do |column| %>
-                        <td><%= entry[column] %></td>
-                    <% end %>
+					<%= render '/keycodes/tables/body', entryClass: Key, entry: entry %>
                 </tr>
             <% end %>
         </tbody>

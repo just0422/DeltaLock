@@ -3,17 +3,15 @@
     <table class="table all-tables">
         <thead class="thead-inverse">
             <tr>
-                <% EndUser.column_names.each do |title| %>
-                    <th><%= title %></th>
+				<% EndUser.column_names.each do |title| %>
+					<%= render '/keycodes/tables/header', title:title %>
                 <% end %>
             </tr>
         </thead>
         <tbody>
             <% @end_users_list.each do |entry| %>
-                <tr data-link="<%= end_user_path(entry["id"]) %>">
-                    <% EndUser.column_names.each do |column| %>
-                        <td><%= entry[column] %></td>
-                    <% end %>
+				<tr data-link="<%= end_user_path(entry["id"]) %>">
+					<%= render '/keycodes/tables/body', entryClass: EndUser, entry: entry %>
                 </tr>
             <% end %>
         </tbody>

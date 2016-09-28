@@ -52,6 +52,22 @@
 	</div>
 </div>
 
+<div id="are-you-sure" style="display:none;">
+	<button onclick="fade_confirmation('confirm-', '')">Assign</button>
+</div>
+
+<div id="confirm-are-you-sure" style="display:none;">
+	<div class="col-xs-12">
+		<h3>Are you sure?</h3>
+	</div>
+	<div class="col-xs-6">
+		<button onclick="fade_confirmation('', 'confirm-')">No I'm not sure. Let me double check</button>
+	</div>
+	<div class="col-xs-6" id="assign-form-confirm">
+		<button onclick="generate_purchase_order_form()">Yes</button>
+	</div>
+</div>
+
 <script>
 
 	function existing(category, id){
@@ -74,5 +90,16 @@
 			$("#" + id + "-searchbar-list").fadeIn(FADE_TIME);
 			$('#' + id + '-searchbar-list').html('<h2>Find Existing ' + category + '</h2>'+ category_search);
 		});
+	}
+
+	function generate_purchase_order_form(){
+		$("#assign-form-confirm").html("<%= j ( render '/assign/create_po_form') %>");
+		
+		table_to_hash("purchaseorder-header-table");
+		table_to_hash("purchaser-header-table");
+		table_to_hash("enduser-header-table");
+		table_to_hash("key-header-table");
+
+		$("#purchaseorder").submit();
 	}
 </script>

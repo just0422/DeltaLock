@@ -1,0 +1,5 @@
+<% if ColumnLabels.column?(title) %> 
+	<th><%= ColumnLabels.columnToLabel(title) %></th>
+<% else %> 
+	<th style="display:none;"><%= title %></th>
+<% end %>

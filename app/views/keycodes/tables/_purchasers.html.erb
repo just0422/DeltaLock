@@ -4,16 +4,14 @@
         <thead class="thead-inverse">
             <tr>
                 <% Purchaser.column_names.each do |title| %>
-                    <th><%= title %></th>
+					<%= render '/keycodes/tables/header', title:title %>
                 <% end %>
             </tr>
         </thead>
         <tbody>
             <% @purchasers_list.each do |entry| %>
 				<tr class="purchaser-row" data-link="<%= purchaser_path(entry["id"]) %>">
-                    <% Purchaser.column_names.each do |column| %>
-                        <td><%= entry[column] %></td>
-                    <% end %>
+					<%= render '/keycodes/tables/body', entryClass: Purchaser, entry: entry %>
                 </tr>
             <% end %>
         </tbody>
