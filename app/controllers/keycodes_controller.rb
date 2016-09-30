@@ -7,7 +7,7 @@ class KeycodesController < ApplicationController
 			@enduser = EndUser.find(params[:id])
 		end
 
-		@info_view = "/keycodes/info/" + params[:category] + "info"
+		@info_view = "/keycode/info/" + params[:category] + "info"
 	end
 
 	def index
