@@ -1,9 +1,12 @@
 class EndUserController < ApplicationController
-	before_action :set_enduser, only: [:show, :edit, :update]
+	before_action :set_enduser, only: [:info, :show, :edit, :update]
+	before_action :set_purchaseorder_list, only: [:info, :show] 
 	respond_to :html, :js
 
+	def info
+	end
+
 	def show 
-        @purchase_orders_list = PurchaseOrder.where("end_user_id like ?", "%#{params[:id]}%")
     end
 	
 	def update
@@ -39,4 +42,9 @@ class EndUserController < ApplicationController
 	def set_enduser
 		@enduser = EndUser.find(params[:id])
 	end
+
+	def set_purchaseorder_list
+        @purchase_orders_list = PurchaseOrder.where("end_user_id like ?", "%#{params[:id]}%")
+	end
+
 end

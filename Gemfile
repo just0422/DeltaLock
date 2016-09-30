@@ -8,6 +8,8 @@ gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'bootstrap-slider-rails'
 gem 'carrierwave', '~> 0.9'
+gem 'bootstrap_form'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

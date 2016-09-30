@@ -1,11 +1,13 @@
 <ul class="list-group">
 	<% EndUser.column_names.each do |title| %>
-		<li class="list-group-item">
-			<div class="enduser-label">
-				<strong><%= title %> : </strong>
-				<span><%= @enduser[title] %></span>
-			</div>
-		</li>
+		<% if ColumnLabels.column?(title) %>
+			<li class="list-group-item">
+				<div class="enduser-label">
+					<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
+					<span><%= @enduser[title] %></span>
+				</div>
+			</li>
+		<% end %>
 	<% end %>
 </ul>
 <%= link_to edit_end_user_path(@enduser), remote: true do %>
