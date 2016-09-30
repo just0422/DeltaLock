@@ -1,20 +1,21 @@
 <div class="col-xs-6">
-	<div id="enduser-table">
-		<%= render '/keycodes/lists/endusers' %>
-		<%= render '/keycodes/tables/endusers' %>
-	</div>
+	<div id="information-listings">
+		<div id="enduser-table">
+			<%= render '/keycodes/lists/endusers' %>
+			<%# render '/keycodes/tables/endusers' %>
+		</div>
 
+		<div id="key-table">
+			<%# render'/keycodes/tables/keys' %>
+		</div>
 
-	<div id="key-table">
-		<%= render'/keycodes/tables/keys' %>
-	</div>
+		<% if @purchase_orders_list.length > 0 %>
+			<%# render '/keycodes/tables/purchaseorders' %>
+		<% end %>
 
-	<% if @purchase_orders_list.length > 0 %>
-		<%= render '/keycodes/tables/purchaseorders' %>
-	<% end %>
-
-	<div id="purchaser-table">
-		<%= render '/keycodes/tables/purchasers' %>
+		<div id="purchaser-table">
+			<%# render '/keycodes/tables/purchasers' %>
+		</div>
 	</div>
 </div>
 

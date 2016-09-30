@@ -2,6 +2,14 @@ class KeycodesController < ApplicationController
 	before_action :set_arrays
 	after_action :uniq_arrays
 
+	def info
+		if (params[:category] == "enduser")
+			@enduser = EndUser.find(params[:id])
+		end
+
+		@info_view = "/keycodes/info/" + params[:category] + "info"
+	end
+
 	def index
     end
 

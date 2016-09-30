@@ -1,6 +1,6 @@
 class EndUserController < ApplicationController
-	before_action :set_enduser, only: [:info, :show, :edit, :update]
-	before_action :set_purchaseorder_list, only: [:info, :show] 
+	before_action :set_enduser, only: [:show, :edit, :update]
+	before_action :set_purchaseorder_list, only: [:show] 
 	respond_to :html, :js
 
 	def info
