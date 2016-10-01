@@ -6,7 +6,7 @@
 
 			<div id="associated-purchase-orders-<%= entry["key"] %>">
 				<% pokLink(entry["id"]) %>
-				<a class="list-group-item" href="<%= purchase_order_path(@pok["purchase_order_id"]) %>"><%= @pok[:purchase_order_id] %></a>
+				<%= link_to @pok[:purchase_order_id], {:controller => "keycodes", :action => "info", :id => @pok[:purchase_order_id], :category => "purchaseorder"}, :remote => true %>
 			</div>
 		<% end %>
 	</div>

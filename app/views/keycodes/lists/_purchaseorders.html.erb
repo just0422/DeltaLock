@@ -7,17 +7,17 @@
 			<% purchaserEnduserKeyLinks(entry) %>
 			<% if @enduser != nil %>
 				<div id="associated-enduser-<%= entry["id"] %>">
-					<a class="list-group-item" href="<%= end_user_path(@end_user["id"]) %>"><%= @end_user[:name] %></a>
+					<%= link_to @end_user[:name], {:controller => "keycodes", :action => "info", :id => entry["id"], :category => "enduser" }, :remote => true %>
 				</div>
 			<% end %>
 			<% if @purchaser != nil %>
 				<div id="associated-purchaser-<%= entry["id"] %>">
-					<a class="list-group-item" href="<%= purchaser_path(@purchaser["id"]) %>"><%= @purchaser[:name] %></a>
+					<%= link_to @purchaser[:name], {:controller => "keycodes", :action => "info", :id => entry["id"], :category => "purchaser" }, :remote => true %>
 				</div>
 			<% end %>
 			<div id="associated-keys-<%= entry["id"] %>">
 				<% @keys_list.each do |key| %>
-					<a class="list-group-item" href="<%= key_path(key["key_hash"]) %>"><%= key[:key] %></a>
+					<%= link_to key[:key], {:controller => "keycodes", :action => "info", :id => entry["id"], :category => "key" }, :remote => true %>
 				<% end %>
 			</div>
 		<% end %>
