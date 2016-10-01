@@ -10,6 +10,8 @@ class KeycodesController < ApplicationController
 			@key = Key.find(params[:id])
 		when "purchaseorder"
 			@purchaseorder = PurchaseOrder.find(params[:id])
+		when "purchaser"
+			@purchaser = Purchaser.find(params[:id])
 		end
 
 

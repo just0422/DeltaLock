@@ -1,0 +1,4 @@
+<%= render '/keycodes/info/info', categoryList: Purchaser, entry: @purchaser %>
+<%= link_to edit_end_user_path(@purchaser), remote: true do %>
+	<button class="btn">Edit</button>
+<% end %>
