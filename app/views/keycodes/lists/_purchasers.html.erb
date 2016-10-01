@@ -1,19 +1,15 @@
 <% if @purchasers_list.length > 0 %>
-    <h1>Purchasers</h1>
-    <table class="table all-tables">
-        <thead class="thead-inverse">
-            <tr>
-                <% Purchaser.column_names.each do |title| %>
-					<%= render '/keycodes/tables/header', title:title %>
-                <% end %>
-            </tr>
-        </thead>
-        <tbody>
-            <% @purchasers_list.each do |entry| %>
-				<tr class="purchaser-row" data-link="<%= purchaser_path(entry["id"]) %>">
-					<%= render '/keycodes/tables/body', entryClass: Purchaser, entry: entry %>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
+	<h1>Purchasers</h1>
+	<div class="">
+		<% @purchasers_list.each do |entry| %>
+			<%= link_to entry["name"], {:controller => "keycodes", :action => "info", :id => entry["id"], :category => "purchaser" }, :remote => true %>
+
+			<div id="associated-purchase-orders-<%= entry["id"] %>">
+				<% purchaseOrderLinks(entry["id"]) %>
+				<% @purchaseorders_list.each do |po| %>
+					<a class="list-group-item" href="<%= purchase_order_path(po["id"]) %>"><%= po[:po_number] %></a>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
 <% end %>
