@@ -1,17 +1,25 @@
-<h1>Purchase Orders</h1>
-<table class="table all-tables">
-	<thead class="thead-inverse">
-		<tr>
-			<% PurchaseOrder.column_names.each do |title| %>
-				<%= render '/keycodes/tables/header', title:title %>
-			<% end %>
-		</tr>
-	</thead>
-	<tbody>
+<% if @purchase_orders_list.length > 0 %>
+	<h1>Purchase Orders</h1>
+	<div class="">
 		<% @purchase_orders_list.each do |entry| %>
-			<tr data-link="<%= purchase_order_path(entry["id"]) %>">
-				<%= render '/keycodes/tables/body', entryClass: PurchaseOrder, entry: entry %>
-			</tr>
+			<%= link_to entry["id"], {:controller => "keycodes", :action => "info", :id => entry["id"], :category => "purchaseorder" }, :remote => true %>
+
+			<% purchaserEnduserKeyLinks(entry) %>
+			<% if @enduser != nil %>
+				<div id="associated-enduser-<%= entry["id"] %>">
+					<a class="list-group-item" href="<%= end_user_path(@end_user["id"]) %>"><%= @end_user[:name] %></a>
+				</div>
+			<% end %>
+			<% if @purchaser != nil %>
+				<div id="associated-purchaser-<%= entry["id"] %>">
+					<a class="list-group-item" href="<%= purchaser_path(@purchaser["id"]) %>"><%= @purchaser[:name] %></a>
+				</div>
+			<% end %>
+			<div id="associated-keys-<%= entry["id"] %>">
+				<% @keys_list.each do |key| %>
+					<a class="list-group-item" href="<%= key_path(key["key_hash"]) %>"><%= key[:key] %></a>
+				<% end %>
+			</div>
 		<% end %>
-	</tbody>
-</table>
+	</div>
+<% end %>

@@ -6,7 +6,7 @@
 
 			<div id="associated-purchase-orders-<%= entry["id"] %>">
 				<% purchaseOrderLinks(entry["id"]) %>
-				<% @purchase_orders_list.each do |po| %>
+				<% @purchaseorders_list.each do |po| %>
 					<a class="list-group-item" href="<%= purchase_order_path(po["id"]) %>"><%= po[:po_number] %></a>
 				<% end %>
 			</div>
