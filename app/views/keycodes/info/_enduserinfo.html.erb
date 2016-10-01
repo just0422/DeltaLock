@@ -1,15 +1,4 @@
-<ul class="list-group">
-	<% EndUser.column_names.each do |title| %>
-		<% if ColumnLabels.column?(title) %>
-			<li class="list-group-item">
-				<div class="enduser-label">
-					<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
-					<span><%= @enduser[title] %></span>
-				</div>
-			</li>
-		<% end %>
-	<% end %>
-</ul>
+<%= render '/keycodes/info/info', categoryList: EndUser, entry: @enduser %>
 <%= link_to edit_end_user_path(@enduser), remote: true do %>
 	<button class="btn">Edit</button>
 <% end %>

@@ -1,0 +1,4 @@
+<%= render '/keycodes/info/info', categoryList: Key, entry: @key %>
+<%= link_to edit_key_path(@key), remote: true do %>
+	<button class="btn">Edit</button>
+<% end %>

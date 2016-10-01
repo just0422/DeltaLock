@@ -2,11 +2,10 @@
 	<div id="information-listings">
 		<div id="enduser-table">
 			<%= render '/keycodes/lists/endusers' %>
-			<%# render '/keycodes/tables/endusers' %>
 		</div>
 
 		<div id="key-table">
-			<%# render'/keycodes/tables/keys' %>
+			<%= render'/keycodes/lists/keycodes' %>
 		</div>
 
 		<% if @purchase_orders_list.length > 0 %>
