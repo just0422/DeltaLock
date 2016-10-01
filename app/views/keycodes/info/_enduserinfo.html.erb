@@ -1,4 +1,1 @@
-<%= render '/keycodes/info/info', categoryList: EndUser, entry: @enduser %>
-<%= link_to edit_end_user_path(@enduser), remote: true do %>
-	<button class="btn">Edit</button>
-<% end %>
+<%= render '/keycodes/info/info', categoryList: EndUser, entry: @enduser, path: edit_end_user_path(@enduser)%>

@@ -1,5 +1,5 @@
 
-$("#purchaseorder-list").html("<%= j (render 'purchaseorderinfo') %>");
+$("#purchaseorder-list").html("<%= j (render '/keycodes/info/purchaseorderinfo') %>");
 $("#purchaseorder-form").fadeOut(300, function(){
 	$('#purchaseorder-list').fadeIn(300);
 });

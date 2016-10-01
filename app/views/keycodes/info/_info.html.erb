@@ -1,10 +1,17 @@
-<ul class="list-group">
-	<% categoryList.column_names.each do |title| %>
-		<% if ColumnLabels.column?(title) %>
-			<li class="list-group-item">
-				<strong><%= title %> : </strong>
-				<span><%= entry[title] %></span>
-			</li>
+<div id="<%= params[:category] %>-list">
+	<ul class="list-group">
+		<% categoryList.column_names.each do |title| %>
+			<% if ColumnLabels.column?(title) %>
+				<li class="list-group-item">
+					<strong><%= title %> : </strong>
+					<span><%= entry[title] %></span>
+				</li>
+			<% end %>
 		<% end %>
+	</ul>
+	<%= link_to path, remote: true do %>
+		<button class="btn">Edit</button>
 	<% end %>
-</li>
+</div>
+<div id="<%= params[:category] %>-form"></div>
+

@@ -3,9 +3,6 @@ class EndUserController < ApplicationController
 	before_action :set_purchaseorder_list, only: [:show] 
 	respond_to :html, :js
 
-	def info
-	end
-
 	def show 
     end
 	

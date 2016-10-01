@@ -1,4 +1,1 @@
-<%= render '/keycodes/info/info', categoryList: PurchaseOrder, entry: @purchaseorder %>
-<%= link_to edit_end_user_path(@purchaseorder), remote: true do %>
-	<button class="btn">Edit</button>
-<% end %>
+<%= render '/keycodes/info/info', categoryList: PurchaseOrder, entry: @purchaseorder, path: edit_purchase_order_path(@purchaseorder)%>
