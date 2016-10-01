@@ -4,7 +4,7 @@
 		<% @key_codes_list.each do |entry| %>
 			<%= link_to entry["key"], {:controller => "keycodes", :action => "info", :id => entry["key_hash"], :category => "key" }, :remote => true %>
 
-			<div id="associated-purchase-orders-<%= entry["id"] %>">
+			<div id="associated-purchase-orders-<%= entry["key"] %>">
 				<% pokLink(entry["id"]) %>
 				<a class="list-group-item" href="<%= purchase_order_path(@pok["purchase_order_id"]) %>"><%= @pok[:purchase_order_id] %></a>
 			</div>
