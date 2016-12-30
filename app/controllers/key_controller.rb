@@ -3,7 +3,29 @@ class KeyController < ApplicationController
 	respond_to :html, :js
 
 	def show
+		@end_users_list = Array.new
+
         @pok = PoK.find_by_key_id(@key[:key_hash])
+
+		@matching_keys = Key.where("master_key like ?", "%#{val}%")
+		@matching_keys += Key.where("control_key like ?", "%#{val}%")
+		@matching_keys += Key.where("key like ?", "%#{val}%")
+
+		@matching_keys = @matching_keys.uniq.compact
+		
+		@matchin_keys.each do |key|
+			pok = PoK.find_by_key_id(key[:key_hash])
+			po = PurchaseOrder.find(PoK[:purchase_order_id])
+			@end_users_list += EndUser.find(po[:end_user_id])
+		end
+		# find all end users associated with each keys
+		# return all end users
+		#
+		# if end users is empty
+		#   continue as before
+		# else
+		# 	render maps page
+		
     end
 
 	def update
