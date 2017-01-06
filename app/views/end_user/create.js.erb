@@ -4,7 +4,6 @@ var table_body = '<%= @enduser_info.html_safe %>';
 var table_close = "</table>";
 var selected_row = table_open + table_head + table_body + table_close;
 
-
 $("#enduser-form").fadeOut(200, function(){
 	$("#header-information").append(selected_row);
 	$("#assign-key").fadeIn(200);

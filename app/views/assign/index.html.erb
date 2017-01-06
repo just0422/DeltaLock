@@ -39,7 +39,7 @@
 	</div>
 </div>
 
-
+<div id="key-map" style="display:none;"></div>
 <div id="key-upload" style="display:none;"></div>
 
 <div id="assign-purchaseorder" style="display:none;">
@@ -69,7 +69,6 @@
 </div>
 
 <script>
-
 	function existing(category, id){
 		create_list_and_table(id);
 
@@ -82,7 +81,31 @@
 				category_search = '<%= j ( render '/keycodes/fetch_endusers', category: "End User") %>';
 				break;
 			case "Key Codes":
-				category_search = '<%= j ( render '/keycodes/fetch_keys', category: "Key Codes") %>';
+				if (isNaN(parseInt($("#enduser-group_id").html()))){
+					console.log("Wrong value", isNaN(parseInt($("#enduser-group_id"))))
+					category_search = '<%= j ( render '/keycodes/fetch_keys', category: "Key Codes") %>';
+				}
+				else{
+//					category_search = '<# j ( render '/maps/map' ) %>';
+					$.ajax({
+						type: "GET",
+						url: "/get_keys_map",
+						data: {
+							"id" :  parseInt($("#enduser-id").html()), 
+							"group": parseInt($("#enduser-group_id").html())
+						}
+//						dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+					}).success(function(response, status){
+						$("#assign-key").fadeOut(FADE_TIME, function(){
+							$("#key-map").html(response);
+							$("#key-map").fadeIn(FADE_TIME);
+						});
+							
+						console.log("success", status);
+					});
+					return false; // prevents normal behaviour
+				}
+					//category_search = '<# j ( render '/keycodes/fetch_keys_map') %>';
 				break;
 		}
 
@@ -93,7 +116,7 @@
 	}
 
 	function generate_purchase_order_form(){
-		$("#assign-form-confirm").html("<%= j ( render '/assign/create_po_form') %>");
+		$("#assign-form-confirm").html("<# j ( render '/assign/create_po_form') %>");
 		
 		table_to_hash("purchaseorder-header-table");
 		table_to_hash("purchaser-header-table");

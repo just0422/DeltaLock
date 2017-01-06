@@ -11,7 +11,7 @@
         <tbody>
             <% @key_codes_list.each do |entry| %>
                 <tr data-link="<%= key_path(entry["id"]) %>">
-					<%= render '/keycodes/tables/body', entryClass: Key, entry: entry %>
+					<%= render '/keycodes/tables/body', entryClass: Key, entry: entry, classString: "key"  %>
                 </tr>
             <% end %>
         </tbody>

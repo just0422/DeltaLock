@@ -85,6 +85,9 @@ class KeycodesController < ApplicationController
 		end
 	end
 
+	def get_keys_map
+	end
+
 	private
 	def purchaser_check(key, val)
 		case key
@@ -118,6 +121,8 @@ class KeycodesController < ApplicationController
 			return EndUser.where("store_number like ?", "%#{val}%")
 		when "Phone"
 			return EndUser.where("phone like ?", "%#{val}%")
+		when "Group"
+			return EndUser.where("group_id like ?", "%#{val}%")
 		else
 			print_debug(key, val, "End User")
 			return []

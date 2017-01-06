@@ -2,6 +2,7 @@ require 'json'
 
 class PurchaseOrderController < ApplicationController
 	before_action :set_purchaseorder, only: [:show, :edit, :update]
+	after_action :set_session, only: [:set_purchaseorder, :create]
 	respond_to :html, :js
 	
 	def show
@@ -62,6 +63,10 @@ class PurchaseOrderController < ApplicationController
 	end
 	def pok_params
 		params.require(:pok).permit(:quantity, :key_id, :purchase_order_id)
+	end
+
+	def set_session
+		session[:purchaseorder] = @purchaseorder[:id]
 	end
 
 	def set_purchaseorder

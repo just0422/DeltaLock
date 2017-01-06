@@ -1,5 +1,5 @@
 class MapController < ApplicationController
-	before_action :set_enduser, only: [:show]
+	before_action :set_enduser, only: [:show, :map]
 	respond_to :html, :js
 
 	def index
@@ -7,6 +7,41 @@ class MapController < ApplicationController
 
 		@end_users = EndUser.within(5000, :origin => @enduser[:address])
     end
+
+	def map
+		if not params.key?("red")
+			params[:red] = 25
+			params[:yellow] = 50
+			params[:green] = 100
+		end
+
+		if Integer(params[:yellow]) > Integer(params[:green])
+			params[:green] = params[:yellow]
+		end
+		
+		end_user_group = EndUser.where(group_id: params[:group])
+
+		@end_users_red = end_user_group.within(params[:red], :origin => @enduser[:address]);
+		@end_users_yellow = end_user_group.in_range(params[:red]..params[:yellow], :origin => @enduser[:address]);
+		@end_users_green = end_user_group.beyond(params[:yellow], :origin => @enduser[:address]);
+
+		
+		@end_users_red.to_a.delete(@enduser)	
+		@end_users_yellow.to_a.delete(@enduser)	
+		@end_users_green.to_a.delete(@enduser)	
+
+		@red_key_codes = get_associated_keys(@end_users_red)
+		@yellow_key_codes = get_associated_keys(@end_users_yellow)
+		@green_key_codes = get_associated_keys(@end_users_green)
+		
+		#render :partial => "map"
+		respond_to do |format|
+#			#format.html { redirect_to @user, notice: "Successfully updated user." }
+#			format.js
+			format.html { render :partial => "keymap" }
+#			#render(:partial => "map")
+		end
+	end
 
 	def show
 		if not params.key?("red")
@@ -18,11 +53,12 @@ class MapController < ApplicationController
 		if Integer(params[:yellow]) > Integer(params[:green])
 			params[:green] = params[:yellow]
 		end
+		
+		end_user_group = EndUser.where(group_id: params[:group])
 
-		@end_users_red = EndUser.within(params[:red], :origin => @enduser[:address]);
-		@end_users_yellow = EndUser.in_range(params[:red]..params[:yellow], :origin => @enduser[:address]);
-		@end_users_green = EndUser.beyond(params[:yellow], :origin => @enduser[:address]);
-
+		@end_users_red = end_user_group.within(params[:red], :origin => @enduser[:address]);
+		@end_users_yellow = end_user_group.in_range(params[:red]..params[:yellow], :origin => @enduser[:address]);
+		@end_users_green = end_user_group.beyond(params[:yellow], :origin => @enduser[:address]);
 		
 		@end_users_red.to_a.delete(@enduser)	
 		@end_users_yellow.to_a.delete(@enduser)	
@@ -31,11 +67,11 @@ class MapController < ApplicationController
 		@red_key_codes = get_associated_keys(@end_users_red)
 		@yellow_key_codes = get_associated_keys(@end_users_yellow)
 		@green_key_codes = get_associated_keys(@end_users_green)
-
 	end
 
 	private 
 	def set_enduser
+#		@enduser = EndUser.find(session[:enduser])
 		@enduser = EndUser.find(params[:id])
 	end
 

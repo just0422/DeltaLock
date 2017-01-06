@@ -9,7 +9,7 @@ var p = "Purchasers";
 var rows = 0;
 
 var table_columns = {
-    "End User"        : ["Name", "Address", "Email", "Phone", "Department", "Store Number"],
+    "End User"        : ["Name", "Address", "Email", "Phone", "Department", "Store Number", "Group"],
     "Key Codes"       : ["Key Code", "Master Key", "Control Key", "Stamp Code"],
     "Purchase Orders" : ["S.O. Number", "P.O. Number", "Date Ordered"],
     "Purchasers"      : ["Name", "Address", "Email", "Phone", "Fax"],

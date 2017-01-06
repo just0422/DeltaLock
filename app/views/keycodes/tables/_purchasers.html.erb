@@ -11,7 +11,7 @@
         <tbody>
             <% @purchasers_list.each do |entry| %>
 				<tr class="purchaser-row" data-link="<%= purchaser_path(entry["id"]) %>">
-					<%= render '/keycodes/tables/body', entryClass: Purchaser, entry: entry %>
+					<%= render '/keycodes/tables/body', entryClass: Purchaser, entry: entry, classString: "purchaser"  %>
                 </tr>
             <% end %>
         </tbody>

@@ -1,5 +1,6 @@
 class KeyController < ApplicationController
 	before_action :set_key, only: [:show, :edit, :update]
+	after_action :set_session, only:[:set_key, :create]
 	respond_to :html, :js
 
 	def show
@@ -47,11 +48,16 @@ class KeyController < ApplicationController
 		end
 		@key_columns += "</tr></thead>"
 		@key_info += "</tr></tbody"
+
 	end
 
 	private
 	def key_params
 		params.require(:key).permit(:key, :master_key, :control_key, :stamp_code)
+	end
+
+	def set_session
+		session[:key] = @key[:id]
 	end
 
 	def set_key

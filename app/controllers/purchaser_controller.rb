@@ -1,5 +1,6 @@
 class PurchaserController < ApplicationController
 	before_action :set_purchaser, only: [:show, :edit, :update]
+	after_action :set_session, only: [:set_purchaser, :create]
 	respond_to :html, :js
 
 	def show 
@@ -32,6 +33,10 @@ class PurchaserController < ApplicationController
 	private
 	def purchaser_params
 		params.require(:purchaser).permit(:name, :address, :email, :phone, :fax)
+	end
+
+	def set_session
+		session[:purchaser] = @purchaser[:id]
 	end
 
 	def set_purchaser
