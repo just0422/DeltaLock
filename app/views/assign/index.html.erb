@@ -98,6 +98,7 @@
 					}).success(function(response, status){
 						$("#assign-key").fadeOut(FADE_TIME, function(){
 							$("#key-map").html(response);
+							initialize_map();
 							$("#key-map").fadeIn(FADE_TIME);
 						});
 							
