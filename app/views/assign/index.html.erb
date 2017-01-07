@@ -82,11 +82,9 @@
 				break;
 			case "Key Codes":
 				if (isNaN(parseInt($("#enduser-group_id").html()))){
-					console.log("Wrong value", isNaN(parseInt($("#enduser-group_id"))))
 					category_search = '<%= j ( render '/keycodes/fetch_keys', category: "Key Codes") %>';
 				}
 				else{
-//					category_search = '<# j ( render '/maps/map' ) %>';
 					$.ajax({
 						type: "GET",
 						url: "/get_keys_map",
@@ -101,8 +99,6 @@
 							initialize_map();
 							$("#key-map").fadeIn(FADE_TIME);
 						});
-							
-						console.log("success", status);
 					});
 					return false; // prevents normal behaviour
 				}
@@ -117,7 +113,7 @@
 	}
 
 	function generate_purchase_order_form(){
-		$("#assign-form-confirm").html("<# j ( render '/assign/create_po_form') %>");
+		$("#assign-form-confirm").html("<%= j ( render '/assign/create_po_form') %>");
 		
 		table_to_hash("purchaseorder-header-table");
 		table_to_hash("purchaser-header-table");

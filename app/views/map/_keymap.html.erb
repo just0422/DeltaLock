@@ -84,6 +84,21 @@
 				var yellow_icon = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
 				var green_icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
 
+
+////////////////////////////////////////////////////////////////////////////////////////////
+				var infowindow = new google.maps.InfoWindow({
+					content: contentString
+				});
+        		var marker = new google.maps.Marker({
+			        position: uluru,
+					map: map,
+					title: 'Uluru (Ayers Rock)'
+				});
+        		marker.addListener('click', function() {
+			       	infowindow.open(map, marker);
+				});
+////////////////////////////////////////////////////////////////////////////////////////////
+
 				<% @end_users_red.each do |eur| %>
 					var eurLocation = new google.maps.LatLng(<%= eur[:lat] %>, <%= eur[:lng] %>);
 					var mark = new google.maps.Marker({ position: eurLocation, map: map });
