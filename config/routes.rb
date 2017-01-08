@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/info' => 'keycodes#info', as: 'info'
   get '/signup' => 'users#new'
   get '/login' => 'sessions#new'
+  get '/users' => 'users#user_management'
 
   post 'login' => 'sessions#create'
 

@@ -7,8 +7,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.string :username
       t.string :password_digest
-
-	  t.string :role
     end
   end
 end

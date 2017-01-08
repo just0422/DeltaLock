@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107222901) do
+ActiveRecord::Schema.define(version: 20170108172029) do
 
   create_table "end_users", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20170107222901) do
     t.string   "last_name",       limit: 255
     t.string   "username",        limit: 255
     t.string   "password_digest", limit: 255
+    t.string   "role",            limit: 255
   end
 
   add_foreign_key "end_users", "groups"
