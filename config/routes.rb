@@ -13,6 +13,12 @@ Rails.application.routes.draw do
   get '/fetch_keys' => 'keycodes#get_keys', as: 'fetch_keys'
   get '/get_keys_map', to: 'map#map'
   get '/info' => 'keycodes#info', as: 'info'
+  get '/signup' => 'users#new'
+  get '/login' => 'sessions#new'
+
+  post 'login' => 'sessions#create'
+
+  delete 'logout' => 'sessions#destroy'
 
   resources :key
   resources :end_user 
@@ -22,6 +28,9 @@ Rails.application.routes.draw do
   resources :map
   resources :assign
   resources :key_upload
+  resources :users
+  resources :sessions
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
