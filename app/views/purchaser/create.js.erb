@@ -1,12 +1,8 @@
-var table_open = "<table class='table'>";
-var table_head = '<%= @purchaser_columns.html_safe %>';
-var table_body = '<%= @purchaser_info.html_safe %>';
-var table_close = "</table>";
+var selected_row = '<h3 data-toggle="collapse" data-target="#purchaser-info">Purchaser</h3>';
+selected_row += '<div id="purchaser-info" class="collapse"><%= j render ("purchaserinfo") %></div>';
 
-var selected_row = table_open + table_head + table_body + table_close;
-
-$("#purchaser-form").fadeOut(200, function(){
+$("#purchaser-form").fadeOut(FADE_TIME, function(){
 	$("#header-information").append(selected_row);
-	$("#assign-enduser").fadeIn(200);
+	$("#assign-enduser").fadeIn(FADE_TIME);
 	destroy("purchaser");
 });

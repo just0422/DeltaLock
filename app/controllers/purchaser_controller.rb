@@ -1,6 +1,6 @@
 class PurchaserController < ApplicationController
 	before_action :set_purchaser, only: [:show, :edit, :update]
-	after_action :set_session, only: [:set_purchaser, :create]
+	#after_action :set_session, only: [:set_purchaser, :create]
 	respond_to :html, :js
 
 	def show 
@@ -26,7 +26,6 @@ class PurchaserController < ApplicationController
 		end
 		@purchaser_columns += "</tr></thead>"
 		@purchaser_info += "</tr></tbody>"
-
 	end
 
 

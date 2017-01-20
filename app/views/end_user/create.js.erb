@@ -1,11 +1,8 @@
-var table_open = "<table class='table'>";
-var table_head = '<%= @enduser_columns.html_safe %>';
-var table_body = '<%= @enduser_info.html_safe %>';
-var table_close = "</table>";
-var selected_row = table_open + table_head + table_body + table_close;
+var selected_row = '<h3 data-toggle="collapse" data-target="#enduser-info">End User</h3>';
+selected_row += '<div id="enduser-info" class="collapse"><%= j render ("enduserinfo") %></div>';
 
-$("#enduser-form").fadeOut(200, function(){
+$("#enduser-form").fadeOut(FADE_TIME, function(){
 	$("#header-information").append(selected_row);
-	$("#assign-key").fadeIn(200);
+	$("#assign-key").fadeIn(FADE_TIME);
 	destroy("enduser");
 });
