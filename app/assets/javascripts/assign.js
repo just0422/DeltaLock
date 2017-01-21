@@ -14,12 +14,25 @@ function create_form(id){
 }
 
 function getHighlightedRow(category){
-	var table_open = '<table class="table" id="' + category + '-header-table">';
-	var table_head = '<thead>' + $('.all-tables thead').html() + '</thead>';
-	var table_body = '<tbody><tr>' + $('.bg-primary').html() + '</tr></tbody>';
-	var table_close = '</table>';
+	var id = parseInt($(".bg-primary .id").html());
+	var selected = '<h3 data-toggle="collapse" data-target="#' + category + '-info">' + category + '</h3>';
+//	var id = ;
+//	var group_id = ;
+	$.ajax({
+		type: "GET",
+		url: category + "/" + id + "/" + id,
+		async: false
+	}).success(function(response){
+		selected += '<div id="' + category + '-info" class="collapse">' + response  + '</div>';
+	});
 
-	return table_open + table_head + table_body + table_close;
+	return selected;
+//	var table_open = '<table class="table" id="' + category + '-header-table">';
+//	var table_head = '<thead>' + $('.all-tables thead').html() + '</thead>';
+//	var table_body = '<tbody><tr>' + $('.bg-primary').html() + '</tr></tbody>';
+//	var table_close = '</table>';
+
+//	return table_open + table_head + table_body + table_close;
 }
 
 function getNewRow(){

@@ -1,5 +1,5 @@
 <% entryClass.column_names.each do |column| %>
-	<td id="<%= classString + "-" + column %>"
+	<td class="<%= column %>"
 	<% if ColumnLabels.column?(column) %>
 		>
 	<% else %>

@@ -1,11 +1,15 @@
 class EndUserController < ApplicationController
-	before_action :set_enduser, only: [:show, :edit, :update]
+	before_action :set_enduser, only: [:show, :show_enduser, :edit, :update]
 	after_action :set_session, only: [:set_enduser, :create]
 	respond_to :html, :js
 
 	def show
         @purchase_orders_list = PurchaseOrder.where("end_user_id like ?", "%#{params[:id]}%")
     end
+	
+	def show_enduser
+		render partial: "enduserinfo"
+	end
 	
 	def update
 		geo = EndUser.geocode(params[:end_user][:address])

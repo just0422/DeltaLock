@@ -1,11 +1,15 @@
 class PurchaserController < ApplicationController
-	before_action :set_purchaser, only: [:show, :edit, :update]
+	before_action :set_purchaser, only: [:show, :show_purchaser, :edit, :update]
 	after_action :set_session, only: [:set_purchaser, :create]
 	respond_to :html, :js
 
 	def show 
         @purchase_orders_list = PurchaseOrder.where("purchaser_id like ?", "%#{params[:id]}%")
     end
+
+	def show_purchaser
+		render partial: "purchaserinfo"
+	end
 
 	def update
 		@purchaser.update_attributes(purchaser_params)

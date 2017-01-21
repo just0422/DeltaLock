@@ -1,5 +1,5 @@
 class KeyController < ApplicationController
-	before_action :set_key, only: [:show, :edit, :update]
+	before_action :set_key, only: [:show, :edit, :update, :show_key]
 	after_action :set_session, only:[:set_key, :create]
 	respond_to :html, :js
 
@@ -28,6 +28,9 @@ class KeyController < ApplicationController
 		# 	render maps page
 		
     end
+
+	def show_key
+	end
 
 	def update
 		@key.update_attributes(key_params)

@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   get '/login' => 'sessions#new'
   get '/users' => 'users#user_management'
+  get '/purchaser/:id/:group_id', to: 'purchaser#show_purchaser'
+  get '/enduser/:id/:group_id', to: 'end_user#show_enduser'
+  get '/key/:id/:group_id', to: 'key#show_key'
 
   post 'login' => 'sessions#create'
 
