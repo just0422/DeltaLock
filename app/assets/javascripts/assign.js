@@ -14,7 +14,7 @@ function create_form(id){
 }
 
 function getHighlightedRow(category){
-	var id = parseInt($(".bg-primary .id").html());
+	var id = parseInt($(".bg-primary ." + category + "-id").html());
 	var selected = '<h3 data-toggle="collapse" data-target="#' + category + '-info">' + category + '</h3>';
 //	var id = ;
 //	var group_id = ;

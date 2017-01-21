@@ -4,7 +4,7 @@
 			<li class="list-group-item">
 				<div class="enduser-label">
 					<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
-					<span><%= @enduser[title] %></span>
+					<span class="enduser-<%= title %>"><%= @enduser[title] %></span>
 				</div>
 			</li>
 		<% end %>

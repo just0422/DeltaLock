@@ -4,7 +4,7 @@
 			<% if ColumnLabels.column?(title) %>
 				<li class="list-group-item">
 					<strong><%= title %> : </strong>
-					<span><%= entry[title] %></span>
+					<span class="<%= classString + "=" + title %>"><%= entry[title] %></span>
 				</li>
 			<% end %>
 		<% end %>

@@ -1,6 +1,6 @@
 class EndUserController < ApplicationController
 	before_action :set_enduser, only: [:show, :show_enduser, :edit, :update]
-	after_action :set_session, only: [:set_enduser, :create]
+	after_action :set_session
 	respond_to :html, :js
 
 	def show

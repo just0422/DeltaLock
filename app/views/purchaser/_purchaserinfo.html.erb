@@ -3,7 +3,7 @@
 		<li class="list-group-item">
 			<div class="purchaser-label">
 				<strong><%= title %> : </strong>
-				<span><%= @purchaser[title] %></span>
+				<span class="purchaser-<%= title %>"><%= @purchaser[title] %></span>
 			</div>
 		</li>
 	<% end %>

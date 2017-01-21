@@ -46,6 +46,7 @@ Key.create!([{
     stamp_code: "4AA",
     key_hash: 4
 }])
+p "Created #{Key.count} Keys"
 
 EndUser.create!([{
     id: 1,
@@ -54,7 +55,8 @@ EndUser.create!([{
     email: ";lkj",
     phone: "234",
     department: "asdf",
-    store_number: 2
+    store_number: 2,
+	group_id: 1
 },
 {
     id: 2,
@@ -63,7 +65,8 @@ EndUser.create!([{
     email: "jjjjjj",
     phone: "2344",
     department: "as",
-    store_number: 1
+    store_number: 1,
+	group_id: 1
 },
 {
     id: 7,
@@ -72,7 +75,8 @@ EndUser.create!([{
     email: "jj",
     phone: "2344",
     department: "as",
-    store_number: 1
+    store_number: 1,
+	group_id: 1
 },
 {
     id: 6,
@@ -81,7 +85,8 @@ EndUser.create!([{
     email: "jj",
     phone: "2344",
     department: "as",
-    store_number: 1
+    store_number: 1,
+	group_id: 1
 },
 {
     id: 5,
@@ -90,7 +95,8 @@ EndUser.create!([{
     email: "jj",
     phone: "2344",
     department: "as",
-    store_number: 1
+    store_number: 1,
+	group_id: 1
 },
 {
     id: 4,
@@ -99,7 +105,8 @@ EndUser.create!([{
     email: "asdfa",
     phone: "2344444",
     department: "as",
-    store_number: 1
+    store_number: 1,
+	group_id: 1
 },
 {
     id: 3,
@@ -108,8 +115,10 @@ EndUser.create!([{
     email: "ffdsas",
     phone: "64221",
     department: "asdf",
-    store_number: 3
+    store_number: 3,
+	group_id: 1
 }])
+p "Created #{EndUser.count} Users"
 
 
 Purchaser.create!([{
@@ -136,6 +145,7 @@ Purchaser.create!([{
     phone: "1f34",
     fax: "q3asd4"
 }])
+p "Created #{Purchaser.count} Purchasers"
 
 
 PurchaseOrder.create!([{
@@ -144,6 +154,27 @@ PurchaseOrder.create!([{
     date_order: DateTime.strptime("09/14/2009 8:00", "%m/%d/%Y %H:%M"),
     purchaser_id: 1,
     end_user_id: 1
+},
+{
+    so_number: 6,
+    po_number: 1,
+    date_order: DateTime.strptime("09/14/2009 8:00", "%m/%d/%Y %H:%M"),
+    purchaser_id: 2,
+    end_user_id: 6
+},
+{
+    so_number: 4,
+    po_number: 1,
+    date_order: DateTime.strptime("09/14/2009 8:00", "%m/%d/%Y %H:%M"),
+    purchaser_id: 2,
+    end_user_id: 4
+},
+{
+    so_number: 3,
+    po_number: 1,
+    date_order: DateTime.strptime("09/14/2009 8:00", "%m/%d/%Y %H:%M"),
+    purchaser_id: 2,
+    end_user_id: 3
 },
 {
     so_number: 2,
@@ -159,6 +190,7 @@ PurchaseOrder.create!([{
     purchaser_id: 2,
     end_user_id: 1 
 }])
+p "Created #{PurchaseOrder.count} Purchase Orders"
 
 PoK.create!([{
     quantity: 100,
@@ -182,9 +214,5 @@ PoK.create!([{
 }])
 
 
-p "Created #{Key.count} Keys"
-p "Created #{EndUser.count} Users"
-p "Created #{Purchaser.count} Purchasers"
-p "Created #{PurchaseOrder.count} Purchase Orders"
 p "Created #{PoK.count} PurchaseOrder--Keys"
 

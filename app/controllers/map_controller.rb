@@ -19,13 +19,15 @@ class MapController < ApplicationController
 			params[:green] = params[:yellow]
 		end
 		
-		end_user_group = EndUser.where(group_id: params[:group])
+#		end_user_group = EndUser.where(group_id: params[:group])
+		end_user_group = EndUser.where(group_id: session[:group_id])
 
 		@end_users_red = end_user_group.within(params[:red], :origin => @enduser[:address]);
 		@end_users_yellow = end_user_group.in_range(params[:red]..params[:yellow], :origin => @enduser[:address]);
 		@end_users_green = end_user_group.beyond(params[:yellow], :origin => @enduser[:address]);
 
-		
+		puts end_user_group
+	
 		@end_users_red.to_a.delete(@enduser)	
 		@end_users_yellow.to_a.delete(@enduser)	
 		@end_users_green.to_a.delete(@enduser)	
@@ -33,7 +35,16 @@ class MapController < ApplicationController
 		@red_key_codes = get_associated_keys(@end_users_red)
 		@yellow_key_codes = get_associated_keys(@end_users_yellow)
 		@green_key_codes = get_associated_keys(@end_users_green)
-		
+
+		puts "Red"
+		puts @end_users_red
+		puts @red_key_codes
+		puts "Green"
+		puts @end_users_green
+		puts @green_key_codes
+		puts "Yellow"
+		puts @end_users_yellow
+		puts @yellow_key_codes
 		#render :partial => "map"
 		respond_to do |format|
 #			#format.html { redirect_to @user, notice: "Successfully updated user." }
@@ -71,8 +82,8 @@ class MapController < ApplicationController
 
 	private 
 	def set_enduser
-#		@enduser = EndUser.find(session[:enduser])
-		@enduser = EndUser.find(params[:id])
+		@enduser = EndUser.find(session[:enduser])
+#		@enduser = EndUser.find(params[:id])
 	end
 
 	def get_associated_keys(endusers)
