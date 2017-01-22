@@ -157,14 +157,14 @@ PurchaseOrder.create!([{
 },
 {
     so_number: 6,
-    po_number: 1,
+    po_number: 3,
     date_order: DateTime.strptime("09/14/2009 8:00", "%m/%d/%Y %H:%M"),
     purchaser_id: 2,
     end_user_id: 6
 },
 {
     so_number: 4,
-    po_number: 1,
+    po_number: 2,
     date_order: DateTime.strptime("09/14/2009 8:00", "%m/%d/%Y %H:%M"),
     purchaser_id: 2,
     end_user_id: 4
@@ -178,14 +178,14 @@ PurchaseOrder.create!([{
 },
 {
     so_number: 2,
-    po_number: 1,
+    po_number: 4,
     date_order: DateTime.strptime("09/14/2009 8:00", "%m/%d/%Y %H:%M"),
     purchaser_id: 2,
     end_user_id: 2
 },
 {
     so_number: 12,
-    po_number: 2,
+    po_number: 5,
     date_order: DateTime.strptime("09/14/2009 8:00", "%m/%d/%Y %H:%M"),
     purchaser_id: 2,
     end_user_id: 1 

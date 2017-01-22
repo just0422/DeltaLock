@@ -85,3 +85,8 @@ function enable_all_tables_highlights(){
 			$(this).addClass("bg-primary");
 	});
 }
+
+function flipAddress(){
+	$("#domestic-address").toggle();
+	$("#other-address").toggle();
+}

@@ -59,7 +59,8 @@ class PurchaseOrderController < ApplicationController
 
 	private
 	def purchaseorder_params
-		params.require(:purchase_order).permit(:po_number, :date_order, :so_number)
+		params.require(:purchase_order).require(:po_number, :date_order):
+		params.require(:purchase_order).permit(:so_number)
 	end
 	def pok_params
 		params.require(:pok).permit(:quantity, :key_id, :purchase_order_id)
