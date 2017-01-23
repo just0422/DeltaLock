@@ -17,6 +17,7 @@ class PurchaserController < ApplicationController
 
 	def new
 		@purchaser = Purchaser.new
+		@purchaser.build_address
 	end
 
 	def create

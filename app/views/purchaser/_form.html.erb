@@ -1,7 +1,7 @@
 <li class="list-group-item"><%= f.label :name %>		 :	<%= f.text_field :name %></br></li>
 <li class="list-group-item">
-	<% f.fields_for :address do |address| %>
-		<%= render :partial => '/shared/address', :locals => {:f => address} %>
+	<%= f.fields_for :address do |ff| %>
+		<%= render :partial => 'shared/address', :locals => {:f => ff} %>
 	<% end %>
 	</br>
 </li>
