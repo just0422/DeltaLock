@@ -8,7 +8,8 @@
 		<div id="<%= @uid %>" class="panel-collapse collapse in">
 			<ul class="list-group">
 				<% @current_keys.each do |ck| %>
-					<li class="list-group-item"><%= ck[:key] %></li>
+					<li class="list-group-item"><%= j render :partial "/key/key_info", :locals => { @key: ck} %></li>
+					<!--<li class="list-group-item"><%# ck[:key] %></li>-->
 				<% end %>
 			</ul>
 		</div>
