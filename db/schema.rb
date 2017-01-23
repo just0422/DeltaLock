@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122215503) do
+ActiveRecord::Schema.define(version: 20170123025639) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "line1",            limit: 255
@@ -58,13 +58,16 @@ ActiveRecord::Schema.define(version: 20170122215503) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "keys", primary_key: "key_hash", force: :cascade do |t|
-    t.string   "keyway",      limit: 255
-    t.string   "master_key",  limit: 255
-    t.string   "control_key", limit: 255
-    t.string   "stamp_code",  limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+  create_table "keys", force: :cascade do |t|
+    t.string   "keyway",        limit: 255
+    t.string   "master_key",    limit: 255
+    t.string   "control_key",   limit: 255
+    t.string   "operating_key", limit: 255
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "bitting",       limit: 255
+    t.string   "system_name",   limit: 255
+    t.text     "comments",      limit: 4294967295
   end
 
   create_table "po_ks", force: :cascade do |t|

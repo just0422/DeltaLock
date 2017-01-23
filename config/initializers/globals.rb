@@ -22,7 +22,10 @@ ColumnLabels.insert("lng", "Longitude")
 # Key
 ColumnLabels.insert("master_key", "Master Key Code")
 ColumnLabels.insert("control_key", "Control Key Code")
-ColumnLabels.insert("stamp_code", "Stamp Code")
+ColumnLabels.insert("operating_key", "Operating Key Code")
+ColumnLabels.insert("bitting", "Bitting")
+ColumnLabels.insert("system_name", "System Name")
+ColumnLabels.insert("comments", "Comments")
 
 # Purchase Orders
 ColumnLabels.insert("po_number", "Purchase Order #")
