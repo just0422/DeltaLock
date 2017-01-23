@@ -6,14 +6,14 @@ class KeycodesController < ApplicationController
 		case params[:category]
 		when "enduser"
 			@enduser = EndUser.find(params[:id])
-			@address_attributes = Address.find_by_addressable_id(params[:id])
+			@address_attributes = Address.find_by_addressable_id_and_addressable_type(params[:id], "EndUser")
 		when "key"
 			@key = Key.find(params[:id])
 		when "purchaseorder"
 			@purchaseorder = PurchaseOrder.find(params[:id])
 		when "purchaser"
 			@purchaser = Purchaser.find(params[:id])
-			@address_attributes = Address.find_by_addressable_id(params[:id])
+			@address_attributes = Address.find_by_addressable_id_and_addressable_type(params[:id], "Purchaser")
 		end
 
 
@@ -60,6 +60,12 @@ class KeycodesController < ApplicationController
 			@purchasers_list += purchaser_check(column, val)
 		end	
         @purchasers_list = @purchasers_list.uniq.compact
+
+		@address_attributes_list = Hash.new
+		@purchasers_list.each do |eu|
+			@address_attributes_list[eu[:id]] = Address.find_by_addressable_id_and_addressable_type(eu[:id], "Purchaser")
+		end
+
 		respond_to do |format|
 			format.js
 		end
@@ -71,6 +77,12 @@ class KeycodesController < ApplicationController
 			@end_users_list += enduser_check(column, val)
 		end	
 		@end_users_list = @end_users_list.uniq.compact
+
+		@address_attributes_list = Hash.new
+		@end_users_list.each do |eu|
+			@address_attributes_list[eu[:id]] = Address.find_by_addressable_id_and_addressable_type(eu[:id], "EndUser")
+		end
+
 		respond_to do |format|
 			format.js
 		end
@@ -95,14 +107,12 @@ class KeycodesController < ApplicationController
 		case key
 		when "Name"
 			return Purchaser.where("name like ?", "%#{val}%")
-		when "Address"
-			return Purchaser.where("address like ?", "%#{val}%")
-		when "Email"
-			return Purchaser.where("email like ?", "%#{val}%")
 		when "Phone"
 			return Purchaser.where("phone like ?", "%#{val}%")
 		when "Fax"
 			return Purchaser.where("fax like ?", "%#{val}%")
+		when "Group"
+			return Purchaser.where("group like ?", "%#{val}%")
 		else
 			print_debug(key, val, "Purchaser")
 			return []
@@ -115,8 +125,6 @@ class KeycodesController < ApplicationController
 			return EndUser.where("name like ?", "%#{val}%")
 		when "Address"
 			return EndUser.where("address like ?", "%#{val}%")
-		when "Email"
-			return EndUser.where("email like ?", "%#{val}%")
 		when "Department"
 			return EndUser.where("department like ?", "%#{val}%")
 		when "Store Number"
@@ -124,7 +132,7 @@ class KeycodesController < ApplicationController
 		when "Phone"
 			return EndUser.where("phone like ?", "%#{val}%")
 		when "Group"
-			return EndUser.where("group_id like ?", "%#{val}%")
+			return EndUser.where("group_name like ?", "%#{val}%")
 		else
 			print_debug(key, val, "End User")
 			return []

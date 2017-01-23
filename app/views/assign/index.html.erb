@@ -88,7 +88,7 @@
 				category_search = '<%= j ( render '/keycodes/fetch_endusers', category: "End User") %>';
 				break;
 			case "Key Codes":
-				if (isNaN(parseInt($(".enduser-group_id").html()))){
+				if (isNaN(parseInt($(".enduser-group").html()))){
 					category_search = '<%= j ( render '/keycodes/fetch_keys', category: "Key Codes") %>';
 				}
 				else{
@@ -97,7 +97,7 @@
 						url: "/get_keys_map",
 						data: {
 							"id" :  parseInt($(".enduser-id").html()), 
-							"group": parseInt($(".enduser-group_id").html())
+							"group": parseInt($(".enduser-group").html())
 						}
 //						dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
 					}).success(function(response, status){

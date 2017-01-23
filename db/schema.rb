@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123191626) do
+ActiveRecord::Schema.define(version: 20170123205102) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "line1",            limit: 255
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20170123191626) do
     t.string   "sub_department_4",     limit: 255
     t.integer  "address_id",           limit: 4
     t.string   "fax",                  limit: 255
-    t.string   "group",                limit: 255
+    t.string   "group_name",           limit: 255
   end
 
   add_index "end_users", ["address_id"], name: "fk_rails_365732cfc2", using: :btree
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20170123191626) do
     t.string   "primary_contact",      limit: 255
     t.string   "primary_contact_type", limit: 255
     t.integer  "address_id",           limit: 4
-    t.string   "group",                limit: 255
+    t.string   "group_name",           limit: 255
   end
 
   add_index "purchasers", ["address_id"], name: "fk_rails_0ef4eb6c71", using: :btree
