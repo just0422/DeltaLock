@@ -20,6 +20,7 @@ ColumnLabels.insert("lat", "Latitude")
 ColumnLabels.insert("lng", "Longitude")
 
 # Key
+ColumnLabels.insert("keyway", "Keyway")
 ColumnLabels.insert("master_key", "Master Key Code")
 ColumnLabels.insert("control_key", "Control Key Code")
 ColumnLabels.insert("operating_key", "Operating Key Code")
