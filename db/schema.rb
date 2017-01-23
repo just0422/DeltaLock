@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123025639) do
+ActiveRecord::Schema.define(version: 20170123191626) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "line1",            limit: 255
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20170123025639) do
     t.integer  "store_number",         limit: 4
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.integer  "group_id",             limit: 4
     t.float    "lat",                  limit: 24
     t.float    "lng",                  limit: 24
     t.string   "primary_contact",      limit: 255
@@ -47,16 +46,10 @@ ActiveRecord::Schema.define(version: 20170123025639) do
     t.string   "sub_department_4",     limit: 255
     t.integer  "address_id",           limit: 4
     t.string   "fax",                  limit: 255
+    t.string   "group",                limit: 255
   end
 
   add_index "end_users", ["address_id"], name: "fk_rails_365732cfc2", using: :btree
-  add_index "end_users", ["group_id"], name: "index_end_users_on_group_id", using: :btree
-
-  create_table "groups", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
 
   create_table "keys", force: :cascade do |t|
     t.string   "keyway",        limit: 255
@@ -101,12 +94,11 @@ ActiveRecord::Schema.define(version: 20170123025639) do
     t.datetime "updated_at",                       null: false
     t.string   "primary_contact",      limit: 255
     t.string   "primary_contact_type", limit: 255
-    t.integer  "group_id",             limit: 4
     t.integer  "address_id",           limit: 4
+    t.string   "group",                limit: 255
   end
 
   add_index "purchasers", ["address_id"], name: "fk_rails_0ef4eb6c71", using: :btree
-  add_index "purchasers", ["group_id"], name: "fk_rails_27499c4b85", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                  null: false
@@ -119,9 +111,7 @@ ActiveRecord::Schema.define(version: 20170123025639) do
   end
 
   add_foreign_key "end_users", "addresses"
-  add_foreign_key "end_users", "groups"
   add_foreign_key "purchase_orders", "end_users"
   add_foreign_key "purchase_orders", "purchasers"
   add_foreign_key "purchasers", "addresses"
-  add_foreign_key "purchasers", "groups"
 end

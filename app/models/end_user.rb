@@ -1,6 +1,4 @@
 class EndUser < ActiveRecord::Base
-    belongs_to :group
-
 	has_one :address, :as => :addressable
 	accepts_nested_attributes_for :address
 
