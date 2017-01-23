@@ -3,8 +3,13 @@
 		<% categoryList.column_names.each do |title| %>
 			<% if ColumnLabels.column?(title) %>
 				<li class="list-group-item">
-					<strong><%= title %> : </strong>
-					<span class="<%= classString + "=" + title %>"><%= entry[title] %></span>
+					<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
+					<% if title == "address_id" %>
+						</br>
+						<span class="<%= classString + "-" + title %>"><%= build_address_string(@address_attributes) %>
+					<% else %>
+						<span class="<%= classString + "-" + title %>"><%= entry[title] %></span>
+					<% end %>
 				</li>
 			<% end %>
 		<% end %>

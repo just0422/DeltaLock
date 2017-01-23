@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
   def build_address_string(address_attributes)
 	address = ""
 	if address_attributes[:custom_address].empty?
-		address += address_attributes[:line1].to_s + " " + address_attributes[:line2].to_s + "\n"
-		address += address_attributes[:city].to_s + " " + address_attributes[:state].to_s + " "
+		address += address_attributes[:line1].to_s + " " + address_attributes[:line2].to_s + ""
+		address += address_attributes[:city].to_s + ", " + address_attributes[:state].to_s + " "
 		address += address_attributes[:zip]
 	else
 		address = address_attributes[:custom_attributes]

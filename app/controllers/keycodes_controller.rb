@@ -6,12 +6,14 @@ class KeycodesController < ApplicationController
 		case params[:category]
 		when "enduser"
 			@enduser = EndUser.find(params[:id])
+			@address_attributes = Address.find_by_addressable_id(params[:id])
 		when "key"
 			@key = Key.find(params[:id])
 		when "purchaseorder"
 			@purchaseorder = PurchaseOrder.find(params[:id])
 		when "purchaser"
 			@purchaser = Purchaser.find(params[:id])
+			@address_attributes = Address.find_by_addressable_id(params[:id])
 		end
 
 

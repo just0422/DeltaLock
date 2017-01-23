@@ -9,6 +9,7 @@ class EndUserController < ApplicationController
 	
 	def show_enduser
 		render partial: "enduserinfo"
+		@address_attributes = Address.find_by_addressable_id(params[:id])
 	end
 	
 	def update
