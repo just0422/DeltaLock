@@ -4,7 +4,7 @@
 			<% if ColumnLabels.column?(title) %>
 				<li class="list-group-item">
 					<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
-					<% if title == "address_id" and not (@address_attributes == nil) %>
+					<% if title == "address_id" %>
 						</br>
 						<span class="<%= classString + "-" + title %>"><%= build_address_string(@address_attributes) %>
 					<% else %>
