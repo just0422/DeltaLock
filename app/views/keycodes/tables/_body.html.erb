@@ -5,5 +5,10 @@
 	<% else %>
 		style="display:none;">
 	<% end %>
-	<%= entry[column] %></td>
+	<% if column == "address_id" %>
+		<%= build_address_string(@address_attributes) %>
+	<% else %>
+		<%= entry[column] %>
+	<% end %>
+	</td>
 <% end %>
