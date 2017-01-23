@@ -12,7 +12,7 @@ class EndUserController < ApplicationController
 	end
 	
 	def update
-		geo = EndUser.geocode(params[:end_user][:address])
+		geo = EndUser.geocode(build_address_string(params[:end_user][:address_attributes]))
 		@enduser[:lat] = geo.lat
 		@enduser[:lng] = geo.lng
 
@@ -21,14 +21,15 @@ class EndUserController < ApplicationController
 	
 	def new 
 		@enduser = EndUser.new
+		@enduser.build_address
 	end
 
 	def create
 		if not Group.exists?(id: params[:end_user][:group_id])
 			Group.create(id: params[:end_user][:group_id])
 		end
-	
-		geo = EndUser.geocode(params[:end_user][:address])
+
+		geo = EndUser.geocode(build_address_string(params[:end_user][:address_attributes]))
 		params[:end_user][:lat] = geo.lat
 		params[:end_user][:lng] = geo.lng
 
@@ -37,7 +38,7 @@ class EndUserController < ApplicationController
 
 	private
 	def enduser_params
-		params.require(:end_user).permit(:name, :email, :address, :phone, :department, :store_number, :group_id, :lat, :lng)
+		params.require(:end_user).permit(:name, :phone, :fax, :primary_contact, :primary_contact_type, :department, :store_number, :group_id, :lat, :lng, :sub_department_1, :sub_department_2, :sub_department_3, :sub_department_4, address_attributes: [:line1, :line2, :city, :state, :zip, :country, :custom_address])
 	end
 
 	def set_session
@@ -47,5 +48,11 @@ class EndUserController < ApplicationController
 
 	def set_enduser
 		@enduser = EndUser.find(params[:id])
+	end
+
+	def check_group_and_address
+		if not Group.exists?(id: params[:end_user][:group_id])
+			Group.create(id: params[:end_user][:group_id])
+		end
 	end
 end

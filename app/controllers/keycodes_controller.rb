@@ -15,7 +15,7 @@ class KeycodesController < ApplicationController
 		end
 
 
-		@info_view = "/keycodes/info/" + params[:category] + "info"
+		@info_view = "/shared/info/" + params[:category] + "info"
 	end
 
 	def index
@@ -132,7 +132,7 @@ class KeycodesController < ApplicationController
 	def keycodes_check(key, val)
 		case key 
 		when "Key Code"
-			return Key.where("`key` like ?", "%#{val}%")
+			return Key.where("`keyway` like ?", "%#{val}%")
 		when "Master Key"
 			return Key.where("master_key like ?", "%#{val}%")
 		when "Control Key"

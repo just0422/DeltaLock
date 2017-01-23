@@ -20,7 +20,7 @@ function getHighlightedRow(category){
 //	var group_id = ;
 	$.ajax({
 		type: "GET",
-		url: category + "/" + id + "/" + id,
+		url: category + "/show_" + category  + "/" + id,
 		async: false
 	}).success(function(response){
 		selected += '<div id="' + category + '-info" class="collapse">' + response  + '</div>';

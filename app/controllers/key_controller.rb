@@ -6,16 +6,16 @@ class KeyController < ApplicationController
 	def show
 		@end_users_list = Array.new
 
-        @pok = PoK.find_by_key_id(@key[:key_hash])
+        @pok = PoK.find_by_key_id(@key[:keyway])
 
 		@matching_keys = Key.where("master_key like ?", "%#{val}%")
 		@matching_keys += Key.where("control_key like ?", "%#{val}%")
-		@matching_keys += Key.where("key like ?", "%#{val}%")
+		@matching_keys += Key.where("keyway like ?", "%#{val}%")
 
 		@matching_keys = @matching_keys.uniq.compact
 		
 		@matchin_keys.each do |key|
-			pok = PoK.find_by_key_id(key[:key_hash])
+			pok = PoK.find_by_key_id(key[:keyway])
 			po = PurchaseOrder.find(PoK[:purchase_order_id])
 			@end_users_list += EndUser.find(po[:end_user_id])
 		end
@@ -56,7 +56,7 @@ class KeyController < ApplicationController
 
 	private
 	def key_params
-		params.require(:key).permit(:key, :master_key, :control_key, :stamp_code)
+		params.require(:key).permit(:keyway, :master_key, :control_key, :stamp_code)
 	end
 
 	def set_session

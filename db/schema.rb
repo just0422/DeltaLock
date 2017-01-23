@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170121211913) do
+ActiveRecord::Schema.define(version: 20170122215503) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "line1",            limit: 255
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20170121211913) do
     t.string   "addressable_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country",          limit: 255
+    t.string   "custom_address",   limit: 255
   end
 
   add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", unique: true, using: :btree
@@ -44,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170121211913) do
     t.string   "sub_department_3",     limit: 255
     t.string   "sub_department_4",     limit: 255
     t.integer  "address_id",           limit: 4
+    t.string   "fax",                  limit: 255
   end
 
   add_index "end_users", ["address_id"], name: "fk_rails_365732cfc2", using: :btree
