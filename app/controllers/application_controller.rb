@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 		address += address_attributes[:state] + " " if address_attributes[:state] != nil
 		address += address_attributes[:zip] if address_attributes[:zip] != nil
 	else
-		address = address_attributes[:custom_attributes]
+		address = address_attributes[:custom_address]
 	end
 	return address
   end
