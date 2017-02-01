@@ -1,0 +1,10 @@
+<% Key.column_names.each do |title| %>
+	<div class="key-label">
+		<strong><%= title %> : </strong>
+		<span class="key-<%= title %>"><%= @key[title] %></span>
+	</div>
+	</br>
+<% end %>
+<%= link_to edit_key_path(@key), remote: true do %>
+	<button class="btn">Edit</button>
+<% end %>

@@ -58,6 +58,7 @@ function selectEndUser(){
 }
 
 function selectKey(){
+	$("#key-map").fadeOut(FADE_TIME);
 	$("#key-table").fadeOut(FADE_TIME, function(){
 		if ($("#header-information").find("#key-header-table").length > 0)
 			$("#key-header-table").append(getNewRow());

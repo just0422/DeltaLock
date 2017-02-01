@@ -5,10 +5,15 @@
 				<a data-toggle="collapse" data-parent="#accordion" href="#<%= @uid %>"><%= @uid.split('-')[0].capitalize %></a>
 			</h4>
 		</div>
-		<div id="<%= @uid %>" class="panel-collapse collapse in">
+		<div id="<%= @uid %>" class="panel-collapse collapse in all-maps">
 			<ul class="list-group">
 				<% @current_keys.each do |ck| %>
-					<li class="list-group-item"><%= j render :partial "/key/key_info", :locals => { @key: ck} %></li>
+					<% @key = ck %>
+					<li class="list-group-item key-label map-key-code">
+						<span class="key-id" style="display:none;"><%= ck[:id] %></span>
+						<strong>Keyway : </strong><span class="key-keyway"><%= ck[:keyway] %></span></br>
+						<strong>System Name : </strong><span class="key-system_name"><%= ck[:system_name] %></span></br>
+					</li>
 					<!--<li class="list-group-item"><%# ck[:key] %></li>-->
 				<% end %>
 			</ul>

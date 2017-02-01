@@ -30,6 +30,7 @@ class KeyController < ApplicationController
     end
 
 	def show_key
+		render partial: "keyinfo"
 	end
 
 	def update

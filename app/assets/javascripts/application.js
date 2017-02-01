@@ -31,7 +31,8 @@ $(document).ready(function(){
           window.location = $(this).data("link");
     });
 	
-	enable_all_tables_highlights();
+	enable_all_highlights(".all-tables", "tbody tr");
+	enable_all_highlights(".all-maps", "ul li");
 
 });
 
@@ -66,19 +67,19 @@ function toggle_edit_save(button){
 }
 
 
-function enable_all_tables_highlights(){
-	$(".all-tables").on("mouseleave","tbody tr",function(){
+function enable_all_highlights(type, element){
+	$(type).on("mouseleave",element,function(){
 		if (!$(this).hasClass("bg-primary"))
 			$(this).removeClass("bg-info");
 	});
-	$(".all-tables").on("mouseenter","tbody tr",function(){
+	$(type).on("mouseenter",element,function(){
 		if (!$(this).hasClass("bg-primary"))
 			$(this).addClass("bg-info");
 	});
-	$(".all-tables").on("click","tbody tr",function(){
+	$(type).on("click",element,function(){
 		var selected = $(this).hasClass("bg-primary");
-		$("tr").removeClass("bg-info");
-		$("tr").removeClass("bg-primary");
+		$("tr,li").removeClass("bg-info");
+		$("tr,li").removeClass("bg-primary");
 		if (selected)
 			$(this).removeClass("bg-primary");
 		else

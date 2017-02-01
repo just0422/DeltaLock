@@ -3,5 +3,5 @@ $('#enduser-searchbar-list').fadeOut(FADE_TIME, function(){
 	$('#enduser-table').prepend("<%= j (render '/keycodes/tables/endusers') %>");
 	$("#enduser-table").append("<button onclick='selectEndUser()'>Select</button>");
 	$('#enduser-table').fadeIn(FADE_TIME);
-	enable_all_tables_highlights();
+	enable_all_highlights(".all-tables","tbody tr");
 });

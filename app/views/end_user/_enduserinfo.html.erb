@@ -7,6 +7,8 @@
 					<span class="enduser-<%= title %>"><%= @enduser[title] %></span>
 				</div>
 			</li>
+		<% else %>
+			<span class="enduser-<%= title %>" style="display:none;"><%= @enduser[title] %></span>
 		<% end %>
 	<% end %>
 </ul>

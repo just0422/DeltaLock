@@ -8,6 +8,7 @@ class PurchaserController < ApplicationController
     end
 
 	def show_purchaser
+		@address_attributes = Address.find_by_addressable_id_and_addressable_type(params[:id], "Purchaser")
 		render partial: "purchaserinfo"
 	end
 
