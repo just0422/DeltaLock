@@ -1,6 +1,43 @@
-apt-get update
-apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs
-apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
+#!/bin/bash
+
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+
+echo "Running apt-get update"
+apt-get update -yqq
+
+pkgs=(git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs)
+
+for pkg in "${pkgs[@]}"
+do
+	echo -e "${NC}Installing $pkg"
+	if dpkg -s "$pkg" >/dev/null 2>&1; then
+		echo -e "${YELLOW}$pkg already installed"
+	elif apt-get -qq -y install "$pkg" >/dev/null 2>&1; then
+		echo -e "${GREEN}$pkg sucessfully installed"
+	else
+		echo -e "\t${RED}$pkg not installed"
+	fi
+done
+echo -e "${NC}Done"
+
+pkgs=(autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev)
+
+for pkg in "${pkgs[@]}"
+do
+	echo -e "${NC}Installing $pkg"
+	if dpkg -s "$pkg" >/dev/null 2>&1; then
+		echo -e "${YELLOW}$pkg already installed"
+	elif apt-get -qq -y install "$pkg" >/dev/null 2>&1; then
+		echo -e "${GREEN}$pkg sucessfully installed"
+	else
+		echo -e "\t${RED}$pkg not installed"
+	fi
+done
+echo -e "${NC}Done"
 
 
 
@@ -8,7 +45,7 @@ git config --global color.ui true
 git config --global user.name "DeltaLock"
 git config --global user.email "delta@deltalock.biz"
 
-cd
+cd ~
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
