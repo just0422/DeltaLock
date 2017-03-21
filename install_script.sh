@@ -78,8 +78,8 @@ export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 echo -e "${BLUE}Installing ruby${NC}"
 #source ~/.bashrc
 
-rbenv install 2.4.0
-rbenv global 2.4.0
+rbenv install 2.3.1
+rbenv global 2.3.1
 install 'ruby -v' 'ruby'
 #if ruby -v; then
 #	echo -e "${GREEN}Ruby successfully installed${NC}"
@@ -98,13 +98,14 @@ gem install rails -v 5.0.1
 rbenv rehash
 install 'rails -v' 'Rails'
 
-echo -e "${BLUE}Installing gems${NC}"
-install 'bundle install' 'Gems'
-
-
 echo -e "${BLUE}Install Node.js${NC}"
 apt-add-repository ppa:chris-lea/node.js
 apt-get install -yq nodejs
+
+cd ~/DeltaLock
+echo -e "${BLUE}Installing gems${NC}"
+install 'bundle install' 'Gems'
+
 
 echo -e "${YELLOW}CONNECT TO DB NOW${NC}"
 echo -e "${BLUE}config/database.yml${NC}"
