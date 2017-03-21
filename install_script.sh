@@ -52,6 +52,8 @@ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 echo -e "${BLUE}Installing rbenv${NC}"
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 if source ~/.bashrc; then
 	echo -e "${GREEN}rbenv successfully installed${NC}"
 else
@@ -61,6 +63,7 @@ fi
 echo -e "${BLUE}Cloning ruby build into rbenv${NC}"
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 echo -e "${BLUE}Installing ruby${NC}"
 source ~/.bashrc
 
