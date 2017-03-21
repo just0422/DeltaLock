@@ -15,39 +15,6 @@ function install(){
 	fi
 }
 
-
-echo -e "${BLUE}Running apt-get update${NC}"
-apt-get -yq update
-
-pkgs=(git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs)
-
-for pkg in "${pkgs[@]}"
-do
-	echo -e "${BLUE}Installing $pkg"
-	if dpkg -s "$pkg" >/dev/null 2>&1; then
-		echo -e "${YELLOW}$pkg already installed"
-	elif apt-get -qq -y install "$pkg" >/dev/null 2>&1; then
-		echo -e "${GREEN}$pkg sucessfully installed"
-	else
-		echo -e "\t${RED}$pkg not installed"
-	fi
-done
-
-pkgs=(autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev)
-
-for pkg in "${pkgs[@]}"
-do
-	echo -e "${BLUE}Installing $pkg"
-	if dpkg -s "$pkg" >/dev/null 2>&1; then
-		echo -e "${YELLOW}$pkg already installed"
-	elif apt-get -qq -y install "$pkg" >/dev/null 2>&1; then
-		echo -e "${GREEN}$pkg sucessfully installed"
-	else
-		echo -e "\t${RED}$pkg not installed"
-	fi
-done
-
-
 echo -e "${BLUE}Config git${NC}"
 git config --global color.ui true
 git config --global user.name "DeltaLock"
@@ -94,13 +61,15 @@ install 'gem install bundler' 'bundle'
 
 
 echo -e "${BLUE}Install Rails${NC}"
-gem install rails -v 5.0.1
+gem install rails -v 4.2.6
 rbenv rehash
 install 'rails -v' 'Rails'
 
 echo -e "${BLUE}Install Node.js${NC}"
 apt-add-repository ppa:chris-lea/node.js
 apt-get install -yq nodejs
+
+## Make sure DB is Setup HERE***********************************
 
 cd ~/DeltaLock
 echo -e "${BLUE}Installing gems${NC}"
@@ -112,20 +81,17 @@ echo -e "${BLUE}config/database.yml${NC}"
 
 
 
-cd ~/.rbenv
-git pull
-
 echo -e "${BLUE}Cloning rbenv-vars for secret key generation and password protection"
 cd ~/.rbenv/plugins
 git clone https://github.com/sstephenson/rbenv-vars.git
 
 echo -e "${BLUE}Generating secret key"
 cd ~/DeltaLock
-rake secret
+secret_key="$(rake secret)"
 exit 0
 
-cat "SECRET_KEY_BASE=your_generated_secret\n" >> .rbenv-vars
-cat "APPNAME_DATABASE_PASSWORD=prod_db_pass\n" >> .rbenv-vars
+echo "SECRET_KEY_BASE=$secret_key\n" >> .rbenv-vars
+echo "APPNAME_DATABASE_PASSWORD=prod_db_pass\n" >> .rbenv-vars
 
 
 
@@ -134,9 +100,9 @@ RAILS_ENV=production rake assets:precompile
 RAILS_ENV=production rails server --binding= #PUBLIC IP
 
 
-cat "gem 'unicorn'" >> Gemfile
+echo "gem 'unicorn'" >> Gemfile
 bundle
-cat special_files/unicorn.rb >> confige/unicorn.rb
+echo special_files/unicorn.rb >> confige/unicorn.rb
 
 mkdir -p shared/pids shared/sockets shared/log
 
