@@ -98,6 +98,9 @@ gem install rails -v 5.0.1
 rbenv rehash
 install 'rails -v' 'Rails'
 
+echo -e "${BLUE}Installing gems${NC}"
+install 'bundle install' 'Gems'
+
 
 echo -e "${BLUE}Install Node.js${NC}"
 apt-add-repository ppa:chris-lea/node.js
