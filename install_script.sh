@@ -43,6 +43,7 @@ echo -e "${BLUE}Config git${NC}"
 git config --global color.ui true
 git config --global user.name "DeltaLock"
 git config --global user.email "delta@deltalock.biz"
+git config --global push.default matching
 
 cd ~
 echo -e "${BLUE}Removing previous .rbenv directory (if it exists)${NC}"
