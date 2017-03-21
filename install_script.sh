@@ -6,6 +6,15 @@ GREEN='\033[0;32m'
 BLUE='\033[0;36m'
 NC='\033[0m'
 
+function install(){
+	if $1; then
+		echo -e "${GREEN}$2 successfully installed${NC}"
+	else
+		echo -e "${RED}$2 not installed${NC}"
+		exit 1
+	fi
+}
+
 
 echo -e "${BLUE}Running apt-get update${NC}"
 apt-get -yq update
@@ -53,54 +62,63 @@ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 echo -e "${BLUE}Installing rbenv${NC}"
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-if source ~/.bashrc; then
-	echo -e "${GREEN}rbenv successfully installed${NC}"
-else
-	echo -e "${RED}rbenv not installed${NC}"
-fi
+install 'export PATH="$HOME/.rbenv/bin:$PATH"' 'rbenv path'
+install 'eval "$(rbenv init -)"' 'rbenv init'
+#install 'source ~/.bashrc'
+#if source ~/.bashrc; then
+#	echo -e "${GREEN}rbenv successfully installed${NC}"
+#else
+#	echo -e "${RED}rbenv not installed${NC}"
+#fi
 
 echo -e "${BLUE}Cloning ruby build into rbenv${NC}"
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+install 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' 'Ruby Path'
 echo -e "${BLUE}Installing ruby${NC}"
-source ~/.bashrc
+#source ~/.bashrc
 
 rbenv install 2.4.0
 rbenv global 2.4.0
-if ruby -v; then
-	echo -e "${GREEN}Ruby successfully installed${NC}"
-else
-	echo -e "${RED}Ruby not installed. Abort...${NC}"
-	exit 1
-fi
-
-exit 0
-gem install bundler
+install 'ruby -v' 'ruby'
+#if ruby -v; then
+#	echo -e "${GREEN}Ruby successfully installed${NC}"
+#else
+#	echo -e "${RED}Ruby not installed. Abort...${NC}"
+#	exit 1
+#fi
 
 
+echo -e "${BLUE}Installing bundle${NC}"
+install 'gem install bundler' 'bundle'
+
+
+echo -e "${BLUE}Install Rails${NC}"
 gem install rails -v 5.0.1
 rbenv rehash
-rails -v
+install 'rails -v' 'Rails'
 
-cd /tmp
-\curl -sSL https://deb.nodesource.com/setup_6.x -o nodejs.sh
-less nodejs.sh
 
-cat /tmp/nodejs.sh | sudo -E bash -
-apt-get install -y nodejs
+echo -e "${BLUE}Install Node.js${NC}"
+apt-add-repository ppa:chris-lea/node.js
+apt-get install -yq nodejs
+
+echo -e "${YELLOW}CONNECT TO DB NOW${NC}"
+echo -e "${BLUE}config/database.yml${NC}"
+
+
 
 cd ~/.rbenv
 git pull
 
-
+echo -e "${BLUE}Cloning rbenv-vars for secret key generation and password protection"
 cd ~/.rbenv/plugins
 git clone https://github.com/sstephenson/rbenv-vars.git
 
+echo -e "${BLUE}Generating secret key"
 cd ~/DeltaLock
 rake secret
+exit 0
 
 cat "SECRET_KEY_BASE=your_generated_secret\n" >> .rbenv-vars
 cat "APPNAME_DATABASE_PASSWORD=prod_db_pass\n" >> .rbenv-vars
@@ -129,7 +147,3 @@ apt-get install nginx
 cp special_files/nginx_config >> /etc/nginx/sites-available/default
 
 service nginx restart
-
-
-
-
