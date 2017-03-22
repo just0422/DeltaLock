@@ -16,7 +16,7 @@ USAGE="Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
 
 # app settings
 USER="justin" #################################################################
-APP_NAME="DelatLock" 
+APP_NAME="DeltaLock" 
 APP_ROOT="/home/$USER/$APP_NAME"
 ENV="production"
 

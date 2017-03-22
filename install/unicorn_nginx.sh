@@ -11,7 +11,8 @@ cp install/special_files/unicorn_init.sh /etc/init.d/unicorn_deltalock
 echo -e "${BLUE}Adjusting unicorn /etc/init.d permissions${NC}"
 chmod 755 /etc/init.d/unicorn_deltalock
 update-rc.d unicorn_deltalock defaults
-
+echo -e "${BLUE}Starting  unicorn${NC}"
+service unicorn_deltalock start
 
 echo -e "${BLUE}Installing nginx${NC}"
 apt-get -yq install nginx

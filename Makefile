@@ -1,4 +1,4 @@
-all: dependencies rails node_mysql db_unicorn 
+all: dependencies rails node_mysql db_unicorn unicorn_nginx
 
 dependencies:
 	sudo ./install/dependencies.sh
@@ -10,5 +10,7 @@ node_mysql:
 	sudo ./install/node_mysql.sh
 
 db_unicorn:
-	./install/db_unicorn_install.sh
-	sudo ./install/unicorn_permissions.sh
+	./install/db_unicorn.sh
+
+unicorn_nginx:
+	sudo ./install/unicorn_nginx.sh

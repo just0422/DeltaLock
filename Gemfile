@@ -60,6 +60,3 @@ group :development do
 end
 
 gem 'unicorn'
-gem 'unicorn'
-gem 'unicorn'
-gem 'unicorn'

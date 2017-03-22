@@ -50,7 +50,7 @@ RAILS_ENV=production rake assets:precompile
 echo -e "${BLUE}Installing Unicorn Gem${NC}"
 echo "gem 'unicorn'" >> Gemfile
 bundle
-echo install/special_files/unicorn.rb >> ../config/unicorn.rb
+cp install/special_files/unicorn.rb config/unicorn.rb
 echo -e "${GREEN}Unicorn file installed${NC}"
 
 mkdir -p shared/pids shared/sockets shared/log

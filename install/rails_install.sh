@@ -29,7 +29,9 @@ echo -e "${BLUE}Cloning rbenv repository${NC}"
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 echo -e "${BLUE}Installing rbenv${NC}"
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.profile
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.profile
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 #install 'source ~/.bashrc'
@@ -42,6 +44,7 @@ eval "$(rbenv init -)"
 echo -e "${BLUE}Cloning ruby build into rbenv${NC}"
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.profile
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 echo -e "${BLUE}Installing ruby${NC}"
 #source ~/.bashrc
