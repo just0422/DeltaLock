@@ -8,18 +8,19 @@ NC='\033[0m'
 
 function install(){
 	if $1; then
-		echo -e "${GREEN}$2 successfully installed${NC}"
+		echo -e "${GREEN}$2 successfully installed!${NC}"
 	else
 		echo -e "${RED}$2 not installed${NC}"
 		exit 1
 	fi
 }
 
-echo -e "${BLUE}Config git${NC}"
+echo -e "${BLUE}Configuring git...${NC}"
 git config --global color.ui true
 git config --global user.name "DeltaLock"
 git config --global user.email "delta@deltalock.biz"
 git config --global push.default matching
+echo -e "${GREEN}Git configuration successful!${NC}"
 
 cd ~
 echo -e "${BLUE}Removing previous .rbenv directory (if it exists)${NC}"
@@ -65,55 +66,3 @@ gem install rails -v 4.2.6
 rbenv rehash
 install 'rails -v' 'Rails'
 
-echo -e "${BLUE}Install Node.js${NC}"
-apt-add-repository ppa:chris-lea/node.js
-apt-get install -yq nodejs
-
-## Make sure DB is Setup HERE***********************************
-
-cd ~/DeltaLock
-echo -e "${BLUE}Installing gems${NC}"
-install 'bundle install' 'Gems'
-
-
-echo -e "${YELLOW}CONNECT TO DB NOW${NC}"
-echo -e "${BLUE}config/database.yml${NC}"
-
-
-
-echo -e "${BLUE}Cloning rbenv-vars for secret key generation and password protection"
-cd ~/.rbenv/plugins
-git clone https://github.com/sstephenson/rbenv-vars.git
-
-echo -e "${BLUE}Generating secret key"
-cd ~/DeltaLock
-secret_key="$(rake secret)"
-exit 0
-
-echo "SECRET_KEY_BASE=$secret_key\n" >> .rbenv-vars
-echo "APPNAME_DATABASE_PASSWORD=prod_db_pass\n" >> .rbenv-vars
-
-
-
-RAILS_ENV=production rake db:create
-RAILS_ENV=production rake assets:precompile
-RAILS_ENV=production rails server --binding= #PUBLIC IP
-
-
-echo "gem 'unicorn'" >> Gemfile
-bundle
-echo special_files/unicorn.rb >> confige/unicorn.rb
-
-mkdir -p shared/pids shared/sockets shared/log
-
-cp special_files/unicorn_init.sh /etc/init.d/unicorn_ #APPNAME
-chmod 755 /etc/init.d/unicorn_ #APPNAME
-update-rc.d unicorn_appname defaults
-
-service unicorn_ #APPNAME start
-
-
-apt-get install nginx
-cp special_files/nginx_config >> /etc/nginx/sites-available/default
-
-service nginx restart
