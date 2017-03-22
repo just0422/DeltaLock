@@ -15,7 +15,7 @@ set -e
 USAGE="Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
 
 # app settings
-USER="deploy" #################################################################
+USER="justin" #################################################################
 APP_NAME="DelatLock" 
 APP_ROOT="/home/$USER/$APP_NAME"
 ENV="production"

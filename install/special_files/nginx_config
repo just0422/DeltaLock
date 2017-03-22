@@ -1,14 +1,13 @@
-REPLACE DEPLOY AND APPNAME
 upstream app {
     # Path to Unicorn SOCK file, as defined previously
-    server unix:/home/#deploy#/#appname#/shared/sockets/unicorn.sock fail_timeout=0;
+    server unix:/home/justin/DeltaLock/shared/sockets/unicorn.sock fail_timeout=0;
 }
 
 server {
     listen 80;
     server_name localhost;
 
-    root /home/#deploy/appname#/public;
+    root /home/justin/DeltaLock/public;
 
     try_files $uri/index.html $uri @app;
 
