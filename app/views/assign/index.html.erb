@@ -116,6 +116,7 @@
 		$('#assign-' + id).fadeOut(FADE_TIME, function(){
 			$("#" + id + "-searchbar-list").fadeIn(FADE_TIME);
 			$('#' + id + '-searchbar-list').html('<h2>Find Existing ' + category + '</h2>'+ category_search);
+			add_new_row_single_category(category);
 		});
 	}
 
