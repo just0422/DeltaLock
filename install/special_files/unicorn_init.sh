@@ -15,7 +15,7 @@ set -e
 USAGE="Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
 
 # app settings
-USER="justin" #################################################################
+USER="administrator" 
 APP_NAME="DeltaLock" 
 APP_ROOT="/home/$USER/$APP_NAME"
 ENV="production"

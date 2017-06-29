@@ -52,5 +52,5 @@ test:
 production:
   <<: *default
   database: DeltaLock_production
-  username: DeltaLock
+  username: administrator
   password: <%= ENV['DELTALOCK_DATABASE_PASSWORD'] %>

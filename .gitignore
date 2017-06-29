@@ -14,3 +14,7 @@
 
 *.swp*
 db/schema.rb
+
+*.save
+shared/*
+public/*
