@@ -1,6 +1,4 @@
-<%= form_for @key, url: {controller: :key_upload, action: :create},  html: { multipart: true }, remote: true do |f| %>
-	<%= f.label :key %>
-	<%= f.text_field :key %>
+<%= form_for @key, url: {controller: :upload, action: :create},  html: { multipart: true }, remote: true do |f| %>
 	<%= f.label :keyfile %>
 	<%= f.file_field :keyfile %>
 	<%= f.submit "Save", class: "btn btn-primary" %>
