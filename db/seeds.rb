@@ -6,8 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
-p "Destroying Addresses"
-Address.destroy_all
+
+#p "Destroying Addresses"
+#Address.destroy_all
 p "Destroying PoKs"
 PoK.destroy_all
 p "Destroying PurchaseOrders"
@@ -19,6 +20,7 @@ EndUser.destroy_all
 p "Destroying Keys"
 Key.destroy_all
 
+=begin
 Address.create!([{
     line1: "100 Spear st",
 	line2: "",
@@ -106,7 +108,7 @@ Address.create!([{
 	addressable_type: "EndUser"
 }])
 p "Created #{Address.count} Addresses"
-
+=end
 
 Key.create!([{
 	id: 1,
@@ -149,14 +151,14 @@ Key.create!([{
 	comments: "HAHAHA"
 }])
 p "Created #{Key.count} Keys"
-
+=begin
 EndUser.create!([{
     id: 1,
     name: "asdf",
     phone: "234",
     department: "asdf",
     store_number: 2,
-	group: "Google"
+	group_name: "Google"
 },
 {
     id: 2,
@@ -164,7 +166,7 @@ EndUser.create!([{
     phone: "2344",
     department: "as",
     store_number: 1,
-	group: "Google"
+	group_name: "Google"
 },
 {
     id: 7,
@@ -172,7 +174,7 @@ EndUser.create!([{
     phone: "2344",
     department: "as",
     store_number: 1,
-	group: "Google"
+	group_name: "Google"
 },
 {
     id: 6,
@@ -180,7 +182,7 @@ EndUser.create!([{
     phone: "2344",
     department: "as",
     store_number: 1,
-	group: "Google"
+	group_name: "Google"
 },
 {
     id: 5,
@@ -188,7 +190,7 @@ EndUser.create!([{
     phone: "2344",
     department: "as",
     store_number: 1,
-	group: "Google"
+	group_name: "Google"
 },
 {
     id: 4,
@@ -196,7 +198,7 @@ EndUser.create!([{
     phone: "2344444",
     department: "as",
     store_number: 1,
-	group: "Google"
+	group_name: "Google"
 },
 {
     id: 3,
@@ -204,35 +206,35 @@ EndUser.create!([{
     phone: "64221",
     department: "asdf",
     store_number: 3,
-	group: "Google"
+	group_name: "Google"
 }])
+=end
 p "Created #{EndUser.count} End Users"
-
 
 Purchaser.create!([{
     id:1, 
     name: "justin",
     phone: "1234",
-	group: "Google",
+	group_name: "Google",
     fax: "q34re"
 },
 {
     id: 2,
     name: "just",
     phone: "134",
-	group: "Google",
+	group_name: "Google",
     fax: "q34"
 },
 {
     id: 3,
     name: "stan",
     phone: "1f34",
-	group: "Google",
+	group_name: "Google",
     fax: "q3asd4"
 }])
 p "Created #{Purchaser.count} Purchasers"
 
-
+=begin
 PurchaseOrder.create!([{
     so_number: 1,
     po_number: 4,
@@ -282,8 +284,9 @@ PurchaseOrder.create!([{
     purchaser_id: 1,
     end_user_id: 7 
 }])
+=end
 p "Created #{PurchaseOrder.count} Purchase Orders"
-
+=begin
 PoK.create!([{
     quantity: 100,
     key_id: 1,
@@ -319,4 +322,5 @@ PoK.create!([{
     key_id: 3,
     purchase_order_id: 7
 }])
+=end
 p "Created #{PoK.count} PurchaseOrder--Keys"
