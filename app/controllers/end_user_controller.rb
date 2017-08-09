@@ -1,6 +1,6 @@
 class EndUserController < ApplicationController
 	before_action :set_enduser, only: [:show, :show_enduser, :edit, :update]
-	after_action :set_session
+	after_action :set_session, except: [:all]
 	respond_to :html, :js
 
 	def show
@@ -35,6 +35,10 @@ class EndUserController < ApplicationController
 		params[:end_user][:lng] = geo.lng
 
 		@enduser = EndUser.create(enduser_params)
+	end
+
+	def all
+		@endusers = EndUser.all
 	end
 
 	private

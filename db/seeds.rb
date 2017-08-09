@@ -20,7 +20,7 @@ EndUser.destroy_all
 p "Destroying Keys"
 Key.destroy_all
 
-=begin
+
 Address.create!([{
     line1: "100 Spear st",
 	line2: "",
@@ -107,8 +107,8 @@ Address.create!([{
 	addressable_id: 3,
 	addressable_type: "EndUser"
 }])
+
 p "Created #{Address.count} Addresses"
-=end
 
 Key.create!([{
 	id: 1,
@@ -151,7 +151,7 @@ Key.create!([{
 	comments: "HAHAHA"
 }])
 p "Created #{Key.count} Keys"
-=begin
+
 EndUser.create!([{
     id: 1,
     name: "asdf",
@@ -208,7 +208,7 @@ EndUser.create!([{
     store_number: 3,
 	group_name: "Google"
 }])
-=end
+
 p "Created #{EndUser.count} End Users"
 
 Purchaser.create!([{
@@ -234,7 +234,6 @@ Purchaser.create!([{
 }])
 p "Created #{Purchaser.count} Purchasers"
 
-=begin
 PurchaseOrder.create!([{
     so_number: 1,
     po_number: 4,
@@ -284,9 +283,9 @@ PurchaseOrder.create!([{
     purchaser_id: 1,
     end_user_id: 7 
 }])
-=end
+
 p "Created #{PurchaseOrder.count} Purchase Orders"
-=begin
+
 PoK.create!([{
     quantity: 100,
     key_id: 1,
@@ -322,5 +321,5 @@ PoK.create!([{
     key_id: 3,
     purchase_order_id: 7
 }])
-=end
+
 p "Created #{PoK.count} PurchaseOrder--Keys"

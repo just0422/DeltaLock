@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/fetch_purchasers' => 'keycodes#get_purchasers', as: 'fetch_purchasers'
   get '/fetch_endusers' => 'keycodes#get_endusers', as: 'fetch_endusers'
   get '/fetch_keys' => 'keycodes#get_keys', as: 'fetch_keys'
+  get '/all_endusers' => 'end_user#all', as: 'all_endusers'
   get '/get_keys_map', to: 'map#map'
   get '/info' => 'keycodes#info', as: 'info'
   get '/signup' => 'users#new'

@@ -1,0 +1,12 @@
+
+<table>
+	<% @endusers.each do |user| %>
+		<tr>
+			<% EndUser.column_names.each do |title| %>
+				<% if ColumnLabels.column?(title) %>
+					<td><%= user[title] %></td>
+				<% end %>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
