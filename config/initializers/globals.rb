@@ -42,4 +42,4 @@ ColumnLabels.insert("zip", "Zip Code")
 ColumnLabels.insert("country", "Country")
 ColumnLabels.insert("custom_address", "Custom Address")
 
-
+AddressColumns = ['line2', 'city', 'state', 'zip', 'country']

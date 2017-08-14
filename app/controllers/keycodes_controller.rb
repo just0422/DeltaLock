@@ -6,14 +6,14 @@ class KeycodesController < ApplicationController
 		case params[:category]
 		when "enduser"
 			@enduser = EndUser.find(params[:id])
-			@address_attributes = Address.find_by_addressable_id_and_addressable_type(params[:id], "EndUser")
+			#@address_attributes = Address.find_by_addressable_id_and_addressable_type(params[:id], "EndUser")
 		when "key"
 			@key = Key.find(params[:id])
 		when "purchaseorder"
 			@purchaseorder = PurchaseOrder.find(params[:id])
 		when "purchaser"
 			@purchaser = Purchaser.find(params[:id])
-			@address_attributes = Address.find_by_addressable_id_and_addressable_type(params[:id], "Purchaser")
+			#@address_attributes = Address.find_by_addressable_id_and_addressable_type(params[:id], "Purchaser")
 		end
 
 
@@ -63,7 +63,7 @@ class KeycodesController < ApplicationController
 
 		@address_attributes_list = Hash.new
 		@purchasers_list.each do |eu|
-			@address_attributes_list[eu[:id]] = Address.find_by_addressable_id_and_addressable_type(eu[:id], "Purchaser")
+			#@address_attributes_list[eu[:id]] = Address.find_by_addressable_id_and_addressable_type(eu[:id], "Purchaser")
 		end
 
 		respond_to do |format|
@@ -80,7 +80,7 @@ class KeycodesController < ApplicationController
 
 		@address_attributes_list = Hash.new
 		@end_users_list.each do |eu|
-			@address_attributes_list[eu[:id]] = Address.find_by_addressable_id_and_addressable_type(eu[:id], "EndUser")
+			#@address_attributes_list[eu[:id]] = Address.find_by_addressable_id_and_addressable_type(eu[:id], "EndUser")
 		end
 
 		respond_to do |format|

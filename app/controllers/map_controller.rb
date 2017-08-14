@@ -23,7 +23,7 @@ class MapController < ApplicationController
 		#puts session[:group_name]
 		#		end_user_group = EndUser.where(group_id: params[:group])
 		end_user_group = EndUser.where(group_name: session[:group_name])
-		address_attributes = Address.find_by_addressable_id_and_addressable_type(params[:id], "EndUser")
+		#address_attributes = Address.find_by_addressable_id_and_addressable_type(params[:id], "EndUser")
 
 		@end_users_red = end_user_group.within(params[:red], :origin => build_address_string(address_attributes));
 		@end_users_yellow = end_user_group.in_range(params[:red]..params[:yellow], :origin => build_address_string(address_attributes));

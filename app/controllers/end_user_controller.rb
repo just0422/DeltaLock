@@ -43,7 +43,7 @@ class EndUserController < ApplicationController
 
 	private
 	def enduser_params
-		params.require(:end_user).permit(:name, :phone, :fax, :primary_contact, :primary_contact_type, :department, :store_number, :group_name, :lat, :lng, :sub_department_1, :sub_department_2, :sub_department_3, :sub_department_4, address_attributes: [:line1, :line2, :city, :state, :zip, :country, :custom_address])
+		params.require(:end_user).permit(:name, :phone, :fax, :primary_contact, :primary_contact_type, :department, :store_number, :group_name, :lat, :lng, :sub_department_1, :sub_department_2, :sub_department_3, :sub_department_4, :line1, :line2, :city, :state, :zip, :country, :custom_address)
 	end
 
 	def set_session
