@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class HomePageController < ApplicationController
    def index
        render :layout => false
    end
