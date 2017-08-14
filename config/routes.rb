@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   delete 'logout' => 'sessions#destroy'
 
+  resources :all
   resources :key
   resources :end_user 
   resources :keycodes

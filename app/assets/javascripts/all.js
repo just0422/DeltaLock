@@ -2,4 +2,4 @@
 //All this logic will automatically be available in application.js.
 //You can use CoffeeScript in this file: http://coffeescript.org/
 //
-//$("#all-end-users-table").dataTable();
+$("#all-end-users-table").dataTable();

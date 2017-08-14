@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'responders'
 gem 'geokit-rails'
-gem 'jquery-datatables-rails'
+#gem 'jquery-datatables-rails'
 gem 'jquery-ui-rails'
 gem 'ajax-datatables-rails'
 gem 'gmaps4rails'
@@ -11,6 +11,9 @@ gem 'bootstrap-slider-rails'
 gem 'carrierwave', '~> 0.9'
 gem 'bootstrap_form'
 gem 'roo'
+
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+  
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

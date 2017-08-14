@@ -1,0 +1,23 @@
+
+<table id="all-end-users-table">
+	<thead>
+		<tr>
+			<% EndUser.column_names.each do |title| %>
+				<% if ColumnLabels.column?(title) %>
+					<th><%= ColumnLabels.columnToLabel(title) %></th>
+				<% end %>
+			<% end %>
+		</tr>
+	</thead>
+	</tbody>
+		<% @endusers.each do |user| %>
+			<tr>
+				<% EndUser.column_names.each do |title| %>
+					<% if ColumnLabels.column?(title) %>
+						<td><%= user[title] %></td>
+					<% end %>
+				<% end %>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

@@ -18,6 +18,7 @@
 //= require bootstrap-slider
 //= require underscore
 //= require gmaps/google
+//= require dataTables/jquery.dataTables
 //= require_tree .
 //
 
