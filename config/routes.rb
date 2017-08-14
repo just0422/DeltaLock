@@ -8,12 +8,12 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   get '' => 'home_page#index'
-  get '/fetch_purchasers' => 'keycodes#get_purchasers', as: 'fetch_purchasers'
-  get '/fetch_endusers' => 'keycodes#get_endusers', as: 'fetch_endusers'
-  get '/fetch_keys' => 'keycodes#get_keys', as: 'fetch_keys'
+  get '/fetch_purchasers' => 'search#get_purchasers', as: 'fetch_purchasers'
+  get '/fetch_endusers' => 'search#get_endusers', as: 'fetch_endusers'
+  get '/fetch_keys' => 'search#get_keys', as: 'fetch_keys'
   get '/all_endusers' => 'end_user#all', as: 'all_endusers'
   get '/get_keys_map', to: 'map#map'
-  get '/info' => 'keycodes#info', as: 'info'
+  get '/info' => 'search#info', as: 'info'
   get '/signup' => 'users#new'
   get '/login' => 'sessions#new'
   get '/users' => 'users#user_management'
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :all
   resources :key
   resources :end_user 
-  resources :keycodes
+  resources :search
   resources :purchaser
   resources :purchase_order
   resources :map

@@ -1,5 +1,5 @@
 <% list.each do |entry| %>
-	<%= link_to entry["name"], {:controller => "keycodes", :action => "info", :id => entry["id"], :category => cat }, :remote => true %>
+	<%= link_to entry["name"], {:controller => "search", :action => "info", :id => entry["id"], :category => cat }, :remote => true %>
 
 	<div id="associated-purchase-orders-<%= entry["id"] %>">
 		<% purchaseOrderLinks(entry["id"]) %>

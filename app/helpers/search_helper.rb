@@ -1,4 +1,4 @@
-module KeycodesHelper
+module SearchHelper
 	def purchaseOrderLinks(id)
 		@purchaseorders_list = PurchaseOrder.where("end_user_id like ?", "%#{id}%")
 	end

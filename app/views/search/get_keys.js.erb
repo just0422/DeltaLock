@@ -1,6 +1,6 @@
 
 $('#key-searchbar-list').fadeOut(FADE_TIME, function(){
-	$('#key-table').prepend("<%= j (render '/keycodes/tables/keys') %>");
+	$('#key-table').prepend("<%= j (render '/search/tables/keys') %>");
 	$("#key-table").append("<button onclick='selectKey()'>Select</button>");
 	$('#key-table').fadeIn(FADE_TIME);
 	enable_all_highlights(".all-tables","tbody tr");

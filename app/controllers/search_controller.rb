@@ -1,4 +1,4 @@
-class KeycodesController < ApplicationController
+class SearchController < ApplicationController
 	before_action :set_arrays
 	after_action :uniq_arrays
 

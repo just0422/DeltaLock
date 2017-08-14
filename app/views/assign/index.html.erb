@@ -82,14 +82,14 @@
 		var category_search;
 		switch(category){
 			case "Purchasers":
-				category_search = '<%= j ( render '/keycodes/fetch_purchasers', category: "Purchasers") %>';
+				category_search = '<%= j ( render '/search/fetch_purchasers', category: "Purchasers") %>';
 				break;
 			case "End User":
-				category_search = '<%= j ( render '/keycodes/fetch_endusers', category: "End User") %>';
+				category_search = '<%= j ( render '/search/fetch_endusers', category: "End User") %>';
 				break;
 			case "Key Codes":
 				if ($(".enduser-group_name").html().length <= 0){
-					category_search = '<%= j ( render '/keycodes/fetch_keys', category: "Key Codes") %>';
+					category_search = '<%= j ( render '/search/fetch_keys', category: "Key Codes") %>';
 				}
 				else{
 					$.ajax({
@@ -109,7 +109,7 @@
 					});
 					return false; // prevents normal behaviour
 				}
-					//category_search = '<# j ( render '/keycodes/fetch_keys_map') %>';
+					//category_search = '<# j ( render '/search/fetch_keys_map') %>';
 				break;
 		}
 
