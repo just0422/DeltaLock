@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   get '' => 'home_page#index'
+  get '/get_items' => 'search#render_items', as: 'get_items'
   get '/fetch_purchasers' => 'search#get_purchasers', as: 'fetch_purchasers'
   get '/fetch_endusers' => 'search#get_endusers', as: 'fetch_endusers'
   get '/fetch_keys' => 'search#get_keys', as: 'fetch_keys'
@@ -28,7 +29,9 @@ Rails.application.routes.draw do
   resources :all
   resources :key
   resources :end_user 
-  resources :search
+  resources :search do
+	  collection { post :search, to: 'search#index' }
+  end
   resources :purchaser
   resources :purchase_order
   resources :map

@@ -1,7 +1,42 @@
-<%= form_tag("/search/show", :method => "get") do %>
-	<%= render 'search' %>
-<% end %>
+
+<div>
+	<a href="javascript:void(0)" onclick="openTab(event, 'search_purchase_orders');">
+	    <div class="searchtablink">Purchase Orders</div>
+	</a>
+	<a href="javascript:void(0)" onclick="openTab(event, 'Key Codes');">
+	    <div class="searchtablink">Key Codes</div>
+	</a>
+	<a href="javascript:void(0)" onclick="openTab(event, 'End Users');">
+	    <div class="searchtablink">End Users</div>
+	</a>
+	<a href="javascript:void(0)" onclick="openTab(event, 'Purchasers');">
+	    <div class="searchtablink">Purchasers</div>
+	</a>
+</div>
+
+<div id="search_purchase_orders" class="searchtab">
+	<%= search_form_for @search, url: search_search_index_path, method: :post do |f| %>
+	<%# form_tag("/search/show", :method => "get") do %> 
+		<%= f.condition_fields do |c| %>
+			<%= render "condition_fields", f: c %>
+		<% end %>
+		<p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
+		
+
+		<div>
+			Sort:
+			<%= f.sort_fields do |s| %>
+			  <%= s.sort_select %>
+			<% end %>
+		</div>
+
+		<%= submit_tag "Search", :name => nil %>
+	<% end %>
+
+	<%= render '/search/tables/purchaseorders' %>
+</div>
+	<%# render 'search' %>
 
 <script>
-	add_new_row();
+	//add_new_row();
 </script>

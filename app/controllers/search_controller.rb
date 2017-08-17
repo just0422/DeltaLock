@@ -21,10 +21,17 @@ class SearchController < ApplicationController
 	end
 
 	def index
+		@search = PurchaseOrder.search(params[:q])
+		@purchase_orders_list = @search.result
+		@search.build_condition if @search.conditions.empty?
+		@search.build_sort if @search.sorts.empty?
     end
 
 
     def show
+		@end_users_list = EndUser.search(params[:q]).result
+		@purchasers_list = Purchaser.search(params[:q]).result
+=begin
         params.each do |key, val|
             table = key.split('--')[0]
             column = key.split('--')[1]
@@ -50,21 +57,17 @@ class SearchController < ApplicationController
                 Rails.logger.debug ("SOMETHING WENT WRONG ==> " + key)
             end
         end
-
+=end
     end
 	
-	
+	def render_items
+	end
 	def get_purchasers
 		params.each do |key, val|
             column = key.split('--')[1]
 			@purchasers_list += purchaser_check(column, val)
 		end	
         @purchasers_list = @purchasers_list.uniq.compact
-
-		@address_attributes_list = Hash.new
-		@purchasers_list.each do |eu|
-			#@address_attributes_list[eu[:id]] = Address.find_by_addressable_id_and_addressable_type(eu[:id], "Purchaser")
-		end
 
 		respond_to do |format|
 			format.js
@@ -76,12 +79,6 @@ class SearchController < ApplicationController
             column = key.split('--')[1]
 			@end_users_list += enduser_check(column, val)
 		end	
-		@end_users_list = @end_users_list.uniq.compact
-
-		@address_attributes_list = Hash.new
-		@end_users_list.each do |eu|
-			#@address_attributes_list[eu[:id]] = Address.find_by_addressable_id_and_addressable_type(eu[:id], "EndUser")
-		end
 
 		respond_to do |format|
 			format.js

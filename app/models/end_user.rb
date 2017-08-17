@@ -1,6 +1,5 @@
 class EndUser < ActiveRecord::Base
-	has_one :address, :as => :addressable
-	accepts_nested_attributes_for :address
+    has_many :purchase_orders
 
     acts_as_mappable :default_units => :miles,
                      :default_formula => :sphere,

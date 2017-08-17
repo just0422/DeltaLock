@@ -20,7 +20,7 @@ EndUser.destroy_all
 p "Destroying Keys"
 Key.destroy_all
 
-
+=begin
 Address.create!([{
     line1: "100 Spear st",
 	line2: "",
@@ -109,7 +109,7 @@ Address.create!([{
 }])
 
 p "Created #{Address.count} Addresses"
-
+=end
 Key.create!([{
 	id: 1,
     keyway: "1",

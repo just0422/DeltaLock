@@ -1,6 +1,37 @@
 //# Place all the behaviors and hooks related to the matching controller here.
 //# All this logic will automatically be available in application.js.
 //# You can use CoffeeScript in this file: http://coffeescript.org/
+//
+$('form').on('click', '.remove_fields', function(event) {
+    $(this).closest('.field').remove();
+    return event.preventDefault();
+});
+$('form').on('click', '.add_fields', function(event) {
+    var regexp, time;
+    time = new Date().getTime();
+    regexp = new RegExp($(this).data('id'), 'g');
+    $(this).before($(this).data('fields').replace(regexp, time));
+    return event.preventDefault();
+});
+
+function openTab(evt, searchtabName) {
+  var i, x, searchtablinks;
+  x = document.getElementsByClassName("searchtab");
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  searchtablinks = document.getElementsByClassName("searchtablink");
+  for (i = 0; i < x.length; i++) {
+     searchtablinks[i].className = searchtablinks[i].className.replace("red-border", "");
+     searchtablinks[i].style.color = "";
+  }
+  document.getElementById(searchtabName).style.display = "block";
+  evt.currentTarget.firstElementChild.className += "red-border";
+  evt.currentTarget.firstElementChild.style.color = "red";
+}
+
+
+
 var eu = "End User";
 var k = "Key Codes";
 var po = "Purchase Orders";

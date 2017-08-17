@@ -13,6 +13,8 @@ gem 'bootstrap_form'
 gem 'roo'
 
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'ransack', github: 'activerecord-hackery/ransack'
+
   
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
