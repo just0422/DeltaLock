@@ -15,23 +15,7 @@
 </div>
 
 <div id="search_purchase_orders" class="searchtab">
-	<%= search_form_for @search, url: search_search_index_path, method: :post do |f| %>
-	<%# form_tag("/search/show", :method => "get") do %> 
-		<%= f.condition_fields do |c| %>
-			<%= render "condition_fields", f: c %>
-		<% end %>
-		<p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
-		
-
-		<div>
-			Sort:
-			<%= f.sort_fields do |s| %>
-			  <%= s.sort_select %>
-			<% end %>
-		</div>
-
-		<%= submit_tag "Search", :name => nil %>
-	<% end %>
+	<%= render 'search/forms/form' %>
 
 	<%= render '/search/tables/purchaseorders' %>
 </div>

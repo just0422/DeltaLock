@@ -21,10 +21,10 @@ class SearchController < ApplicationController
 	end
 
 	def index
-		@search = PurchaseOrder.search(params[:q])
-		@purchase_orders_list = @search.result
-		@search.build_condition if @search.conditions.empty?
-		@search.build_sort if @search.sorts.empty?
+		@purchase_order_search = PurchaseOrder.search(params[:q])
+		@purchase_orders_list = @purchase_order_search.result
+		@purchase_order_search.build_condition if @purchase_order_search.conditions.empty?
+		@purchase_order_search.build_sort if @purchase_order_search.sorts.empty?
     end
 
 
