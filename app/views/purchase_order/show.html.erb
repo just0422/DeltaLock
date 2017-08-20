@@ -9,12 +9,12 @@
     </div>
     <div class = "col-xs-6">
         <h2>End User:</h2>
-        <a class="list-group-item" href="<%= end_user_path(@end_user["id"]) %>"><%= @end_user[:name] %></a>
+        <a class="list-group-item" href="<%= end_user_path(@end_user) %>"><%= @end_user[:name] %></a>
         <h2>Purchaser:</h2>
-        <a class="list-group-item" href="<%= purchaser_path(@purchaser["id"]) %>"><%= @purchaser[:name] %></a>
+        <a class="list-group-item" href="<%= purchaser_path(@purchaser) %>"><%= @purchaser[:name] %></a>
         <h2>Keys</h2>
         <% @keys_list.each do |key| %>
-            <a class="list-group-item" href="<%= key_path(key["key_hash"]) %>"><%= key[:key] %></a>
+            <a class="list-group-item" href="<%= key_path(key) %>"><%= key[:key] %></a>
         <% end %>
     </div>
 </div>
