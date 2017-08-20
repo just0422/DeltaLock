@@ -1,4 +1,5 @@
 <h1>Purchase Orders</h1>
+<div id="accordion">
 <table class="table all-tables">
 	<thead class="thead-inverse">
 		<tr>
@@ -9,9 +10,14 @@
 	</thead>
 	<tbody>
 		<% @purchase_orders_list.each do |entry| %>
-			<tr data-link="<%= purchase_order_path(entry["id"]) %>">
+			<tr data-toggle="collapse" data-parent="#accordion" data-target="#searchpurchaserinfo-<%= entry.id %>">
 				<%= render '/search/tables/body', entryClass: PurchaseOrder, entry: entry, classString: "purchaseorder"  %>
+			</tr>
+			<tr class="collapse out" id="searchpurchaserinfo-<%= entry.id %>">
+				<td colspan="<% PurchaseOrder.column_names.length %>">
+				<%= render '/shared/info/info', categoryList: PurchaseOrder, entry:entry, path: edit_purchase_order_path(entry), classString: "purchaseorder" %>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
+</div>

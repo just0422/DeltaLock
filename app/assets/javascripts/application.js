@@ -31,7 +31,7 @@ $(document).ready(function(){
     $("tr[data-link]").click(function() {
           window.location = $(this).data("link");
     });
-	
+
 	enable_all_highlights(".all-tables", "tbody tr");
 	enable_all_highlights(".all-maps", "ul li");
 
