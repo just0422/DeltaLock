@@ -1,8 +1,8 @@
 <%= search_form_for @purchase_order_search, url: search_search_index_path, method: :post do |f| %>
 	<%= f.condition_fields do |c| %>
-		<%= render "/search/forms/condition_fields", f: c %>
+		<%= render "condition_fields", f: c %>
 	<% end %>
-	<p><%= link_to_add_fields "Add Conditions", f, :condition, "/search/forms/condition" %></p>
+	<p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
 
 	<div> Sort:
 		<%= f.sort_fields do |s| %>
