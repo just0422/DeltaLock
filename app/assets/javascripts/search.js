@@ -14,6 +14,11 @@ $(document).ready(function() {
 		$(this).before($(this).data('fields').replace(regexp, time));
 		return event.preventDefault();
 	});
+
+  	var x = document.getElementsByClassName("searchtab");
+  	for (var i = 0; i < x.length; i++) {
+    	x[i].style.display = "none";
+  	}
 });
 
 function openTab(evt, searchtabName) {
@@ -24,12 +29,20 @@ function openTab(evt, searchtabName) {
   }
   searchtablinks = document.getElementsByClassName("searchtablink");
   for (i = 0; i < x.length; i++) {
-     searchtablinks[i].className = searchtablinks[i].className.replace("red-border", "");
+     searchtablinks[i].className = searchtablinks[i].className.replace(" red-border", "");
      searchtablinks[i].style.color = "";
   }
-  document.getElementById(searchtabName).style.display = "block";
-  evt.currentTarget.firstElementChild.className += "red-border";
-  evt.currentTarget.firstElementChild.style.color = "red";
+  if (searchtabName.length > 0){
+	  document.getElementById(searchtabName).style.display = "block";
+	  if (evt.currentTarget){
+		  evt.currentTarget.firstElementChild.className += " red-border";
+		  evt.currentTarget.firstElementChild.style.color = "red";
+	  }
+	  else {
+		  evt.target.firstElementChild.className += " red-border";
+		  evt.target.firstElementChild.style.color = "red";
+	  }
+  }
 }
 
 

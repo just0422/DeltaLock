@@ -1,4 +1,4 @@
-<% if @key_codes_list.length > 0 %>
+<% if @keycodes_list.length > 0 %>
     <h1>Key Codes</h1>
     <table class="table all-tables">
         <thead class="thead-inverse">
@@ -9,7 +9,7 @@
             </tr>
         </thead>
         <tbody>
-            <% @key_codes_list.each do |entry| %>
+            <% @keycodes_list.each do |entry| %>
                 <tr data-link="<%= key_path(entry["id"]) %>">
 					<%= render '/search/tables/body', entryClass: Key, entry: entry, classString: "key"  %>
                 </tr>

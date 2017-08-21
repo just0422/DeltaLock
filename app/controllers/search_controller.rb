@@ -25,6 +25,21 @@ class SearchController < ApplicationController
 		@purchase_orders_list = @purchase_order_search.result
 		@purchase_order_search.build_condition if @purchase_order_search.conditions.empty?
 		@purchase_order_search.build_sort if @purchase_order_search.sorts.empty?
+
+		@keycodes_search = Key.search(params[:q])
+		@keycodes_list = @keycodes_search.result
+		@keycodes_search.build_condition if @keycodes_search.conditions.empty?
+		@keycodes_search.build_sort if @keycodes_search.sorts.empty?
+
+		@end_users_search = EndUser.search(params[:q])
+		@end_users_list = @end_users_search.result
+		@end_users_search.build_condition if @end_users_search.conditions.empty?
+		@end_users_search.build_sort if @end_users_search.sorts.empty?
+
+		@purchasers_search = Purchaser.search(params[:q])
+		@purchasers_list = @purchasers_search.result
+		@purchasers_search.build_condition if @purchasers_search.conditions.empty?
+		@purchasers_search.build_sort if @purchasers_search.sorts.empty?
     end
 
 
