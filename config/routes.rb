@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/purchaser/show_purchaser/:id', to: 'purchaser#show_purchaser'
   get '/enduser/show_enduser/:id', to: 'end_user#show_enduser'
   get '/key/show_key/:id', to: 'key#show_key'
+  get '/search/export/:search_type' => 'search#export', as: 'export'
 
   post 'login' => 'sessions#create'
 
@@ -30,13 +31,13 @@ Rails.application.routes.draw do
   resources :key
   resources :end_user 
   resources :search do
-	  collection { post :search, to: 'search#index' }
+	  collection { post :result, to: 'search#index' }
   end
   resources :purchaser
   resources :purchase_order
   resources :map
   resources :assign
-  resources :key_upload
+  resources :upload
   resources :users
   resources :sessions
 

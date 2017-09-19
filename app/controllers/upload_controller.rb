@@ -11,10 +11,10 @@ class UploadController < ApplicationController
 		key       = ['keyway', 'master_key', 'control_key', 'operating_key',
 			   		 'bitting', 'system_name', 'comment']
 
-		purchaser = ['name', 'phone', 'fax', 'primary_contact', 
+		purchaser = ['name', 'phone', 'fax', 'primary_contact',
 			   		 'primary_contact_type', 'group_name', 'address_id']
 
-		user	  = ['first_name', 'last_name', 'username', 'password_digest', 
+		user	  = ['first_name', 'last_name', 'username', 'password_digest',
 					 'role']
 
 		purchase_order = ['po_number', 'date_order', 'purchaser_id', 'end_user_id']
@@ -24,10 +24,19 @@ class UploadController < ApplicationController
 		Rails.logger.debug("PARAMS --> " + JSON.pretty_generate(params))
 		#Key.import(params[:key][:keyfile])*/
 
-			
-		xls = Roo::Spreadsheet.open(params[:file].path, 'r') 
-		Rails.logger.debug(xls.info)
-		sheet = xls.sheet(0)
+		case params[:category]
+		when "end_user"
+			EndUser.import(params[:file])
+		when "purchaser"
+			Purchaser.import(params[:file])
+		when "purchase_order"
+			PurchaseOrder.import(params[:file])
+		when "keycode"
+			Key.import(params[:file])
+		end
+		# xls = Roo::Spreadsheet.open(params[:file].path.to_s, 'r')
+		# Rails.logger.debug(xls.info)
+		# sheet = xls.sheet(0)
 =begin
 		sheet.each do |line|
 		case params[:category]
@@ -59,7 +68,7 @@ class UploadController < ApplicationController
 				line_split = line.split(",").squish
 				PurchaseOrder.create(Hash[title_line.zip line_split])
 			end
-		end  
+		end
 		#@key = Key.new(key_params)*/
 		end
 =end

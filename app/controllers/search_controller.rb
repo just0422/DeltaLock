@@ -21,58 +21,66 @@ class SearchController < ApplicationController
 	end
 
 	def index
+		if params[:search_type] == "purchase_order_search"
+			session[:purchase_order_search] = params[:q]
+		end
 		@purchase_order_search = PurchaseOrder.search(params[:q])
 		@purchase_orders_list = @purchase_order_search.result
 		@purchase_order_search.build_condition if @purchase_order_search.conditions.empty?
 		@purchase_order_search.build_sort if @purchase_order_search.sorts.empty?
 
+		if params[:search_type] == "keycodes_search"
+			session[:keycodes_search] = params[:q]
+		end
 		@keycodes_search = Key.search(params[:q])
 		@keycodes_list = @keycodes_search.result
 		@keycodes_search.build_condition if @keycodes_search.conditions.empty?
 		@keycodes_search.build_sort if @keycodes_search.sorts.empty?
 
+		if params[:search_type] == "end_user_search"
+			session[:end_user_search] = params[:q]
+		end
 		@end_users_search = EndUser.search(params[:q])
 		@end_users_list = @end_users_search.result
 		@end_users_search.build_condition if @end_users_search.conditions.empty?
 		@end_users_search.build_sort if @end_users_search.sorts.empty?
 
+		if params[:search_type] == "purchaser_search"
+			session[:purchaser_search] = params[:q]
+		end
 		@purchasers_search = Purchaser.search(params[:q])
 		@purchasers_list = @purchasers_search.result
 		@purchasers_search.build_condition if @purchasers_search.conditions.empty?
 		@purchasers_search.build_sort if @purchasers_search.sorts.empty?
     end
+	def export
+		@class = ""
+		@list = {}
+		case params[:search_type]
+		when "purchaser_search"
+			@class = Purchaser
+			search = Purchaser.search(params[:purchaser_search])
+			@list = Purchaser.result
+		when "end_user_search"
+			@class = EndUser
+			search = EndUser.search(params[:end_user_search])
+			@list = EndUser.result
+		when "purchaser_order_search"
+			@class = PurchaseOrder
+			search = PurchaseOrder.search(params[:purchase_order_search])
+			@list = PurchaseOrder.result
+		when "keycodes_search"
+			@class = Key
+			search = Key.search(params[:keycodes_search])
+			@list = Key.result
+		end
 
+		respond_to :xls
+	end
 
     def show
 		@end_users_list = EndUser.search(params[:q]).result
 		@purchasers_list = Purchaser.search(params[:q]).result
-=begin
-        params.each do |key, val|
-            table = key.split('--')[0]
-            column = key.split('--')[1]
-            case table
-            when "End User"
-				@end_users_list += enduser_check(column, val)
-            when "Key Codes"
-				@key_codes_list += keycodes_check(column, val)
-            when "Purchase Orders"
-                case column
-                when "S.O. Number"
-                    @purchase_orders_list += PurchaseOrder.where("so_number like ?", "%#{val}%")
-                when "P.O. Number"
-                    @purchase_orders_list += PurchaseOrder.where("po_number like ?", "%#{val}%")
-                when "Date Ordered"
-                    @purchase_orders_list += PurchaseOrder.where("date_order like ?", "%#{val}%")
-                else
-					print_debug(key, val, "Purchase Order")
-                end
-            when "Purchasers"
-				@purchasers_list += purchaser_check(column, val)
-            else
-                Rails.logger.debug ("SOMETHING WENT WRONG ==> " + key)
-            end
-        end
-=end
     end
 	
 	def render_items
@@ -173,6 +181,11 @@ class SearchController < ApplicationController
         @key_codes_list = Array.new
         @purchase_orders_list = Array.new
         @purchasers_list = Array.new
+
+		session[:purchase_order_search] = {}
+		session[:purchaser_search] = {}
+		session[:end_user_search] = {}
+		session[:keycodes_search] = {}
 	end
 
 	def uniq_arrays

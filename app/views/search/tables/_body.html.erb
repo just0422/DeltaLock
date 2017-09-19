@@ -5,8 +5,8 @@
 	<% else %>
 		style="display:none;">
 	<% end %>
-	<% if column == "address_id" %>
-		<%= build_address_string(@address_attributes) %>
+	<% if column == "line1" %>
+		<%= build_address_string(entry) %>
 	<% else %>
 		<%= entry[column] %>
 	<% end %>

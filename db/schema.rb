@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170814014956) do
+ActiveRecord::Schema.define(version: 20170919160031) do
 
   create_table "end_users", force: :cascade do |t|
     t.datetime "created_at",                         null: false
@@ -30,13 +30,7 @@ ActiveRecord::Schema.define(version: 20170814014956) do
     t.string   "sub_department_4",     limit: 255
     t.float    "lat",                  limit: 24
     t.float    "lng",                  limit: 24
-    t.string   "line1",                limit: 255
-    t.string   "line2",                limit: 255
-    t.string   "city",                 limit: 255
-    t.string   "state",                limit: 255
-    t.string   "zip",                  limit: 255
-    t.string   "country",              limit: 255
-    t.text     "custom_address",       limit: 65535
+    t.text     "address",              limit: 65535
   end
 
   create_table "keys", force: :cascade do |t|
@@ -84,12 +78,7 @@ ActiveRecord::Schema.define(version: 20170814014956) do
     t.string   "primary_contact_type", limit: 255
     t.string   "group_name",           limit: 255
     t.string   "line1",                limit: 255
-    t.string   "line2",                limit: 255
-    t.string   "city",                 limit: 255
-    t.string   "state",                limit: 255
-    t.string   "zip",                  limit: 255
-    t.string   "country",              limit: 255
-    t.text     "custom_address",       limit: 65535
+    t.text     "address",              limit: 65535
   end
 
   create_table "users", force: :cascade do |t|

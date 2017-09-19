@@ -15,19 +15,19 @@
 </div>
 
 <div id="purchase_order_search" class="searchtab">
-	<%= render 'search_form', search_type: @purchase_order_search, search_id: "purchase_order_search" %>
+	<%= render 'search_form', search_type: @purchase_order_search, search_id: "purchase_order_search", search_category: "Purchase Order" %>
 	<%= render 'search/tables/purchaseorders' %>
 </div>
 <div id="keycodes_search" class="searchtab">
-	<%= render 'search_form', search_type: @keycodes_search, search_id: "keycodes_search" %>
+	<%= render 'search_form', search_type: @keycodes_search, search_id: "keycodes_search", search_category: "Key Codes" %>
 	<%= render 'search/tables/keycodes' %>
 </div>
 <div id="end_user_search" class="searchtab">
-	<%= render 'search_form', search_type: @end_users_search, search_id: "end_user_search" %>
+	<%= render 'search_form', search_type: @end_users_search, search_id: "end_user_search", search_category: "End User" %>
 	<%= render 'search/tables/endusers' %>
 </div>
 <div id="purchaser_search" class="searchtab">
-	<%= render 'search_form', search_type: @purchasers_search, search_id: "purchaser_search" %>
+	<%= render 'search_form', search_type: @purchasers_search, search_id: "purchaser_search", search_category: "Purchaser" %>
 	<%= render 'search/tables/purchasers' %>
 </div>
 	<%# render 'search' %>
