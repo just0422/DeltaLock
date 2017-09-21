@@ -60,22 +60,24 @@ class SearchController < ApplicationController
 		when "purchaser_search"
 			@class = Purchaser
 			search = Purchaser.search(params[:purchaser_search])
-			@list = Purchaser.result
+			@list = search.result
 		when "end_user_search"
 			@class = EndUser
 			search = EndUser.search(params[:end_user_search])
-			@list = EndUser.result
-		when "purchaser_order_search"
+			@list = search.result
+		when "purchase_order_search"
 			@class = PurchaseOrder
 			search = PurchaseOrder.search(params[:purchase_order_search])
-			@list = PurchaseOrder.result
+			@list = search.result
 		when "keycodes_search"
 			@class = Key
 			search = Key.search(params[:keycodes_search])
-			@list = Key.result
+			@list = search.result
 		end
 
-		respond_to :xls
+		respond_to do |format|
+			format.xls
+		end
 	end
 
     def show

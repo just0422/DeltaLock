@@ -1,4 +1,5 @@
-<%= link_to "Download Current #{search_category} Search", export_path(search_type: search_id) %>
+<%= link_to "Download Current #{search_category} Search", export_path(search_type: search_id, format:"xls"), :method => :post %>
+
 <%= search_form_for search_type, url: result_search_index_path, method: :post do |f| %>
 	<%= f.condition_fields do |c| %>
 		<%= render "condition_fields", f: c %>
