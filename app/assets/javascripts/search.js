@@ -15,10 +15,10 @@ $(document).ready(function() {
 		return event.preventDefault();
 	});
 
-  	var x = document.getElementsByClassName("searchtab");
-  	for (var i = 0; i < x.length; i++) {
+//  	var x = document.getElementsByClassName("searchtab");
+/*  	for (var i = 0; i < x.length; i++) {
     	x[i].style.display = "none";
-  	}
+  	}*/
 });
 
 function openTab(evt, searchtabName) {
