@@ -20,7 +20,7 @@ class Key < ActiveRecord::Base
 			row = Hash[[header, spreadsheet.row(i)].transpose]
 
 			keycode = Key.find_by_id(row["id"]) || new
-			keycode.attributes = row.to_hash.slice(*accessible_attributes)
+			keycode.attributes = row.to_hash.slice(*ColumnTypeXls.keys)
 			keycode.save!
 		end
 	end

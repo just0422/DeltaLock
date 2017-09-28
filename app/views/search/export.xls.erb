@@ -9,7 +9,7 @@
 			<Row>
 				<% @class.column_names.each do |title| %>
 					<% if ColumnLabels.column?(title) %>
-						<Cell><Data ss:Type="String"><%= ColumnLabels.columnToLabel(title) %></Data></Cell>
+						<Cell><Data ss:Type="String"><%= title %></Data></Cell>
 					<% end %>
 				<% end %>
 			</Row>

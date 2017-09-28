@@ -1,7 +1,7 @@
 require 'ColumnTitles'
 
 ColumnTypeXls = {
-	"id" => "String",
+	"id" => "Number",
 	"name" => "String",
 	"phone" => "String",
 	"fax" => "String",

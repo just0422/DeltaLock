@@ -23,7 +23,7 @@ class EndUser < ActiveRecord::Base
 			row = Hash[[header, spreadsheet.row(i)].transpose]
 
 			end_user = EndUser.find_by_id(row["id"]) || new
-			end_user.attributes = row.to_hash.slice(*accessible_attributes)
+			end_user.attributes = row.to_hash.slice(*ColumnTypeXls.keys)
 			end_user.save!
 		end
 	end

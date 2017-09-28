@@ -21,7 +21,7 @@ class Purchaser < ActiveRecord::Base
       row = Hash[[header, spreadsheet.row(i)].transpose]
 
       purchaser = Purchaser.find_by_id(row["id"]) || new
-      purchaser.attributes = row.to_hash.slice(*accessible_attributes)
+      purchaser.attributes = row.to_hash.slice(*ColumnTypeXls.keys)
       purchaser.save!
     end
   end

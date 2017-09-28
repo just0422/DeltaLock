@@ -19,7 +19,7 @@ class PurchaseOrder < ActiveRecord::Base
         row = Hash[[header, spreadsheet.row(i)].transpose]
 
         purchase_order = PurchaseOrder.find_by_id(row["id"]) || new
-        purchase_order.attributes = row.to_hash.slice(*accessible_attributes)
+        purchase_order.attributes = row.to_hash.slice(*ColumnTypeXls.keys)
         purchase_order.save!
       end
     end
