@@ -14,11 +14,6 @@ $(document).ready(function() {
 		$(this).before($(this).data('fields').replace(regexp, time));
 		return event.preventDefault();
 	});
-
-//  	var x = document.getElementsByClassName("searchtab");
-/*  	for (var i = 0; i < x.length; i++) {
-    	x[i].style.display = "none";
-  	}*/
 });
 
 function openTab(evt, searchtabName) {
