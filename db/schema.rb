@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919160031) do
+ActiveRecord::Schema.define(version: 20170928040455) do
 
   create_table "end_users", force: :cascade do |t|
     t.datetime "created_at",                         null: false
@@ -56,13 +56,12 @@ ActiveRecord::Schema.define(version: 20170919160031) do
   add_index "po_ks", ["key_id"], name: "index_po_ks_on_key_id", using: :btree
   add_index "po_ks", ["purchase_order_id"], name: "index_po_ks_on_purchase_order_id", using: :btree
 
-  create_table "purchase_orders", primary_key: "so_number", force: :cascade do |t|
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "po_number",    limit: 4
-    t.date     "date_order"
-    t.integer  "purchaser_id", limit: 4
-    t.integer  "end_user_id",  limit: 4
+  create_table "purchase_orders", force: :cascade do |t|
+    t.integer "po_number",    limit: 4
+    t.integer "so_number",    limit: 4
+    t.date    "date_order"
+    t.integer "purchaser_id", limit: 4
+    t.integer "end_user_id",  limit: 4
   end
 
   add_index "purchase_orders", ["end_user_id"], name: "index_purchase_orders_on_end_user_id", using: :btree
@@ -77,7 +76,6 @@ ActiveRecord::Schema.define(version: 20170919160031) do
     t.string   "primary_contact",      limit: 255
     t.string   "primary_contact_type", limit: 255
     t.string   "group_name",           limit: 255
-    t.string   "line1",                limit: 255
     t.text     "address",              limit: 65535
   end
 

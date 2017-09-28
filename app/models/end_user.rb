@@ -12,7 +12,7 @@ class EndUser < ActiveRecord::Base
 
 
 	def self.ransackable_attributes(auth_object = nil)
-		super - ['id', 'created_at', 'updated_at', 'lat', 'lng']
+		super - ['created_at', 'updated_at', 'lat', 'lng']
 	end
 
 	def self.import(file)
