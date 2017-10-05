@@ -1,0 +1,12 @@
+var table_open = "<table class='table'>";
+var table_head = '<%= @key_columns.html_safe %>';
+var table_body = '<%= @key_info.html_safe %>';
+var table_close = "</table>";
+
+var selected_row = table_open + table_head + table_body + table_close;
+
+$("#key-form").fadeOut(200, function(){
+	$("#header-information").append(selected_row);
+	$("#assign-purchaseorder").fadeIn(200);
+	destroy("key");
+});

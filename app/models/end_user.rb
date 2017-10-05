@@ -1,4 +1,4 @@
-class EndUser < ActiveRecord::Base
+class EndUser < ApplicationRecord
 	include ImportFunctions
 	has_many :purchase_orders
 

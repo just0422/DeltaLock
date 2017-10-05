@@ -1,0 +1,33 @@
+<% if @end_users.length > 0 %>
+    <h1>End Users</h1>
+    <table class="table table-striped">
+        <thead class="thead-inverse">
+            <tr>
+                <% EndUser.column_names.each do |title| %>
+                    <th><%= title %></th>
+				<% end %>
+				<th> Distance From (mi)</th>
+            </tr>
+        </thead>
+        <tbody>
+			<% @end_users.each do |entry| %>
+				<% distance = @enduser.distance_from(entry, :units => :miles) %>
+				<% case %>
+				<% when distance < 10 %>
+                	<tr data-link="<%= end_user_path(entry["id"]) %>" class="danger">
+				<% when distance < 100 %>
+					<tr data-link="<%= end_user_path(entry["id"]) %>" class="warning">
+				<% else %>
+					<tr data-link="<%= end_user_path(entry["id"]) %>" class="success">
+				<% end %>
+
+                    <% EndUser.column_names.each do |column| %>
+                        <td><%= entry[column] %></td>
+					<% end %>
+					<td><%= @enduser.distance_from(entry, :units => :miles) %></tr>
+				</tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>
+

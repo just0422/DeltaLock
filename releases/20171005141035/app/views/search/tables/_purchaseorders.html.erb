@@ -1,0 +1,19 @@
+<h1>Purchase Orders</h1>
+<div id="accordion">
+<table class="table all-tables">
+	<thead class="thead-inverse">
+		<tr>
+			<% PurchaseOrder.column_names.each do |title| %>
+				<%= render '/search/tables/header', title:title %>
+			<% end %>
+		</tr>
+	</thead>
+	<tbody>
+		<% @purchase_orders_list.each do |entry| %>
+			<tr data-link="<%= purchase_order_path(entry) %>">
+				<%= render '/search/tables/body', entryClass: PurchaseOrder, entry: entry, classString: "purchaseorder"  %>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+</div>

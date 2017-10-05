@@ -1,4 +1,4 @@
-class PurchaseOrder < ActiveRecord::Base
+class PurchaseOrder < ApplicationRecord
   include ImportFunctions
     belongs_to :purchaser
 	belongs_to :end_user

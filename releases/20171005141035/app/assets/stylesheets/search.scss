@@ -1,0 +1,42 @@
+// Place all the styles related to the Keycodes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#information-listings{
+	height: 85vh;
+	overflow: auto;
+}
+
+.searchbars-list{
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.dropdown-toggle{
+    width: 100%;
+    text-decoration: none;
+}
+
+.caret{
+    text-align: right;
+}
+.form-control{
+    text-align: center;
+    text-align-last: center;
+}
+
+button{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+select, option{
+    text-align: center;
+}
+
+i{
+    text-align: right;
+}
+                                                
+.searchtab {
+	display:none;
+}

@@ -1,0 +1,5 @@
+
+$('#purchaseorder-list').fadeOut(300, function(){
+	$('#purchaseorder-form').html("<%= j (render 'editpurchaseorder') %>");
+	$('#purchaseorder-form').fadeIn(300);
+});

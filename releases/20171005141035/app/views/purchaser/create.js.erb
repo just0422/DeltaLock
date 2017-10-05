@@ -1,0 +1,8 @@
+var selected_row = '<h3 data-toggle="collapse" data-target="#purchaser-info">Purchaser</h3>';
+selected_row += '<div id="purchaser-info" class="collapse"><%= j render ("purchaserinfo") %></div>';
+
+$("#purchaser-form").fadeOut(FADE_TIME, function(){
+	$("#header-information").append(selected_row);
+	$("#assign-enduser").fadeIn(FADE_TIME);
+	destroy("purchaser");
+});

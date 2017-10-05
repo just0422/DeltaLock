@@ -1,0 +1,27 @@
+<li class="list-group-item"><%= f.label :name %>		 :	<%= f.text_field :name %></br></li>
+<li class="list-group-item">
+	<input type="checkbox" data-role="flipswitch" name="switch" id="switch" onclick="flipAddress()">
+	<div id="domestic-address">
+		<p> <%= f.label :line1, 'Address Line 1' %> : <%= f.text_field :line1 %> </p>
+		<p> <%= f.label :line2, 'Address Line 2' %> : <%= f.text_field :line2 %> </p>
+		<p> <%= f.label :city %> : <%= f.text_field :city %> </p>
+		<p> <%= f.label :state %> : <%= f.text_field :state, :size => 2 %> </p>
+		<p> <%= f.label :zip, 'Zip Code' %> : <%= f.text_field :zip %> </p>
+		<p> <%= f.label :country %> : <%= f.text_field :country %> </p>
+	</div>
+	<div id="other-address" style="display:none;">
+		<%= f.text_area(:custom_address, cols: 40, rows: 8) %>
+	</div>
+</li>
+<li class="list-group-item"><%= f.label :phone %>        :  <%= telephone_field(:end_user, :phone) %></br></li>
+<li class="list-group-item"><%= f.label :fax %>        :  <%= telephone_field(:end_user, :fax) %></br></li>
+<li class="list-group-item"><%= f.label :primary_contact %>      :  <%= f.text_field :primary_contact %></br></li>
+<li class="list-group-item"><%= f.label :primary_contact_type %>         :  <%= f.text_field :primary_contact_type %></br></li>
+<li class="list-group-item"><%= f.label :store_number %> : 	<%= f.text_field :store_number %></br></li>
+<li class="list-group-item"><%= f.label :group_name %>	 :  <%= f.text_field :group_name %></br></li>
+<li class="list-group-item"><%= f.label :department %>	 : 	<%= f.text_field :department %></br></li>
+<li class="list-group-item"><%= f.label :sub_department_1 %>	 : 	<%= f.text_field :sub_department_1 %></br></li>
+<li class="list-group-item"><%= f.label :sub_department_2 %>	 : 	<%= f.text_field :sub_department_2 %></br></li>
+<li class="list-group-item"><%= f.label :sub_department_3 %>	 : 	<%= f.text_field :sub_department_3 %></br></li>
+<li class="list-group-item"><%= f.label :sub_department_4 %>	 : 	<%= f.text_field :sub_department_4 %></br></li>
+<%= f.button :submit %>

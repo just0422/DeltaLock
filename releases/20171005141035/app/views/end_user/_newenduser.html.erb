@@ -1,0 +1,5 @@
+<h2>New End User</h2>
+
+<%= form_for @enduser, url: {:controller => :end_user, action: :create}, remote: true do |f| %>
+	<%= render 'form', f: f %>
+<% end %>

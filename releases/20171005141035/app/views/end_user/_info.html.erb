@@ -1,0 +1,17 @@
+<h1>End User</h1>
+
+<div class="row">
+    <div class = "col-xs-6">
+		<ul id="enduser-form" class="list-group" style="display:none;"></ul>
+		<div id="enduser-list">
+			<%= render 'enduserinfo' %>
+		</div>	
+    </div>
+    <div class = "col-xs-6">
+        <h2>Associated Purchase Order(s)</h2>
+        <div class = "list-group">
+            <% @purchase_orders_list.each do |po| %>
+                <a class="list-group-item" href="<%= purchase_order_path(po["id"]) %>"><%= po[:po_number] %></a>
+            <% end %>
+        </div>
+</div>

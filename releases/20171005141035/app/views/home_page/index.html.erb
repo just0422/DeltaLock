@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DeltaLock</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+	<%# stylesheet_link_tag	   'landing', media: 'all' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+    <%= csrf_meta_tags %>
+</head>
+<body>
+    <div id="homepage-vertical-align" class="container">
+        <div id="homepage-container">
+            <h1 id="homepage-logo-text"> DeltaLock </h1>
+            
+            <div id="buttons">
+                <a href="/search" class="thumbnail col-sm-4">
+                    <h1>Search</h1>
+                </a>
+                <a href="/assign" class="thumbnail col-sm-4">
+                    <h1>Assign Keycodes</h1>
+                </a>
+                <a href="/upload" class="thumbnail col-sm-4">
+                    <h1>Upload</h1>
+                </a>
+            </div>
+        </div>		
+    </div>
+</body>
+</html>

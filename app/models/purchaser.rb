@@ -1,4 +1,4 @@
-class Purchaser < ActiveRecord::Base
+class Purchaser < ApplicationRecord
   include ImportFunctions
     has_many :purchase_orders
 

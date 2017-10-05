@@ -1,0 +1,6 @@
+console.log("HERERER");
+
+$('#assign-key').fadeOut(FADE_TIME, function(){
+	$("#key-map").append("<%= j render(:partial => "keymap") %>");
+	$("#key-map").fadeIn(FADE_TIME);
+});

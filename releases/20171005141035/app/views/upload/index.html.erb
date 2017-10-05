@@ -1,0 +1,19 @@
+<h1>KeyUpload#index</h1>
+<%= form_tag url_for(controller: :upload, action: :create), multipart: true do %>
+<%# form_for @key, url: {controller: :upload, action: :create},  html: { multipart: true }, remote: true do |f| %>
+	<%= label_tag :file, "Upload File" %>
+	<%= file_field_tag :file, required: true %>
+
+	<%= radio_button_tag :category, "end_user", selected: true%>
+	<%= label_tag :end_users %>
+	<%= radio_button_tag :category, "key"%>
+	<%= label_tag :key_codes %>
+	<%= radio_button_tag :category, "purchaser"%>
+	<%= label_tag :purchasers %>
+	<%= radio_button_tag :category, "purchase_order"%>
+	<%= label_tag :purchase_order %>
+
+	<%= submit_tag "Upload", class: "btn btn-primary" %>
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<% end %>
+<p>Find me in app/views/key_upload/index.html.erb</p>

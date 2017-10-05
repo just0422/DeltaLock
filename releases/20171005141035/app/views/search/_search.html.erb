@@ -1,0 +1,16 @@
+<div class="searchbars-list">
+</div>
+
+<div class="row">
+	<% form_tag search_path, :method => 'get' do %>
+	  <p>
+		<%= text_field_tag :search, params[:search] %>
+		<%= submit_tag "Search", :name => nil %>
+	  </p>
+	<% end %>
+
+	<button id="add-another-field" class=" btn col-xs-3 col-xs-offset-2" onclick="add_new_row()" type="button">
+		Add another field
+	</button>  
+	<button class="btn col-xs-3 col-xs-offset-2" type="submit">Submit</button>
+</div>

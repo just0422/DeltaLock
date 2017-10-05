@@ -1,0 +1,37 @@
+<table>
+	<thead>
+		<tr>
+			<td>First Name</td>
+			<td>Last Name</td>
+			<td>Username</td>
+			<td>Priviledge</td>
+		</tr>
+	</thead>
+	<% @all_users.each do |user| %>
+		<tbody>
+			<tr id="row-<%= user[:id] %>">
+				<%= form_for(user, :remote=>true) do |f| %>
+					<td><%= f.text_field :first_name, :disabled => true %></td>
+					<td><%= f.text_field :last_name, :disabled => true %></td>
+					<td><%= f.text_field :username, :disabled => true %></td>
+					<td><%= f.text_field :role, :disabled => true %></td>
+				<% end %>
+					<td>
+						<button 
+							id="edit-<%= user[:id] %>" 
+	   						onclick="edit_row('<%= user[:id] %>')">
+	   							Edit
+						</button>
+						<button 
+							id="save-<%= user[:id] %>" 
+	   						style="display:none"
+							form="edit_user_<%= user[:id] %>"
+							value="submit"
+	   						onclick="save_row('<%= user[:id] %>')">
+						Save
+					</td>
+					<td><button onclick="delete_row('<%= user[:id] %>')">Delete</button></td>
+			</tr>
+		</tbody>
+	<% end %>
+</table>

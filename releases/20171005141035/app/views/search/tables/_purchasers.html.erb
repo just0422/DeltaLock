@@ -1,0 +1,19 @@
+<% if @purchasers_list.length > 0 %>
+    <h1>Purchasers</h1>
+    <table class="table all-tables">
+        <thead class="thead-inverse">
+            <tr>
+                <% Purchaser.column_names.each do |title| %>
+					<%= render '/search/tables/header', title:title %>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <% @purchasers_list.each do |entry| %>
+				<tr class="purchaser-row" data-link="<%= purchaser_path(entry["id"]) %>">
+					<%= render '/search/tables/body', entryClass: Purchaser, entry: entry, classString: "purchaser"  %>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>

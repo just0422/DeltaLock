@@ -1,4 +1,4 @@
-class Key < ActiveRecord::Base
+class Key < ApplicationRecord
 	include ImportFunctions
 	has_many :po_ks
 	has_many :purchase_orders, through: :po_ks

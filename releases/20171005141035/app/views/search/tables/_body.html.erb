@@ -1,0 +1,14 @@
+<% entryClass.column_names.each do |column| %>
+	<td class="<%= classString + "-" + column %>"
+	<% if ColumnLabels.column?(column) %>
+		>
+	<% else %>
+		style="display:none;">
+	<% end %>
+	<% if column == "line1" %>
+		<%= build_address_string(entry) %>
+	<% else %>
+		<%= entry[column] %>
+	<% end %>
+	</td>
+<% end %>

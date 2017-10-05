@@ -1,0 +1,13 @@
+<% list.each do |entry| %>
+	<%= link_to entry["name"], {:controller => "search", :action => "info", :id => entry["id"], :category => cat }, :remote => true %>
+
+	<div id="associated-purchase-orders-<%= entry["id"] %>">
+		<% purchaseOrderLinks(entry["id"]) %>
+		<% @purchase_orders_list.each do |po| %>
+			<a class="list-group-item" href="<%= purchase_order_path(po["id"]) %>"><%= po[:po_number] %></a>
+		<% end %>
+		<!-- Create partial to render links -->
+	</div>
+	<!-- Make this a collapsable dive -->
+	<!-- Added associated purchase orders to it -->
+<% end %>

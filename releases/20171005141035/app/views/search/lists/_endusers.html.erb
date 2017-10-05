@@ -1,0 +1,13 @@
+	<h1>End Users</h1>
+	<div class="">
+		<% @end_users_list.each do |entry| %>
+			<%= link_to entry["name"], {:controller => "search", :action => "info", :id => entry["id"], :category => "enduser" }, :remote => true %>
+
+			<div id="associated-purchase-orders-<%= entry["id"] %>">
+				<% purchaseOrderLinks(entry["id"]) %>
+				<% @purchaseorders_list.each do |po| %>
+					<%= link_to po[:po_number], {:controller => "search", :action => "info", :id => po[:id], :category => "purchaseorder"}, :remote => true %>
+				<% end %>
+			</div>
+		<% end %>
+	</div>

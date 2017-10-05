@@ -1,0 +1,7 @@
+<%= form_for @purchaseorder, :html => {:id => "purchaserorder"}, url: {:controller => :purchase_order, action: :create} do |f| %>
+	<input type="hidden" id="purchaseorder-header-table-information" name="purchaseorder-information">
+	<input type="hidden" id="purchaser-header-table-information" name="purchaser-information">
+	<input type="hidden" id="enduser-header-table-information" name="enduser-information">
+	<input type="hidden" id="key-header-table-information" name="key-information">
+	<%= f.button :submit %>
+<% end %>
