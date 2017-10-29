@@ -13,12 +13,12 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: administrator
-  password: $0v3rFl0w
-  socket: /var/run/mysqld/mysqld.sock
-#  username: root
-#  password: 12345
-#  socket: /tmp/mysql.sock
+#  username: administrator
+#  password: $0v3rFl0w
+#  socket: /var/run/mysqld/mysqld.sock
+  username: root
+  password: 12345
+  socket: /tmp/mysql.sock
 # Flip between OS X and Ubuntu Sockets
 
 development:
