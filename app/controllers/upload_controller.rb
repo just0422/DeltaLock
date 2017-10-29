@@ -22,7 +22,7 @@ class UploadController < ApplicationController
 	end
 
 	def create
-		Rails.logger.debug("PARAMS --> " + JSON.pretty_generate(params))
+		#Rails.logger.debug("PARAMS --> " + JSON.pretty_generate(params))
 		#Key.import(params[:key][:keyfile])*/
 
 		case params[:category]
@@ -34,6 +34,8 @@ class UploadController < ApplicationController
 			PurchaseOrder.import(params[:file])
 		when "keycode"
 			Key.import(params[:file])
+		when "assignment"
+			Relationship.import(params[:file])
 		end
 		# xls = Roo::Spreadsheet.open(params[:file].path.to_s, 'r')
 		# Rails.logger.debug(xls.info)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171029193637) do
+ActiveRecord::Schema.define(version: 20171029210613) do
 
   create_table "end_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.datetime "created_at",                         null: false
@@ -68,11 +68,13 @@ ActiveRecord::Schema.define(version: 20171029193637) do
     t.index ["id"], name: "index_purchasers_on_id", using: :btree
   end
 
-  create_table "relationship", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "purchase_order_id"
-    t.integer "purchaser_id"
-    t.integer "end_user_id"
-    t.integer "key_id"
+  create_table "relationships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer  "purchase_order_id"
+    t.integer  "purchaser_id"
+    t.integer  "end_user_id"
+    t.integer  "key_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|

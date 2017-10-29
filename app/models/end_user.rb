@@ -1,6 +1,5 @@
 class EndUser < ApplicationRecord
 	include ImportFunctions
-	has_many :purchase_orders
 
 	acts_as_mappable :default_units => :miles,
 					 :default_formula => :sphere,

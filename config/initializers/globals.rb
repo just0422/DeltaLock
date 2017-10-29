@@ -23,7 +23,11 @@ ColumnTypeXls = {
 	"po_number" => "Number",
 	"so_number" => "Number",
 	"date_order" => "DateTime",
-	"address" => "String"
+	"address" => "String",
+	"purchase_order_id" => "Number",
+	"purchaser_id" => "Number",
+	"end_user_id" => "Number",
+	"key_id" => "Number"
 }
 
 ColumnLabels = BiHash.new
