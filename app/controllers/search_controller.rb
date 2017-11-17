@@ -6,14 +6,14 @@ class SearchController < ApplicationController
 		case params[:category]
 		when "enduser"
 			@enduser = EndUser.find(params[:id])
-			#@address_attributes = Address.find_by_addressable_id_and_addressable_type(params[:id], "EndUser")
 		when "key"
 			@key = Key.find(params[:id])
 		when "purchaseorder"
 			@purchaseorder = PurchaseOrder.find(params[:id])
 		when "purchaser"
 			@purchaser = Purchaser.find(params[:id])
-			#@address_attributes = Address.find_by_addressable_id_and_addressable_type(params[:id], "Purchaser")
+		when "assignment"
+			@assignment = Relationship.find(params[:id])
 		end
 
 
@@ -52,6 +52,14 @@ class SearchController < ApplicationController
 		@purchasers_list = @purchasers_search.result
 		@purchasers_search.build_condition if @purchasers_search.conditions.empty?
 		@purchasers_search.build_sort if @purchasers_search.sorts.empty?
+
+		if params[:search_type] == "assignment_search"
+			session[:assignment_search] = params[:q]
+		end
+		@assignments_search = Relationship.search(params[:q])
+		@assignments_list = @assignments_search.result
+		@assignments_search.build_condition if @assignments_search.conditions.empty?
+		@assignments_search.build_sort if @assignments_search.sorts.empty?
     end
 	def export
 		@class = ""
@@ -72,6 +80,10 @@ class SearchController < ApplicationController
 		when "keycodes_search"
 			@class = Key
 			search = Key.search(params[:keycodes_search])
+			@list = search.result
+		when "assignments_search"
+			@class = Relationship
+			search = Relationship.search(params[:assignments_search])
 			@list = search.result
 		end
 
@@ -183,11 +195,13 @@ class SearchController < ApplicationController
         @key_codes_list = Array.new
         @purchase_orders_list = Array.new
         @purchasers_list = Array.new
+        @assignments_list = Array.new
 
 		session[:purchase_order_search] = {}
 		session[:purchaser_search] = {}
 		session[:end_user_search] = {}
 		session[:keycodes_search] = {}
+		session[:assignments_search] = {}
 	end
 
 	def uniq_arrays
@@ -195,6 +209,7 @@ class SearchController < ApplicationController
         @key_codes_list = @key_codes_list.uniq.compact
         @purchase_orders_list = @purchase_orders_list.uniq.compact
         @purchasers_list = @purchasers_list.uniq.compact
+        @assignments_list = @purchasers_list.uniq.compact
 	end
 
 	def print_debug(key, val, table)

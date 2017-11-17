@@ -29,6 +29,8 @@
 <div id="purchaser_search" class="searchtab">
 	<%= render 'search_form', search_type: @purchasers_search, search_id: "purchaser_search", search_category: "Purchaser" %>
 	<%= render 'search/tables/purchasers' %>
+	<%= render 'search_form', search_type: @assignments_search, search_id: "assignment", search_category: "Assignment" %>
+	<%= render 'search/tables/assignments' %>
 </div>
 	<%# render 'search' %>
 

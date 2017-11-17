@@ -65,3 +65,8 @@ ColumnLabels.insert("date_order", "Date Ordered")
 
 # Address
 ColumnLabels.insert("address", "Address")
+
+ColumnLabels.insert("purchaser_id", "Purchaser");
+ColumnLabels.insert("end_user_id", "End User");
+ColumnLabels.insert("purchase_order_id", "Purchase Order");
+ColumnLabels.insert("key_id", "Key");

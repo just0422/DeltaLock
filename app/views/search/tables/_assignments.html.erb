@@ -1,0 +1,19 @@
+<% if @assignments_list.length > 0 %>
+    <h1>Assignemnts</h1>
+    <table class="table all-tables">
+        <thead class="thead-inverse">
+            <tr>
+				<% Relationship.column_names.each do |title| %>
+					<%= render '/search/tables/header', title:title %>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <% @assignments_list.each do |entry| %>
+				<tr data-link="<%= end_user_path(entry["id"]) %>">
+				<%= render '/search/tables/body', entryClass: Relationship, entry: entry, classString: "assignemnt" %>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>
