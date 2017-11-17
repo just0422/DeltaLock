@@ -12,6 +12,9 @@
 	<a id="purchaser_search_header" href="javascript:void(0)" onclick="openTab(event, 'purchaser_search');">
 	    <div class="searchtablink">Purchasers</div>
 	</a>
+	<a id="assignment_search_header" href="javascript:void(0)" onclick="openTab(event, 'assignment_search');">
+	    <div class="searchtablink">Assignments</div>
+	</a>
 </div>
 
 <div id="purchase_order_search" class="searchtab">
@@ -29,6 +32,8 @@
 <div id="purchaser_search" class="searchtab">
 	<%= render 'search_form', search_type: @purchasers_search, search_id: "purchaser_search", search_category: "Purchaser" %>
 	<%= render 'search/tables/purchasers' %>
+</div>
+<div id="assignment_search" class="searchtab">
 	<%= render 'search_form', search_type: @assignments_search, search_id: "assignment", search_category: "Assignment" %>
 	<%= render 'search/tables/assignments' %>
 </div>
