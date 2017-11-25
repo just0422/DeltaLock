@@ -1,4 +1,5 @@
 class ShowController < ApplicationController
+	before_action :set_variables, only: [:show, :edit, :update]
   def index
 		
   end
@@ -6,24 +7,14 @@ class ShowController < ApplicationController
 	def show
 		case params[:type]
 		when "key"
-			@entry = Key.find(params[:id])
-			@class = Key
 			@associations = get_associated_items("key", params[:id])
 		when "end_user"
-			@entry = EndUser.find(params[:id])
-			@class = EndUser
 			@associations = get_associated_items("end_user", params[:id])
 		when "purchaser"
-			@entry = Purchaser.find(params[:id])
-			@class = Purchaser
 			@associations = get_associated_items("purchaser", params[:id])
 		when "purchase_order"
-			@entry = PurchaseOrder.find(params[:id])
-			@class = PurchaseOrder
 			@associations = get_associated_items("purchase_order", params[:id])
 		end
-		@id = params[:id]
-		@type = params[:type]
 		@column_names = {
 			"key" => "Key",
 			"end_user" => "End User",
@@ -33,7 +24,17 @@ class ShowController < ApplicationController
 	end
 
 	def edit
+	end
 
+	def update
+		Rails.logger.debug(params)
+		case params[:type]
+		when "key"
+		when "end_user"
+			@entry.update_attributes(enduser_parameters)
+		when "purchaser"
+		when "purchase_order"
+		end
 	end
 
 	private
@@ -78,5 +79,28 @@ class ShowController < ApplicationController
 		end
 
 		return associations
+	end
+
+	def set_variables
+		case params[:type]
+		when "key"
+			@entry = Key.find(params[:id])
+			@class = Key
+		when "end_user"
+			@entry = EndUser.find(params[:id])
+			@class = EndUser
+		when "purchaser"
+			@entry = Purchaser.find(params[:id])
+			@class = Purchaser
+		when "purchase_order"
+			@entry = PurchaseOrder.find(params[:id])
+			@class = PurchaseOrder
+		end
+		@id = params[:id]
+		@type = params[:type]
+	end
+
+	def enduser_parameters
+		params.permit(:name, :address, :phone, :fax, :primary_contact, :primary_contact_type, :department, :store_number, :group_name, :lat, :lng, :sub_department_1, :sub_department_2, :sub_department_3, :sub_department_4)
 	end
 end

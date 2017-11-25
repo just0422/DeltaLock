@@ -3,10 +3,10 @@
 		<ul id="entry-form" class="list-group" style="display:none;"></ul>
 		<div id="entry-info">
 			<%= render 'info_list' %>
+			<%= link_to edit_entry_path(@type, @id), remote: true do %>
+				<button>Edit</button>
+			<% end %>
 		</div>
-		<%= link_to edit_entry_path(@type, @id), remote: true do %>
-			<button>Edit</button>
-		<% end %>
 	</div>
 	<div class = "col-xs-8">
 		<h2>Associations</h2>

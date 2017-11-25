@@ -1,7 +1,5 @@
-console.log("<%= params %>");
-
 $("#entry-info").fadeOut(FADE_TIME, function(){
-	$("#entry-form").html("<%= j (render 'info_list') %>");
+	$("#entry-form").html("<%= j (render 'info_form') %>");
 
-	$("#entry-form").fadeIn(300);
+	$("#entry-form").fadeIn(FADE_TIME);
 });

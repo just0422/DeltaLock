@@ -1,0 +1,3 @@
+<%= form_tag( update_entry_path(@type, @id), method: :post, remote: true ) do |f| %>
+	<%= render '/show/forms/end_user' %>
+<% end %>

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get '/edit/:type/:id', to: 'show#edit', as: 'edit_entry'
   
   post '/search/export/:search_type' => 'search#export', as: 'export'
+  post '/update/:type/:id', to: 'show#update', as: 'update_entry'
   post 'login' => 'sessions#create'
 
   delete 'logout' => 'sessions#destroy'
