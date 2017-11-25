@@ -1,5 +1,7 @@
 require 'ColumnTitles'
 
+FADE_TIME = 100
+
 ColumnTypeXls = {
 	"id" => "Number",
 	"name" => "String",

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -21,6 +22,8 @@ Rails.application.routes.draw do
   get '/purchaser/show_purchaser/:id', to: 'purchaser#show_purchaser'
   get '/enduser/show_enduser/:id', to: 'end_user#show_enduser'
   get '/key/show_key/:id', to: 'key#show_key'
+  get '/show/:type/:id', to: 'show#show', as: 'show_entry'
+  get '/edit/:type/:id', to: 'show#edit', as: 'edit_entry'
   
   post '/search/export/:search_type' => 'search#export', as: 'export'
   post 'login' => 'sessions#create'

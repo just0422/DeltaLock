@@ -1,0 +1,12 @@
+<ul class="list-group">
+	<% @class.column_names.each do |title| %>
+		<% if ColumnLabels.column?(title) %>
+			<li class="list-group-item">
+				<div class="<%= @type %>-label">
+					<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
+					<span class="<%= @type %>-<%= title %>"><%= @entry[title] %></span>
+				</div>
+			</li>
+		<% end %>
+	<% end %>
+</ul>
