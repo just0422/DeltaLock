@@ -10,3 +10,6 @@
 		<% end %>
 	<% end %>
 </ul>
+<%= link_to edit_entry_path(@type, @id), remote: true do %>
+	<button>Edit</button>
+<% end %>

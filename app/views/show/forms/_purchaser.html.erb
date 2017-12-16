@@ -1,0 +1,8 @@
+<li class="list-group-item"><%= ColumnLabels.columnToLabel("name") %> : <%= text_field_tag(:name, @entry["name"]) %></li></br>
+<li class="list-group-item"><%= ColumnLabels.columnToLabel("address") %> : <%= text_area_tag(:address, @entry["address"]) %></li></br>
+<li class="list-group-item"><%= ColumnLabels.columnToLabel("phone") %> : <%= telephone_field_tag(:phone, @entry["phone"]) %></li></br>
+<li class="list-group-item"><%= ColumnLabels.columnToLabel("fax") %> : <%= telephone_field_tag(:fax, @entry["fax"]) %></li></br>
+<li class="list-group-item"><%= ColumnLabels.columnToLabel("primary_contact") %> : <%= text_field_tag(:primary_contact, @entry["primary_contact"]) %></li></br>
+<li class="list-group-item"><%= ColumnLabels.columnToLabel("primary_contact_type") %> : <%= text_field_tag(:primary_contact_type, @entry["primary_contact_type"]) %></li></br>
+<li class="list-group-item"><%= ColumnLabels.columnToLabel("group_name") %> : <%= text_field_tag(:group_name, @entry["group_name"]) %></li></br>
+<%= submit_tag("Submit") %>

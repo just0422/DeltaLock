@@ -30,10 +30,13 @@ class ShowController < ApplicationController
 		Rails.logger.debug(params)
 		case params[:type]
 		when "key"
+			@entry.update_attributes(key_parameters)
 		when "end_user"
 			@entry.update_attributes(enduser_parameters)
 		when "purchaser"
+			@entry.update_attributes(purchaser_parameters)
 		when "purchase_order"
+			@entry.update_attributes(purchase_order_parameters)
 		end
 	end
 
@@ -102,5 +105,17 @@ class ShowController < ApplicationController
 
 	def enduser_parameters
 		params.permit(:name, :address, :phone, :fax, :primary_contact, :primary_contact_type, :department, :store_number, :group_name, :lat, :lng, :sub_department_1, :sub_department_2, :sub_department_3, :sub_department_4)
+	end
+
+	def purchaser_parameters
+		params.permit(:name, :address, :email, :phone, :fax, :primary_contact, :primary_contact_type, :group_name)
+	end
+
+	def purchase_order_parameters
+		params.permit(:po_number, :date_order, :so_number)
+	end
+
+	def key_parameters
+		params.permit(:keyway, :master_key, :control_key, :operating_key, :bitting, :system_name, :comments)
 	end
 end
