@@ -10,7 +10,7 @@
 	</thead>
 	<tbody>
 		<% @purchase_orders_list.each do |entry| %>
-			<tr data-link="<%= purchase_order_path(entry) %>">
+			<tr data-link="<%= show_entry_path("purchase_order", entry) %>">
 				<%= render '/search/tables/body', entryClass: PurchaseOrder, entry: entry, classString: "purchaseorder"  %>
 			</tr>
 		<% end %>
