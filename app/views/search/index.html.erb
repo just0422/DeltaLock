@@ -1,21 +1,13 @@
-<div>**Note: if the buttons on this page don't work, try refreshing**</div>
 <div>
-	<a id="purchase_order_search_header" href="javascript:void(0)" onclick="openTab(event, 'purchase_order_search');">
-	    <div class="searchtablink">Purchase Orders</div>
-	</a>
-	<a id="keycodes_search_header" href="javascript:void(0)" onclick="openTab(event, 'keycodes_search');">
-	    <div class="searchtablink">Key Codes</div>
-	</a>
-	<a id="end_user_search_header" href="javascript:void(0)" onclick="openTab(event, 'end_user_search');">
-	    <div class="searchtablink">End Users</div>
-	</a>
-	<a id="purchaser_search_header" href="javascript:void(0)" onclick="openTab(event, 'purchaser_search');">
-	    <div class="searchtablink">Purchasers</div>
-	</a>
-	<a id="assignment_search_header" href="javascript:void(0)" onclick="openTab(event, 'assignment_search');">
-	    <div class="searchtablink">Assignments</div>
-	</a>
+	<ul class="tabs tabs-fixed-width">
+		<li class="tab"><a id="purchase_order_search_header" href="#purchase_order_search" class="active">Purchase Orders</a></li>
+		<li class="tab"><a id="keycodes_search_header" href="#keycodes_search">Key Codes</a></li>
+		<li class="tab"><a id="end_user_search_header" href="#end_user_search">End Users</a></li>
+		<li class="tab"><a id="purchaser_search_header" href="#purchaser_search">Purchasers</a></li>
+		<li class="tab"><a id="assignment_search_header" href="#assignment_search">Assignments</a></li>
+	</ul>
 </div>
+<div>**Note: if the buttons on this page don't work, try refreshing**</div>
 
 <div id="purchase_order_search" class="searchtab">
 	<%= render 'search_form', search_type: @purchase_order_search, search_id: "purchase_order_search", search_category: "Purchase Order" %>

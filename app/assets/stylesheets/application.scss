@@ -40,6 +40,25 @@ body{
   //@include background-image(linear-gradient(top, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%));
 }
 
+.delta-blue {
+	color: white;
+	background-color: rgb(9, 86, 165);
+}
+
+.tabs .tab a,
+.tabs .tab a.active{
+	color: rgb(9, 86, 165);
+} /*Black color to the text*/
+
+.tabs .tab a:hover {
+	color: rgb(9, 86, 165);
+	background-color:rgba(9, 86, 165, 0.3);
+} /*Text color on hover*/
+
+.tabs .indicator {
+	background-color: rgb(9, 86, 165);
+}
+
 tbody>tr{
 	cursor: pointer;
 }
