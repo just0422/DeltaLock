@@ -6,9 +6,12 @@
 	<% end %>
 	<p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
 
-	<div> Sort:
+	<div class="row">
+		<div class="col s1">Sort:</div>
 		<%= f.sort_fields do |s| %>
-			<%= s.sort_select %>
+			<div class="col s4">
+				<%= s.sort_select %>
+			</div>
 		<% end %>
 	</div>
 	<div class="actions"><%= f.submit "Search" %></div>

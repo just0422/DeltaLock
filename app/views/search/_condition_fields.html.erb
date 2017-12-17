@@ -1,10 +1,18 @@
-<div class="field">
-	<%= f.attribute_fields do |a| %>
-		<%= a.attribute_select %>
-	<% end %>
-	<%= f.predicate_select compounds: false %>
-	<%= f.value_fields do |v| %>
-		<%= v.text_field :value %>
-	<% end %>
-	<%= link_to "remove", '#', class: "remove_fields" %>
+<div class="field row">
+	<div class="col s4">
+		<%= f.attribute_fields do |a| %>
+			<%= a.attribute_select %>
+		<% end %>
+	</div>
+	<div class="col s4">
+		<%= f.predicate_select compounds: false %>
+	</div>
+	<div class="col s3">
+		<%= f.value_fields do |v| %>
+			<%= v.text_field :value %>
+		<% end %>
+	</div>
+	<div class="col s1">
+		<%= link_to "remove", '#', class: "remove_fields" %>
+	</div>
 </div>

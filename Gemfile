@@ -21,6 +21,7 @@ gem 'rails'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass'
 gem 'materialize-sass'
 gem 'font-awesome-sass', '~> 4.6.2'
 gem 'autoprefixer-rails'

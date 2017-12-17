@@ -17,14 +17,15 @@
 //= require materialize
 //= require underscore
 //= require gmaps/google
-//= require dataTables/jquery.dataTables
 //= require_tree .
 //
 
 const FADE_TIME = 200;
 
 $(document).ready(function(){
-    $("li[data-link]").click(function() {
+	$('select').material_select();
+
+/*    $("li[data-link]").click(function() {
           window.location = $(this).data("link");
     });
     $("tr[data-link]").click(function() {
@@ -33,6 +34,7 @@ $(document).ready(function(){
 
 	enable_all_highlights(".all-tables", "tbody tr");
 	enable_all_highlights(".all-maps", "ul li");
+	*/
 
 });
 
@@ -85,9 +87,4 @@ function enable_all_highlights(type, element){
 		else
 			$(this).addClass("bg-primary");
 	});
-}
-
-function flipAddress(){
-	$("#domestic-address").toggle();
-	$("#other-address").toggle();
 }
