@@ -14,8 +14,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require bootstrap
-//= require bootstrap-slider
+//= require materialize
 //= require underscore
 //= require gmaps/google
 //= require dataTables/jquery.dataTables

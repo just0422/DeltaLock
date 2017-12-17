@@ -2,14 +2,12 @@ source 'https://rubygems.org'
 
 gem 'responders'
 gem 'geokit-rails'
-#gem 'jquery-datatables-rails'
 gem 'jquery-ui-rails'
 gem 'ajax-datatables-rails'
 gem 'gmaps4rails'
 gem 'underscore-rails'
-gem 'bootstrap-slider-rails'
+#gem 'bootstrap-slider-rails'
 gem 'carrierwave', '~> 0.9'
-gem 'bootstrap_form'
 gem 'roo'
 
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
@@ -23,8 +21,7 @@ gem 'rails'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-#gem 'bootstrap', '~> 4.0.0.alpha3'
-gem "bootstrap-sass", "~> 3.3.6"
+gem 'materialize-sass'
 gem 'font-awesome-sass', '~> 4.6.2'
 gem 'autoprefixer-rails'
 # Use Uglifier as compressor for JavaScript assets

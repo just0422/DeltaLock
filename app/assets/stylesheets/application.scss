@@ -10,14 +10,13 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require bootstrap-slider
  *= require_self
  *= require dataTables/jquery.dataTables
  *= require_tree .
  */
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import "materialize";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
