@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <% @end_users_list.each do |entry| %>
-				<tr data-link="<%= show_entry_path("end_user", entry["id"]) %>">
+				<tr class="search-row" data-href="<%= show_entry_path("end_user", entry["id"]) %>">
 				<%= render '/search/tables/body', entryClass: EndUser, entry: entry, classString: "enduser" %>
                 </tr>
             <% end %>

@@ -17,6 +17,10 @@ $(document).ready(function() {
 		$('select').material_select();
 		return event.preventDefault();
 	});
+
+	$(".search-row").click(function() {
+		window.location = $(this).data("href");
+	});
 });
 
 function openTab(evt, searchtabName) {
