@@ -9,9 +9,7 @@
 	<div class="row">
 		<div class="col s1">Sort:</div>
 		<%= f.sort_fields do |s| %>
-			<div class="col s4">
-				<%= s.sort_select %>
-			</div>
+				<%= s.sort_select Hash.new, class:"col s5" %>
 		<% end %>
 	</div>
 	<div class="actions"><%= f.submit "Search" %></div>
