@@ -1,10 +1,8 @@
-<%= link_to "Download Current #{search_category} Search", export_path(search_type: search_id, format:"xls"), :method => :post %>
-
 <%= search_form_for search_type, url: result_search_index_path, method: :post do |f| %>
 	<%= f.condition_fields do |c| %>
 		<%= render "condition_fields", f: c %>
 	<% end %>
-	<p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
+	<p><%= link_to_add_fields '<i class="fa fa-plus-square" aria-hidden="true"></i>', f, :condition %></p>
 
 	<div class="row">
 		<div class="col s1">Sort:</div>
@@ -12,7 +10,10 @@
 				<%= s.sort_select Hash.new, class:"col s5" %>
 		<% end %>
 	</div>
-	<div class="actions"><%= f.submit "Search" %></div>
+	<div class="row">
+		<div class="actions"><%= f.submit "Search", class:"btn col s4 push-s1 delta-btn" %></div>
+		<%= link_to "Download Current Search", export_path(search_type: search_id, format:"xls"), :method => :post, class:"btn col s4 push-s2 delta-btn" %>
+	</div>
 	<%= hidden_field_tag :search_type, search_id %>
 <% end %>
 

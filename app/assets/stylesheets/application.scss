@@ -59,6 +59,15 @@ body{
 	background-color: rgb(9, 86, 165);
 }
 
+.delta-btn {
+	color: white;
+	background-color: rgb(9, 86, 165);
+}
+.delta-btn:hover {
+	background-color: rgb(0, 64, 128);
+}
+
+
 .search-row:hover{
 	cursor: pointer;
 	background-color: rgba(9, 86, 165, 0.3);
@@ -68,3 +77,4 @@ body{
 	color: white;
 	background-color: rgb(9, 86, 165);
 }
+

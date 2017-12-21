@@ -12,7 +12,9 @@
 			<%= v.text_field :value %>
 		<% end %>
 	</div>
-	<div class="col s1">
-		<%= link_to "remove", '#', class: "remove_fields" %>
+	<div class="col s1 valign-wrapper">
+		<a class="remove_fields btn red" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+		<%# link_to "remove", '#', class: "remove_fields" %>
 	</div>
 </div>
