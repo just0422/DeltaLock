@@ -12,7 +12,7 @@
 	</div>
 	<div class="row">
 		<div class="actions"><%= f.submit "Search", class:"btn col s4 push-s1 delta-btn" %></div>
-		<%= link_to "Download Current Search", export_path(search_type: search_id, format:"xls"), :method => :post, class:"btn col s4 push-s2 delta-btn" %>
+		<%= link_to "Download Current Search", export_path(search_type: search_id, format:"xls"), :method => :post, class:"btn col s4 push-s3 delta-btn" %>
 	</div>
 	<%= hidden_field_tag :search_type, search_id %>
 <% end %>

@@ -26,7 +26,6 @@ html{
 
 body{
   height: 100%;
-  margin: 1em 0 2em 0;
   //background-repeat: no-repeat;
   //background-attachment: fixed;
   //background-color: #1e5799;
@@ -39,6 +38,12 @@ body{
   //@include filter-gradient(#1e5799, #7db9e8, vertical);
   //@include background-image(linear-gradient(top, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%));
 }
+
+.container{
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+
 
 .delta-blue {
 	color: white;
