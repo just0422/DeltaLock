@@ -1,19 +1,21 @@
-<h1>Purchase Orders</h1>
-<div id="accordion">
-<table class="table bordered centered responsive-table">
-	<thead class="thead-inverse">
-		<tr>
-			<% PurchaseOrder.column_names.each do |title| %>
-				<%= render '/search/tables/header', title:title %>
-			<% end %>
-		</tr>
-	</thead>
-	<tbody>
-		<% @purchase_orders_list.each do |entry| %>
-			<tr class="search-row" data-href="<%= show_entry_path("purchase_order", entry) %>">
-				<%= render '/search/tables/body', entryClass: PurchaseOrder, entry: entry, classString: "purchaseorder"  %>
+<% if @purchase_orders_list.length > 0 %>
+	<h1 class="search-table-header">Purchase Orders</h1>
+	<div id="accordion">
+	<table class="table bordered centered responsive-table">
+		<thead class="thead-inverse">
+			<tr>
+				<% PurchaseOrder.column_names.each do |title| %>
+					<%= render '/search/tables/header', title:title %>
+				<% end %>
 			</tr>
-		<% end %>
-	</tbody>
-</table>
-</div>
+		</thead>
+		<tbody>
+			<% @purchase_orders_list.each do |entry| %>
+				<tr class="search-row" data-href="<%= show_entry_path("purchase_order", entry) %>">
+					<%= render '/search/tables/body', entryClass: PurchaseOrder, entry: entry, classString: "purchaseorder"  %>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	</div>
+<% end %>
