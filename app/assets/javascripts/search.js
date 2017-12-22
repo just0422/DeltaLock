@@ -23,32 +23,6 @@ $(document).ready(function() {
 	});
 });
 
-function openTab(evt, searchtabName) {
-  var i, x, searchtablinks;
-  x = document.getElementsByClassName("searchtab");
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";
-  }
-  searchtablinks = document.getElementsByClassName("searchtablink");
-  for (i = 0; i < x.length; i++) {
-     searchtablinks[i].className = searchtablinks[i].className.replace(" red-border", "");
-     searchtablinks[i].style.color = "";
-  }
-  if (searchtabName.length > 0){
-	  document.getElementById(searchtabName).style.display = "block";
-	  if (evt.currentTarget){
-		  evt.currentTarget.firstElementChild.className += " red-border";
-		  evt.currentTarget.firstElementChild.style.color = "red";
-	  }
-	  else {
-		  evt.target.firstElementChild.className += " red-border";
-		  evt.target.firstElementChild.style.color = "red";
-	  }
-  }
-}
-
-
-
 var eu = "End User";
 var k = "Key Codes";
 var po = "Purchase Orders";
