@@ -1,13 +1,14 @@
+<h1 class="show-header"><%= @column_names[@type] %>s</h1>
 <div class="row">
-	<div class="col-xs-4">
+	<div class="col s4 card">
 		<ul id="entry-form" class="list-group" style="display:none;"></ul>
 		<div id="entry-info">
 			<%= render 'info_list' %>
 		</div>
 	</div>
-	<div class = "col-xs-8">
-		<h2>Associations</h2>
-		<table class = "table">
+	<div class = "col s8 card">
+		<h3 class="show-header">Associations</h3>
+		<table class = "table bordered centered responsive-table">
 			<thead class = "thead-inverse">
 				<tr>
 					<% @column_names.each do |type, name| %>

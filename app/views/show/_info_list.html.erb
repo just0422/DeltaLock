@@ -1,7 +1,7 @@
-<ul class="list-group">
+<ul>
 	<% @class.column_names.each do |title| %>
 		<% if ColumnLabels.column?(title) %>
-			<li class="list-group-item">
+			<li class="delta-collection-item">
 				<div class="<%= @type %>-label">
 					<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
 					<span class="<%= @type %>-<%= title %>"><%= @entry[title] %></span>
@@ -10,6 +10,6 @@
 		<% end %>
 	<% end %>
 </ul>
-<%= link_to edit_entry_path(@type, @id), remote: true do %>
-	<button>Edit</button>
-<% end %>
+<div class="card-action row edit-btn">
+	<%= link_to "Edit", edit_entry_path(@type, @id), remote: true, class:"btn col s12 delta-btn" %>
+</div>
