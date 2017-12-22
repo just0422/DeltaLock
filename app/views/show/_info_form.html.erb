@@ -1,3 +1,27 @@
 <%= form_tag( update_entry_path(@type, @id), method: :post, remote: true ) do |f| %>
-	<%= render '/show/forms/' + @type %>
+	<% @class.column_names.each do |title| %>
+		<% if ColumnLabels.column?(title) %>
+			<% if title == "id" %>
+				<% next %>
+			<% elsif title == "address" %>
+				<div class="input-field">
+					<textarea name="<%= title %>" class="materialize-textarea" value="<%= @entry[title] %>"></textarea>
+					<label for="<%= title %>" class="active"><%=ColumnLabels.columnToLabel(title)%></label> 
+				</div>
+			<% elsif @entry[title] == "" %>
+				<div class="input-field">
+					<input name="<%= title %>"/>
+					<label for="<%= title %>"><%=ColumnLabels.columnToLabel(title)%></label> 
+				</div>
+			<% else %>
+				<div class="input-field">
+					<input name="<%= title %>" type="text" value="<%= @entry[title] %>"/>
+					<label for="<%= title %>" class="active"><%=ColumnLabels.columnToLabel(title)%></label> 
+				</div>
+			<% end %>
+		<% end %>
+	<% end %>
+	<div class="card-action row edit-btn">
+		<%= submit_tag("Save", class:"btn col s12 delta-btn") %>
+	</div>
 <% end %>

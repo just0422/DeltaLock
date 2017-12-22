@@ -1,4 +1,7 @@
-<li class="list-group-item"><%= ColumnLabels.columnToLabel("name") %> : <%= text_field_tag(:name, @entry["name"]) %></li></br>
+  <input id="last_name" type="text" class="validate">
+  <label for="last_name">Last Name</label>
+<%= text_field_tag(:name, @entry["name"]) %>
+<label for="name"<%= ColumnLabels.columnToLabel("name") %> : </li></br>
 <li class="list-group-item"><%= ColumnLabels.columnToLabel("address") %> : <%= text_area_tag(:address, @entry["address"]) %></li></br>
 <li class="list-group-item"><%= ColumnLabels.columnToLabel("phone") %> : <%= telephone_field_tag(:phone, @entry["phone"]) %></li></br>
 <li class="list-group-item"><%= ColumnLabels.columnToLabel("fax") %> : <%= telephone_field_tag(:fax, @entry["fax"]) %></li></br>
@@ -11,4 +14,14 @@
 <li class="list-group-item"><%= ColumnLabels.columnToLabel("sub_department_2") %> : <%= text_field_tag(:sub_department_2, @entry["sub_department_2"]) %></li></br>
 <li class="list-group-item"><%= ColumnLabels.columnToLabel("sub_department_3") %> : <%= text_field_tag(:sub_department_3, @entry["sub_department_3"]) %></li></br>
 <li class="list-group-item"><%= ColumnLabels.columnToLabel("sub_department_4") %> : <%= text_field_tag(:sub_department_4, @entry["sub_department_4"]) %></li></br>
+
+<% @class.column_names.each do |title| %>
+	<% if ColumnLabels.column?(title) %>
+		<div class="input-field">
+			<input name="<%= title %>" value="<%= @entry[title] %>"/>
+			<label for="<%= title %>" class="active"><%=ColumnLabels.columnToLabel(title)%></label> 
+		</div>
+	<% end %>
+<% end %>
 <%= submit_tag("Submit") %>
+			

@@ -1,14 +1,14 @@
 <h1 class="show-header"><%= @column_names[@type] %>s</h1>
 <div class="row">
 	<div class="col s4 card">
-		<ul id="entry-form" class="list-group" style="display:none;"></ul>
+		<div id="entry-form" style="display:none;"></div>
 		<div id="entry-info">
 			<%= render 'info_list' %>
 		</div>
 	</div>
 	<div class = "col s8 card">
 		<h3 class="show-header">Associations</h3>
-		<table class = "table bordered centered responsive-table">
+		<table class = "table bordered centered responsive-table show-table">
 			<thead class = "thead-inverse">
 				<tr>
 					<% @column_names.each do |type, name| %>
@@ -23,11 +23,15 @@
 					<tr>
 						<% association.each do |type, entry| %>
 							<% if type != @type %>
-								<td>
-									<form action="/show/<%= type %>/<%= entry["id"] %>">
-										<input type="submit" value="<%= entry["name"] %>">
-									</form>
-								</td>
+								<% if entry["name"] != ""%>
+									<td class="show-table-cell">
+										<a href="/show/<%= type %>/<%= entry["id"] %>">
+											<div class="show-table-link"><%= entry["name"] %></div>
+										</a>
+									</td>
+								<% else %>
+									<td class="show-table-empty"></td>
+								<% end %>
 							<% end %>
 						<% end %>
 					</tr>
