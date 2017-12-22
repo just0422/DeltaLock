@@ -88,7 +88,7 @@ class SearchController < ApplicationController
 		end
 
 		respond_to do |format|
-			format.xls
+			format.csv { send_data @list.to_csv }
 		end
 	end
 

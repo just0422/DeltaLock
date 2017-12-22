@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'json'
 require 'roo'
+require 'csv'
 
 class UploadController < ApplicationController
 	def index

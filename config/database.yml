@@ -14,15 +14,14 @@ default: &default
   encoding: utf8
   pool: 5
 #  username: administrator
-  password: $0v3rFl0w
-  socket: /var/run/mysqld/mysqld.sock
+#  password: $0v3rFl0w
   username: root
-#  password: 12345
-#  socket: /tmp/mysql.sock
+  password: 12345
 # Flip between OS X and Ubuntu Sockets
 
 development:
   <<: *default
+  socket: /tmp/mysql.sock
   database: DeltaLock_development
 
 # Warning: The database defined as "test" will be erased and
@@ -56,3 +55,4 @@ production:
   database: DeltaLock_production
   username: administrator
   password: <%= ENV['DELTALOCK_DATABASE_PASSWORD'] %>
+  socket: /var/run/mysqld/mysqld.sock
