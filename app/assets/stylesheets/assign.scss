@@ -18,12 +18,21 @@
 	border: 1px solid black;
 	text-align:center
 }
-.assign-quad:hover{
+.assign-title:hover{
 	background-color: rgba(9, 86, 165, 0.3);
 	cursor: pointer;
 }
-.assign-quad>h3{
+.assign-title{
+	height: 100%;
+}
+.assign-quad>div>h3{
 	position:relative;
 	margin: 0;
-	top:41%;
+	top:40%;
+}
+.assign-new-btn{
+	margin-top:21%;
+}
+.assign-search-btn{
+	margin-top:19%;
 }

@@ -1,15 +1,15 @@
 <div id="assign-container">
-	<div class="assign-quad">
-		<h3>Purchaser</h3>
-	</div>
-	<div class="assign-quad">
-		<h3>End User</h3>
-	</div>
-	<div class="assign-quad">
-		<h3>Purchase Orders</h3>
-	</div>
-	<div class="assign-quad">
-		<h3>Keys</h3>
-	</div>
+	<% @categories.each do |cat| %>
+		<% catName = cat.name.underscore.humanize.split.map(&:capitalize).join(' ') %>
+		<div class="assign-quad">
+			<div class="assign-title">
+				<h3><%= catName %></h3>
+			</div>
+			<div class="assign-new-or-search" style="display:none;">
+				<a class="row btn-large delta-btn assign-new-btn">New <%= catName %></a>
+				<a class="row btn-large delta-btn assign-search-btn">Search <%= catName %>s</a>
+			</div>
+		</div>
+	<% end %>
 </div>
 

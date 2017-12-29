@@ -1,7 +1,11 @@
 var assign_key;
 
+
 $(document).ready(function(){
-	assign_key = $("#assign-key").clone();
+	$(".assign-title").on('click',function(){
+		$(this).toggle()
+		$(this).siblings().toggle();
+	})
 });
 
 function create_list_and_table(id){
