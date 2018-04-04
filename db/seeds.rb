@@ -9,8 +9,6 @@
 
 #p "Destroying Addresses"
 #Address.destroy_all
-p "Destroying PoKs"
-PoK.destroy_all
 p "Destroying PurchaseOrders"
 PurchaseOrder.destroy_all
 p "Destroying Purchasers"
@@ -20,96 +18,7 @@ EndUser.destroy_all
 p "Destroying Keys"
 Key.destroy_all
 
-=begin
-Address.create!([{
-    line1: "100 Spear st",
-	line2: "",
-	city: "San Francisco",
-	state: "CA",
-	zip: 94105,
-	addressable_id: 1,
-	addressable_type: "EndUser"
-	},
-	{
-	custom_address: "40 Bay St, Toronto, ON M5J 2X2, Canada",
-	addressable_id: 2,
-	addressable_type: "EndUser"
-	},
-	{
-    line1: "49 Washington St",
-	line2: "",
-	city: "New London",
-	state: "CT",
-	zip: 06320,
-	addressable_id: 1,
-	addressable_type: "Purchaser"
-	},
-	{
-    line1: "49 Washington St",
-	line2: "",
-	city: "New London",
-	state: "CT",
-	zip: 06320,
-	addressable_id: 7,
-	addressable_type: "EndUser"
-	},
-	{
-    line1: "64-34 Myrtle Ave",
-	line2: "",
-	city: "Glendale",
-	state: "NY",
-	zip: 11385,
-	addressable_id: 2,
-	addressable_type: "Purchaser"
-	},
-	{
-    line1: "64-34 Myrtle Ave",
-	line2: "",
-	city: "Glendale",
-	state: "NY",
-	zip: 11385,
-	addressable_id: 6,
-	addressable_type: "EndUser"
-	},
-	{
-    line1: "131 Brookville Rd",
-	line2: "",
-	city: "Glen Head",
-	state: "NY",
-	zip: 11545,
-	addressable_id: 3,
-	addressable_type: "Purchaser"
-	},
-	{
-    line1: "131 Brookville Rd",
-	line2: "",
-	city: "Glen Head",
-	state: "NY",
-	zip: 11545,
-	addressable_id: 5,
-	addressable_type: "EndUser"
-	},
-	{
-    line1: "715 Todt Hill Rd",
-	line2: "",
-	city: "Staten Island",
-	state: "NY",
-	zip: 10304,
-	addressable_id: 4,
-	addressable_type: "EndUser"
-	},
-	{
-    line1: "112 Ocean Avenue",
-	line2: "",
-	city: "Amityville",
-	state: "NY",
-	zip: 11701,
-	addressable_id: 3,
-	addressable_type: "EndUser"
-}])
-
-p "Created #{Address.count} Addresses"
-=end
+p "Trying to create"
 Key.create!([{
 	id: 1,
     keyway: "1",
@@ -286,40 +195,3 @@ PurchaseOrder.create!([{
 
 p "Created #{PurchaseOrder.count} Purchase Orders"
 
-PoK.create!([{
-    quantity: 100,
-    key_id: 1,
-    purchase_order_id: 1
-},
-{
-    quantity: 100,
-    key_id: 2,
-    purchase_order_id: 2
-},
-{
-    quantity: 100,
-    key_id: 3,
-    purchase_order_id: 3
-},
-{
-    quantity: 100,
-    key_id: 4,
-    purchase_order_id: 4
-},
-{
-    quantity: 100,
-    key_id: 1,
-    purchase_order_id: 5
-},
-{
-    quantity: 100,
-    key_id: 2,
-    purchase_order_id: 6
-},
-{
-    quantity: 100,
-    key_id: 3,
-    purchase_order_id: 7
-}])
-
-p "Created #{PoK.count} PurchaseOrder--Keys"

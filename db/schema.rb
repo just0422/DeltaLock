@@ -13,14 +13,20 @@
 ActiveRecord::Schema.define(version: 20180404161527) do
 
   create_table "end_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "name"
     t.string   "phone"
     t.string   "fax"
     t.string   "department"
     t.integer  "store_number"
     t.string   "group_name"
+    t.string   "line2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "country"
+    t.text     "custom_address",       limit: 65535
     t.string   "primary_contact"
     t.string   "primary_contact_type"
     t.string   "sub_department_1"
@@ -33,7 +39,7 @@ ActiveRecord::Schema.define(version: 20180404161527) do
     t.index ["id"], name: "index_end_users_on_id", using: :btree
   end
 
-  create_table "keys", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "keyway"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
@@ -43,7 +49,6 @@ ActiveRecord::Schema.define(version: 20180404161527) do
     t.string   "bitting"
     t.string   "system_name"
     t.text     "comments",      limit: 4294967295
-    t.integer  "id"
     t.index ["id"], name: "index_keys_on_id", using: :btree
   end
 

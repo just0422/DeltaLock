@@ -45,7 +45,7 @@ class FixBadMigrationsFromBefore < ActiveRecord::Migration[5.0]
             t.change :created_at, :datetime, after: :keyway
 
         end
-
+        
         add_index :keys, :id
 
         drop_table "po_ks" do |t|
