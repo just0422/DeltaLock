@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171029210613) do
-create_table "end_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+ActiveRecord::Schema.define(version: 20180404161527) do
+
+  create_table "end_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "name"
     t.string   "phone"
     t.string   "fax"
-    t.string   "group_name"
     t.string   "department"
     t.integer  "store_number"
+    t.string   "group_name"
     t.string   "primary_contact"
     t.string   "primary_contact_type"
     t.string   "sub_department_1"
@@ -28,36 +29,40 @@ create_table "end_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARS
     t.string   "sub_department_4"
     t.float    "lat",                  limit: 24
     t.float    "lng",                  limit: 24
-    t.text     "address",              limit: 65535
+    t.string   "address"
     t.index ["id"], name: "index_end_users_on_id", using: :btree
   end
 
-  create_table "keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "keys", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "keyway"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.string   "keyway"
     t.string   "master_key"
     t.string   "control_key"
     t.string   "operating_key"
     t.string   "bitting"
     t.string   "system_name"
     t.text     "comments",      limit: 4294967295
+    t.integer  "id"
     t.index ["id"], name: "index_keys_on_id", using: :btree
   end
 
-  create_table "purchase_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "purchase_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "po_number"
     t.integer "so_number"
     t.date    "date_order"
     t.integer "purchaser_id"
     t.integer "end_user_id"
+    t.index ["end_user_id"], name: "index_purchase_orders_on_end_user_id", using: :btree
     t.index ["id"], name: "index_purchase_orders_on_id", using: :btree
+    t.index ["purchaser_id"], name: "index_purchase_orders_on_purchaser_id", using: :btree
   end
 
-  create_table "purchasers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "purchasers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.string   "name"
+    t.string   "email"
     t.string   "phone"
     t.string   "fax"
     t.string   "primary_contact"
@@ -67,7 +72,7 @@ create_table "end_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARS
     t.index ["id"], name: "index_purchasers_on_id", using: :btree
   end
 
-  create_table "relationships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "relationships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "purchase_order_id"
     t.integer  "purchaser_id"
     t.integer  "end_user_id"
@@ -76,7 +81,7 @@ create_table "end_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARS
     t.datetime "updated_at",        null: false
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "first_name"
