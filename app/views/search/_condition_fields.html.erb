@@ -1,13 +1,13 @@
 <div class="field row">
-	<div class="col s4">
+	<div class="col s2">
 		<%= f.attribute_fields do |a| %>
 			<%= a.attribute_select %>
 		<% end %>
 	</div>
-	<div class="col s4">
+	<div class="col s2">
 		<%= f.predicate_select compounds: false %>
 	</div>
-	<div class="col s3">
+	<div class="col s7">
 		<%= f.value_fields do |v| %>
 			<%= v.text_field :value %>
 		<% end %>

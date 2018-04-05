@@ -2,10 +2,10 @@
 	<%= f.condition_fields do |c| %>
 		<%= render "condition_fields", f: c %>
 	<% end %>
-	<p><%= link_to_add_fields '<i class="fa fa-plus-square" aria-hidden="true"></i>', f, :condition %></p>
+    <%= link_to_add_fields '<i class="fa fa-plus-square" aria-hidden="true"></i>', f, :condition %>
 
-	<div class="row">
-		<div class="col s1">Sort:</div>
+    <div class="row" style="margin-top:2em">
+        <h5 class="col s1">Sort:</h5>
 		<%= f.sort_fields do |s| %>
 				<%= s.sort_select Hash.new, class:"col s5" %>
 		<% end %>
