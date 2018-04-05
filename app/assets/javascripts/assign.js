@@ -6,6 +6,8 @@ $(document).ready(function(){
 		$(this).toggle()
 		$(this).siblings().toggle();
 	})
+
+    $('.modal').modal();
 });
 
 function create_list_and_table(id){

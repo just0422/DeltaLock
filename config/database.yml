@@ -21,7 +21,6 @@ default: &default
 
 development:
   <<: *default
-  socket: /tmp/mysql.sock
   database: DeltaLock_development
 
 # Warning: The database defined as "test" will be erased and
