@@ -30,9 +30,21 @@
 	margin: 0;
 	top:40%;
 }
+.assign-new-or-search{
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+}
+.assign-new-or-search-row{
+    display: table-row;
+    text-align: center;
+}
+.assign-btn-wrapper{
+    display: table-cell;
+    vertical-align: middle;
+}
 .assign-new-btn{
-	margin-top:21%;
 }
 .assign-search-btn{
-	margin-top:19%;
 }
