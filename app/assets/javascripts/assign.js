@@ -8,6 +8,7 @@ $(document).ready(function(){
 	})
 
     $('.modal').modal();
+    $('select').material_select();
 });
 
 function create_list_and_table(id){

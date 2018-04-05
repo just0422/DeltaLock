@@ -10,5 +10,8 @@ class AssignController < ApplicationController
         @categories['purchaseorder'] = [ PurchaseOrder, PurchaseOrder.search]
         @categories['key'] = [ Key, Key.search]
 	end
-
+    
+    def search
+        Rails.logger.debug("Hello******************************")
+    end
 end

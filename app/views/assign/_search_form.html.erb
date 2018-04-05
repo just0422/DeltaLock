@@ -4,12 +4,6 @@
     <% end %>
     <%= link_to_add_fields '<i class="fa fa-plus-square" aria-hidden="true"></i>', f, :condition %>
 
-    <div class="row" style="margin-top:2em">
-        <h5 class="col s1">Sort:</h5>
-        <%= f.sort_fields do |s| %>
-                <%= s.sort_select Hash.new, class:"col s5" %>
-        <% end %>
-    </div>
     <div class="row">
         <div class="actions"><%= f.submit "Search", class:"btn col s6 push-s3 delta-btn" %></div>
     </div>
