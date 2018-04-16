@@ -1,4 +1,4 @@
-class ShowController < ApplicationController
+class EntryController < ApplicationController
 	before_action :set_variables, only: [:show, :edit, :update]
   def index
 		
