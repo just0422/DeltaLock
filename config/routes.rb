@@ -24,9 +24,11 @@ Rails.application.routes.draw do
   get '/key/show_key/:id', to: 'key#show_key'
   get '/show/:type/:id', to: 'entry#show', as: 'show_entry'
   get '/edit/:type/:id', to: 'entry#edit', as: 'edit_entry'
+  get '/new/:type', to: 'entry#new', as: 'new_entry'
   
   post '/search/export/:search_type' => 'search#export', as: 'export'
   post '/update/:type/:id', to: 'entry#update', as: 'update_entry'
+  post '/create/:type', to: 'entry#create', as: 'create_entry'
   post 'login' => 'sessions#create'
 
   delete 'logout' => 'sessions#destroy'

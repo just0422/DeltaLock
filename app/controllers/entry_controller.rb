@@ -1,10 +1,12 @@
 class EntryController < ApplicationController
-	before_action :set_variables, only: [:show, :edit, :update]
-  def index
-		
-  end
+	before_action :set_variables, only: [:show, :edit, :update, :new]
+
+    def index
+    end
 
 	def show
+        @entry = @class.find(params[:id])
+
 		case params[:type]
 		when "key"
 			@associations = get_associated_items("key", params[:id])
@@ -15,6 +17,7 @@ class EntryController < ApplicationController
 		when "purchase_order"
 			@associations = get_associated_items("purchase_order", params[:id])
 		end
+
 		@column_names = {
 			"key" => "Key",
 			"end_user" => "End User",
@@ -23,11 +26,13 @@ class EntryController < ApplicationController
 		}
 	end
 
-	def edit
-	end
+	def edit 
+        @entry = @class.find(params[:id])
+    end
 
 	def update
-		Rails.logger.debug(params)
+        @entry = @class.find(params[:id])
+
 		case params[:type]
 		when "key"
 			@entry.update_attributes(key_parameters)
@@ -39,6 +44,10 @@ class EntryController < ApplicationController
 			@entry.update_attributes(purchase_order_parameters)
 		end
 	end
+
+    def new
+        @entry = @class.new
+    end
 
 	private
 	def get_associated_items(type, id)
@@ -87,16 +96,12 @@ class EntryController < ApplicationController
 	def set_variables
 		case params[:type]
 		when "key"
-			@entry = Key.find(params[:id])
 			@class = Key
 		when "end_user"
-			@entry = EndUser.find(params[:id])
 			@class = EndUser
 		when "purchaser"
-			@entry = Purchaser.find(params[:id])
 			@class = Purchaser
 		when "purchase_order"
-			@entry = PurchaseOrder.find(params[:id])
 			@class = PurchaseOrder
 		end
 		@id = params[:id]

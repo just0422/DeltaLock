@@ -5,7 +5,8 @@
 $(document).ready(function() {
 	$('form').on('click', '.remove_fields', function(event) {
 		$(this).closest('.field').remove();
-		$('select').material_select();
+        var modalElement = document.querySelector('.modal');
+        M.Modal.init(modalElement, {opacity: 0.9});
 		return event.preventDefault();
 	});
 	$('form').on('click', '.add_fields', function(event) {
@@ -14,7 +15,8 @@ $(document).ready(function() {
 		regexp = new RegExp($(this).data('id'), 'g');
 		$(this).before($(this).data('fields').replace(regexp, time));
 
-		$('select').material_select();
+        var modalElement = document.querySelector('.modal');
+        M.Modal.init(modalElement, {opacity: 0.9});
 		return event.preventDefault();
 	});
 

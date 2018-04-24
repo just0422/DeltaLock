@@ -14,7 +14,6 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require materialize
 //= require underscore
 //= require gmaps/google
 //= require_tree .
@@ -23,7 +22,8 @@
 const FADE_TIME = 200;
 
 $(document).ready(function(){
-	$('select').material_select();
+    var selectElement = document.querySelector('select');
+    M.FormSelect.init(selectElement);
 
 /*    $("li[data-link]").click(function() {
           window.location = $(this).data("link");

@@ -2,17 +2,19 @@
     <% @categories.each do |cat, catArr| %>
         <% catName = catArr[0].name.underscore.humanize.split.map(&:capitalize).join(' ') %>
         <% catLower = catArr[0].name.downcase %>
+        <% catNewField = "New " + catName %>
 		<div class="assign-quad">
 			<div class="assign-title">
 				<h3><%= catName %></h3>
 			</div>
 			<div class="assign-new-or-search" style="display:none;">
-                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><a class="btn-large delta-btn modal-trigger" href="#<%= catLower %>-new-modal">New <%= catName %></a></div></div>
+                <!-- This should be a form -->
+                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to catNewField, new_entry_path(catLower), remote: true, class: "btn-large delta-btn modal-trigger" %></div></div>
                 <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><a class="btn-large delta-btn modal-trigger" href="#<%= catLower %>-search-modal">Search <%= catName %>s</a></div></div>
             </div>
         </div>
 
-        <div id="<%= catLower %>-new-modal" class="modal modal-fixed-footer">
+        <div id="<%= catLower %>-new-form" class="modal modal-fixed-footer">
             <div class="modal-content">
                 <h4>Modal Header</h4>
                 <p>A bunch of text</p>
