@@ -11,7 +11,7 @@
 		</thead>
 		<tbody>
 			<% @purchase_orders_list.each do |entry| %>
-				<tr class="search-row" data-href="<%= show_entry_path("purchase_order", entry) %>">
+				<tr class="search-row" data-href="<%= show_entry_path("purchaseorder", entry) %>">
 					<%= render '/search/tables/body', entryClass: PurchaseOrder, entry: entry, classString: "purchaseorder"  %>
 				</tr>
 			<% end %>

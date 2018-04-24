@@ -10,19 +10,19 @@ class EntryController < ApplicationController
 		case params[:type]
 		when "key"
 			@associations = get_associated_items("key", params[:id])
-		when "end_user"
+		when "enduser"
 			@associations = get_associated_items("end_user", params[:id])
 		when "purchaser"
 			@associations = get_associated_items("purchaser", params[:id])
-		when "purchase_order"
+		when "purchaseorder"
 			@associations = get_associated_items("purchase_order", params[:id])
 		end
 
 		@column_names = {
 			"key" => "Key",
-			"end_user" => "End User",
+			"enduser" => "End User",
 			"purchaser" => "Purchaser",
-			"purchase_order" => "Purchase Order"
+			"purchaseorder" => "Purchase Order"
 		}
 	end
 
@@ -36,11 +36,11 @@ class EntryController < ApplicationController
 		case params[:type]
 		when "key"
 			@entry.update_attributes(key_parameters)
-		when "end_user"
+		when "enduser"
 			@entry.update_attributes(enduser_parameters)
 		when "purchaser"
 			@entry.update_attributes(purchaser_parameters)
-		when "purchase_order"
+		when "purchaseorder"
 			@entry.update_attributes(purchase_order_parameters)
 		end
 	end
@@ -97,11 +97,11 @@ class EntryController < ApplicationController
 		case params[:type]
 		when "key"
 			@class = Key
-		when "end_user"
+		when "enduser"
 			@class = EndUser
 		when "purchaser"
 			@class = Purchaser
-		when "purchase_order"
+		when "purchaseorder"
 			@class = PurchaseOrder
 		end
 		@id = params[:id]
