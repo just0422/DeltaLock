@@ -1,14 +1,12 @@
 var assign_key;
 
 
-$(document).ready(function(){
+$(document).ready(() => {
 	$(".assign-title").on('click',function(){
 		$(this).toggle()
 		$(this).siblings().toggle();
 	})
 
-    var modalElement = document.querySelector('.modal');
-    M.Modal.init(modalElement, {opacity: 0.9});
 });
 
 function create_list_and_table(id){

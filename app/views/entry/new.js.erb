@@ -1,8 +1,14 @@
 $("body").append("<h1><%= @type %></h1>");
-$("#<%= @type %>-new-form").append("<%= j (render 'new_form') %>");
-$("#<%= @type %>-new-form").html("<%= j (render 'new_form') %>");
+$("#entry-new-form").html("<%= j (render 'new_form') %>");
 
-var elem = document.querySelector("#<%= @type %>-new-form");
+var modalElement = document.querySelector('#entry-new-form');
+var instance = M.Modal.init(modalElement, 
+    {
+        opacity: 0.9,
+        onCloseEnd: () => {
+            this.destroy();
+        }
+    }
+);
 
-var instance = M.Modal.getInstance(elem);  
 instance.open();
