@@ -1,5 +1,5 @@
 $("body").append("<h1><%= @type %></h1>");
-$("#entry-new-form").html("<%= j (render 'new_form') %>");
+$("#entry-new-form").html("<%= j (render 'entry/forms/new') %>");
 
 var modalElement = document.querySelector('#entry-new-form');
 var instance = M.Modal.init(modalElement, 
