@@ -1,5 +1,5 @@
 $("#entry-form").fadeOut(FADE_TIME, function(){
-	$("#entry-info").html("<%= j (render 'info_list') %>");
+	$("#entry-form").html("<%= j (render 'entry/forms/edit') %>");
 
 	$("#entry-info").fadeIn(FADE_TIME);
 });
