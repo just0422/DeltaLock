@@ -49,6 +49,23 @@ class EntryController < ApplicationController
         @entry = @class.new
     end
 
+    def create
+        case params[:type]
+        when "key"
+            @entry = Key.create(key_parameters)
+        when "enduser"
+            geo = EndUser.geocode(params[:address])
+            params[:lat] = geo.lat
+            params[:lng] = geo.lng
+
+            @entry = EndUser.create(enduser_parameters)
+        when "purchaser"
+            @entry = Purchaser.create(purchaser_parameters)
+        when "purchaseorder"
+            @entry = PurchaseOrder.create(purchase_order_parameters)
+        end
+    end
+
 	private
 	def get_associated_items(type, id)
 		associations = Array.new
