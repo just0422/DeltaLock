@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404161527) do
+ActiveRecord::Schema.define(version: 20180425202508) do
 
   create_table "end_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at",                         null: false
@@ -56,11 +56,7 @@ ActiveRecord::Schema.define(version: 20180404161527) do
     t.integer "po_number"
     t.integer "so_number"
     t.date    "date_order"
-    t.integer "purchaser_id"
-    t.integer "end_user_id"
-    t.index ["end_user_id"], name: "index_purchase_orders_on_end_user_id", using: :btree
     t.index ["id"], name: "index_purchase_orders_on_id", using: :btree
-    t.index ["purchaser_id"], name: "index_purchase_orders_on_purchaser_id", using: :btree
   end
 
   create_table "purchasers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -78,12 +74,12 @@ ActiveRecord::Schema.define(version: 20180404161527) do
   end
 
   create_table "relationships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "purchase_order_id"
+    t.integer  "purchaseorder_id"
     t.integer  "purchaser_id"
-    t.integer  "end_user_id"
+    t.integer  "enduser_id"
     t.integer  "key_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

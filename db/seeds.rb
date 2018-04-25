@@ -9,6 +9,8 @@
 
 #p "Destroying Addresses"
 #Address.destroy_all
+p "Destroying Assignments"
+Relationship.destroy_all
 p "Destroying PurchaseOrders"
 PurchaseOrder.destroy_all
 p "Destroying Purchasers"
@@ -144,6 +146,7 @@ Purchaser.create!([{
 p "Created #{Purchaser.count} Purchasers"
 
 PurchaseOrder.create!([{
+    id: 1,
     so_number: 1,
     po_number: 4,
     date_order: DateTime.strptime("09/14/2009 8:00", "%m/%d/%Y %H:%M"),
@@ -151,6 +154,7 @@ PurchaseOrder.create!([{
     end_user_id: 1
 },
 {
+    id: 2,
     so_number: 2,
     po_number: 3,
     date_order: DateTime.strptime("09/14/2010 8:00", "%m/%d/%Y %H:%M"),
@@ -158,6 +162,7 @@ PurchaseOrder.create!([{
     end_user_id: 2
 },
 {
+    id: 3,
     so_number: 3,
     po_number: 2,
     date_order: DateTime.strptime("09/14/2011 8:00", "%m/%d/%Y %H:%M"),
@@ -165,6 +170,7 @@ PurchaseOrder.create!([{
     end_user_id: 3
 },
 {
+    id: 4,
     so_number: 4,
     po_number: 1,
     date_order: DateTime.strptime("09/14/2012 8:00", "%m/%d/%Y %H:%M"),
@@ -172,6 +178,7 @@ PurchaseOrder.create!([{
     end_user_id: 4
 },
 {
+    id: 5,
     so_number: 5,
     po_number: 4,
     date_order: DateTime.strptime("09/14/2013 8:00", "%m/%d/%Y %H:%M"),
@@ -179,6 +186,7 @@ PurchaseOrder.create!([{
     end_user_id: 5
 },
 {
+    id: 6,
     so_number: 6,
     po_number: 4,
     date_order: DateTime.strptime("09/14/2014 8:00", "%m/%d/%Y %H:%M"),
@@ -186,6 +194,7 @@ PurchaseOrder.create!([{
     end_user_id: 6
 },
 {
+    id: 7,
     so_number: 7,
     po_number: 5,
     date_order: DateTime.strptime("09/14/2015 8:00", "%m/%d/%Y %H:%M"),
@@ -195,3 +204,17 @@ PurchaseOrder.create!([{
 
 p "Created #{PurchaseOrder.count} Purchase Orders"
 
+
+Relationship.create!([{
+    purchase_order_id: 1,
+    purchaser_id: 1,
+    end_user_id: 1,
+    key_id: 1
+},
+{
+    purchase_order_id: 2,
+    purchaser_id: 3,
+    end_user_id: 1
+}])
+
+p "Created #{Relationship.count} Assignments"

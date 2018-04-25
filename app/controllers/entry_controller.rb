@@ -11,11 +11,11 @@ class EntryController < ApplicationController
 		when "key"
 			@associations = get_associated_items("key", params[:id])
 		when "enduser"
-			@associations = get_associated_items("end_user", params[:id])
+			@associations = get_associated_items("enduser", params[:id])
 		when "purchaser"
 			@associations = get_associated_items("purchaser", params[:id])
 		when "purchaseorder"
-			@associations = get_associated_items("purchase_order", params[:id])
+			@associations = get_associated_items("purchaseorder", params[:id])
 		end
 
 		@column_names = {
@@ -41,7 +41,7 @@ class EntryController < ApplicationController
 		when "purchaser"
 			@entry.update_attributes(purchaser_parameters)
 		when "purchaseorder"
-			@entry.update_attributes(purchase_order_parameters)
+			@entry.update_attributes(purchaseorder_parameters)
 		end
 	end
 
@@ -62,7 +62,7 @@ class EntryController < ApplicationController
         when "purchaser"
             @entry = Purchaser.create(purchaser_parameters)
         when "purchaseorder"
-            @entry = PurchaseOrder.create(purchase_order_parameters)
+            @entry = PurchaseOrder.create(purchaseorder_parameters)
         end
     end
 
@@ -83,12 +83,12 @@ class EntryController < ApplicationController
 			}
 			association["key"] = key
 
-			end_user_entry = assignment[:end_user_id].blank? ? nil : EndUser.find(assignment[:end_user_id])
-			end_user = { 
-				"name" => end_user_entry ? end_user_entry[:name] : "",
-				"id" => end_user_entry ? assignment[:end_user_id] : ""
+			enduser_entry = assignment[:enduser_id].blank? ? nil : EndUser.find(assignment[:enduser_id])
+			enduser = { 
+				"name" => enduser_entry ? enduser_entry[:name] : "",
+				"id" => enduser_entry ? assignment[:enduser_id] : ""
 			}
-			association["end_user"] = end_user
+			association["enduser"] = enduser
 
 			purchaser_entry = assignment[:purchaser_id].blank? ? nil : Purchaser.find(assignment[:purchaser_id])
 			purchaser = { 
@@ -97,12 +97,12 @@ class EntryController < ApplicationController
 			}
 			association["purchaser"] = purchaser
 
-			purchase_order_entry = assignment[:purchase_order_id].blank? ? nil : PurchaseOrder.find(assignment[:purchase_order_id])
-			purchase_order = { 
-				"name" => purchase_order_entry ? purchase_order_entry[:so_number] : "",
-				"id" => purchase_order_entry ? assignment[:purchase_order_id] : ""
+			purchaseorder_entry = assignment[:purchaseorder_id].blank? ? nil : PurchaseOrder.find(assignment[:purchaseorder_id])
+			purchaseorder = { 
+				"name" => purchaseorder_entry ? purchaseorder_entry[:so_number] : "",
+				"id" => purchaseorder_entry ? assignment[:purchaseorder_id] : ""
 			}
-			association["purchase_order"] = purchase_order
+			association["purchaseorder"] = purchaseorder
 
 			associations.push(association)
 		end
@@ -133,7 +133,7 @@ class EntryController < ApplicationController
 		params.permit(:name, :address, :email, :phone, :fax, :primary_contact, :primary_contact_type, :group_name)
 	end
 
-	def purchase_order_parameters
+	def purchaseorder_parameters
 		params.permit(:po_number, :date_order, :so_number)
 	end
 
