@@ -1,5 +1,6 @@
 <%= form_tag( create_entry_path(@type), method: :post, remote: true ) do |f| %>
     <div class="modal-content">
+        <h3 class="center-align">New <%= @class.name.underscore.split.map(&:capitalize).join(' ') %></h3>
         <% @class.column_names.each do |title| %>
             <% if ColumnLabels.column?(title) %>
                 <% if title == "id" %>
