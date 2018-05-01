@@ -1,11 +1,17 @@
-<%= search_form_for search_type, url: result_search_index_path, method: :post do |f| %>
-    <%= f.condition_fields do |c| %>
-        <%= render "condition_fields", f: c %>
-    <% end %>
-    <%= link_to_add_fields '<i class="fa fa-plus-square" aria-hidden="true"></i>', f, :condition %>
+<div class="modal-content">
+    <%= search_form_for search_type, url: result_search_index_path, method: :post do |f| %>
+        <%= f.condition_fields do |c| %>
+            <%= render "condition_fields", f: c %>
+        <% end %>
+        <%= link_to_add_fields '<i class="fa fa-plus-square" aria-hidden="true"></i>', f, :condition %>
 
-    <div class="row">
-        <div class="actions"><%= f.submit "Search", class:"btn col s6 push-s3 delta-btn" %></div>
+        <div class="row">
+            <div class="actions"><%= f.submit "Search", class:"btn col s6 push-s3 delta-btn" %></div>
+        </div>
+        <%= hidden_field_tag :search_type, search_id %>
+    <% end %>
     </div>
-    <%= hidden_field_tag :search_type, search_id %>
-<% end %>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+    </div>
+</div>

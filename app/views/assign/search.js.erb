@@ -1,0 +1,13 @@
+$("#assign-search-form").html("<%= j (render 'search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")
+
+var modalElement = document.querySelector('#assign-search-form');
+var instance = M.Modal.init(modalElement, 
+    {
+        opacity: 0.9,
+        onCloseEnd: () => {
+            this.destroy();
+        }
+    }
+);
+
+instance.open();

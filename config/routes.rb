@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get '/show/:type/:id', to: 'entry#show', as: 'show_entry'
   get '/edit/:type/:id', to: 'entry#edit', as: 'edit_entry'
   get '/new/:type', to: 'entry#new', as: 'new_entry'
+  get '/assign/search/:type', to: 'assign#search', as: 'search_assign'
   
   post '/search/export/:search_type' => 'search#export', as: 'export'
   post '/update/:type/:id', to: 'entry#update', as: 'update_entry'

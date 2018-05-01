@@ -5,13 +5,28 @@ class AssignController < ApplicationController
 		@categories = [ Purchaser, EndUser, PurchaseOrder, Key ]
 
 		@categories = Hash.new
-        @categories['purchaser'] = [ Purchaser, Purchaser.search]
-        @categories['enduser'] = [ EndUser, EndUser.search]
-        @categories['purchaseorder'] = [ PurchaseOrder, PurchaseOrder.search]
-        @categories['key'] = [ Key, Key.search]
+        @categories['purchaser'] = Purchaser
+        @categories['enduser'] = EndUser
+        @categories['purchaseorder'] = PurchaseOrder
+        @categories['key'] = Key
 	end
     
     def search
-        Rails.logger.debug("Hello******************************")
+        @category = params[:type]
+
+        case params[:type]
+        when 'purchaser'
+            @categoryName = "Purchaser"
+            @categorySearch = Purchaser.search
+        when 'enduser'
+            @categoryName = "EndUser"
+            @categorySearch = EndUser.search
+        when 'purchaserorder'
+            @categoryName = "PurchaseOrder"
+            @categorySearch = PurchaseOrder.search
+        when 'key'
+            @categoryName = "Key"
+            @categorySearch = Key.search
+        end
     end
 end

@@ -1,38 +1,25 @@
 <div id="assign-container">
-    <% @categories.each do |cat, catArr| %>
-        <% catName = catArr[0].name.underscore.humanize.split.map(&:capitalize).join(' ') %>
-        <% catLower = catArr[0].name.downcase %>
-        <% catNewField = "New " + catName %>
+    <% @categories.each do |category, categoryClass| %>
+        <% categoryName = categoryClass.name.underscore.humanize.split.map(&:capitalize).join(' ') %>
+        <% categoryLower = categoryClass.name.downcase %>
+        <% categoryNewField = "New " + categoryName %>
+        <% categorySearchField = "Search " + categoryName %>
 		<div class="assign-quad">
-			<div class="assign-title" id="<% catLower %>-assign-title">
-				<h3><%= catName %></h3>
+			<div class="assign-title" id="<% categoryLower %>-assign-title">
+				<h3><%= categoryName %></h3>
 			</div>
-			<div class="assign-new-or-search" id="<% catLower %>-assign-new-or-search" style="display:none;">
+			<div class="assign-new-or-search" id="<% categoryLower %>-assign-new-or-search" style="display:none;">
                 <!-- This should be a form -->
-                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to catNewField, new_entry_path(catLower), remote: true, class: "btn-large delta-btn modal-trigger" %></div></div>
-                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><a class="btn-large delta-btn modal-trigger" href="#<%= catLower %>-search-modal">Search <%= catName %>s</a></div></div>
+                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categoryNewField, new_entry_path(categoryLower), remote: true, class: "btn-large delta-btn modal-trigger" %></div></div>
+                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categorySearchField, search_assign_path(categoryLower), remote: true, class:"btn-large delta-btn modal-trigger" %></div></div>
             </div>
-            <div id="<%= catLower%>-assign-selected" style="display:none;"></div>
+            <div id="<%= categoryLower%>-assign-selected" style="display:none;"></div>
         </div>
-
-        <div id="<%= catLower %>-search-modal" class="modal modal-fixed-footer">
-            <div class="modal-content">
-                <%= render 'search_form', search_type: catArr[1], search_id: cat, search_category: catName %>
-            </div>
-            <div class="modal-footer">
-              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-			</div>
-		</div>
 	<% end %>
 </div>
 
 <div id="entry-new-form" class="modal modal-fixed-footer">
-    <div class="modal-content">
-        <h4>Modal Header</h4>
-        <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-    </div>
 </div>
 
+<div id="assign-search-form" class="modal modal-fixed-footer">
+</div>
