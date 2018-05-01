@@ -4,7 +4,8 @@ var assign_key;
 $(document).on("turbolinks:load", () => {
 	$(".assign-title").on('click',function(){
 		$(this).toggle()
-		$(this).siblings().toggle();
+        var id = $(this).attr('id').split('-')[0];
+		$("#" + id + "-assign-new-or-search").toggle();
 	})
 
 });
