@@ -2,7 +2,7 @@
 //# All this logic will automatically be available in application.js.
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 //
-$(document).ready(function() {
+$(document).on("turbolinks:load", function() {
 	$('form').on('click', '.remove_fields', function(event) {
 		$(this).closest('.field').remove();
         var modalElement = document.querySelector('.modal');

@@ -1,7 +1,7 @@
 var assign_key;
 
 
-$(document).ready(() => {
+$(document).on("turbolinks:load", () => {
 	$(".assign-title").on('click',function(){
 		$(this).toggle()
 		$(this).siblings().toggle();

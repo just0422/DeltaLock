@@ -22,7 +22,7 @@
 
 const FADE_TIME = 200;
 
-$(document).ready(function(){
+$(document).on("turbolinks:load", function(){
     var selectElement = document.querySelector('select');
     M.FormSelect.init(selectElement);
 
