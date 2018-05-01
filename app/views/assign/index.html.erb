@@ -5,15 +5,15 @@
         <% categoryNewField = "New " + categoryName %>
         <% categorySearchField = "Search " + categoryName %>
 		<div class="assign-quad">
-			<div class="assign-title" id="<% categoryLower %>-assign-title">
+			<div class="assign-title" id="<%= categoryLower %>-assign-title">
 				<h3><%= categoryName %></h3>
 			</div>
-			<div class="assign-new-or-search" id="<% categoryLower %>-assign-new-or-search" style="display:none;">
+			<div class="assign-new-or-search" id="<%= categoryLower %>-assign-new-or-search" style="display:none;">
                 <!-- This should be a form -->
                 <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categoryNewField, new_entry_path(categoryLower), remote: true, class: "btn-large delta-btn modal-trigger" %></div></div>
                 <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categorySearchField, search_assign_path(categoryLower), remote: true, class:"btn-large delta-btn modal-trigger" %></div></div>
             </div>
-            <div id="<%= categoryLower%>-assign-selected" style="display:none;"></div>
+            <div id="<%= categoryLower %>-assign-selected" style="display:none;"></div>
         </div>
 	<% end %>
 </div>
