@@ -1,0 +1,13 @@
+$("#entry-new-form").html("<%= j (render 'assign/forms/new') %>");
+
+var modalElement = document.querySelector('#entry-new-form');
+var instance = M.Modal.init(modalElement, 
+    {
+        opacity: 0.9,
+        onCloseEnd: () => {
+            this.destroy();
+        }
+    }
+);
+
+instance.open();

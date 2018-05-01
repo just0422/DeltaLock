@@ -1,0 +1,27 @@
+<%= form_tag( create_assign_path(@type), method: :post, remote: true ) do |f| %>
+    <div class="modal-content">
+        <h3 class="center-align">New <%= @class.name.underscore.split.map(&:capitalize).join(' ') %></h3>
+        <% @class.column_names.each do |title| %>
+            <% if ColumnLabels.column?(title) %>
+                <% if title == "id" %>
+                    <% next %>
+                <% elsif title == "address" %>
+                    <div class="input-field">
+                        <textarea name="<%= title %>" class="materialize-textarea"></textarea>
+                        <label for="<%= title %>" class="active"><%=ColumnLabels.columnToLabel(title)%></label> 
+                    </div>
+                <% else %>
+                    <div class="input-field">
+                        <input name="<%= title %>"/>
+                        <label for="<%= title %>"><%=ColumnLabels.columnToLabel(title)%></label> 
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+    </div>
+    <div class="modal-footer">
+        <div class="card-action row edit-btn">
+            <%= submit_tag("Create", class:"btn col s12 delta-btn") %>
+        </div>
+    </div>
+<% end %>
