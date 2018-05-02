@@ -1,4 +1,4 @@
-$("#assign-search-form").html("<%= j (render 'search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")
+$("#assign-search-form").html("<%= j (render 'assign/forms/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")
 
 var modalElement = document.querySelector('#assign-search-form');
 var instance = M.Modal.init(modalElement, 

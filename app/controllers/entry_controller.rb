@@ -1,5 +1,5 @@
 class EntryController < ApplicationController
-	before_action :set_variables, only: [:show, :edit, :update, :new, :create]
+	before_action :set_variables, only: [:show, :edit, :update]
 
     def index
     end
