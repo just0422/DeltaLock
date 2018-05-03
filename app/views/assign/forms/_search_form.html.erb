@@ -1,7 +1,7 @@
 <div class="modal-content">
-    <%= search_form_for search_type, url: result_search_index_path, method: :post do |f| %>
+    <%= search_form_for search_type, url: result_assign_path, method: :post do |f| %>
         <%= f.condition_fields do |c| %>
-            <%= render "condition_fields", f: c %>
+            <%= render "assign/forms/condition_fields", f: c %>
         <% end %>
         <%= link_to_add_fields '<i class="fa fa-plus-square" aria-hidden="true"></i>', f, :condition %>
 
@@ -12,6 +12,6 @@
     <% end %>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+        <a href="#!" class="waves-effect waves-green btn-flat ">Agree</a>
     </div>
 </div>

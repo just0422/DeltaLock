@@ -1,0 +1,20 @@
+<div class="field row">
+	<div class="col s2">
+		<%= f.attribute_fields do |a| %>
+			<%= a.attribute_select %>
+		<% end %>
+	</div>
+	<div class="col s2">
+		<%= f.predicate_select compounds: false %>
+	</div>
+	<div class="col s7">
+		<%= f.value_fields do |v| %>
+			<%= v.text_field :value %>
+		<% end %>
+	</div>
+	<div class="col s1 valign-wrapper">
+		<a class="remove_fields btn red" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+		<%# link_to "remove", '#', class: "remove_fields" %>
+	</div>
+</div>
