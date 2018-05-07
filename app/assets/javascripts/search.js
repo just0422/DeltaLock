@@ -17,6 +17,11 @@ $(document).on("turbolinks:load", function() {
 
         //var modalElement = document.querySelector('.modal');
         //M.Modal.init(modalElement, {opacity: 0.9});
+        var selectElements = document.querySelectorAll('select');
+        for (var i = 0; i < selectElements.length; i++){
+            M.FormSelect.init(selectElements[i]);
+        }
+
 		return event.preventDefault();
 	});
 
@@ -26,5 +31,10 @@ $(document).on("turbolinks:load", function() {
 
     var searchTabs = document.querySelector('.tabs');
     M.Tabs.init(searchTabs, {});
+
+    var selectElements = document.querySelectorAll('select');
+    for (var i = 0; i < selectElements.length; i++){
+        M.FormSelect.init(selectElements[i]);
+    }
 });
 
