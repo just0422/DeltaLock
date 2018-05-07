@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   resources :key
   resources :end_user 
   resources :search do
-	  collection { post :result, to: 'search#index' }
+	  collection { post :result, to: 'search#items' }
   end
   resources :purchaser
   resources :purchase_order

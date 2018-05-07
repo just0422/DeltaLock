@@ -28,7 +28,8 @@ $(document).on("turbolinks:load", function() {
 	$(".search-row").click(function() {
 		window.location = $(this).data("href");
 	});
-
+    
+    console.log("here");
     var searchTabs = document.querySelector('.tabs');
     M.Tabs.init(searchTabs, {});
 

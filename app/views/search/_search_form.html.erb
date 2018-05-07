@@ -1,4 +1,4 @@
-<%= search_form_for search_type, url: result_search_index_path, method: :post do |f| %>
+<%= search_form_for search_type, url: result_search_index_path, remote:true, method: :post do |f| %>
 	<%= f.condition_fields do |c| %>
 		<%= render "condition_fields", f: c %>
 	<% end %>
@@ -7,7 +7,9 @@
     <div class="row" style="margin-top:2em">
         <h5 class="col s1">Sort:</h5>
 		<%= f.sort_fields do |s| %>
-				<%= s.sort_select Hash.new, class:"col s5" %>
+            <div class="col s7">
+    		    <%= s.sort_select Hash.new %>
+            </div>
 		<% end %>
 	</div>
 	<div class="row">

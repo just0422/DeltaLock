@@ -20,47 +20,57 @@ class SearchController < ApplicationController
 		@info_view = "/shared/info/" + params[:category] + "info"
 	end
 
-	def index
-		if params[:search_type] == "purchase_order_search"
-			session[:purchase_order_search] = params[:q]
-		end
-		@purchase_order_search = PurchaseOrder.search(params[:q])
+    def index
+        @purchase_order_search = PurchaseOrder.search
 		@purchase_orders_list = @purchase_order_search.result
-		@purchase_order_search.build_condition if @purchase_order_search.conditions.empty?
-		@purchase_order_search.build_sort if @purchase_order_search.sorts.empty?
 
-		if params[:search_type] == "keycodes_search"
-			session[:keycodes_search] = params[:q]
-		end
-		@keycodes_search = Key.search(params[:q])
+		@keycodes_search = Key.search
 		@keycodes_list = @keycodes_search.result
-		@keycodes_search.build_condition if @keycodes_search.conditions.empty?
-		@keycodes_search.build_sort if @keycodes_search.sorts.empty?
 
-		if params[:search_type] == "end_user_search"
-			session[:end_user_search] = params[:q]
-		end
-		@end_users_search = EndUser.search(params[:q])
+		@end_users_search = EndUser.search
 		@end_users_list = @end_users_search.result
-		@end_users_search.build_condition if @end_users_search.conditions.empty?
-		@end_users_search.build_sort if @end_users_search.sorts.empty?
 
-		if params[:search_type] == "purchaser_search"
-			session[:purchaser_search] = params[:q]
-		end
-		@purchasers_search = Purchaser.search(params[:q])
+		@purchasers_search = Purchaser.search
 		@purchasers_list = @purchasers_search.result
-		@purchasers_search.build_condition if @purchasers_search.conditions.empty?
-		@purchasers_search.build_sort if @purchasers_search.sorts.empty?
 
-		if params[:search_type] == "assignment_search"
-			session[:assignment_search] = params[:q]
-		end
-		@assignments_search = Relationship.search(params[:q])
+		@assignments_search = Relationship.search
 		@assignments_list = @assignments_search.result
-		@assignments_search.build_condition if @assignments_search.conditions.empty?
-		@assignments_search.build_sort if @assignments_search.sorts.empty?
     end
+
+	def items 
+        case params[:search_type]
+        when "purchase_order_search"
+            @class = PurchaseOrder
+            @css_class = "purchaseorders"
+            @name = "Purchase Orders"
+        when "keycodes_search"
+            @class = Key
+            @css_class = "keycodes"
+            @name = "Key Codes"
+        when "end_user_search"
+            @class = EndUser
+            @css_class = "endusers"
+            @name = "End Users"
+        when "purchaser_search"
+            @class = Purchaser
+            @css_class = "purchasers"
+            @name = "Purchaser"
+        when "assignment_search"
+            @class = Relationship
+            @css_class = "assignments"
+            @name = "Assignments"
+        end
+        
+        @search = @class.search(params[:q])
+        @list = @search.result
+        @search.build_condition if @search.conditions.empty?
+        @search.build_sort if @search.sorts.empty?
+
+        respond_to do |format|
+            format.js
+        end
+    end
+
 	def export
 		@class = ""
 		@list = {}

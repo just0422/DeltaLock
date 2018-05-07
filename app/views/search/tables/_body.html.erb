@@ -5,10 +5,6 @@
 	<% else %>
 		style="display:none;">
 	<% end %>
-	<% if column == "line1" %>
-		<%= build_address_string(entry) %>
-	<% else %>
-		<%= entry[column] %>
-	<% end %>
+	<%= entry[column] %>
 	</td>
 <% end %>

@@ -1,0 +1,19 @@
+<% if @list.length > 0 %>
+    <h1 class="search-table-header"><%= @name %></h1>
+    <table class="table bordered centered responsive-table">
+        <thead class="thead-inverse">
+            <tr>
+                <% @class.column_names.each do |title| %>
+					<%= render '/search/tables/header', title:title %>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <% @list.each do |entry| %>
+				<tr class="search-row" data-href="<%= show_entry_path(@css_class, entry["id"]) %>">
+					<%= render '/search/tables/body', entryClass: @class, entry: entry, classString: @css_class %>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>
