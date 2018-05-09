@@ -1,5 +1,5 @@
 class AssignController < ApplicationController
-	before_action :set_variables, only: [:create, :new]
+	before_action :set_variables, only: [:create, :new, :search]
 	respond_to :html, :js
 
 	def index
@@ -12,25 +12,6 @@ class AssignController < ApplicationController
         @categories['key'] = Key
 	end
     
-    def search
-        @category = params[:type]
-
-        case params[:type]
-        when 'purchaser'
-            @categoryName = "Purchaser"
-            @categorySearch = Purchaser.search
-        when 'enduser'
-            @categoryName = "EndUser"
-            @categorySearch = EndUser.search
-        when 'purchaserorder'
-            @categoryName = "PurchaseOrder"
-            @categorySearch = PurchaseOrder.search
-        when 'key'
-            @categoryName = "Key"
-            @categorySearch = Key.search
-        end
-    end
-
     def new
         @entry = @class.new
     end
@@ -50,6 +31,28 @@ class AssignController < ApplicationController
         when "purchaseorder"
             @entry = PurchaseOrder.create(purchaseorder_parameters)
         end
+    end
+
+    def search
+        @category = params[:type]
+
+        case params[:type]
+        when 'purchaser'
+            @categoryName = "Purchaser"
+            @categorySearch = Purchaser.search
+        when 'enduser'
+            @categoryName = "EndUser"
+            @categorySearch = EndUser.search
+        when 'purchaserorder'
+            @categoryName = "PurchaseOrder"
+            @categorySearch = PurchaseOrder.search
+        when 'key'
+            @categoryName = "Key"
+            @categorySearch = Key.search
+        end
+    end
+
+    def result
     end
 
     private

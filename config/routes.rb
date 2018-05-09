@@ -26,11 +26,11 @@ Rails.application.routes.draw do
   get '/edit/:type/:id', to: 'entry#edit', as: 'edit_entry'
   get '/assign/new/:type', to: 'assign#new', as: 'new_assign'
   get '/assign/search/:type', to: 'assign#search', as: 'search_assign'
-  get '/assign/result/:type', to: 'assign#result', as: 'result_assign'
   
   post '/search/export/:search_type' => 'search#export', as: 'export'
   post '/update/:type/:id', to: 'entry#update', as: 'update_entry'
   post '/assign/create/:type', to: 'assign#create', as: 'create_assign'
+  post '/assign/result/:type', to: 'assign#result', as: 'result_assign'
   post 'login' => 'sessions#create'
 
   delete 'logout' => 'sessions#destroy'

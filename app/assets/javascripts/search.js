@@ -9,7 +9,8 @@ $(document).on("turbolinks:load", function() {
         //M.Modal.init(modalElement, {opacity: 0.9});
 		return event.preventDefault();
 	});
-	$('form').on('click', '.add_fields', function(event) {
+    $(".add_fields").click(function(event){
+	//$('form').on('click', '.add_fields', function(event) {
 		var regexp, time;
 		time = new Date().getTime();
 		regexp = new RegExp($(this).data('id'), 'g');
@@ -29,7 +30,6 @@ $(document).on("turbolinks:load", function() {
 		window.location = $(this).data("href");
 	});
     
-    console.log("here");
     var searchTabs = document.querySelector('.tabs');
     M.Tabs.init(searchTabs, {});
 

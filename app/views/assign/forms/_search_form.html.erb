@@ -1,5 +1,6 @@
 <div class="modal-content">
-    <%= search_form_for search_type, url: result_assign_path, method: :post do |f| %>
+    <h3 class="center-align"><%= @class.name.underscore.split.map(&:capitalize).join(' ') %> Search</h3>
+    <%= search_form_for search_type, url: result_assign_path, remote: true, method: :post do |f| %>
         <%= f.condition_fields do |c| %>
             <%= render "assign/forms/condition_fields", f: c %>
         <% end %>
