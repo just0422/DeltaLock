@@ -53,6 +53,31 @@ class AssignController < ApplicationController
     end
 
     def result
+        case params[:search_type]
+        when "purchase_order"
+            @class = PurchaseOrder
+            @css_class = "purchaseorders"
+            @name = "Purchase Orders"
+        when "keycodes"
+            @class = Key
+            @css_class = "keycodes"
+            @name = "Key Codes"
+        when "end_user"
+            @class = EndUser
+            @css_class = "endusers"
+            @name = "End Users"
+        when "purchaser"
+            @class = Purchaser
+            @css_class = "purchasers"
+            @name = "Purchaser"
+        end
+        
+        @search = @class.search(params[:q])
+        @list = @search.result
+
+        respond_to do |format|
+            format.js
+        end
     end
 
     private
