@@ -15,6 +15,18 @@ $(document).on("turbolinks:load", () => {
 	})
 });
 
+function check_assign_ready(){
+    var count = 0;
+    
+    for (param in assign_params)
+        if (assign_params[param] != "")
+            count++;
+
+    if (count > 1){
+        $("#assign-button").show();
+    }
+}
+
 function create_list_and_table(id){
 	$('<div id="' + id + '-searchbar-list" style="display:none;"></div>').insertAfter($("#assign-" + id));
 	$('<div id="' + id + '-table" style="display:none;"></div>').insertAfter($("#" + id + "-searchbar-list"));

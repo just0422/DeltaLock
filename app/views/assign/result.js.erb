@@ -4,7 +4,8 @@ $(".assign-row").click(function(){
     $(this).addClass("assign-row-active").siblings().removeClass("assign-row-active");
     //assign_params["<%= @css_class %>"] = $("#<%= @css_class %>-id").; 
     assign_params["<%= @css_class %>"] = parseInt($(this).find(".<%= @css_class %>-id").html());
-    
+    check_assign_ready();
+
     var elementValue;
     <% @class.column_names.each do |title| %>
 		<% if ColumnLabels.column?(title) %>
@@ -27,3 +28,4 @@ $(".assign-row").click(function(){
     $("#<%= @css_class %>-assign-new-or-search").hide();
     $("#<%= @css_class %>-assign-selected").show();
 });
+
