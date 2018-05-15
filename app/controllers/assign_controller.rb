@@ -77,6 +77,12 @@ class AssignController < ApplicationController
         end
     end
 
+    def assignment
+        respond_to do |format|
+            format.js
+        end
+    end
+
     private
 	def set_variables
 		case params[:type]

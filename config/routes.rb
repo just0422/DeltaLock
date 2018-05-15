@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   post '/update/:type/:id', to: 'entry#update', as: 'update_entry'
   post '/assign/create/:type', to: 'assign#create', as: 'create_assign'
   post '/assign/result/:type', to: 'assign#result', as: 'result_assign'
+  post '/assign/assignment', to: 'assign#assignment'
+
   post 'login' => 'sessions#create'
 
   delete 'logout' => 'sessions#destroy'

@@ -27,6 +27,17 @@ function check_assign_ready(){
     }
 }
 
+function create_assignment(){
+    $.ajax({
+        url: "/assign/assignment",
+        method: 'post',
+        data: assign_params,
+        success: function(response){
+            console.log("Did it!");
+        }
+    });
+}
+
 function create_list_and_table(id){
 	$('<div id="' + id + '-searchbar-list" style="display:none;"></div>').insertAfter($("#assign-" + id));
 	$('<div id="' + id + '-table" style="display:none;"></div>').insertAfter($("#" + id + "-searchbar-list"));

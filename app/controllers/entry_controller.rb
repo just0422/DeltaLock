@@ -70,37 +70,37 @@ class EntryController < ApplicationController
 	def get_associated_items(type, id)
 		associations = Array.new
 		
-		type += "_id"
+		type += "s"
 		list = Relationship.where({ type.to_s => 1 })
 
 		list.each do |assignment|
 			association = Hash.new
 
-			key_entry = assignment[:key_id].blank? ? nil : Key.find(assignment[:key_id])
+			key_entry = assignment[:keys].blank? ? nil : Key.find(assignment[:keys])
 			key = {
 				"name" => key_entry ? key_entry[:system_name] : "",
-				"id" => key_entry ? assignment[:key_id] : "",
+				"id" => key_entry ? assignment[:keys] : "",
 			}
 			association["key"] = key
 
-			enduser_entry = assignment[:enduser_id].blank? ? nil : EndUser.find(assignment[:enduser_id])
+			enduser_entry = assignment[:endusers].blank? ? nil : EndUser.find(assignment[:endusers])
 			enduser = { 
 				"name" => enduser_entry ? enduser_entry[:name] : "",
-				"id" => enduser_entry ? assignment[:enduser_id] : ""
+				"id" => enduser_entry ? assignment[:endusers] : ""
 			}
 			association["enduser"] = enduser
 
-			purchaser_entry = assignment[:purchaser_id].blank? ? nil : Purchaser.find(assignment[:purchaser_id])
+			purchaser_entry = assignment[:purchasers].blank? ? nil : Purchaser.find(assignment[:purchasers])
 			purchaser = { 
 				"name" => purchaser_entry ? purchaser_entry[:name] : "",
-				"id" => purchaser_entry ? assignment[:purchaser_id] : ""
+				"id" => purchaser_entry ? assignment[:purchasers] : ""
 			}
 			association["purchaser"] = purchaser
 
-			purchaseorder_entry = assignment[:purchaseorder_id].blank? ? nil : PurchaseOrder.find(assignment[:purchaseorder_id])
+			purchaseorder_entry = assignment[:purchaseorders].blank? ? nil : PurchaseOrder.find(assignment[:purchaseorders])
 			purchaseorder = { 
 				"name" => purchaseorder_entry ? purchaseorder_entry[:so_number] : "",
-				"id" => purchaseorder_entry ? assignment[:purchaseorder_id] : ""
+				"id" => purchaseorder_entry ? assignment[:purchaseorders] : ""
 			}
 			association["purchaseorder"] = purchaseorder
 

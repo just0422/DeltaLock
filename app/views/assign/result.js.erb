@@ -5,7 +5,8 @@ $(".assign-row").click(function(){
     //assign_params["<%= @css_class %>"] = $("#<%= @css_class %>-id").; 
     assign_params["<%= @css_class %>"] = parseInt($(this).find(".<%= @css_class %>-id").html());
     check_assign_ready();
-
+    
+    $("#<%= @css_class %>-assign-selected").html("");
     var elementValue;
     <% @class.column_names.each do |title| %>
 		<% if ColumnLabels.column?(title) %>
