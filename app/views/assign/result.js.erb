@@ -3,7 +3,7 @@ $("#assign-search-form").html("<%= j ( render 'assign/result_table' ) %>");
 $(".assign-row").click(function(){
     $(this).addClass("assign-row-active").siblings().removeClass("assign-row-active");
     //assign_params["<%= @css_class %>"] = $("#<%= @css_class %>-id").; 
-    assign_params["<%= @css_class %>"] = parseInt($(this).find(".<%= @css_class %>-id").html());
+    $("input[name=<%= @css_class %>]").val(parseInt($(this).find(".<%= @css_class %>-id").html()));
     check_assign_ready();
     
     $("#<%= @css_class %>-assign-selected").html("");

@@ -78,6 +78,8 @@ class AssignController < ApplicationController
     end
 
     def assignment
+        Relationship.create(assignment_parameters)
+
         respond_to do |format|
             format.js
         end
@@ -114,4 +116,8 @@ class AssignController < ApplicationController
 	def key_parameters
 		params.permit(:keyway, :master_key, :control_key, :operating_key, :bitting, :system_name, :comments)
 	end
+
+    def assignment_parameters
+        params.permit(:purchase_orders, :purchasers, :endusers, :keys)
+    end
 end

@@ -1,12 +1,5 @@
 var assign_key;
 
-var assign_params = {
-    "purchasers" : "",
-    "purchaseorders": "",
-    "endusers" : "",
-    "keys" : ""
-}
-
 $(document).on("turbolinks:load", () => {
 	$(".assign-title").click(function(){
 		$(this).toggle()
@@ -17,26 +10,20 @@ $(document).on("turbolinks:load", () => {
 
 function check_assign_ready(){
     var count = 0;
+    var assign_params = ["purchaseorders", "purchasers", "endusers", "keys"];
     
-    for (param in assign_params)
-        if (assign_params[param] != "")
+    for (var i = 0; i < assign_params.length; i++){
+        console.log(assign_params[i]);
+        console.log($("input[name=" + assign_params[i] + "]").val() != "");
+        if ($("input[name=" + assign_params[i] + "]").val() != "")
             count++;
+    }
 
     if (count > 1){
         $("#assign-button").show();
     }
 }
 
-function create_assignment(){
-    $.ajax({
-        url: "/assign/assignment",
-        method: 'post',
-        data: assign_params,
-        success: function(response){
-            console.log("Did it!");
-        }
-    });
-}
 
 function create_list_and_table(id){
 	$('<div id="' + id + '-searchbar-list" style="display:none;"></div>').insertAfter($("#assign-" + id));

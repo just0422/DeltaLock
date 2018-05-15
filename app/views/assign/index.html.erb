@@ -16,9 +16,15 @@
             <ul id="<%= categoryLower %>-assign-selected" style="display:none;"></ul>
         </div>
 	<% end %>
-
-    <button id="assign-button" class="btn-large delta-btn" onclick="create_assignment()">ASSIGN</button>
+    <form action="/assign/assignment" method="POST">
+        <input type="hidden" name="purchaseorders">
+        <input type="hidden" name="purchasers">
+        <input type="hidden" name="endusers">
+        <input type="hidden" name="keys">
+        <input type="submit" id="assign-button" class="btn-large delta-btn" onclick="create_assignment()" value="ASSIGN" />
+    </form>
 </div>
+
 
 <div id="entry-new-form" class="modal modal-fixed-footer">
 </div>
