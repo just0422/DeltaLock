@@ -1,6 +1,6 @@
 <div class="modal-content">
     <% if @list.length > 0 %>
-        <h1 class="search-table-header"><%= @name %></h1>
+        <h1 class="assign-table-header"><%= @name %></h1>
         <table class="table bordered centered responsive-table">
             <thead class="thead-inverse">
                 <tr>
@@ -15,7 +15,7 @@
             </thead>
             <tbody>
                 <% @list.each do |entry| %>
-                    <tr class="search-row">
+                    <tr class="assign-row">
                         <% @class.column_names.each do |column| %>
                             <td class="<%= @css_class + "-" + column %>"
                             <% if ColumnLabels.column?(column) %>

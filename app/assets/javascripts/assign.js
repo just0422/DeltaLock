@@ -1,13 +1,18 @@
 var assign_key;
 
+var assign_params = {
+    "purchaser" : "",
+    "purchaseorder": "",
+    "enduser" : "",
+    "key" : ""
+}
 
 $(document).on("turbolinks:load", () => {
-	$(".assign-title").on('click',function(){
+	$(".assign-title").click(function(){
 		$(this).toggle()
         var id = $(this).attr('id').split('-')[0];
 		$("#" + id + "-assign-new-or-search").toggle();
 	})
-
 });
 
 function create_list_and_table(id){

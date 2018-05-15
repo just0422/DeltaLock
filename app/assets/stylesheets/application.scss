@@ -78,15 +78,3 @@ body{
 .table th {
 	background-color: #f2f2f2;
 }
-
-
-.search-row:hover{
-	cursor: pointer;
-	background-color: rgba(9, 86, 165, 0.3);
-}
-.search-row:active{
-	cursor: pointer;
-	color: white;
-	background-color: rgb(9, 86, 165);
-}
-

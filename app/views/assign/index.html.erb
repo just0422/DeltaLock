@@ -1,7 +1,7 @@
 <div id="assign-container">
     <% @categories.each do |category, categoryClass| %>
         <% categoryName = categoryClass.name.underscore.humanize.split.map(&:capitalize).join(' ') %>
-        <% categoryLower = categoryClass.name.downcase %>
+        <% categoryLower = categoryClass.name.downcase + 's' %>
         <% categoryNewField = "New " + categoryName %>
         <% categorySearchField = "Search " + categoryName %>
 		<div class="assign-quad">
@@ -13,7 +13,7 @@
                 <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categoryNewField, new_assign_path(categoryLower), remote: true, class: "btn-large delta-btn modal-trigger" %></div></div>
                 <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categorySearchField, search_assign_path(categoryLower), remote: true, class:"btn-large delta-btn modal-trigger" %></div></div>
             </div>
-            <div id="<%= categoryLower %>-assign-selected" style="display:none;"></div>
+            <ul id="<%= categoryLower %>-assign-selected" style="display:none;"></ul>
         </div>
 	<% end %>
 </div>

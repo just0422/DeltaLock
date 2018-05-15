@@ -44,3 +44,13 @@
     display: table-cell;
     vertical-align: middle;
 }
+
+.assign-row:hover{
+	cursor: pointer;
+	background-color: rgba(9, 86, 165, 0.3);
+}
+.assign-row-active{    
+	cursor: pointer;
+	color: white;
+	background-color: rgb(9, 86, 165);
+}

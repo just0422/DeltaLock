@@ -37,16 +37,16 @@ class AssignController < ApplicationController
         @category = params[:type]
 
         case params[:type]
-        when 'purchaser'
+        when 'purchasers'
             @categoryName = "Purchaser"
             @categorySearch = Purchaser.search
-        when 'enduser'
+        when 'endusers'
             @categoryName = "EndUser"
             @categorySearch = EndUser.search
-        when 'purchaserorder'
+        when 'purchaserorders'
             @categoryName = "PurchaseOrder"
             @categorySearch = PurchaseOrder.search
-        when 'key'
+        when 'keys'
             @categoryName = "Key"
             @categorySearch = Key.search
         end
@@ -54,24 +54,21 @@ class AssignController < ApplicationController
 
     def result
         case params[:search_type]
-        when "purchase_order"
+        when "purchaseorders"
             @class = PurchaseOrder
-            @css_class = "purchaseorders"
             @name = "Purchase Orders"
         when "keycodes"
             @class = Key
-            @css_class = "keycodes"
             @name = "Key Codes"
-        when "end_user"
+        when "endusers"
             @class = EndUser
-            @css_class = "endusers"
             @name = "End Users"
-        when "purchaser"
+        when "purchasers"
             @class = Purchaser
-            @css_class = "purchasers"
-            @name = "Purchaser"
+            @name = "Purchasers"
         end
         
+        @css_class = params[:search_type]
         @search = @class.search(params[:q])
         @list = @search.result
 
@@ -83,13 +80,13 @@ class AssignController < ApplicationController
     private
 	def set_variables
 		case params[:type]
-		when "key"
+		when "keys"
 			@class = Key
-		when "enduser"
+		when "endusers"
 			@class = EndUser
-		when "purchaser"
+		when "purchasers"
 			@class = Purchaser
-		when "purchaseorder"
+		when "purchaseorders"
 			@class = PurchaseOrder
 		end
 		@id = params[:id]
