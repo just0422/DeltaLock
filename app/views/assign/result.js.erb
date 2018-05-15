@@ -12,7 +12,7 @@ $(".assign-row").click(function(){
             elementValue = $.trim($(this).find(".<%= @css_class %>-<%= title %>").html());
             // Add it to the list
             $("#<%= @css_class %>-assign-selected").append(
-			    '<li class="delta-collection-item">' +
+			    '<li>' +
 				    '<div class="<%= @css_class %>-label">' +
 					    '<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>' +
 					    '<span class="<%= @css_class %>-<%= title %>">' +
