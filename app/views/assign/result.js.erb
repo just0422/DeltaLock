@@ -23,4 +23,7 @@ $(".assign-row").click(function(){
             );
 		<% end %>
 	<% end %>
+
+    $("#<%= @css_class %>-assign-new-or-search").hide();
+    $("#<%= @css_class %>-assign-selected").show();
 });
