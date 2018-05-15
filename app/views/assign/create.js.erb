@@ -1,4 +1,9 @@
 $("#<%= @type %>-assign-selected").html("<%= j (render 'assign/info/list') %>");
 
-$("#<%= @type %>-assign-selected").toggle();
-$("#<%= @type %>-assign-new-or-search").toggle();
+$("#<%= @type %>-assign-new-or-search").hide();
+$("#<%= @type %>-assign-selected").show();
+
+assign_params["<%= @type %>"] = <%= @entry["id"] %>;
+var element = document.querySelector("#entry-new-form");
+var instance = M.Modal.getInstance(element);
+instance.close();

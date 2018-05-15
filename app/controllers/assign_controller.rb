@@ -18,17 +18,17 @@ class AssignController < ApplicationController
 
     def create
         case params[:type]
-        when "key"
+        when "keys"
             @entry = Key.create(key_parameters)
-        when "enduser"
+        when "endusers"
             geo = EndUser.geocode(params[:address])
             params[:lat] = geo.lat
             params[:lng] = geo.lng
 
             @entry = EndUser.create(enduser_parameters)
-        when "purchaser"
+        when "purchasers"
             @entry = Purchaser.create(purchaser_parameters)
-        when "purchaseorder"
+        when "purchaseorders"
             @entry = PurchaseOrder.create(purchaseorder_parameters)
         end
     end

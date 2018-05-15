@@ -1,10 +1,10 @@
 var assign_key;
 
 var assign_params = {
-    "purchaser" : "",
-    "purchaseorder": "",
-    "enduser" : "",
-    "key" : ""
+    "purchasers" : "",
+    "purchaseorders": "",
+    "endusers" : "",
+    "keys" : ""
 }
 
 $(document).on("turbolinks:load", () => {

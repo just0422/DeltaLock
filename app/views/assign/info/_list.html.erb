@@ -1,12 +1,10 @@
-<ul>
-	<% @class.column_names.each do |title| %>
-		<% if ColumnLabels.column?(title) %>
-			<li class="delta-collection-item">
-				<div class="<%= @type %>-label">
-					<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
-					<span class="<%= @type %>-<%= title %>"><%= @entry[title] %></span>
-				</div>
-			</li>
-		<% end %>
-	<% end %>
-</ul>
+<% @class.column_names.each do |title| %>
+    <% if ColumnLabels.column?(title) %>
+        <li class="delta-collection-item">
+            <div class="<%= @type %>-label">
+                <strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
+                <span class="<%= @type %>-<%= title %>"><%= @entry[title] %></span>
+            </div>
+        </li>
+    <% end %>
+<% end %>
