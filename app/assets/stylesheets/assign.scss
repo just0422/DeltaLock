@@ -65,3 +65,33 @@
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
 }
+
+
+.assign-table-cell{
+	padding: 0;
+}
+.assign-edit-link,
+.assign-delete-link{
+	width: 100%;
+	height: 100%;
+	color: black;
+	padding: 15px 5px;
+}
+.assign-edit-link:hover{
+	background-color: rgba(9, 86, 165, 0.3);
+}
+.assign-edit-link:active{
+	color:white;
+	background-color: rgb(9, 86, 165);
+}
+.assign-delete-link:hover{
+	background-color: rgba(9, 86, 165, 0.3);
+}
+.assign-delete-link:active{
+	color:white;
+	background-color: rgb(9, 86, 165);
+}
+.assign-table-empty{
+	padding: 15px 5px;
+	background-color: rgba(0,0,0, 0.1);
+}

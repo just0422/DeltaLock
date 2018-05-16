@@ -88,7 +88,11 @@ class AssignController < ApplicationController
         list = Relationship.all
 
         list.each do |assignment|
-            @assignments.push(assign_parts(assignment))
+            assigned_parts = Hash.new
+            assigned_parts[:data] = assign_parts(assignment)
+            assigned_parts[:id] = assignment[:id]
+            @assignments.push(assigned_parts)
+            
         end
     end
 
