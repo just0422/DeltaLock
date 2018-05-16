@@ -1,5 +1,5 @@
 class EntryController < ApplicationController
-	before_action :set_variables, only: [:show, :edit, :update]
+	before_action :set_variables, only: [:show, :edit, :update, :delete]
 
     def index
     end
@@ -10,10 +10,10 @@ class EntryController < ApplicationController
 		@associations = get_associated_items(params[:type], params[:id])
 
 		@column_names = {
-			"key" => "Key",
-			"enduser" => "End User",
-			"purchaser" => "Purchaser",
-			"purchaseorder" => "Purchase Order"
+			"keys" => "Key",
+			"endusers" => "End User",
+			"purchasers" => "Purchaser",
+			"purchaseorders" => "Purchase Order"
 		}
 	end
 
@@ -25,13 +25,13 @@ class EntryController < ApplicationController
         @entry = @class.find(params[:id])
 
 		case params[:type]
-		when "key"
+		when "keys"
 			@entry.update_attributes(key_parameters)
-		when "enduser"
+		when "endusers"
 			@entry.update_attributes(enduser_parameters)
-		when "purchaser"
+		when "purchasers"
 			@entry.update_attributes(purchaser_parameters)
-		when "purchaseorder"
+		when "purchaseorders"
 			@entry.update_attributes(purchaseorder_parameters)
 		end
 	end
@@ -42,26 +42,49 @@ class EntryController < ApplicationController
 
     def create
         case params[:type]
-        when "key"
+        when "keys"
             @entry = Key.create(key_parameters)
-        when "enduser"
+        when "endusers"
             geo = EndUser.geocode(params[:address])
             params[:lat] = geo.lat
             params[:lng] = geo.lng
 
             @entry = EndUser.create(enduser_parameters)
-        when "purchaser"
+        when "purchasers"
             @entry = Purchaser.create(purchaser_parameters)
-        when "purchaseorder"
+        when "purchaseorders"
             @entry = PurchaseOrder.create(purchaseorder_parameters)
         end
+    end
+
+    def delete
+        ignore_columns = ["id", "created_at", "updated_at"]
+		list = Relationship.where({ @type.to_s => @id })
+
+		list.each do |assignment|
+            assignment[type] = nil
+
+            count = 0
+            Relationship.column_names.each do |column|
+                if assignment[column] != nil and not ignore_columns.include?(column)
+                    count += 1
+                end
+            end
+            
+            if count <= 1
+                assignment.destroy
+            else
+                assignment.save
+            end
+        end
+
+        @class.destroy(@id)
     end
 
 	private
 	def get_associated_items(type, id)
 		associations = Array.new
 		
-		type += "s"
 		list = Relationship.where({ type.to_s => id })
 
 		list.each do |assignment|
@@ -103,13 +126,13 @@ class EntryController < ApplicationController
 
 	def set_variables
 		case params[:type]
-		when "key"
+		when "keys"
 			@class = Key
-		when "enduser"
+		when "endusers"
 			@class = EndUser
-		when "purchaser"
+		when "purchasers"
 			@class = Purchaser
-		when "purchaseorder"
+		when "purchaseorders"
 			@class = PurchaseOrder
 		end
 		@id = params[:id]

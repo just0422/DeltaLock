@@ -1,4 +1,5 @@
 <%= render 'entry/info/list' %>
 <div class="card-action row edit-btn">
-	<%= link_to "Edit", edit_entry_path(@type, @id), remote: true, class:"btn col s12 delta-btn" %>
+	<%= link_to "Edit", edit_entry_path(@type, @id), remote: true, class:"btn col s6 delta-btn" %>
+	<%= link_to "Delete", delete_entry_path(@type, @id), method: :delete, class:"btn col s6 red" %>
 </div>

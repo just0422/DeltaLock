@@ -6,10 +6,10 @@ class AssignController < ApplicationController
 		@categories = [ Purchaser, EndUser, PurchaseOrder, Key ]
 
 		@categories = Hash.new
-        @categories['purchaser'] = Purchaser
-        @categories['enduser'] = EndUser
-        @categories['purchaseorder'] = PurchaseOrder
-        @categories['key'] = Key
+        @categories['purchasers'] = Purchaser
+        @categories['endusers'] = EndUser
+        @categories['purchaseorders'] = PurchaseOrder
+        @categories['keys'] = Key
 	end
     
     def new
@@ -83,28 +83,28 @@ class AssignController < ApplicationController
         @assignment_parts = Hash.new
 
 		key_entry = params[:keys].blank? ? nil : Key.find(params[:keys])
-        @assignment_parts["key"] = {
+        @assignment_parts["keys"] = {
             "title" => "Key",
             "name" => key_entry ? key_entry[:system_name] : "",
             "id" => key_entry ? params[:keys] : ""
         }
 
 		enduser_entry = params[:endusers].blank? ? nil : EndUser.find(params[:endusers])
-        @assignment_parts["enduser"] = {
+        @assignment_parts["endusers"] = {
             "title" => "End User",
             "name" => enduser_entry ? enduser_entry[:name] : "",
             "id" => enduser_entry ? params[:endusers] : ""
         }
 
 		purchaser_entry = params[:purchasers].blank? ? nil : Purchaser.find(params[:purchasers])
-        @assignment_parts["purchaser"] = {
+        @assignment_parts["purchasers"] = {
             "title" => "Purchaser",
             "name" => purchaser_entry ? purchaser_entry[:name] : "",
             "id" => purchaser_entry ? params[:purchasers] : ""
         }
 
 		purchaseorder_entry = params[:purchaseorders].blank? ? nil : PurchaseOrder.find(params[:purchaseorders])
-        @assignment_parts["purchaseorder"] = {
+        @assignment_parts["purchaseorders"] = {
             "title" => "Purchase Order",
             "name" => purchaseorder_entry ? purchaseorder_entry[:so_number] : "",
             "id" => purchaseorder_entry ? params[:purchaseorders] : ""

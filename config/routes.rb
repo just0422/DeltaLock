@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
 
   delete 'logout' => 'sessions#destroy'
+  delete '/delete/:type/:id', to: 'entry#delete', as: 'delete_entry'
 
   resources :all
   resources :key

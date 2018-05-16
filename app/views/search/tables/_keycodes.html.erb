@@ -10,8 +10,8 @@
         </thead>
         <tbody>
             <% @keycodes_list.each do |entry| %>
-                <tr class="search-row" data-href="<%= show_entry_path("key", entry["id"]) %>">
-					<%= render '/search/tables/body', entryClass: Key, entry: entry, classString: "key"  %>
+                <tr class="search-row" data-href="<%= show_entry_path("keys", entry["id"]) %>">
+					<%= render '/search/tables/body', entryClass: Key, entry: entry, classString: "keys"  %>
                 </tr>
             <% end %>
         </tbody>

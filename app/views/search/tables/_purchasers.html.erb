@@ -10,8 +10,8 @@
         </thead>
         <tbody>
             <% @purchasers_list.each do |entry| %>
-				<tr class="search-row" data-href="<%= show_entry_path("purchaser", entry["id"]) %>">
-					<%= render '/search/tables/body', entryClass: Purchaser, entry: entry, classString: "purchaser"  %>
+				<tr class="search-row" data-href="<%= show_entry_path("purchasers", entry["id"]) %>">
+					<%= render '/search/tables/body', entryClass: Purchaser, entry: entry, classString: "purchasers"  %>
                 </tr>
             <% end %>
         </tbody>
