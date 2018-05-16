@@ -96,6 +96,12 @@ class AssignController < ApplicationController
         end
     end
 
+    def delete
+        Relationship.delete(params[:id])
+
+        redirect_to "/assign/manage"
+    end
+
     private
 	def set_variables
 		case params[:type]
