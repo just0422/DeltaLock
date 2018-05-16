@@ -16,7 +16,8 @@
 	height: 50%;
 	float: left;
 	border: 1px solid black;
-	text-align:center
+	text-align:center;
+    overflow: hidden;
 }
 .assign-title:hover{
 	background-color: rgba(9, 86, 165, 0.3);

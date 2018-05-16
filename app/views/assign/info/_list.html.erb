@@ -1,5 +1,5 @@
 <% entryClass.column_names.each do |title| %>
-    <% if ColumnLabels.column?(title) %>
+    <% if ColumnLabels.column?(title) and not entry[title].blank? %>
         <li class="delta-collection-item">
             <div class="<%= type %>-label">
                 <strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
