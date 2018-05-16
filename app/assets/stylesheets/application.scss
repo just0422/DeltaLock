@@ -75,6 +75,16 @@ body{
 	background-color: rgb(0, 64, 128);
 }
 
+.delta-btn-flat{
+    background-color: white;
+}
+.delta-btn-flat:hover{
+	background-color: rgb(252, 230, 199);
+}
+.delta-btn-flat:active{
+	background-color: rgb(255, 170, 0);
+}
+
 .table th {
 	background-color: #f2f2f2;
 }

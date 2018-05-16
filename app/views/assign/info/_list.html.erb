@@ -1,10 +1,13 @@
-<% entryClass.column_names.each do |title| %>
-    <% if ColumnLabels.column?(title) and not entry[title].blank? %>
-        <li class="delta-collection-item">
-            <div class="<%= type %>-label">
-                <strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
-                <span class="<%= type %>-<%= title %>"><%= entry[title] %></span>
-            </div>
-        </li>
+<a class="assign-change-button btn btn-flat delta-btn-flat" onclick="change_assign_entry('<%= type %>')">Change</a>
+<ul>
+    <% entryClass.column_names.each do |title| %>
+        <% if ColumnLabels.column?(title) and not entry[title].blank? %>
+            <li class="delta-collection-item">
+                <div class="<%= type %>-label">
+                    <strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
+                    <span class="<%= type %>-<%= title %>"><%= entry[title] %></span>
+                </div>
+            </li>
+        <% end %>
     <% end %>
-<% end %>
+</ul>

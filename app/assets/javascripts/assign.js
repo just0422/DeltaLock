@@ -13,8 +13,6 @@ function check_assign_ready(){
     var assign_params = ["purchaseorders", "purchasers", "endusers", "keys"];
     
     for (var i = 0; i < assign_params.length; i++){
-        console.log(assign_params[i]);
-        console.log($("input[name=" + assign_params[i] + "]").val() != "");
         if ($("input[name=" + assign_params[i] + "]").val() != "")
             count++;
     }
@@ -22,6 +20,14 @@ function check_assign_ready(){
     if (count > 1){
         $("#assign-button").show();
     }
+}
+
+function change_assign_entry(type){
+    $("input[name=" + type + "]").val("")
+    $("#" + type + "-assign-selected").hide();
+    $("#" + type + "-assign-new-or-search").show();
+    
+    check_assign_ready();
 }
 
 

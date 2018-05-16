@@ -6,23 +6,34 @@ $(".assign-row").click(function(){
     $("input[name=<%= @css_class %>]").val(parseInt($(this).find(".<%= @css_class %>-id").html()));
     check_assign_ready();
     
-    $("#<%= @css_class %>-assign-selected").html("");
+    $("#<%= @css_class %>-assign-selected").html(
+        '<a class="assign-change-button btn btn-flat delta-btn-flat" ' + 
+        'onclick="change_assign_entry(\'<%= @css_class %>\')">' +
+        'Change' + 
+        '</a>' +
+        '<ul></ul>'
+    );
+//        '<a class="assign-change-button btn btn-flat delta-btn-flat" onclick="change_assign_entry(\'<%= @css_class %>\')'>Change</a>
+//");
     var elementValue;
     <% @class.column_names.each do |title| %>
 		<% if ColumnLabels.column?(title) %>
             // Get <%= title %> value
             elementValue = $.trim($(this).find(".<%= @css_class %>-<%= title %>").html());
-            // Add it to the list
-            $("#<%= @css_class %>-assign-selected").append(
-			    '<li>' +
-				    '<div class="<%= @css_class %>-label">' +
-					    '<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>' +
-					    '<span class="<%= @css_class %>-<%= title %>">' +
-                           elementValue +
-                        '</span>' +
-                    '</div>' +
-                '</li>'
-            );
+
+            if (elementValue != ""){
+                // Add it to the list
+                $("#<%= @css_class %>-assign-selected ul").append(
+                    '<li class="delta-collection-item">' +
+                        '<div class="<%= @css_class %>-label">' +
+                            '<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>' +
+                            '<span class="<%= @css_class %>-<%= title %>">' +
+                               elementValue +
+                            '</span>' +
+                        '</div>' +
+                    '</li>'
+                );
+            }
 		<% end %>
 	<% end %>
 

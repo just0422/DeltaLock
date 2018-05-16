@@ -10,11 +10,11 @@
                 <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categoryNewField, new_assign_path(categoryLower), remote: true, class: "btn-large delta-btn modal-trigger" %></div></div>
                 <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categorySearchField, search_assign_path(categoryLower), remote: true, class:"btn-large delta-btn modal-trigger" %></div></div>
             </div>
-            <ul id="<%= categoryLower %>-assign-selected" <% if @assignment[category] == nil %>style="display:none;"<% end %>>
+            <div id="<%= categoryLower %>-assign-selected" <% if @assignment[category] == nil %>style="display:none;"<% end %>>
                 <% if @assignment[category] != nil %>
                     <%= render 'assign/info/list', entryClass: categoryClass, type: categoryLower, entry: @assignment_parts[category] %>
                 <% end %>
-            </ul>
+            </div>
         </div>
 	<% end %>
     <form action="/assign/assignment" method="POST">
