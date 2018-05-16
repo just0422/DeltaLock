@@ -7,16 +7,7 @@ class EntryController < ApplicationController
 	def show
         @entry = @class.find(params[:id])
 
-		case params[:type]
-		when "key"
-			@associations = get_associated_items("key", params[:id])
-		when "enduser"
-			@associations = get_associated_items("enduser", params[:id])
-		when "purchaser"
-			@associations = get_associated_items("purchaser", params[:id])
-		when "purchaseorder"
-			@associations = get_associated_items("purchaseorder", params[:id])
-		end
+		@associations = get_associated_items(params[:type], params[:id])
 
 		@column_names = {
 			"key" => "Key",
@@ -71,7 +62,7 @@ class EntryController < ApplicationController
 		associations = Array.new
 		
 		type += "s"
-		list = Relationship.where({ type.to_s => 1 })
+		list = Relationship.where({ type.to_s => id })
 
 		list.each do |assignment|
 			association = Hash.new

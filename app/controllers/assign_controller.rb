@@ -90,21 +90,21 @@ class AssignController < ApplicationController
         }
 
 		enduser_entry = params[:endusers].blank? ? nil : EndUser.find(params[:endusers])
-        @assignment_parts["endusers"] = {
+        @assignment_parts["enduser"] = {
             "title" => "End User",
             "name" => enduser_entry ? enduser_entry[:name] : "",
             "id" => enduser_entry ? params[:endusers] : ""
         }
 
 		purchaser_entry = params[:purchasers].blank? ? nil : Purchaser.find(params[:purchasers])
-        @assignment_parts["purchasers"] = {
+        @assignment_parts["purchaser"] = {
             "title" => "Purchaser",
             "name" => purchaser_entry ? purchaser_entry[:name] : "",
             "id" => purchaser_entry ? params[:purchasers] : ""
         }
 
 		purchaseorder_entry = params[:purchaseorders].blank? ? nil : PurchaseOrder.find(params[:purchaseorders])
-        @assignment_parts["purchaseorders"] = {
+        @assignment_parts["purchaseorder"] = {
             "title" => "Purchase Order",
             "name" => purchaseorder_entry ? purchaseorder_entry[:so_number] : "",
             "id" => purchaseorder_entry ? params[:purchaseorders] : ""
