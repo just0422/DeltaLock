@@ -79,7 +79,7 @@ class EntryController < ApplicationController
 			key_entry = assignment[:keys].blank? ? nil : Key.find(assignment[:keys])
 			key = {
 				"name" => key_entry ? key_entry[:system_name] : "",
-				"id" => key_entry ? assignment[:keys] : "",
+				"id" => key_entry ? assignment[:keys] : ""
 			}
 			association["key"] = key
 

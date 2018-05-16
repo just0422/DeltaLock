@@ -1,0 +1,26 @@
+<h1>Assignment Created!</h1>
+
+<table class = "table bordered centered responsive-table show-table">
+    <thead class = "thead-inverse">
+        <tr>
+		    <% @assignment_parts.each do |type, entry| %>
+				<th><%= entry["title"] %></th>
+			<% end %>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <% @assignment_parts.each do |type, entry| %>
+                <% if entry["name"] != "" %>
+                    <td class="show-table-cell">
+                        <a href="/show/<%= type %>/<%= entry["id"] %>">
+                            <div class="show-table-link"><%= entry["name"] %></div>
+                        </a>
+                    </td>
+                <% else %>
+                    <td class="show-table-empty"></td>
+                <% end %>
+            <% end %>
+        </tr>
+    </tbody>
+</table>
