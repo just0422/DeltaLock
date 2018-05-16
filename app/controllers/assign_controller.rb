@@ -1,6 +1,5 @@
 class AssignController < ApplicationController
 	before_action :set_variables, only: [:create, :new, :search]
-	respond_to :html, :js
 
 	def index
 		@categories = [ Purchaser, EndUser, PurchaseOrder, Key ]
@@ -94,6 +93,33 @@ class AssignController < ApplicationController
             @assignments.push(assigned_parts)
             
         end
+    end
+
+    def edit
+        @assignment_parts = Hash.new
+        @assignment = Relationship.find(params[:id])
+        Rails.logger.debug(@assignment[:keys])
+        Rails.logger.debug(@assignment[:endusers])
+        Rails.logger.debug(@assignment[:purchasers])
+        Rails.logger.debug(@assignment[:purchaseorders])
+
+        @assignment_parts["purchasers"] = @assignment[:purchasers].nil? ? nil :  Purchaser.find(@assignment[:purchasers])
+        @assignment_parts["endusers"] = @assignment[:endusers].nil? ? nil :  EndUser.find(@assignment[:endusers])
+        @assignment_parts["purchaseorders"] = @assignment[:purchaseorders].nil? ? nil : PurchaseOrder.find(@assignment[:purchaseorders])
+        @assignment_parts["keys"] = @assignment[:keys].nil? ? nil : Key.find(@assignment[:keys])
+
+        Rails.logger.debug(@assignment_parts[:keys])
+        Rails.logger.debug(@assignment_parts[:endusers])
+        Rails.logger.debug(@assignment_parts[:purchasers])
+        Rails.logger.debug(@assignment_parts[:purchaseorders])
+
+		@categories = Hash.new
+        @categories['keys'] = Key
+        @categories['endusers'] = EndUser
+        @categories['purchasers'] = Purchaser
+        @categories['purchaseorders'] = PurchaseOrder
+
+        Rails.logger.debug(@assignment[:purchasers])
     end
 
     def delete

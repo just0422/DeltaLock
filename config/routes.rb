@@ -27,12 +27,12 @@ Rails.application.routes.draw do
   get '/assign/new/:type', to: 'assign#new', as: 'new_assign'
   get '/assign/search/:type', to: 'assign#search', as: 'search_assign'
   get '/assign/manage', to: 'assign#manage'
+  get '/assign/edit/:id', to: 'assign#edit', as: 'edit_assign'
   
   post '/search/export/:search_type' => 'search#export', as: 'export'
   post '/update/:type/:id', to: 'entry#update', as: 'update_entry'
   post '/assign/create/:type', to: 'assign#create', as: 'create_assign'
   post '/assign/result/:type', to: 'assign#result', as: 'result_assign'
-  post '/assign/edit/:id', to: 'assign#edit', as: 'edit_assign'
   post '/assign/assignment', to: 'assign#assignment'
 
   post 'login' => 'sessions#create'

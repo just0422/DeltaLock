@@ -1,0 +1,35 @@
+<div id="assign-container">
+    <% @categories.each do |category, categoryClass| %>
+        <% categoryName = categoryClass.name.underscore.humanize.split.map(&:capitalize).join(' ') %>
+        <% categoryLower = categoryClass.name.downcase + 's' %>
+        <% categoryNewField = "New " + categoryName %>
+        <% categorySearchField = "Search " + categoryName %>
+		<div class="assign-quad">
+			<div class="assign-new-or-search" id="<%= categoryLower %>-assign-new-or-search" <% if @assignment[category] != nil %> style="display:none;" <% end %> >
+                <!-- This should be a form -->
+                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categoryNewField, new_assign_path(categoryLower), remote: true, class: "btn-large delta-btn modal-trigger" %></div></div>
+                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categorySearchField, search_assign_path(categoryLower), remote: true, class:"btn-large delta-btn modal-trigger" %></div></div>
+            </div>
+            <ul id="<%= categoryLower %>-assign-selected" <% if @assignment[category] == nil %>style="display:none;"<% end %>>
+                <% if @assignment[category] != nil %>
+                    <%= render 'assign/info/list', entryClass: categoryClass, type: categoryLower, entry: @assignment_parts[category] %>
+                <% end %>
+            </ul>
+        </div>
+	<% end %>
+    <form action="/assign/assignment" method="POST">
+        <input type="hidden" name="keys" <% if @assignment[:keys] != nil %> value="<%= @assignment[:keys] %>" <% end %> >
+        <input type="hidden" name="endusers" <% if @assignment[:endusers] != nil %> value="<%= @assignment[:endusers] %>" <% end %> >
+        <input type="hidden" name="purchasers" <% if @assignment[:purchasers] != nil %> value="<%= @assignment[:purchasers] %>" <% end %> >
+        <input type="hidden" name="purchaseorders" <% if @assignment[:purchaseorders] != nil %> value="<%= @assignment[:purchaseorders] %>" <% end %> >
+	    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <input type="submit" id="assign-button" class="btn-large delta-btn" value="UPDATE" />
+    </form>
+</div>
+
+
+<div id="entry-new-form" class="modal modal-fixed-footer">
+</div>
+
+<div id="assign-search-form" class="modal modal-fixed-footer">
+</div>

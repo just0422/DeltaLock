@@ -1,4 +1,4 @@
-$("#<%= @type %>-assign-selected").html("<%= j (render 'assign/info/list') %>");
+$("#<%= @type %>-assign-selected").html("<%= j (render 'assign/info/list', entryClass: @class, type: @type, entry: @entry) %>");
 
 $("#<%= @type %>-assign-new-or-search").hide();
 $("#<%= @type %>-assign-selected").show();
