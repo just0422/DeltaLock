@@ -3,28 +3,9 @@
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 //
 $(document).on("turbolinks:load", function() {
-	$('form').on('click', '.remove_fields', function(event) {
-		$(this).closest('.field').remove();
-        //var modalElement = document.querySelector('.modal');
-        //M.Modal.init(modalElement, {opacity: 0.9});
-		return event.preventDefault();
-	});
-    $(".add_fields").click(function(event){
-	//$('form').on('click', '.add_fields', function(event) {
-		var regexp, time;
-		time = new Date().getTime();
-		regexp = new RegExp($(this).data('id'), 'g');
-		$(this).before($(this).data('fields').replace(regexp, time));
-
-        //var modalElement = document.querySelector('.modal');
-        //M.Modal.init(modalElement, {opacity: 0.9});
-        var selectElements = document.querySelectorAll('select');
-        for (var i = 0; i < selectElements.length; i++){
-            M.FormSelect.init(selectElements[i]);
-        }
-
-		return event.preventDefault();
-	});
+    // Function located in application.js
+	$('form').on('click', '.remove_fields', remove_fields_click);
+    $('form').on('click', '.add_fields', add_fields_click);
 
 	$(".search-row").click(function() {
 		window.location = $(this).data("href");
