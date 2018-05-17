@@ -16,7 +16,10 @@ instance.open();
 $('#assign-search-form').on('click', '.remove_fields', remove_fields_click);
 $('#assign-search-form').on('click', '.add_fields', add_fields_click);
 
+$('.add_fields').click()
+
 var selectElements = document.querySelectorAll('select');
 for (var i = 0; i < selectElements.length; i++){
     M.FormSelect.init(selectElements[i]);
 }
+

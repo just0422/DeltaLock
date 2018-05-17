@@ -7,6 +7,9 @@ $(document).on("turbolinks:load", function() {
 	$('form').on('click', '.remove_fields', remove_fields_click);
     $('form').on('click', '.add_fields', add_fields_click);
 
+    $('.add_fields').click()
+
+
 	$(".search-row").click(function() {
 		window.location = $(this).data("href");
 	});
