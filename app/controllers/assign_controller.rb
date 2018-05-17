@@ -122,6 +122,13 @@ class AssignController < ApplicationController
         Rails.logger.debug(@assignment[:purchasers])
     end
 
+    def update
+        entry = Relationship.find(params[:id])
+        entry.update_attributes(assignment_parameters)
+
+        redirect_to "/assign/manage"
+    end
+
     def delete
         Relationship.delete(params[:id])
 

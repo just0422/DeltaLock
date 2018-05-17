@@ -17,14 +17,14 @@
             </div>
         </div>
 	<% end %>
-    <form action="/assign/assignment" method="POST">
+    <%= form_tag( update_assign_path(@assignment[:id]), method: :post ) do %>
         <input type="hidden" name="keys" <% if @assignment[:keys] != nil %> value="<%= @assignment[:keys] %>" <% end %> >
         <input type="hidden" name="endusers" <% if @assignment[:endusers] != nil %> value="<%= @assignment[:endusers] %>" <% end %> >
         <input type="hidden" name="purchasers" <% if @assignment[:purchasers] != nil %> value="<%= @assignment[:purchasers] %>" <% end %> >
         <input type="hidden" name="purchaseorders" <% if @assignment[:purchaseorders] != nil %> value="<%= @assignment[:purchaseorders] %>" <% end %> >
 	    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <input type="submit" id="assign-button" class="btn-large delta-btn" value="UPDATE" />
-    </form>
+	<% end %>
 </div>
 
 
