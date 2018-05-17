@@ -5,7 +5,7 @@
         <% end %>
     </div>
     <div class="col s3">
-        <%= f.predicate_select compounds: false %>
+		<%= f.predicate_select compounds: false, only: [:eq, :not_eq, :lt, :gt, :cont, :not_cont ] %>
     </div>
     <div class="col s5">
         <%= f.value_fields do |v| %>
