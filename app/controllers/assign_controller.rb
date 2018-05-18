@@ -42,7 +42,7 @@ class AssignController < ApplicationController
         when 'endusers'
             @categoryName = "EndUser"
             @categorySearch = EndUser.search
-        when 'purchaserorders'
+        when 'purchaseorders'
             @categoryName = "PurchaseOrder"
             @categorySearch = PurchaseOrder.search
         when 'keys'
