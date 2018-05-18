@@ -85,7 +85,7 @@ class SearchController < ApplicationController
 			@list = search.result
 		when "purchase_order_search"
 			@class = PurchaseOrder
-			search = PurchaseOrder.search(params[:purchase_order_search])
+			search = PurchaseOrder.search(params[:search_result])
 			@list = search.result
 		when "keycodes_search"
 			@class = Key

@@ -26,10 +26,10 @@ ColumnTypeXls = {
 	"so_number" => "Number",
 	"date_order" => "DateTime",
 	"address" => "String",
-	"purchase_order_id" => "Number",
-	"purchaser_id" => "Number",
-	"end_user_id" => "Number",
-	"key_id" => "Number"
+	"purchaseorders" => "Number",
+	"purchasers" => "Number",
+	"endusers" => "Number",
+	"keys" => "Number"
 }
 
 ColumnLabels = BiHash.new
@@ -68,7 +68,7 @@ ColumnLabels.insert("date_order", "Date Ordered")
 # Address
 ColumnLabels.insert("address", "Address")
 
-ColumnLabels.insert("purchaser_id", "Purchaser");
-ColumnLabels.insert("end_user_id", "End User");
-ColumnLabels.insert("purchase_order_id", "Purchase Order");
-ColumnLabels.insert("key_id", "Key");
+ColumnLabels.insert("purchasers", "Purchaser");
+ColumnLabels.insert("endusers", "End User");
+ColumnLabels.insert("purchaseorders", "Purchase Order");
+ColumnLabels.insert("keys", "Key");

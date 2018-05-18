@@ -4,17 +4,9 @@
 	<% end %>
     <%= link_to_add_fields '<i class="fa fa-plus-square" aria-hidden="true"></i>', f, :condition %>
 
-    <div class="row" style="margin-top:2em">
-        <h5 class="col s1">Sort:</h5>
-		<%= f.sort_fields do |s| %>
-            <div class="col s7">
-    		    <%= s.sort_select Hash.new %>
-            </div>
-		<% end %>
-	</div>
 	<div class="row">
 		<div class="actions"><%= f.submit "Search", class:"btn col s4 push-s1 delta-btn" %></div>
-		<%= link_to "Download Current Search", export_path(search_type: search_id, format:"csv"), :method => :post, class:"btn col s4 push-s3 delta-btn" %>
+		<%= link_to "Download " + search_category + "s", export_path(search_type: search_id, format:"csv"), :method => :post, class:"btn col s4 push-s3 delta-btn" %>
 	</div>
 	<%= hidden_field_tag :search_type, search_id %>
 <% end %>
