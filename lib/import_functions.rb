@@ -1,4 +1,22 @@
 module ImportFunctions
+  def self.importClass(model, spreadsheet)
+      header = spreadsheet.row(1)
+
+      entries = Array.new
+
+      (2..spreadsheet.last_row).each do |i|
+        row = Hash[[header, spreadsheet.row(i)].transpose]
+
+        entry = model.find_by_id(row["id"]) || model.new
+        entry.attributes = row.to_hash.slice(*ColumnTypeXls.keys)
+        entry.save!
+
+        entries.push(entry)
+      end
+
+      return entries
+  end
+
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
     when ".csv" then Roo::CSV.new(file.path, csv_options: {encoding: "iso-8859-1:utf-8"})

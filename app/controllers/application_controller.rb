@@ -71,4 +71,19 @@ class ApplicationController < ActionController::Base
 
         return assignment_parts
     end
+	
+    def set_variables
+		case params[:type]
+		when "keys"
+			@class = Key
+		when "endusers"
+			@class = EndUser
+		when "purchasers"
+			@class = Purchaser
+		when "purchaseorders"
+			@class = PurchaseOrder
+		end
+		@id = params[:id]
+		@type = params[:type]
+	end
 end

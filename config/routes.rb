@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   post '/assign/result/:type', to: 'assign#result', as: 'result_assign'
   post '/assign/update/:id', to: 'assign#update', as: 'update_assign'
   post '/assign/assignment', to: 'assign#assignment'
+  post '/manage/upload', to: 'manage#upload', as: 'upload_manage'
 
 
   post 'login' => 'sessions#create'

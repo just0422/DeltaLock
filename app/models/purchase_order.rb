@@ -13,16 +13,9 @@ class PurchaseOrder < ApplicationRecord
 
     def self.import(file)
       spreadsheet = ImportFunctions.open_spreadsheet(file)
-      header = spreadsheet.row(1)
-
-      (2..spreadsheet.last_row).each do |i|
-        row = Hash[[header, spreadsheet.row(i)].transpose]
-
-        purchase_order = PurchaseOrder.find_by_id(row["id"]) || new
-        purchase_order.attributes = row.to_hash.slice(*ColumnTypeXls.keys)
-        purchase_order.save!
-      end
+      return ImportFunctions.importClass(PurchaseOrder, spreadsheet)
     end
+
 	def self.to_csv(options = {})
 	  CSV.generate(options) do |csv|
 		csv << column_names

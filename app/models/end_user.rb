@@ -16,15 +16,7 @@ class EndUser < ApplicationRecord
 
 	def self.import(file)
 		spreadsheet = ImportFunctions.open_spreadsheet(file)
-		header = spreadsheet.row(1)
-
-		(2..spreadsheet.last_row).each do |i|
-			row = Hash[[header, spreadsheet.row(i)].transpose]
-
-			end_user = EndUser.find_by_id(row["id"]) || new
-			end_user.attributes = row.to_hash.slice(*ColumnTypeXls.keys)
-			end_user.save!
-		end
+        return ImportFunctions.importClass(EndUser, spreadsheet)
 	end
 
 	def self.to_csv(options = {})

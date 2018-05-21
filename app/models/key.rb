@@ -14,16 +14,9 @@ class Key < ApplicationRecord
 
 	def self.import(file)
 		spreadsheet = ImportFunctions.open_spreadsheet(file)
-		header = spreadsheet.row(1)
-
-		(2..spreadsheet.last_row).each do |i|
-			row = Hash[[header, spreadsheet.row(i)].transpose]
-
-			keycode = Key.find_by_id(row["id"]) || new
-			keycode.attributes = row.to_hash.slice(*ColumnTypeXls.keys)
-			keycode.save!
-		end
+        return ImportFunctions.importClass(Key, spreadsheet)
 	end
+
 	def self.to_csv(options = {})
 	  CSV.generate(options) do |csv|
 		csv << column_names

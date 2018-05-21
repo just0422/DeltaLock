@@ -11,7 +11,7 @@ class UploadController < ApplicationController
 	end
 
 	def create
-		#Rails.logger.debug("PARAMS --> " + JSON.pretty_generate(params))
+		Rails.logger.debug("PARAMS --> " + params)
 		#Key.import(params[:key][:keyfile])*/
 
 		case params[:category]

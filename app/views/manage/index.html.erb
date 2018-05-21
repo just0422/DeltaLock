@@ -7,7 +7,7 @@
         <div class="col s6 card">
             <div class="card-content" id="manage-upload">
                 <h3>Upload</h3>
-                <%= form_tag "#", multipart: true do %>
+                <%= form_tag upload_manage_path, multipart: true, remote: true do %>
                     <div class="file-field input-field row">
                       <div class="btn delta-btn col s4">
                         <label for="file" style="color:#fff">Select File</label>
@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="input-field">
-                        <%= select_tag(:category, options_for_select(@file_options), include_blank: "-- Select an Upload Type --") %>
+                        <%= select_tag(:type, options_for_select(@file_options), include_blank: "-- Select an Upload Type --") %>
                     </div>
 
                     <%= submit_tag "Upload", class: "btn delta-btn" %>
