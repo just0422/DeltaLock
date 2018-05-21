@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
-
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
+# REORGANIZE ME TO LOOK NICER. TUCK EVERYTHING INTO RESOURCES
   get '' => 'home_page#index'
   get '/get_items' => 'search#render_items', as: 'get_items'
   get '/fetch_purchasers' => 'search#get_purchasers', as: 'fetch_purchasers'
@@ -28,6 +20,7 @@ Rails.application.routes.draw do
   get '/assign/search/:type', to: 'assign#search', as: 'search_assign'
   get '/assign/manage', to: 'assign#manage'
   get '/assign/edit/:id', to: 'assign#edit', as: 'edit_assign'
+  get '/manage', to: 'manage#index'
   
   post '/search/export/:search_type' => 'search#export', as: 'export'
   post '/update/:type/:id', to: 'entry#update', as: 'update_entry'
@@ -35,6 +28,7 @@ Rails.application.routes.draw do
   post '/assign/result/:type', to: 'assign#result', as: 'result_assign'
   post '/assign/update/:id', to: 'assign#update', as: 'update_assign'
   post '/assign/assignment', to: 'assign#assignment'
+
 
   post 'login' => 'sessions#create'
 
