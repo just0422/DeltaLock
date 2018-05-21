@@ -108,25 +108,19 @@ class AssignController < ApplicationController
         @assignment_parts["purchaseorders"] = @assignment[:purchaseorders].nil? ? nil : PurchaseOrder.find(@assignment[:purchaseorders])
         @assignment_parts["keys"] = @assignment[:keys].nil? ? nil : Key.find(@assignment[:keys])
 
-        Rails.logger.debug(@assignment_parts[:keys])
-        Rails.logger.debug(@assignment_parts[:endusers])
-        Rails.logger.debug(@assignment_parts[:purchasers])
-        Rails.logger.debug(@assignment_parts[:purchaseorders])
-
 		@categories = Hash.new
         @categories['keys'] = Key
         @categories['endusers'] = EndUser
         @categories['purchasers'] = Purchaser
         @categories['purchaseorders'] = PurchaseOrder
 
-        Rails.logger.debug(@assignment[:purchasers])
     end
 
     def update
         entry = Relationship.find(params[:id])
         entry.update_attributes(assignment_parameters)
 
-        redirect_to "/assign/manage"
+        redirect_to "/manage"
     end
 
     def delete

@@ -52,7 +52,4 @@ class ManageController < ApplicationController
 			format.csv { send_data @result.to_csv }
 		end
     end
-
-    def manage
-    end
 end
