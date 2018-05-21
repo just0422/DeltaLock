@@ -36,4 +36,39 @@ class ApplicationController < ActionController::Base
 	end
 	return address
   end
+
+
+    def assign_parts(parts)
+        assignment_parts = Hash.new
+
+		key_entry = parts[:keys].blank? ? nil : Key.find(parts[:keys])
+        assignment_parts["keys"] = {
+            "title" => "Key",
+            "name" => key_entry ? key_entry[:system_name] : "",
+            "id" => key_entry ? parts[:keys] : ""
+        }
+
+		enduser_entry = parts[:endusers].blank? ? nil : EndUser.find(parts[:endusers])
+        assignment_parts["endusers"] = {
+            "title" => "End User",
+            "name" => enduser_entry ? enduser_entry[:name] : "",
+            "id" => enduser_entry ? parts[:endusers] : ""
+        }
+
+		purchaser_entry = parts[:purchasers].blank? ? nil : Purchaser.find(parts[:purchasers])
+        assignment_parts["purchasers"] = {
+            "title" => "Purchaser",
+            "name" => purchaser_entry ? purchaser_entry[:name] : "",
+            "id" => purchaser_entry ? parts[:purchasers] : ""
+        }
+
+		purchaseorder_entry = parts[:purchaseorders].blank? ? nil : PurchaseOrder.find(parts[:purchaseorders])
+        assignment_parts["purchaseorders"] = {
+            "title" => "Purchase Order",
+            "name" => purchaseorder_entry ? purchaseorder_entry[:so_number] : "",
+            "id" => purchaseorder_entry ? parts[:purchaseorders] : ""
+        }
+
+        return assignment_parts
+    end
 end
