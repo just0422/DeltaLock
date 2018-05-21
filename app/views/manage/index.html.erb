@@ -1,24 +1,39 @@
 
 <div class="row">
-    <div class="col s6" id="manage-upload">
-        <h3>Upload</h3>
-        <%= form_tag "#", multipart: true do %>
-            <div class="file-field input-field row">
-              <div class="btn delta-btn col s4">
-                <label for="file" style="color:#fff">Select File</label>
-                <%= file_field_tag 'file' %>
-              </div>
-              <div class="file-path-wrapper col push-s1 s7">
-                <input class="file-path validate" type="text">
-              </div>
-            </div>
+    <div class="col s6 card">
+        <div class="card-content" id="manage-upload">
+            <h3>Upload</h3>
+            <%= form_tag "#", multipart: true do %>
+                <div class="file-field input-field row">
+                  <div class="btn delta-btn col s4">
+                    <label for="file" style="color:#fff">Select File</label>
+                    <%= file_field_tag 'file' %>
+                  </div>
+                  <div class="file-path-wrapper col push-s1 s7">
+                    <input class="file-path validate" type="text">
+                  </div>
+                </div>
 
-            <div class="input-field">
-                <%= select_tag(:category, options_for_select(@options), include_blank: "-- Select an Upload Type --") %>
-            </div>
+                <div class="input-field">
+                    <%= select_tag(:category, options_for_select(@file_options), include_blank: "-- Select an Upload Type --") %>
+                </div>
 
-            <%= submit_tag "Upload", class: "btn delta-btn" %>
-            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <% end %>
+                <%= submit_tag "Upload", class: "btn delta-btn" %>
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <% end %>
+        </div>
+    </div>  
+
+    <div class="col s6 card">
+        <div class="card-content">
+            <h3>Download</h3>
+            <% @file_options.each do |name, type|%>
+                <div class="row">
+                    <div class="divider" style="margin-top:10px"></div>
+                    <h5 style="margin-top:10px"><%= name %></h5>
+                    <%= link_to "Download All " + name, export_path(search_type: type, format: "csv"), :method => :post, class: "btn col s5 delta-btn" %>
+                    <%= link_to "Download Template", export_path(search_type: type, format: "csv"), :method => :post, class: "btn col push-s2 s5 delta-btn" %>
+                </div>
+            <% end %>
+        </div>
     </div>
-</div>

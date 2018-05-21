@@ -1,6 +1,6 @@
 class ManageController < ApplicationController
     def index
-        @options = [
+        @file_options = [
             ["Keys", "keys"],
             ["End Users", "endusers"],
             ["Purchasers", "purchasers"],
