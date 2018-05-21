@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   post '/assign/update/:id', to: 'assign#update', as: 'update_assign'
   post '/assign/assignment', to: 'assign#assignment'
   post '/manage/upload', to: 'manage#upload', as: 'upload_manage'
+  post '/manage/download/:template/:type', to: 'manage#download', as: 'download'
 
 
   post 'login' => 'sessions#create'

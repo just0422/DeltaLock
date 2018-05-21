@@ -1,5 +1,5 @@
 class ManageController < ApplicationController
-    before_action :set_variables, only: [:upload]
+    before_action :set_variables, only: [:upload, :download]
 
     def index
         @file_options = [
@@ -41,6 +41,16 @@ class ManageController < ApplicationController
     end
 
     def download
+        if params[:template] == "0"
+            search = @class.search
+            @result = search.result
+        else
+            @result = @class.column_names
+        end
+
+		respond_to do |format|
+			format.csv { send_data @result.to_csv }
+		end
     end
 
     def manage
