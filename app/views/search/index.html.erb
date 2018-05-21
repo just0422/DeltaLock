@@ -4,7 +4,6 @@
 		<li class="tab"><a id="end_user_search_header" href="#end_user_search">End Users</a></li>
 		<li class="tab"><a id="purchaser_search_header" href="#purchaser_search">Purchasers</a></li>
 		<li class="tab"><a id="purchase_order_search_header" href="#purchase_order_search">Purchase Orders</a></li>
-		<li class="tab"><a id="assignment_search_header" href="#assignment_search">Assignments</a></li>
 	</ul>
 </div>
 
@@ -32,15 +31,3 @@
         <%= render 'search/tables/purchasers' %>
     </div>
 </div>
-<div id="assignment_search" class="searchtab">
-	<%= render 'search_form', search_type: @assignments_search, search_id: "assignment", search_category: "Assignments" %>
-    <div id="assignments-table">
-        <%= render 'search/tables/assignments' %>
-    </div>
-</div>
-	<%# render 'search' %>
-
-
-<script>
-
-</script>
