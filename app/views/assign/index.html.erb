@@ -10,7 +10,7 @@
 			</div>
 			<div class="assign-new-or-search" id="<%= categoryLower %>-assign-new-or-search" style="display:none;">
                 <!-- This should be a form -->
-                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categoryNewField, new_assign_path(categoryLower), remote: true, class: "btn-large delta-btn modal-trigger" %></div></div>
+                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categoryNewField, new_assign_path(categoryLower, "assign"), remote: true, class: "btn-large delta-btn modal-trigger" %></div></div>
                 <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categorySearchField, search_assign_path(categoryLower), remote: true, class:"btn-large delta-btn modal-trigger" %></div></div>
             </div>
             <ul id="<%= categoryLower %>-assign-selected" style="display:none;"></ul>

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/key/show_key/:id', to: 'key#show_key'
   get '/show/:type/:id', to: 'entry#show', as: 'show_entry'
   get '/edit/:type/:id', to: 'entry#edit', as: 'edit_entry'
+  get '/new', to: 'entry#new', as: 'new_entry'
   get '/assign/new/:type', to: 'assign#new', as: 'new_assign'
   get '/assign/search/:type', to: 'assign#search', as: 'search_assign'
   get '/assign/manage', to: 'assign#manage'
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
   post '/assign/assignment', to: 'assign#assignment'
   post '/manage/upload', to: 'manage#upload', as: 'upload_manage'
   post '/manage/download/:template/:type', to: 'manage#download', as: 'download'
+  post '/create/:type', to: 'entry#create', as: 'create_entry'
 
 
   post 'login' => 'sessions#create'

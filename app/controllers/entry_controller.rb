@@ -37,7 +37,24 @@ class EntryController < ApplicationController
 	end
 
     def new
-        @entry = @class.new
+		@columns = {
+			"keys" => {
+                "name" => "Key",
+                "class" => Key
+            },
+			"endusers" => {
+                "name" => "End User",
+                "class" => EndUser
+            },
+			"purchasers" => {
+                "name" => "Purchaser",
+                "class" => Purchaser
+            },
+			"purchaseorders" => {
+                "name" => "Purchase Order",
+                "class" => PurchaseOrder
+            }
+		}
     end
 
     def create
@@ -55,6 +72,8 @@ class EntryController < ApplicationController
         when "purchaseorders"
             @entry = PurchaseOrder.create(purchaseorder_parameters)
         end
+
+        redirect_to "/show/" + params[:type] + "/" + @entry[:id].to_s
     end
 
     def delete
