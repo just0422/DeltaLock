@@ -47,8 +47,10 @@
     <table class = "table bordered centered responsive-table show-table">
         <thead class = "thead-inverse">
             <tr>
-                <% @assignments[0][:data].each do |type, entry| %>
-                    <th><%= entry["title"] %></th>
+                <% Relationship.column_names.each do |title| %>
+                    <% if ColumnLabels.column?(title) %> 
+                        <th><%= ColumnLabels.columnToLabel(title) %></th>
+                    <% end %>
                 <% end %>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -57,6 +59,7 @@
         <tbody>
             <% @assignments.each do |assignment_parts| %>
                 <tr>
+                    <td class="assign-table-cell"><%= assignment_parts[:id] %></td>
                     <% assignment_parts[:data].each do |type, entry| %>
                         <% if entry["name"] != "" %>
                             <td class="assign-table-cell">
