@@ -1,7 +1,0 @@
-
-$('#enduser-searchbar-list').fadeOut(FADE_TIME, function(){
-	$('#enduser-table').prepend("<%= j (render '/search/tables/endusers') %>");
-	$("#enduser-table").append("<button onclick='selectEndUser()'>Select</button>");
-	$('#enduser-table').fadeIn(FADE_TIME);
-	enable_all_highlights(".all-tables","tbody tr");
-});

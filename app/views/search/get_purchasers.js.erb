@@ -1,7 +1,0 @@
-
-$('#purchaser-searchbar-list').fadeOut(FADE_TIME, function(){
-	$('#purchaser-table').prepend("<%= j (render '/search/tables/purchasers') %>");
-	$("#purchaser-table").append("<button onclick='selectPurchaser()'>Select</button>");
-	$('#purchaser-table').fadeIn(FADE_TIME);
-	enable_all_highlights(".all-tables","tbody tr");
-});
