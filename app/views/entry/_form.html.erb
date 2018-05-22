@@ -1,0 +1,21 @@
+<% className.columns_hash.each do |title, column| %>
+    <% if ColumnLabels.column?(title) %>
+        <% if title == "id" %>
+            <% next %>
+        <% else %>
+            <div class="input-field">
+                <% case column.type %>
+                <% when :string %>
+                    <%= text_field_tag title, entry[title] %>
+                <% when :integer %>
+                    <%= number_field_tag title, entry[title] %>
+                <% when :text %>
+                    <%= text_area_tag title, entry[title], class:"materialize-textarea" %>
+                <% when :date %>
+                    <%= date_field_tag title, entry[title] %>
+                <% end %>
+                <%= label_tag title, ColumnLabels.columnToLabel(title) %>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>

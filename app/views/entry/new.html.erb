@@ -10,23 +10,7 @@
         <div id="<%= type %>" class="col push-s4 s6">
             <%= form_tag( create_entry_path(type), method: :post, remote: true ) do |f| %>
                 <h3 class="center-align">New <%= attributes["name"] %></h3>
-                <% attributes["class"].column_names.each do |title| %>
-                    <% if ColumnLabels.column?(title) %>
-                        <% if title == "id" %>
-                            <% next %>
-                        <% elsif title == "address" %>
-                            <div class="input-field">
-                                <textarea name="<%= title %>" class="materialize-textarea"></textarea>
-                                <label for="<%= title %>" class="active"><%=ColumnLabels.columnToLabel(title)%></label> 
-                            </div>
-                        <% else %>
-                            <div class="input-field">
-                                <input name="<%= title %>"/>
-                                <label for="<%= title %>"><%=ColumnLabels.columnToLabel(title)%></label> 
-                            </div>
-                        <% end %>
-                    <% end %>
-                <% end %>
+                <%= render 'form', className: attributes["class"], entry: attributes["entry"] %>
                 <%= submit_tag("Create", class:"btn col s12 delta-btn") %>
             <% end %>
         </div>

@@ -2,7 +2,7 @@ require 'ColumnTitles'
 
 FADE_TIME = 100
 
-ColumnTypeXls = {
+ColumnType = {
 	"id" => "Number",
 	"name" => "String",
 	"phone" => "String",

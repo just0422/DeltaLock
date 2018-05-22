@@ -40,19 +40,23 @@ class EntryController < ApplicationController
 		@columns = {
 			"keys" => {
                 "name" => "Key",
-                "class" => Key
+                "class" => Key,
+                "entry" => Key.new
             },
 			"endusers" => {
                 "name" => "End User",
-                "class" => EndUser
+                "class" => EndUser,
+                "entry" => EndUser.new
             },
 			"purchasers" => {
                 "name" => "Purchaser",
-                "class" => Purchaser
+                "class" => Purchaser,
+                "entry" => Purchaser.new
             },
 			"purchaseorders" => {
                 "name" => "Purchase Order",
-                "class" => PurchaseOrder
+                "class" => PurchaseOrder,
+                "entry" => PurchaseOrder.new
             }
 		}
     end
