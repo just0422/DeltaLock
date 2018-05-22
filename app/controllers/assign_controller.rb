@@ -126,7 +126,7 @@ class AssignController < ApplicationController
     def delete
         Relationship.delete(params[:id])
 
-        redirect_to "/assign/manage"
+        redirect_to "/manage"
     end
 
     private
