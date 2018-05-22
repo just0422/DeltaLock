@@ -1,19 +1,10 @@
 Rails.application.routes.draw do
 # REORGANIZE ME TO LOOK NICER. TUCK EVERYTHING INTO RESOURCES
   get '' => 'home_page#index'
-  get '/get_items' => 'search#render_items', as: 'get_items'
-  get '/fetch_purchasers' => 'search#get_purchasers', as: 'fetch_purchasers'
-  get '/fetch_endusers' => 'search#get_endusers', as: 'fetch_endusers'
-  get '/fetch_keys' => 'search#get_keys', as: 'fetch_keys'
-  get '/all_endusers' => 'end_user#all', as: 'all_endusers'
   get '/get_keys_map', to: 'map#map'
-  get '/info' => 'search#info', as: 'info'
   get '/signup' => 'users#new'
   get '/login' => 'sessions#new'
   get '/users' => 'users#user_management'
-  get '/purchaser/show_purchaser/:id', to: 'purchaser#show_purchaser'
-  get '/enduser/show_enduser/:id', to: 'end_user#show_enduser'
-  get '/key/show_key/:id', to: 'key#show_key'
   get '/show/:type/:id', to: 'entry#show', as: 'show_entry'
   get '/edit/:type/:id', to: 'entry#edit', as: 'edit_entry'
   get '/new', to: 'entry#new', as: 'new_entry'
@@ -41,13 +32,9 @@ Rails.application.routes.draw do
   delete '/delete/:id', to: 'assign#delete', as: 'delete_assign'
 
   resources :all
-  resources :key
-  resources :end_user 
   resources :search do
 	  collection { post :result, to: 'search#items' }
   end
-  resources :purchaser
-  resources :purchase_order
   resources :map
   resources :assign
   resources :upload
