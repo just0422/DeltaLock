@@ -34,6 +34,8 @@ class EntryController < ApplicationController
 		when "purchaseorders"
 			@entry.update_attributes(purchaseorder_parameters)
 		end
+
+        @entry = @class.find(params[:id])
 	end
 
     def new
@@ -111,35 +113,7 @@ class EntryController < ApplicationController
 		list = Relationship.where({ type.to_s => id })
 
 		list.each do |assignment|
-			association = Hash.new
-
-			key_entry = assignment[:keys].blank? ? nil : Key.find(assignment[:keys])
-			key = {
-				"name" => key_entry ? key_entry[:system_name] : "",
-				"id" => key_entry ? assignment[:keys] : ""
-			}
-			association["keys"] = key
-
-			enduser_entry = assignment[:endusers].blank? ? nil : EndUser.find(assignment[:endusers])
-			enduser = { 
-				"name" => enduser_entry ? enduser_entry[:name] : "",
-				"id" => enduser_entry ? assignment[:endusers] : ""
-			}
-			association["endusers"] = enduser
-
-			purchaser_entry = assignment[:purchasers].blank? ? nil : Purchaser.find(assignment[:purchasers])
-			purchaser = { 
-				"name" => purchaser_entry ? purchaser_entry[:name] : "",
-				"id" => purchaser_entry ? assignment[:purchasers] : ""
-			}
-			association["purchasers"] = purchaser
-
-			purchaseorder_entry = assignment[:purchaseorders].blank? ? nil : PurchaseOrder.find(assignment[:purchaseorders])
-			purchaseorder = { 
-				"name" => purchaseorder_entry ? purchaseorder_entry[:so_number] : "",
-				"id" => purchaseorder_entry ? assignment[:purchaseorders] : ""
-			}
-			association["purchaseorders"] = purchaseorder
+            association = assign_parts(assignment)
 
 			associations.push(association)
 		end

@@ -20,26 +20,10 @@ class ApplicationController < ActionController::Base
 	redirect_to '/' unless current_user.admin? 
   end
 
-  def build_address_string(address_attributes)
-	address = ""
-	if address_attributes == nil
-		return address
-	end
-	if address_attributes[:custom_address] == nil or address_attributes[:custom_address].empty?
-		address += address_attributes[:line1] + " " if address_attributes[:line1] != nil
-		address += address_attributes[:line2] + " " if address_attributes[:line2] != nil
-		address += address_attributes[:city] + ", " if address_attributes[:city] != nil
-		address += address_attributes[:state] + " " if address_attributes[:state] != nil
-		address += address_attributes[:zip] if address_attributes[:zip] != nil
-	else
-		address = address_attributes[:custom_address]
-	end
-	return address
-  end
-
-
     def assign_parts(parts)
         assignment_parts = Hash.new
+
+        Rails.logger.debug(parts)
 
 		key_entry = parts[:keys].blank? ? nil : Key.find(parts[:keys])
         assignment_parts["keys"] = {

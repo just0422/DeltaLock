@@ -56,7 +56,7 @@ class AssignController < ApplicationController
         when "purchaseorders"
             @class = PurchaseOrder
             @name = "Purchase Orders"
-        when "keycodes"
+        when "keys"
             @class = Key
             @name = "Key Codes"
         when "endusers"
@@ -79,7 +79,7 @@ class AssignController < ApplicationController
     def assignment
         Relationship.create(assignment_parameters)
 
-        @assignment_parts = ManageData.assign_parts(params)
+        @assignment_parts = assign_parts(params)
     end
 
     def manage
@@ -88,7 +88,7 @@ class AssignController < ApplicationController
 
         list.each do |assignment|
             assigned_parts = Hash.new
-            assigned_parts[:data] = ManageData.assign_parts(assignment)
+            assigned_parts[:data] = assign_parts(assignment)
             assigned_parts[:id] = assignment[:id]
             @assignments.push(assigned_parts)
             
@@ -147,6 +147,6 @@ class AssignController < ApplicationController
 	end
 
     def assignment_parameters
-        params.permit(:purchase_orders, :purchasers, :endusers, :keys)
+        params.permit(:purchaseorders, :purchasers, :endusers, :keys)
     end
 end
