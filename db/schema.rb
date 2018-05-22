@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180515201556) do
+ActiveRecord::Schema.define(version: 20180522144319) do
 
   create_table "end_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at",                         null: false
@@ -20,13 +20,9 @@ ActiveRecord::Schema.define(version: 20180515201556) do
     t.string   "fax"
     t.string   "department"
     t.integer  "store_number"
+    t.text     "address",              limit: 65535
     t.string   "group_name"
-    t.string   "line2"
-    t.string   "city"
-    t.string   "state"
     t.string   "zip"
-    t.string   "country"
-    t.text     "custom_address",       limit: 65535
     t.string   "primary_contact"
     t.string   "primary_contact_type"
     t.string   "sub_department_1"
@@ -35,7 +31,6 @@ ActiveRecord::Schema.define(version: 20180515201556) do
     t.string   "sub_department_4"
     t.float    "lat",                  limit: 24
     t.float    "lng",                  limit: 24
-    t.string   "address"
     t.index ["id"], name: "index_end_users_on_id", using: :btree
   end
 
@@ -66,10 +61,10 @@ ActiveRecord::Schema.define(version: 20180515201556) do
     t.string   "email"
     t.string   "phone"
     t.string   "fax"
+    t.text     "address",              limit: 65535
     t.string   "primary_contact"
     t.string   "primary_contact_type"
     t.string   "group_name"
-    t.text     "address",              limit: 65535
     t.index ["id"], name: "index_purchasers_on_id", using: :btree
   end
 
