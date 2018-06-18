@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/assign/search/:type', to: 'assign#search', as: 'search_assign'
   get '/assign/manage', to: 'assign#manage'
   get '/assign/edit/:id', to: 'assign#edit', as: 'edit_assign'
+  get '/assign/filter/map', to: 'assign#filter_map', as: 'filter_map'
   get '/manage', to: 'manage#index'
   
   post '/search/export/:search_type' => 'search#export', as: 'export'

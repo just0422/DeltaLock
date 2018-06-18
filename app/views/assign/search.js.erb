@@ -1,6 +1,8 @@
+console.log("Somewhere...");
 <% if @mapActive %>
     $("#assign-search-form").html("<%= j ( render "assign/forms/map_form") %>");
-    
+
+    console.log("map");
     // Init Map
     var map;
     var enduserPosition = { 
@@ -12,6 +14,7 @@
         zoom: 8,
 	    radius: <%= @yellow * 1609.34 %>
     });
+    console.log("Marker");
     
     // Setup Marker
     var marker = new google.maps.Marker({ 
@@ -25,6 +28,7 @@
         content: '<%= @enduser[:address] %>' 
     });
 
+
     marker.addListener('click', function() { markerinfo.open(map, marker); } );
     marker.setIcon("http://maps.google.com/mapfiles/kml/paddle/blu-stars-lv.png");
 
@@ -36,6 +40,7 @@
     var yellow_icon = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
     var green_icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
     var enduser_marker;
+    console.log("Markers");
 
     <% @endusers_red.each do |enduser| %>
         enduser_marker = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", red_icon, map);
@@ -45,7 +50,23 @@
     <% end %>
     <% @endusers_green.each do |enduser| %>
         enduser_marker = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", green_icon, map);
-    <% end %>
+<% end %>
+    
+    console.log("Slider");
+    var mapSlider = document.getElementById('map-slider');
+
+    noUiSlider.create(mapSlider, {
+        start: [20, 80],
+        connect: true,
+        step: 1,
+        orientation: 'horizontal', // 'horizontal' or 'vertical'
+        range: {
+            'min': 0,
+            'max': 100
+        }
+        })
+        
+    console.log("Broken slider");
 
 <% else %>
     $("#assign-search-form").html("<%= j (render 'assign/forms/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")

@@ -17,6 +17,7 @@
 //= require underscore
 //= require gmaps/google
 //= require materialize
+//= require nouislider
 //= require_tree .
 //
 
