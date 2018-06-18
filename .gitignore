@@ -21,3 +21,5 @@ public/*
 
 config/*
 install/*
+
+.byebug*

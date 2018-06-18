@@ -10,7 +10,7 @@ class AssignController < ApplicationController
         @categories['purchaseorders'] = PurchaseOrder
         @categories['keys'] = Key
 
-        session[:group_name] = ""
+        session[:enduser] = 0
 	end
     
     def new
@@ -49,10 +49,14 @@ class AssignController < ApplicationController
             @categoryName = "PurchaseOrder"
             @categorySearch = PurchaseOrder.search
         when 'keys'
-            @categoryName = "Key"
-            @categorySearch = Key.search
-            @mapSearch = session[:group_name]
-            @mapActive = !session[:group_name].empty?
+            @mapActive = session[:enduser] != 0
+
+            if @mapActive 
+                @enduser = EndUser.find(session[:enduser])
+            else
+                @categoryName = "Key"
+                @categorySearch = Key.search
+            end
         end
     end
 

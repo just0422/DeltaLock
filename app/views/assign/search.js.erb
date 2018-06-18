@@ -1,8 +1,20 @@
 <% if @mapActive %>
-    $("#assign-search-form").html("assign/forms/map_form");
+    $("#assign-search-form").html("<%= j ( render "assign/forms/map_form") %>");
+
+    var map;
+    var enduserLatitude = <%= @enduser[:lat] %>;
+    var enduserLongitude = <%= @enduser[:lng] %>;
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: enduserLatitude, lng: enduserLongitude},
+        zoom: 8
+    });
+
+
 <% else %>
     $("#assign-search-form").html("<%= j (render 'assign/forms/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")
 <% end %>
+
+console.log("Got out of the IF");
 
 var modalElement = document.querySelector('#assign-search-form');
 var instance = M.Modal.init(modalElement, 
@@ -28,4 +40,4 @@ var selectElements = document.querySelectorAll('select');
 for (var i = 0; i < selectElements.length; i++){
     M.FormSelect.init(selectElements[i]);
 }
-
+console.log("Should open after all");
