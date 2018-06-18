@@ -53,6 +53,21 @@ class AssignController < ApplicationController
 
             if @mapActive 
                 @enduser = EndUser.find(session[:enduser])
+                
+                gatherMapBorderParameters()
+
+                end_user_group = EndUser.where(group_name: @enduser[:group_name])
+                @endusers_red = end_user_group.within(@red, :origin => @enduser[:address]);
+                @endusers_yellow = end_user_group.in_range(@red..@yellow, :origin => @enduser[:address]);
+                @endusers_green = end_user_group.beyond(@yellow, :origin => @enduser[:address]);
+
+                @endusers_red.to_a.delete(@enduser)	
+                @endusers_yellow.to_a.delete(@enduser)	
+                @endusers_green.to_a.delete(@enduser)	
+                
+                @red_keys = get_associated_keys(@endusers_red)
+                @yellow_keys = get_associated_keys(@endusers_yellow)
+                @green_keys = get_associated_keys(@endusers_green)
             else
                 @categoryName = "Key"
                 @categorySearch = Key.search
@@ -107,10 +122,6 @@ class AssignController < ApplicationController
     def edit
         @assignment_parts = Hash.new
         @assignment = Relationship.find(params[:id])
-        Rails.logger.debug(@assignment[:keys])
-        Rails.logger.debug(@assignment[:endusers])
-        Rails.logger.debug(@assignment[:purchasers])
-        Rails.logger.debug(@assignment[:purchaseorders])
 
         @assignment_parts["purchasers"] = @assignment[:purchasers].nil? ? nil :  Purchaser.find(@assignment[:purchasers])
         @assignment_parts["endusers"] = @assignment[:endusers].nil? ? nil :  EndUser.find(@assignment[:endusers])
@@ -165,5 +176,30 @@ class AssignController < ApplicationController
 
     def assignment_parameters
         params.permit(:purchaseorders, :purchasers, :endusers, :keys)
+    end
+
+    def gatherMapBorderParameters
+        if not params.key?("red")
+            params[:red] = 25
+            params[:yellow] = 50
+            params[:green] = 100
+        end
+        if Integer(params[:yellow]) > Integer(params[:green])
+            params[:green] = params[:yellow]
+        end
+
+        @red = params[:red]
+        @yellow = params[:yellow]
+        @green = params[:green]
+    end
+
+    def get_associated_keys(endusers)
+        keycodes = Array.new
+        endusers.each do |enduser|
+            relationships = Relationship.where("endusers like?", "%#{enduser[:id]}")
+            relationships.each do |relationship|
+                Rails.logger.debug(relationship[:keys])
+            end
+        end
     end
 end

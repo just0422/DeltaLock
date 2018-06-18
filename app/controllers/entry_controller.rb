@@ -28,7 +28,12 @@ class EntryController < ApplicationController
 		when "keys"
 			@entry.update_attributes(key_parameters)
 		when "endusers"
+            geo = EndUser.geocode(params[:address])
+            @entry[:lat] = geo.lat
+            @entry[:lng] = geo.lng
+
 			@entry.update_attributes(enduser_parameters)
+
 		when "purchasers"
 			@entry.update_attributes(purchaser_parameters)
 		when "purchaseorders"

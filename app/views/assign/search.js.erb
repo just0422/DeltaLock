@@ -1,14 +1,50 @@
 <% if @mapActive %>
     $("#assign-search-form").html("<%= j ( render "assign/forms/map_form") %>");
-
+    
+    // Init Map
     var map;
-    var enduserLatitude = <%= @enduser[:lat] %>;
-    var enduserLongitude = <%= @enduser[:lng] %>;
+    var enduserPosition = { lat: <%= @enduser[:lat] %>, lng: <%= @enduser[:lng] %> };
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: enduserLatitude, lng: enduserLongitude},
-        zoom: 8
+        center: enduserPosition,
+        zoom: 8,
+	    radius: <%= @yellow * 1609.34 %>
+    });
+    
+    // Setup Marker
+    var marker = new google.maps.Marker({ 
+        position: enduserPosition, 
+        map: map, 
+        title: '<%= @enduser[:name] %>' 
+    });
+    var markerinfo = new google.maps.InfoWindow({ 
+        content: '<%= @enduser[:address] %>' 
     });
 
+    marker.addListener('click', function() { markerinfo.open(map, marker); } );
+    marker.setIcon("http://maps.google.com/mapfiles/kml/paddle/blu-stars-lv.png");
+
+    // Setup Circles
+    yellow_circle = new google.maps.Circle({
+        strokeColor: '#FFFF00',
+        strokeWeight: 5,
+        fillColor: '#FFFF00',
+        fillOpacity: '0.1',
+        radius: <%= @yellow * 1609.34 %>,
+        center: enduserPosition,
+        map: map,
+        clickable: false
+    });
+    red_circle = new google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeWeight: 5,
+        fillColor: '#FF0000',
+        fillOpacity: '0.1',
+        radius: <%= @red * 1609.34 %>,
+        center: enduserPosition,
+        map: map,
+        clickable: false
+    });
+    
 
 <% else %>
     $("#assign-search-form").html("<%= j (render 'assign/forms/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")
@@ -40,4 +76,3 @@ var selectElements = document.querySelectorAll('select');
 for (var i = 0; i < selectElements.length; i++){
     M.FormSelect.init(selectElements[i]);
 }
-console.log("Should open after all");
