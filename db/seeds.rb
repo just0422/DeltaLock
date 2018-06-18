@@ -149,72 +149,58 @@ PurchaseOrder.create!([{
     id: 1,
     so_number: 1,
     po_number: 4,
-    date_order: DateTime.strptime("09/14/2009 8:00", "%m/%d/%Y %H:%M"),
-    purchaser_id: 1,
-    end_user_id: 1
+    date_order: DateTime.strptime("09/14/2009 8:00", "%m/%d/%Y %H:%M")
 },
 {
     id: 2,
     so_number: 2,
     po_number: 3,
-    date_order: DateTime.strptime("09/14/2010 8:00", "%m/%d/%Y %H:%M"),
-    purchaser_id: 2,
-    end_user_id: 2
+    date_order: DateTime.strptime("09/14/2010 8:00", "%m/%d/%Y %H:%M")
 },
 {
     id: 3,
     so_number: 3,
     po_number: 2,
-    date_order: DateTime.strptime("09/14/2011 8:00", "%m/%d/%Y %H:%M"),
-    purchaser_id: 3,
-    end_user_id: 3
+    date_order: DateTime.strptime("09/14/2011 8:00", "%m/%d/%Y %H:%M")
 },
 {
     id: 4,
     so_number: 4,
     po_number: 1,
-    date_order: DateTime.strptime("09/14/2012 8:00", "%m/%d/%Y %H:%M"),
-    purchaser_id: 1,
-    end_user_id: 4
+    date_order: DateTime.strptime("09/14/2012 8:00", "%m/%d/%Y %H:%M")
 },
 {
     id: 5,
     so_number: 5,
     po_number: 4,
-    date_order: DateTime.strptime("09/14/2013 8:00", "%m/%d/%Y %H:%M"),
-    purchaser_id: 2,
-    end_user_id: 5
+    date_order: DateTime.strptime("09/14/2013 8:00", "%m/%d/%Y %H:%M")
 },
 {
     id: 6,
     so_number: 6,
     po_number: 4,
-    date_order: DateTime.strptime("09/14/2014 8:00", "%m/%d/%Y %H:%M"),
-    purchaser_id: 3,
-    end_user_id: 6
+    date_order: DateTime.strptime("09/14/2014 8:00", "%m/%d/%Y %H:%M")
 },
 {
     id: 7,
     so_number: 7,
     po_number: 5,
-    date_order: DateTime.strptime("09/14/2015 8:00", "%m/%d/%Y %H:%M"),
-    purchaser_id: 1,
-    end_user_id: 7 
+    date_order: DateTime.strptime("09/14/2015 8:00", "%m/%d/%Y %H:%M")
 }])
 
 p "Created #{PurchaseOrder.count} Purchase Orders"
 
 
 Relationship.create!([{
-    purchase_order_id: 1,
-    purchaser_id: 1,
-    end_user_id: 1,
-    key_id: 1
+    purchaseorders: 1,
+    purchasers: 1,
+    endusers: 1,
+    keys: 1
 },
 {
-    purchase_order_id: 2,
-    purchaser_id: 3,
-    end_user_id: 1
+    purchaseorders: 2,
+    purchasers: 3,
+    endusers: 1
 }])
 
 p "Created #{Relationship.count} Assignments"

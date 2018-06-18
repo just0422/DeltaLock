@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   post '/assign/create/:type', to: 'assign#create', as: 'create_assign'
   post '/assign/result/:type', to: 'assign#result', as: 'result_assign'
   post '/assign/update/:id', to: 'assign#update', as: 'update_assign'
+  post '/assign/group', to: 'assign#session_group', as: 'session_group'
   post '/assign/assignment', to: 'assign#assignment'
   post '/manage/upload', to: 'manage#upload', as: 'upload_manage'
   post '/manage/download/:template/:type', to: 'manage#download', as: 'download'

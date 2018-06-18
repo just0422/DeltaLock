@@ -129,6 +129,14 @@ class AssignController < ApplicationController
         redirect_to "/manage"
     end
 
+    def session_group
+        session[:group_name] = params[:group_name]
+
+        respond_to do |format|
+            format.json { head :ok }
+        end
+    end
+
     private
 	def enduser_parameters
 		params.permit(:name, :address, :phone, :fax, :primary_contact, :primary_contact_type, :department, :store_number, :group_name, :lat, :lng, :sub_department_1, :sub_department_2, :sub_department_3, :sub_department_4)

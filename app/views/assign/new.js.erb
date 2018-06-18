@@ -5,7 +5,7 @@ var instance = M.Modal.init(modalElement,
     {
         opacity: 0.9,
         onCloseEnd: () => {
-            this.destroy();
+            instance.destroy();
         }
     }
 );

@@ -7,7 +7,7 @@ var instance = M.Modal.init(modalElement,
         onCloseEnd: () => {
             $('#assign-search-form').off('click', '.add_fields');
             $('#assign-search-form').off('click', '.remove_fields');
-            this.destroy();
+            instance.destroy();
         }
     }
 );

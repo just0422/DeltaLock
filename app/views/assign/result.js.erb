@@ -2,7 +2,7 @@ $("#assign-search-form").html("<%= j ( render 'assign/result_table' ) %>");
 
 $(".assign-row").click(function(){
     $(this).addClass("assign-row-active").siblings().removeClass("assign-row-active");
-    //assign_params["<%= @css_class %>"] = $("#<%= @css_class %>-id").; 
+
     $("input[name=<%= @css_class %>]").val(parseInt($(this).find(".<%= @css_class %>-id").html()));
     check_assign_ready();
     
@@ -13,8 +13,7 @@ $(".assign-row").click(function(){
         '</a>' +
         '<ul></ul>'
     );
-//        '<a class="assign-change-button btn btn-flat delta-btn-flat" onclick="change_assign_entry(\'<%= @css_class %>\')'>Change</a>
-//");
+
     var elementValue;
     <% @class.column_names.each do |title| %>
 		<% if ColumnLabels.column?(title) %>
@@ -34,7 +33,19 @@ $(".assign-row").click(function(){
                     '</li>'
                 );
             }
-		<% end %>
+        <% end %>
+
+        <% if @css_class == "endusers" and title == "group_name" %>
+            elementValue = $.trim($(this).find(".<%= @css_class %>-<%= title %>").html());
+
+            $.ajax({
+                method: "POST",
+                url: "<%= session_group_path %>",
+                data: {
+                    group_name: elementValue
+                }
+            })
+        <% end %>
 	<% end %>
 
     $("#<%= @css_class %>-assign-new-or-search").hide();
