@@ -9,6 +9,8 @@ class AssignController < ApplicationController
         @categories['endusers'] = EndUser
         @categories['purchaseorders'] = PurchaseOrder
         @categories['keys'] = Key
+
+        session[:group_name] = ""
 	end
     
     def new
@@ -34,6 +36,7 @@ class AssignController < ApplicationController
 
     def search
         @category = params[:type]
+        @map = false
 
         case params[:type]
         when 'purchasers'
@@ -48,6 +51,8 @@ class AssignController < ApplicationController
         when 'keys'
             @categoryName = "Key"
             @categorySearch = Key.search
+            @mapSearch = session[:group_name]
+            @mapActive = !session[:group_name].empty?
         end
     end
 
@@ -129,8 +134,8 @@ class AssignController < ApplicationController
         redirect_to "/manage"
     end
 
-    def session_group
-        session[:group_name] = params[:group_name]
+    def session_enduser
+        session[:enduser] = params[:enduser]
 
         respond_to do |format|
             format.json { head :ok }

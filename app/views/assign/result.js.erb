@@ -35,14 +35,14 @@ $(".assign-row").click(function(){
             }
         <% end %>
 
-        <% if @css_class == "endusers" and title == "group_name" %>
+        <% if @css_class == "endusers" and title == "id" %>
             elementValue = $.trim($(this).find(".<%= @css_class %>-<%= title %>").html());
 
             $.ajax({
                 method: "POST",
-                url: "<%= session_group_path %>",
+                url: "<%= session_enduser_path %>",
                 data: {
-                    group_name: elementValue
+                    enduser: elementValue
                 }
             })
         <% end %>

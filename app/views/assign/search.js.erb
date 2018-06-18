@@ -1,4 +1,8 @@
-$("#assign-search-form").html("<%= j (render 'assign/forms/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")
+<% if @mapActive %>
+    $("#assign-search-form").html("assign/forms/map_form");
+<% else %>
+    $("#assign-search-form").html("<%= j (render 'assign/forms/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")
+<% end %>
 
 var modalElement = document.querySelector('#assign-search-form');
 var instance = M.Modal.init(modalElement, 

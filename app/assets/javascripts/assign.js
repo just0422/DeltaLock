@@ -26,6 +26,17 @@ function change_assign_entry(type){
     $("input[name=" + type + "]").val("")
     $("#" + type + "-assign-selected").hide();
     $("#" + type + "-assign-new-or-search").show();
+
+    if (type === "endusers"){
+        var elementValue = $.trim($(this).find(type + "-id").html());
+        $.ajax({
+            method: "POST",
+            url: "/assign/enduser",
+            data: {
+                enduser: elementValue
+            }
+        })
+    }
     
     check_assign_ready();
 }
