@@ -1,2 +1,9 @@
-<div id="map" style='width: 100%; height: 400px;'></div>
+<div class="modal-content">
+    <h3 class="center-align"><%= @class.name.underscore.split.map(&:capitalize).join(' ') %> Search</h3>
+    <div id="map" style='width: 100%; height: 400px;'></div>
+
+    <%= form_tag map_path(params[:id]), :method => :get do %>
+        <div id="map-slider"></div>
+    <% end %>
+</div>
 

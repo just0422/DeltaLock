@@ -3,7 +3,10 @@
     
     // Init Map
     var map;
-    var enduserPosition = { lat: <%= @enduser[:lat] %>, lng: <%= @enduser[:lng] %> };
+    var enduserPosition = { 
+        lat: <%= @enduser[:lat] %>, 
+        lng: <%= @enduser[:lng] %> 
+    };
     map = new google.maps.Map(document.getElementById('map'), {
         center: enduserPosition,
         zoom: 8,
@@ -14,7 +17,9 @@
     var marker = new google.maps.Marker({ 
         position: enduserPosition, 
         map: map, 
-        title: '<%= @enduser[:name] %>' 
+        title: '<%= @enduser[:name] %>' ,
+        animation: google.maps.Animation.DROP,
+        icon: "http://maps.google.com/mapfiles/kml/paddle/blu-stars-lv.png"
     });
     var markerinfo = new google.maps.InfoWindow({ 
         content: '<%= @enduser[:address] %>' 
@@ -23,28 +28,24 @@
     marker.addListener('click', function() { markerinfo.open(map, marker); } );
     marker.setIcon("http://maps.google.com/mapfiles/kml/paddle/blu-stars-lv.png");
 
-    // Setup Circles
-    yellow_circle = new google.maps.Circle({
-        strokeColor: '#FFFF00',
-        strokeWeight: 5,
-        fillColor: '#FFFF00',
-        fillOpacity: '0.1',
-        radius: <%= @yellow * 1609.34 %>,
-        center: enduserPosition,
-        map: map,
-        clickable: false
-    });
-    red_circle = new google.maps.Circle({
-        strokeColor: '#FF0000',
-        strokeWeight: 5,
-        fillColor: '#FF0000',
-        fillOpacity: '0.1',
-        radius: <%= @red * 1609.34 %>,
-        center: enduserPosition,
-        map: map,
-        clickable: false
-    });
+    yellow_circle = initCircle("#FFFF00", <%= @yellow * 1609.34 %>, enduserPosition, map);
+    red_circle = initCircle("#FF0000", <%= @red * 1609.34 %>, enduserPosition, map);
     
+    // Setup extra end user markers
+    var red_icon = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+    var yellow_icon = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+    var green_icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+    var enduser_marker;
+
+    <% @endusers_red.each do |enduser| %>
+        enduser_marker = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", red_icon, map);
+    <% end %>
+    <% @endusers_yellow.each do |enduser| %>
+        enduser_marker = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", yellow_icon, map);
+    <% end %>
+    <% @endusers_green.each do |enduser| %>
+        enduser_marker = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", green_icon, map);
+    <% end %>
 
 <% else %>
     $("#assign-search-form").html("<%= j (render 'assign/forms/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")

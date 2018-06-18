@@ -41,6 +41,32 @@ function change_assign_entry(type){
     check_assign_ready();
 }
 
+function initCircle(color, radius, position, map){
+    return new google.maps.Circle({
+        strokeColor: color,
+        strokeWeight: 5,
+        fillColor: color,
+        fillOpacity: '0.1',
+        radius: radius,
+        center: position,
+        map: map,
+        clickable: false
+    });
+}
+
+function addMapMarker(lat, lng, name, icon, map){
+    return new google.maps.Marker({
+        position: {
+            lat: lat, 
+            lng: lng
+        },
+        map: map,
+        icon: icon,
+        title: name,
+        animation: google.maps.Animation.DROP
+    })
+}
+
 //With JQuery
 var red_slider, yellow_slider;
 var MILE = 1609.34;
