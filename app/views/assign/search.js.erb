@@ -32,20 +32,17 @@
     let red_circle = initCircle("#FF0000", <%= @red * 1609.34 %>, enduserPosition, map);
     
     // Setup extra end user markers
-    let red_icon = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
-    let yellow_icon = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
-    let green_icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
-    let enduser_marker;
+    var enduser_markers = {};
 
     <% @endusers_red.each do |enduser| %>
-        enduser_marker = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", red_icon, map);
+        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", RED_ICON, map);
     <% end %>
     <% @endusers_yellow.each do |enduser| %>
-        enduser_marker = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", yellow_icon, map);
+        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", YELLOW_ICON, map);
     <% end %>
     <% @endusers_green.each do |enduser| %>
-        enduser_marker = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", green_icon, map);
-<% end %>
+        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", GREEN_ICON, map);
+    <% end %>
     
     let assignMapSlider = document.getElementById('assign-map-slider');
 
@@ -85,6 +82,17 @@
                 yellow_circle.setRadius(value);
                 break;
         }
+    })
+
+    assignMapSlider.noUiSlider.on("end", function(values, index){
+        $.ajax({
+            url: "<%= update_map_path %>",
+            method: "POST",
+            data: {
+                red: values[0],
+                yellow: values[1]
+            }
+        })
     })
 
 

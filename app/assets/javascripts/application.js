@@ -10,8 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require wnumb
-//= require nouislider
 //= require turbolinks
 //= require jquery
 //= require jquery-ui
@@ -19,10 +17,14 @@
 //= require underscore
 //= require gmaps/google
 //= require materialize
+//= require nouislider
 //= require_tree .
 //
 
 const FADE_TIME = 200;
+const RED_ICON = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+const YELLOW_ICON = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+const GREEN_ICON = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
 
 //Search form functions
 function add_fields_click(event){

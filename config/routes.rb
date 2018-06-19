@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post '/assign/result/:type', to: 'assign#result', as: 'result_assign'
   post '/assign/update/:id', to: 'assign#update', as: 'update_assign'
   post '/assign/enduser', to: 'assign#session_enduser', as: 'session_enduser'
+  post '/assign/update_map', to: 'assign#update_map', as: 'update_map'
   post '/assign/assignment', to: 'assign#assignment'
   post '/manage/upload', to: 'manage#upload', as: 'upload_manage'
   post '/manage/download/:template/:type', to: 'manage#download', as: 'download'
