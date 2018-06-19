@@ -9,7 +9,6 @@ gem 'underscore-rails'
 #gem 'bootstrap-slider-rails'
 gem 'carrierwave', '~> 0.9'
 gem 'roo'
-gem 'nouislider-rails'
 
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'ransack', github: 'activerecord-hackery/ransack'

@@ -103,3 +103,25 @@
     right: 0;
     margin-right: 10px;
 }
+#assign-map {
+    width: 100%;
+    height: 300px;
+}
+#assign-map-slider {
+    margin-top: 10px;
+}
+#assign-map-slider-range {
+    line-height: 3;
+    font-size: 18px; 
+    margin-left: 20px;
+}
+
+.noUi-tooltip {
+    display: none;
+}
+.noUi-active .noUi-tooltip {
+    display: block;
+}
+.red-connect{ background: red; }
+.yellow-connect{ background: yellow; }
+.green-connect{ background: #00FF00; }

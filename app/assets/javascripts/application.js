@@ -10,6 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require wnumb
+//= require nouislider
 //= require turbolinks
 //= require jquery
 //= require jquery-ui
@@ -17,7 +19,6 @@
 //= require underscore
 //= require gmaps/google
 //= require materialize
-//= require nouislider
 //= require_tree .
 //
 

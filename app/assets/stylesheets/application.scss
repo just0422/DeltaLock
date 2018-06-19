@@ -12,10 +12,10 @@
  *
  *= require_self
  *= require dataTables/jquery.dataTables
- *= require nouislider
  *= require_tree .
  */
 
+@import "nouislider";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "materialize";
@@ -89,3 +89,7 @@ body{
 .table th {
 	background-color: #f2f2f2;
 }
+.red-connect{ background-color: red; }
+.yellow-connect{ background-color: yellow; }
+.green-connect{ background-color: green; }
+
