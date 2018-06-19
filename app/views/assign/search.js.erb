@@ -2,26 +2,25 @@
     $("#assign-search-form").html("<%= j ( render "assign/forms/map_form") %>");
 
     // Init Map
-    var map;
-    var enduserPosition = { 
+    let map;
+    let enduserPosition = { 
         lat: <%= @enduser[:lat] %>, 
         lng: <%= @enduser[:lng] %> 
     };
     map = new google.maps.Map(document.getElementById('assign-map'), {
         center: enduserPosition,
-        zoom: 7,
-	    radius: <%= @yellow * 1609.34 %>
+        zoom: 7
     });
     
     // Setup Marker
-    var marker = new google.maps.Marker({ 
+    let marker = new google.maps.Marker({ 
         position: enduserPosition, 
         map: map, 
         title: '<%= @enduser[:name] %>' ,
         animation: google.maps.Animation.DROP,
         icon: "http://maps.google.com/mapfiles/kml/paddle/blu-stars-lv.png"
     });
-    var markerinfo = new google.maps.InfoWindow({ 
+    let markerinfo = new google.maps.InfoWindow({ 
         content: '<%= @enduser[:address] %>' 
     });
 
@@ -29,14 +28,14 @@
     marker.addListener('click', function() { markerinfo.open(map, marker); } );
     marker.setIcon("http://maps.google.com/mapfiles/kml/paddle/blu-stars-lv.png");
 
-    yellow_circle = initCircle("#FFFF00", <%= @yellow * 1609.34 %>, enduserPosition, map);
-    red_circle = initCircle("#FF0000", <%= @red * 1609.34 %>, enduserPosition, map);
+    let yellow_circle = initCircle("#FFFF00", <%= @yellow * 1609.34 %>, enduserPosition, map);
+    let red_circle = initCircle("#FF0000", <%= @red * 1609.34 %>, enduserPosition, map);
     
     // Setup extra end user markers
-    var red_icon = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
-    var yellow_icon = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
-    var green_icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
-    var enduser_marker;
+    let red_icon = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+    let yellow_icon = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+    let green_icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+    let enduser_marker;
 
     <% @endusers_red.each do |enduser| %>
         enduser_marker = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", red_icon, map);
@@ -48,7 +47,7 @@
         enduser_marker = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", green_icon, map);
 <% end %>
     
-    var assignMapSlider = document.getElementById('assign-map-slider');
+    let assignMapSlider = document.getElementById('assign-map-slider');
 
     noUiSlider.create(assignMapSlider, {
         start: [<%= @red %>, <%= @yellow %>],
@@ -68,19 +67,33 @@
         }
     })
     
-	var connect = assignMapSlider.querySelectorAll('.noUi-connect');
-	var classes = ["red-connect", "yellow-connect", "green-connect"];
+	let connect = assignMapSlider.querySelectorAll('.noUi-connect');
+	let classes = ["red-connect", "yellow-connect", "green-connect"];
 
-	for ( var i = 0; i < connect.length; i++ ) {
+	for ( let i = 0; i < connect.length; i++ ) {
 		connect[i].classList.add(classes[i]);
-	}	
+    }
+
+    assignMapSlider.noUiSlider.on("update", function(values, index){
+        let value = values[index] * 1609.34;
+
+        switch(index){
+            case 0:
+                red_circle.setRadius(value);
+                break;
+            case 1:
+                yellow_circle.setRadius(value);
+                break;
+        }
+    })
+
 
 <% else %>
     $("#assign-search-form").html("<%= j (render 'assign/forms/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")
 <% end %>
 
-var modalElement = document.querySelector('#assign-search-form');
-var instance = M.Modal.init(modalElement, 
+let modalElement = document.querySelector('#assign-search-form');
+let instance = M.Modal.init(modalElement, 
     {
         opacity: 0.9,
         onCloseEnd: () => {
@@ -99,7 +112,7 @@ $('#assign-search-form').on('click', '.add_fields', add_fields_click);
 
 $('.add_fields').click()
 
-var selectElements = document.querySelectorAll('select');
-for (var i = 0; i < selectElements.length; i++){
+let selectElements = document.querySelectorAll('select');
+for (let i = 0; i < selectElements.length; i++){
     M.FormSelect.init(selectElements[i]);
 }
