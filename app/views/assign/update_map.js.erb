@@ -1,14 +1,13 @@
-console.log(<%= @red %> + " - " + <%= @yellow %>)
-
 <% @endusers_red.each do |enduser| %>
-    console.log("RED - " + <%= enduser[:id] %>);
     enduser_markers[<%= enduser[:id] %>].setIcon(RED_ICON);
 <% end %>
 <% @endusers_yellow.each do |enduser| %>
-    console.log("YELLOW - " + <%= enduser[:id] %>);
     enduser_markers[<%= enduser[:id] %>].setIcon(YELLOW_ICON);
 <% end %>
 <% @endusers_green.each do |enduser| %>
-    console.log("GREEN - " + <%= enduser[:id] %>);
     enduser_markers[<%= enduser[:id] %>].setIcon(GREEN_ICON);
 <% end %>
+
+$("#assign-map-red-keys").html("<%= j ( render "assign/info/keys_lists", keys: @red_keys, color: "Red" ) %>")
+$("#assign-map-yellow-keys").html("<%= j ( render "assign/info/keys_lists", keys: @yellow_keys, color: "Yellow" ) %>")
+$("#assign-map-green-keys").html("<%= j ( render "assign/info/keys_lists", keys: @green_keys, color: "Green" ) %>")

@@ -1,0 +1,11 @@
+<div class="assign-map-keys-title"><%= color %> Keys</div>
+<ul class="collapsible">
+    <% keys.each do |key| %>
+        <li>
+            <div class="collapsible-header"><%= key[:system_name]%></div>
+            <div class="collapsible-body">
+                <%= render "assign/info/modal_list", className: @class, type: @css_class, entry: key %>
+            </div>
+        </li>
+    <% end %>
+</ul>

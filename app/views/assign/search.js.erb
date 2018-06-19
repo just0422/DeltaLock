@@ -95,6 +95,8 @@
         })
     })
 
+    var elems = document.querySelectorAll(".collapsible");
+    let instances = M.Collapsible.init(elems, {});
 
 <% else %>
     $("#assign-search-form").html("<%= j (render 'assign/forms/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")

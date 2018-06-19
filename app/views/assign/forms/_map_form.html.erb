@@ -2,15 +2,25 @@
     <h3 class="center-align"><%= @class.name.underscore.split.map(&:capitalize).join(' ') %> Search</h3>
     <div id="assign-map"></div>
 
-    <%= form_tag filter_map_path, :method => :get do %>
-        <div class="row">
-            <div class="col s2">
-                <strong id="assign-map-slider-range">Range (mi):</strong>
-            </div>
-            <div class="col s10">
-                <div id="assign-map-slider" class="noUiSlider"></div>
-            </div>
+    <div class="row">
+        <div class="col s2">
+            <strong id="assign-map-slider-range">Range (mi):</strong>
         </div>
-    <% end %>
+        <div class="col s10">
+            <div id="assign-map-slider" class="noUiSlider"></div>
+        </div>
+    </div>
+    
+    <div class="row" id="assign-map-keys">
+        <div class="col s4" id="assign-map-red-keys">
+            <%= render "assign/info/keys_lists", keys: @red_keys, color: "Red" %>
+        </div>
+        <div class="col s4" id="assign-map-yellow-keys">
+            <%= render "assign/info/keys_lists", keys: @yellow_keys, color: "Yellow" %>
+        </div>
+        <div class="col s4" id="assign-map-green-keys">
+            <%= render "assign/info/keys_lists", keys: @green_keys, color: "Green" %>
+        </div>
+    </div>
 </div>
 

@@ -36,7 +36,6 @@ class AssignController < ApplicationController
 
     def search
         @category = params[:type]
-        @map = false
 
         case params[:type]
         when 'purchasers'
@@ -64,6 +63,8 @@ class AssignController < ApplicationController
     end
 
     def update_map
+        @class = Key
+        @css_class = "keys"
         @enduser = EndUser.find(session[:enduser])
         
         gather_map_border_paramters()
@@ -208,8 +209,12 @@ class AssignController < ApplicationController
         endusers.each do |enduser|
             relationships = Relationship.where("endusers like?", "%#{enduser[:id]}")
             relationships.each do |relationship|
-                Rails.logger.debug(relationship[:keys])
+                unless relationship[:keys].blank?
+                    keycodes.push(Key.find(relationship[:keys]))
+                end
             end
         end
+
+        return keycodes
     end
 end

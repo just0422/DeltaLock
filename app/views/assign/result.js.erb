@@ -14,7 +14,7 @@ $(".assign-row").click(function(){
         '<ul></ul>'
     );
 
-    var elementValue;
+    let elementValue;
     <% @class.column_names.each do |title| %>
 		<% if ColumnLabels.column?(title) %>
             // Get <%= title %> value
@@ -34,7 +34,9 @@ $(".assign-row").click(function(){
                 );
             }
         <% end %>
+	<% end %>
 
+    <% @class.column_names.each do |title| %>
         <% if @css_class == "endusers" and title == "id" %>
             elementValue = $.trim($(this).find(".<%= @css_class %>-<%= title %>").html());
 
