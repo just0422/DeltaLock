@@ -4,6 +4,7 @@ var modalElement = document.querySelector('#entry-new-form');
 var instance = M.Modal.init(modalElement, 
     {
         opacity: 0.9,
+        endingTop: '5%',
         onCloseEnd: () => {
             instance.destroy();
         }

@@ -161,6 +161,7 @@ let modalElement = document.querySelector('#assign-search-form');
 let instance = M.Modal.init(modalElement, 
     {
         opacity: 0.9,
+        endingTop: '5%',
         onCloseEnd: () => {
             $('#assign-search-form').off('click', '.add_fields');
             $('#assign-search-form').off('click', '.remove_fields');

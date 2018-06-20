@@ -1,7 +1,11 @@
 <%= form_tag( create_assign_path(@type), method: :post, remote: true ) do |f| %>
     <div class="modal-content">
         <h3 class="center-align">New <%= @class.name.underscore.split.map(&:capitalize).join(' ') %></h3>
-        <%= render 'entry/form', className: @class, entry:@entry %>
+        <div class= "row">
+            <div id="<%= @type %>" class="col push-s3 s6">
+                <%= render 'entry/form', className: @class, entry:@entry %>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <div class="card-action row edit-btn">
