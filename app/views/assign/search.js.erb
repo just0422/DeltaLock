@@ -21,7 +21,7 @@
         icon: "http://maps.google.com/mapfiles/kml/paddle/blu-stars-lv.png"
     });
     let markerinfo = new google.maps.InfoWindow({ 
-        content: '<%= @enduser[:address] %>' 
+        content: '<div><strong><%= @enduser[:name] %></strong></div><div><%= @enduser[:address].squish %></div>' 
     });
 
 
@@ -34,14 +34,14 @@
     // Setup extra end user markers
     var enduser_markers = {};
 
-    <% @endusers_red.each do |enduser| %>
-        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", RED_ICON, map);
+<% @endusers_red.each do |enduser| %>
+        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= enduser[:name] %>", "<%= enduser[:address].squish %>", "<%= enduser[:id] %>", RED_ICON, map);
     <% end %>
     <% @endusers_yellow.each do |enduser| %>
-        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", YELLOW_ICON, map);
+        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= enduser[:name] %>", "<%= enduser[:address].squish %>", "<%= enduser[:id] %>", YELLOW_ICON, map);
     <% end %>
     <% @endusers_green.each do |enduser| %>
-        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= @enduser[:name] %>", GREEN_ICON, map);
+        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= enduser[:name] %>", "<%= enduser[:address].squish %>", "<%= enduser[:id] %>", GREEN_ICON, map);
     <% end %>
     
     let assignMapSlider = document.getElementById('assign-map-slider');
@@ -71,6 +71,7 @@
 		connect[i].classList.add(classes[i]);
     }
 
+
     assignMapSlider.noUiSlider.on("update", function(values, index){
         let value = values[index] * 1609.34;
 
@@ -96,7 +97,61 @@
     })
 
     var elems = document.querySelectorAll(".collapsible");
-    let instances = M.Collapsible.init(elems, {});
+    let instances = M.Collapsible.init(elems, {
+        onOpenStart: function(element){
+            let header = element.querySelector(".collapsible-header");
+            header.classList.add("assign-map-key-entry-active-header");
+
+            let body = element.querySelector(".collapsible-body");
+            body.classList.add("assign-map-key-entry-active-body");
+
+            new google.maps.event.trigger( enduser_markers[element.dataset.enduser], 'click' );
+
+
+            $("#keys-assign-selected").html(
+                '<a class="assign-change-button btn btn-flat delta-btn-flat" ' + 
+                'onclick="change_assign_entry(\'keys\')">' +
+                'Change' + 
+                '</a>' +
+                '<ul></ul>'
+            );
+
+            let elementValue;
+            <% Key.column_names.each do |title| %>
+                <% if ColumnLabels.column?(title) %>
+                    // Get <%= title %> value
+                    elementValue = $.trim($(body).find(".keys-<%= title %>").html());
+
+                    if (elementValue != ""){
+                        // Add it to the list
+                        $("#keys-assign-selected ul").append(
+                            '<li class="delta-collection-item">' +
+                                '<div class="keys-label">' +
+                                    '<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>' +
+                                    '<span class="keys-<%= title %>">' +
+                                       elementValue +
+                                    '</span>' +
+                                '</div>' +
+                            '</li>'
+                        );
+                    }
+                <% end %>
+            <% end %>
+            $("#keys-assign-new-or-search").hide();
+            $("#keys-assign-selected").show();
+            $("input[name=keys]").val(parseInt($(body).find(".keys-id").html()));
+            check_assign_ready();
+        },
+        onCloseStart: function(element){
+            $(".assign-map-key-entry .collapsible-header").removeClass("assign-map-key-entry-active-header");
+            $(".assign-map-key-entry .collapsible-body").removeClass("assign-map-key-entry-active-body");
+            $("#keys-assign-selected").html("");
+            $("#keys-assign-new-or-search").show();
+            $("#keys-assign-selected").hide();
+            $("input[name=keys]").val("");
+            check_assign_ready();
+        }
+    });
 
 <% else %>
     $("#assign-search-form").html("<%= j (render 'assign/forms/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")

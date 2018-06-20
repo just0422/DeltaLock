@@ -179,8 +179,6 @@ class AssignController < ApplicationController
     end
 
     def gather_map_border_paramters
-        Rails.logger.debug(params)
-        Rails.logger.debug(params.key?("red"))
         if not params.key?("red")
             params[:red] = 25
             params[:yellow] = 50
@@ -195,9 +193,9 @@ class AssignController < ApplicationController
         @endusers_yellow = end_user_group.in_range(@red..@yellow, :origin => @enduser[:address]);
         @endusers_green = end_user_group.beyond(@yellow, :origin => @enduser[:address]);
 
-        @endusers_red.to_a.delete(@enduser)	
-        @endusers_yellow.to_a.delete(@enduser)	
-        @endusers_green.to_a.delete(@enduser)	
+        @endusers_red = @endusers_red.to_a - [@enduser] 
+        @endusers_yellow = @endusers_yellow.to_a - [@enduser]
+        @endusers_green = @endusers_green.to_a - [@enduser]	
         
         @red_keys = get_associated_keys(@endusers_red)
         @yellow_keys = get_associated_keys(@endusers_yellow)
@@ -210,7 +208,10 @@ class AssignController < ApplicationController
             relationships = Relationship.where("endusers like?", "%#{enduser[:id]}")
             relationships.each do |relationship|
                 unless relationship[:keys].blank?
-                    keycodes.push(Key.find(relationship[:keys]))
+                    key = Key.find(relationship[:keys])
+                    key = key.as_json
+                    key["enduser"] = enduser[:id]
+                    keycodes.push(key)
                 end
             end
         end

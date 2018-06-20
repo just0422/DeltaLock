@@ -54,8 +54,8 @@ function initCircle(color, radius, position, map){
     });
 }
 
-function addMapMarker(lat, lng, name, icon, map){
-    return new google.maps.Marker({
+function addMapMarker(lat, lng, name, address, id, icon, map){
+    let marker = new google.maps.Marker({
         position: {
             lat: lat, 
             lng: lng
@@ -65,5 +65,25 @@ function addMapMarker(lat, lng, name, icon, map){
         title: name,
         animation: google.maps.Animation.DROP
     })
-}
+    let markerinfo = new google.maps.InfoWindow({ 
+        content: '<div><strong>' + name + '</strong></div><div>' + address + '</div>'
+    });
 
+    marker.addListener('click', function() { 
+        markerinfo.open(map, marker); 
+
+        let collapsibles = document.querySelectorAll(".assign-map-key-entry");
+
+        for(let i = 0; i < collapsibles.length; i++){
+            if (collapsibles[i].dataset.enduser === id && !collapsibles[i].classList.contains("active")){
+                let header = collapsibles[i].querySelector(".collapsible-header");
+                header.classList.add("assign-map-enduser-selected-keys");
+            }
+        }
+    } );
+
+    markerinfo.addListener('closeclick', function(){
+        $(".assign-map-key-entry .collapsible-header").removeClass("assign-map-enduser-selected-keys");
+    } );
+    return marker
+}
