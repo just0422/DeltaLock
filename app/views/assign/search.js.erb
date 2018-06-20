@@ -9,7 +9,8 @@
     };
     map = new google.maps.Map(document.getElementById('assign-map'), {
         center: enduserPosition,
-        zoom: 7
+        zoom: 7,
+        gestureHandling: 'cooperative'
     });
     
     // Setup Marker
