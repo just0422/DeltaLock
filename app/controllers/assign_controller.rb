@@ -1,4 +1,5 @@
 class AssignController < ApplicationController
+    load_and_authorize_resource
 	before_action :set_variables, only: [:create, :new, :search]
 
 	def index

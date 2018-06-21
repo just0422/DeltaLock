@@ -1,5 +1,4 @@
 class ManageController < ApplicationController
-    before_action :authenticate_user!
     before_action :set_variables, only: [:upload, :download]
 
     def index
@@ -37,7 +36,6 @@ class ManageController < ApplicationController
             end
         else
             @result = @class.import(params[:file])
-
         end
     end
 

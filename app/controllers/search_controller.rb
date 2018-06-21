@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+    load_and_authorize_resource :class=> false
 	before_action :set_arrays
 	after_action :uniq_arrays
 

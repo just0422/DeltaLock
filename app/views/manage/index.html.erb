@@ -1,6 +1,7 @@
 <ul class="tabs tabs-fixed-width">
     <li class="tab"><a href="#file_upload_download">Files</a></li>
     <li class="tab"><a href="#manage_assignments">Manage Assignments</a></li>
+    <li class="tab"><a href="#manage_users">Manage Users</a></li>
 </ul>
 <div id="file_upload_download">
     <div class="row">
@@ -77,6 +78,24 @@
                     </td>
                 </tr>
             <% end %>
+        </tbody>
+    </table>
+</div>
+<div id="manage_users">
+    <table class = "table bordered centered responsive-table show-table">
+        <thead class = "thead-inverse">
+            <tr>
+                <% User.column_names.each do |title| %>
+                    <% if ColumnLabels.column?(title) %>
+                        <th><%= ColumnLabels.columnToLabel(title) %></th>
+                    <% end %>
+                <% end %>
+                <th>Role</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
         </tbody>
     </table>
 </div>
