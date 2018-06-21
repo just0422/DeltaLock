@@ -36,7 +36,6 @@ ColumnLabels = BiHash.new
 ColumnLabels.insert("id", "ID")
 # End Users / Purchasers
 ColumnLabels.insert("name", "Name")
-#ColumnLabels.insert("address_id", "Address")
 ColumnLabels.insert("phone", "Phone Number")
 ColumnLabels.insert("fax", "Fax Number")
 ColumnLabels.insert("department", "Department")
@@ -68,7 +67,18 @@ ColumnLabels.insert("date_order", "Date Ordered")
 # Address
 ColumnLabels.insert("address", "Address")
 
+# Relationships
 ColumnLabels.insert("purchasers", "Purchaser");
 ColumnLabels.insert("endusers", "End User");
 ColumnLabels.insert("purchaseorders", "Purchase Order");
 ColumnLabels.insert("keys", "Key");
+
+# User
+ColumnLabels.insert("email", "Email Address")
+ColumnLabels.insert("first_name", "First Name")
+ColumnLabels.insert("last_name", "Last Name")
+ColumnLabels.insert("username", "Username")
+ColumnLabels.insert("sign_in_count", "Sign In Count")
+ColumnLabels.insert("last_sign_in_at", "Last Sign In")
+ColumnLabels.insert("current_sign_in_at", "Current Sign In")
+ColumnLabels.insert("role", "Role")

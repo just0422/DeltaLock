@@ -96,6 +96,17 @@
             </tr>
         </thead>
         <tbody>
+            <% @users.each do |user| %>
+                <% user.each do |type, value| %>
+                    <% if (value.blank?) %>
+                        <td class="assign-table-empty"></td>
+                    <% else %>
+                        <td class="assign-table-cell"><%= value %></td>
+                    <% end %>
+                <% end %>
+                <td>Edit</td>
+                <td>Delete</td>
+            <% end %>
         </tbody>
     </table>
 </div>
