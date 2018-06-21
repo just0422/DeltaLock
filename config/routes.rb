@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
+
     root to: "home_page#index"
 
     get '' => 'home_page#index'
-    get '/login' => 'sessions#new'
-    get '/users' => 'users#user_management'
     get '/show/:type/:id', to: 'entry#show', as: 'show_entry'
     get '/edit/:type/:id', to: 'entry#edit', as: 'edit_entry'
     get '/new', to: 'entry#new', as: 'new_entry'
@@ -28,9 +27,6 @@ Rails.application.routes.draw do
     post '/create/:type', to: 'entry#create', as: 'create_entry'
 
 
-    post 'login' => 'sessions#create'
-
-    delete 'logout' => 'sessions#destroy'
     delete '/delete/:type/:id', to: 'entry#delete', as: 'delete_entry'
     delete '/delete/:id', to: 'assign#delete', as: 'delete_assign'
 
@@ -39,6 +35,5 @@ Rails.application.routes.draw do
     end
     resources :assign
     resources :upload
-    resources :users
     resources :sessions
 end

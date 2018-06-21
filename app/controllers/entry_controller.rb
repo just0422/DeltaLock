@@ -1,5 +1,5 @@
 class EntryController < ApplicationController
-    load_and_authorize_resource
+    load_and_authorize_resource :class=> false
 	before_action :set_variables, only: [:show, :edit, :update, :delete]
 
     def index

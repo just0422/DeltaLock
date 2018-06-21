@@ -82,31 +82,37 @@
     </table>
 </div>
 <div id="manage_users">
-    <table class = "table bordered centered responsive-table show-table">
-        <thead class = "thead-inverse">
-            <tr>
-                <% User.column_names.each do |title| %>
-                    <% if ColumnLabels.column?(title) %>
-                        <th><%= ColumnLabels.columnToLabel(title) %></th>
+    <div class="manage-users-table">
+        <table class = "table bordered centered responsive-table show-table">
+            <thead class = "thead-inverse">
+                <tr>
+                    <% User.column_names.each do |title| %>
+                        <% if ColumnLabels.column?(title) %>
+                            <th><%= ColumnLabels.columnToLabel(title) %></th>
+                        <% end %>
                     <% end %>
-                <% end %>
-                <th>Role</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @users.each do |user| %>
-                <% user.each do |type, value| %>
-                    <% if (value.blank?) %>
-                        <td class="assign-table-empty"></td>
-                    <% else %>
-                        <td class="assign-table-cell"><%= value %></td>
+                    <th>Role</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @users.each do |user| %>
+                    <% User.column_names.each do |title| %>
+                        <% if ColumnLabels.column?(title) %>
+                            <td class="assign-table-cell"><%= user[title] %></td>
+                        <% end %>
                     <% end %>
+                    <td><%= user.roles.first.name %></td>
+                    <td>Edit</td>
+                    <td>Delete</td>
                 <% end %>
-                <td>Edit</td>
-                <td>Delete</td>
-            <% end %>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    <div id="new-user-button">
+        <%= link_to raw('<i class="fa fa-plus-square" aria-hidden="true"></i>'), new_user_registration_path, class: "btn green", remote: true %>
+    </div>
+</div>
+<div id="new-user-form" class="modal modal-fixed-footer">
 </div>

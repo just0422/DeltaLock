@@ -21,14 +21,7 @@ class ManageController < ApplicationController
             
         end
 
-        @users = Array.new
-        list = User.all
-
-        list.each do |user|
-            roleless_user = user.as_json
-            user =  Role.find(UserRole.find(roleless_user[:id])[:id])
-            @users.push(user)
-        end
+        @users = User.all
     end
 
     def upload
