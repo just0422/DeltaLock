@@ -50,5 +50,9 @@ class RegistrationsController < Devise::RegistrationsController
     protected
     def authenticate_scope!
     end
+
+    def sign_up_params
+        params.require(:user).permit(:username, :email, :password, :first_name, :last_name)
+    end
 end
 
