@@ -38,5 +38,4 @@ Rails.application.routes.draw do
     end
     resources :assign
     resources :upload
-    resources :sessions
 end
