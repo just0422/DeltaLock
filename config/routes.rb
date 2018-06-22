@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { registrations: 'registrations' }
+    devise_for :users, :controllers => { registrations: 'registrations' }
+    devise_scope :user do
+        delete "users/:id" => "registrations#destroy", :as => :delete_user
+    end
 
     root to: "home_page#index"
 
@@ -25,7 +28,6 @@ Rails.application.routes.draw do
     post '/manage/upload', to: 'manage#upload', as: 'upload_manage'
     post '/manage/download/:template/:type', to: 'manage#download', as: 'download'
     post '/create/:type', to: 'entry#create', as: 'create_entry'
-
 
     delete '/delete/:type/:id', to: 'entry#delete', as: 'delete_entry'
     delete '/delete/:id', to: 'assign#delete', as: 'delete_assign'

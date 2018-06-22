@@ -1,0 +1,28 @@
+<table class = "table bordered centered responsive-table show-table">
+    <thead class = "thead-inverse">
+        <tr>
+            <% User.column_names.each do |title| %>
+                <% if ColumnLabels.column?(title) %>
+                    <th><%= ColumnLabels.columnToLabel(title) %></th>
+                <% end %>
+            <% end %>
+            <th>Role</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>
+			<tr>
+				<% User.column_names.each do |title| %>
+					<% if ColumnLabels.column?(title) %>
+						<td class="assign-table-cell"><%= user[title] %></td>
+					<% end %>
+				<% end %>
+				<td><%= user.roles.first.name %></td>
+				<td>Edit</td>
+                <td><%= link_to "Delete", delete_user_path(user[:id]), method: :delete, class:"btn red", remote: true %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

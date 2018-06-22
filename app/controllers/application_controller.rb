@@ -16,8 +16,6 @@ class ApplicationController < ActionController::Base
     def assign_parts(parts)
         assignment_parts = Hash.new
 
-        Rails.logger.debug(parts)
-
 		key_entry = parts[:keys].blank? ? nil : Key.find(parts[:keys])
         assignment_parts["keys"] = {
             "title" => "Key",
