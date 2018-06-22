@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col push-s3 s6">
+        <h2>Edit <%= @user.first_name %> <%= @user.last_name %></h2>
+        <%= form_for(@user, url: registration_path(resource_name), method: :put, remote: true) do |f| %>
+           <%= devise_error_messages! %>
+           <div class="row">
+              <div class="input-field col s6">
+                 <%= f.text_field :first_name, autofocus: true, value: @user.first_name %>
+                 <%= f.label :first_name %><br />
+              </div>
+              <div class="input-field col s6">
+                 <%= f.text_field :last_name, autofocus: true, value: @user.last_name %>
+                 <%= f.label :last_name %><br />
+              </div>
+           </div>
+           <div class="input-field">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", value: @user.email %>
+              <%= f.label :email %><br />
+           </div>
+           <div class="input-field">
+              <%= f.text_field :username, autofocus: true, value: @user.username %>
+              <%= f.label :username %><br />
+           </div>
+           <div class="input-field">
+                 <select name="role" id="role">
+                     <option value="" disabled <% if @role.blank? %> selected <% end %>>Select Role</option>
+                     <option value="admin" <% if @role=="admin" %> selected <% end %>>Administrator</option>
+                     <option value="editor" <% if @role=="editor" %> selected <% end %>>Editor</option>
+                     <option value="viewer" <% if @role=="viewer" %> selected <% end %>>Viewer</option>
+                 </select>
+                 <label>Role</label>
+           </div>
+
+
+           <div class="input-field">
+              <%= f.password_field :password, autocomplete: "off" %>
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br />
+              <em>Password will not update if left blank</em><br/>
+           </div>
+
+           <div class="actions">
+              <%= f.submit "Update", class: "btn delta-btn" %>
+           </div>
+           <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: "edit-users-authenticity-token" %>
+	       <%= hidden_field_tag :id, @user.id %>
+        <% end %>
+    </div>
+</div>

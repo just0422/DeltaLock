@@ -1,6 +1,6 @@
-$("#new-user-form").html("<%= j (render 'new_user') %>")
+$("#user-form").html("<%= j (render 'new_user_form') %>")
 
-var modalElement = document.querySelector('#new-user-form');
+var modalElement = document.querySelector('#user-form');
 var instance = M.Modal.init(modalElement, 
     {
         opacity: 0.9,
@@ -15,4 +15,3 @@ instance.open();
 
 var elems = document.querySelector('#role');
 var instances = M.FormSelect.init(elems, {});
-

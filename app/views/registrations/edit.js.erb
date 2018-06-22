@@ -1,0 +1,18 @@
+$("#user-form").html("<%= j (render 'edit_user_form') %>");
+
+let modalElement = document.querySelector('#user-form');
+let instance = M.Modal.init(modalElement, 
+    {
+        opacity: 0.9,
+        endingTop: '5%',
+        onCloseEnd: () => {
+            instance.destroy();
+        }
+    }
+);
+
+instance.open();
+
+let elems = document.querySelector('#role');
+let instances = M.FormSelect.init(elems, {});
+M.updateTextFields();

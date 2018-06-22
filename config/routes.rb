@@ -2,6 +2,7 @@ Rails.application.routes.draw do
     devise_for :users, :controllers => { registrations: 'registrations' }
     devise_scope :user do
         delete "users/:id" => "registrations#destroy", :as => :delete_user
+        get "users/:id" => "registrations#edit", :as => :edit_user
     end
 
     root to: "home_page#index"

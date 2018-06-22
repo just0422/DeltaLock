@@ -20,7 +20,7 @@
 					<% end %>
 				<% end %>
 				<td><%= user.roles.first.name %></td>
-				<td>Edit</td>
+                <td><%= link_to "Edit", edit_user_path(user[:id]), method: :get, class: "btn delta-btn", remote: true, authenticity_token: true %></td>
                 <td><%= link_to "Delete", delete_user_path(user[:id]), method: :delete, class:"btn red", remote: true, authenticity_token: true %></td>
             </tr>
         <% end %>

@@ -1,18 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
     respond_to :js
 
-    def new
-        super
-
-        @options = [
-            ["Administrator", "admin"],
-            ["Editor", "editor"],
-            ["Viewer", "viewer"]
-        ]
-    end
-
 	def create
-        Rails.logger.debug("createing")
         build_resource(sign_up_params)
         resource.save
 
@@ -36,6 +25,32 @@ class RegistrationsController < Devise::RegistrationsController
         render "manage"
     end
 
+    def edit
+        @user = User.find(params[:id])
+        @role = @user.roles.first.name
+    end
+
+    def update
+		resource = User.find(params[:id])
+
+        resource_updated = update_resource(resource, update_params) && 
+        update_role(resource, params[:role])
+        yield resource if block_given?
+        if resource_updated
+            if is_flashing_format?
+                flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
+                    :update_needs_confirmation : :updated
+                set_flash_message :notice, flash_key
+            end
+        else
+            clean_up_passwords resource
+            set_minimum_password_length
+        end
+
+        @users = User.all
+		render "manage"
+    end
+
 	def destroy
         user = User.find(params[:id])
 
@@ -53,6 +68,27 @@ class RegistrationsController < Devise::RegistrationsController
 
     def sign_up_params
         params.require(:user).permit(:username, :email, :password, :first_name, :last_name)
+    end
+
+    def update_params
+        params.require(:user).permit(:username, :email, :password, :first_name, :last_name)
+    end
+
+    def update_resource(user, params)
+        if params[:password].blank?
+            params.delete(:password)
+        end
+
+        return user.update(params)
+    end
+    
+    def update_role(user, role)
+        user.roles.each do |old_role|
+            user.remove_role old_role.name
+        end
+        user.add_role role
+
+        return user.has_role? role
     end
 end
 

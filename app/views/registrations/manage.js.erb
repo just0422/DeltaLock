@@ -1,6 +1,6 @@
 $("#manage-users-table").html("<%= j (render 'manage/users_table') %>")
 
-var element = document.querySelector("#new-user-form");
+var element = document.querySelector("#user-form");
 var instance = M.Modal.getInstance(element);
 if (instance)
     instance.close();
