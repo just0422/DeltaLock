@@ -1,4 +1,4 @@
-<%= search_form_for search_type, url: result_search_index_path, remote:true, method: :post do |f| %>
+<%= search_form_for search_type, url: search_result_path, remote:true, method: :post do |f| %>
 	<%= f.condition_fields do |c| %>
 		<%= render "condition_fields", f: c %>
 	<% end %>

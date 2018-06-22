@@ -10,24 +10,24 @@
 <div id="purchase_order_search" class="searchtab">
 	<%= render 'search_form', search_type: @purchase_order_search, search_id: "purchase_order_search", search_category: "Purchase Orders" %>
     <div id="purchaseorders-table">
-	    <%= render 'search/tables/purchaseorders' %>
+        <%= render 'search/tables/generic', list: @purchase_orders_list, name: "Purchase Orders", classObject: PurchaseOrder, type: "purchaseorders" %>
     </div>
 </div>
 <div id="keycodes_search" class="searchtab">
 	<%= render 'search_form', search_type: @keycodes_search, search_id: "keycodes_search", search_category: "Key Codes" %>
     <div id="keycodes-table">
-        <%= render 'search/tables/keycodes' %>
+        <%= render 'search/tables/generic', list: @keycodes_list, name: "Key Codes", classObject: Key, type: "keys" %>
     </div>
 </div>
 <div id="end_user_search" class="searchtab">
 	<%= render 'search_form', search_type: @end_users_search, search_id: "end_user_search", search_category: "End Users" %>
     <div id="endusers-table">
-        <%= render 'search/tables/endusers' %>
+        <%= render 'search/tables/generic', list: @end_users_list, name: "End Users", classObject: EndUser, type: "endusers" %>
     </div>
 </div>
 <div id="purchaser_search" class="searchtab">
 	<%= render 'search_form', search_type: @purchasers_search, search_id: "purchaser_search", search_category: "Purchasers" %>
     <div id="purchasers-table">
-        <%= render 'search/tables/purchasers' %>
+        <%= render 'search/tables/generic', list: @purchasers_list, name: "Purchasers", classObject: Purchaser, type: "purchasers" %>
     </div>
 </div>

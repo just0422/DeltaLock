@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         <% @result.each do |entry| %>
-			<tr class="search-row" data-href="<%= show_entry_path(@type, entry) %>">
+			<tr class="search-row" data-href="<%= entry_path(@type, entry) %>">
                 <% @class.column_names.each do |column| %>
                     <td class="<%= @type + "-" + column %>"
                     <% if ColumnLabels.column?(column) %>
