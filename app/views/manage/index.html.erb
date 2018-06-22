@@ -24,7 +24,7 @@
                     </div>
 
                     <%= submit_tag "Upload", class: "btn delta-btn" %>
-                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                    <%= hidden_field_tag :authenticity_token, form_authenticity_token, id:"assign-authenticity-token" %>
                 <% end %>
             </div>
         </div>  

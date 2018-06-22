@@ -1,5 +1,6 @@
-console.log("<%= j (render 'manage/users_table') %>");
 $("#manage-users-table").html("<%= j (render 'manage/users_table') %>")
 
-
-console.log("pre-render")
+var element = document.querySelector("#new-user-form");
+var instance = M.Modal.getInstance(element);
+if (instance)
+    instance.close();
