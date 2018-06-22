@@ -1,1 +1,5 @@
 $("#<%= @css_class %>-table").html("<%= j (render '/search/tables/generic', list: @list, name: @name, classObject: @class, type: @css_class); %>");
+
+$(".search-row").click(function() {
+    window.location = $(this).data("href");
+});
