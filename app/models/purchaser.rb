@@ -1,5 +1,7 @@
 class Purchaser < ApplicationRecord
   include ImportFunctions
+    resourcify
+
     has_many :purchase_orders
 
 

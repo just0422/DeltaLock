@@ -1,11 +1,8 @@
 class EntryController < ApplicationController
-    load_and_authorize_resource :class=> false
 	before_action :set_variables, only: [:show, :edit, :update, :delete]
 
-    def index
-    end
-
 	def show
+        authorize! :read, :all
         @entry = @class.find(params[:id])
 
 		@associations = get_associated_items(params[:type], params[:id])
@@ -18,33 +15,8 @@ class EntryController < ApplicationController
 		}
 	end
 
-	def edit 
-        @entry = @class.find(params[:id])
-    end
-
-	def update
-        @entry = @class.find(params[:id])
-
-		case params[:type]
-		when "keys"
-			@entry.update_attributes(key_parameters)
-		when "endusers"
-            geo = EndUser.geocode(params[:address])
-            @entry[:lat] = geo.lat
-            @entry[:lng] = geo.lng
-
-			@entry.update_attributes(enduser_parameters)
-
-		when "purchasers"
-			@entry.update_attributes(purchaser_parameters)
-		when "purchaseorders"
-			@entry.update_attributes(purchaseorder_parameters)
-		end
-
-        @entry = @class.find(params[:id])
-	end
-
     def new
+        authorize! :create, :all
 		@columns = {
 			"keys" => {
                 "name" => "Key",
@@ -70,6 +42,7 @@ class EntryController < ApplicationController
     end
 
     def create
+        authorize! :create, :all
         case params[:type]
         when "keys"
             @entry = Key.create(key_parameters)
@@ -85,10 +58,38 @@ class EntryController < ApplicationController
             @entry = PurchaseOrder.create(purchaseorder_parameters)
         end
 
-        redirect_to "/show/" + params[:type] + "/" + @entry[:id].to_s
+        redirect_to show_entry_path(params[:type], @entry[:id])
     end
 
+	def edit 
+        authorize! :update, :all
+        @entry = @class.find(params[:id])
+    end
+
+	def update
+        authorize! :update, :all
+        @entry = @class.find(params[:id])
+
+		case params[:type]
+		when "keys"
+			@entry.update_attributes(key_parameters)
+		when "endusers"
+            geo = EndUser.geocode(params[:address])
+            @entry[:lat] = geo.lat
+            @entry[:lng] = geo.lng
+
+			@entry.update_attributes(enduser_parameters)
+		when "purchasers"
+			@entry.update_attributes(purchaser_parameters)
+		when "purchaseorders"
+			@entry.update_attributes(purchaseorder_parameters)
+		end
+
+        @entry = @class.find(params[:id])
+	end
+
     def delete
+        authorize! :destroy, :all
         ignore_columns = ["id", "created_at", "updated_at"]
 		list = Relationship.where({ @type.to_s => @id })
 

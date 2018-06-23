@@ -1,5 +1,7 @@
 class PurchaseOrder < ApplicationRecord
   include ImportFunctions
+    resourcify
+
     belongs_to :purchaser
 	belongs_to :end_user
     has_many :po_ks

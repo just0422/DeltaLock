@@ -17,8 +17,7 @@ Rails.application.routes.draw do
     delete '/entry/delete/:type/:id', to: 'entry#delete', as: 'delete_entry'
 
     get '/search', to: 'search#index'
-    post '/search/export/:search_type' => 'search#export', as: 'export'
-    post '/search/result' => 'search#items', as: 'search_result'
+    post '/search/result' => 'search#result', as: 'search_result'
     
     get '/assign', to: 'assign#index'
     get '/assign/new/:type', to: 'assign#new', as: 'new_assign'

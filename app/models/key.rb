@@ -1,5 +1,7 @@
 class Key < ApplicationRecord
 	include ImportFunctions
+    resourcify
+
 	has_many :po_ks
 	has_many :purchase_orders, through: :po_ks
 

@@ -1,4 +1,6 @@
 class Relationship < ApplicationRecord
+    resourcify
+
 	def self.import(file)
 		spreadsheet = ImportFunctions.open_spreadsheet(file)
         return ImportFunctions.importClass(Relationship, spreadsheet)

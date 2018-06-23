@@ -6,7 +6,9 @@ class Ability
       if user.admin?
           can :manage, :all
       elsif user.editor?
-          can [:read, :create, :update], [Key, EndUser, Purchaser, PurchaseOrder, Relationship]
+          actions = [:read, :result, :create, :new, :search, :update_map, :assignment, :edit, :update, :upload, :download]
+          can actions, [Key, EndUser, Purchaser, PurchaseOrder, Relationship]
+          can :read, User
       elsif user.viewer?
           can :read, [Key, EndUser, Purchaser, PurchaseOrder, Relationship]
       else

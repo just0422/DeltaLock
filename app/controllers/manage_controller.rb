@@ -1,4 +1,10 @@
 class ManageController < ApplicationController
+    authorize_resource Key
+    authorize_resource EndUser
+    authorize_resource Purchaser 
+    authorize_resource PurchaseOrder
+    authorize_resource Relationship
+    authorize_resource User
     before_action :set_variables, only: [:upload, :download]
 
     def index
@@ -18,9 +24,8 @@ class ManageController < ApplicationController
             assigned_parts[:data] = assign_parts(assignment)
             assigned_parts[:id] = assignment[:id]
             @assignments.push(assigned_parts)
-            
         end
-
+        
         @users = User.all
     end
 
@@ -42,6 +47,7 @@ class ManageController < ApplicationController
     end
 
     def download
+        authorize! :read, @class
         if params[:template] == "0"
             search = @class.search
             @result = search.result

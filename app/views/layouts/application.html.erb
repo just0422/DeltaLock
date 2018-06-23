@@ -15,10 +15,10 @@
 		<div class="nav-wrapper">
             <a href="/" class="brand-logo center">DeltaLock</a>
 			<ul id="nav-mobile" class="hide-on-med-and-down">
-				<li><a href="/search">Search</a></li>
-				<li><a href="/new"   >New</a></li>
-				<li><a href="/assign">Assign</a></li>
-				<li><a href="/manage">Manage</a></li>
+                <li><a href="<%= search_path %>">Search</a></li>
+                <li><a href="<%= new_entry_path %>">New</a></li>
+                <li><a href="<%= assign_path %>">Assign</a></li>
+                <li><a href="<%= manage_path %>">Manage</a></li>
             </ul>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <% if user_signed_in? %>

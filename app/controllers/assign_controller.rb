@@ -1,5 +1,9 @@
 class AssignController < ApplicationController
-    load_and_authorize_resource :class=> false
+    authorize_resource Key
+    authorize_resource EndUser
+    authorize_resource Purchaser 
+    authorize_resource PurchaseOrder
+    authorize_resource Relationship
 	before_action :set_variables, only: [:create, :new, :search]
 
 	def index
@@ -116,7 +120,6 @@ class AssignController < ApplicationController
             assigned_parts[:data] = assign_parts(assignment)
             assigned_parts[:id] = assignment[:id]
             @assignments.push(assigned_parts)
-            
         end
     end
 
@@ -134,7 +137,6 @@ class AssignController < ApplicationController
         @categories['endusers'] = EndUser
         @categories['purchasers'] = Purchaser
         @categories['purchaseorders'] = PurchaseOrder
-
     end
 
     def update
