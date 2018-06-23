@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     end
 
     root to: "home_page#index"
-
     get '' => 'home_page#index'
 
     get '/entry/show/:type/:id', to: 'entry#show', as: 'show_entry'
