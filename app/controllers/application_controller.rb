@@ -8,10 +8,9 @@ class ApplicationController < ActionController::Base
         redirect_to new_user_session_url
     end
 
-    helper_method :current_user 
-    helper_method :require_user
-    helper_method :require_admin
-    helper_method :build_address_string
+    helper_method :is_viewer
+    helper_method :is_editor
+    helper_method :is_admin
 
     def assign_parts(parts)
         assignment_parts = Hash.new
@@ -61,6 +60,28 @@ class ApplicationController < ActionController::Base
 		@id = params[:id]
 		@type = params[:type]
 	end
+
+    def is_viewer
+        return (can? :read, Key) && 
+               (can? :read, EndUser) && 
+               (can? :read, Purchaser) && 
+               (can? :read, PurchaseOrder) && 
+               (can? :read, Relationship)
+    end
+    def is_editor
+        return (can? :create, Key) && 
+               (can? :create, EndUser) && 
+               (can? :create, Purchaser) && 
+               (can? :create, PurchaseOrder) && 
+               (can? :create, Relationship)
+    end
+    def is_admin
+        return (can? :manage, :all)
+    end
+
+    def readable_classes
+        [Key, EndUser, Purchaser, PurchaseOrder, Relationship]
+    end
 
     protected
     def configure_permitted_parameters

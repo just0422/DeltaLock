@@ -3,8 +3,6 @@
 <head>
     <title>DeltaLock</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSpBVcEmUnLMXS1wN9Mx8JcOhWvLA0kvY&v=3" async defer type="text/javascript"></script>
-	<!--<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
-    <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script>--> <!-- only if you need custom infoboxes -->
 
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
@@ -14,11 +12,17 @@
 	<nav class="delta-blue">
 		<div class="nav-wrapper">
             <a href="/" class="brand-logo center">DeltaLock</a>
-			<ul id="nav-mobile" class="hide-on-med-and-down">
-                <li><a href="<%= search_path %>">Search</a></li>
-                <li><a href="<%= new_entry_path %>">New</a></li>
-                <li><a href="<%= assign_path %>">Assign</a></li>
-                <li><a href="<%= manage_path %>">Manage</a></li>
+            <ul id="nav-mobile" class="hide-on-med-and-down">
+                <% if user_signed_in? %>
+                    <% if is_viewer %>
+                        <li><a href="<%= search_path %>">Search</a></li>
+                    <% end %>
+                    <% if is_editor %>
+                        <li><a href="<%= new_entry_path %>">New</a></li>
+                        <li><a href="<%= assign_path %>">Assign</a></li>
+                        <li><a href="<%= manage_path %>">Manage</a></li>
+                    <% end %>
+                <% end %>
             </ul>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <% if user_signed_in? %>

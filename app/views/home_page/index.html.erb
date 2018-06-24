@@ -12,11 +12,15 @@
         <div id="homepage-container">
             <h1 id="homepage-logo-text"> DeltaLock </h1>
             
-            <div class="row">
-                <a href="<%= search_path %>" class="col s3 btn-large delta-btn">Search</a>
-                <a href="<%= new_entry_path %>" class="col s3 btn-large delta-btn">New</a>
-                <a href="<%= assign_path %>" class="col s3 btn-large delta-btn">Assign</a>
-                <a href="<%= manage_path %>" class="col s3 btn-large delta-btn">Manage</a>
+            <div class="home-buttons-row center">
+                <% if is_viewer %>
+                    <a href="<%= search_path %>" class="btn-large delta-btn">Search</a>
+                <% end %>
+                <% if is_editor %>
+                    <a href="<%= new_entry_path %>" class="btn-large delta-btn">New</a>
+                    <a href="<%= assign_path %>" class="btn-large delta-btn">Assign</a>
+                    <a href="<%= manage_path %>" class="btn-large delta-btn">Manage</a>
+                <% end %>
             </div>
         </div>		
     </div>
