@@ -1,7 +1,9 @@
 <ul class="tabs tabs-fixed-width">
     <li class="tab"><a href="#file_upload_download">Files</a></li>
     <li class="tab"><a href="#manage_assignments">Manage Assignments</a></li>
-    <li class="tab"><a href="#manage_users">Manage Users</a></li>
+    <% if is_admin %>
+        <li class="tab"><a href="#manage_users">Manage Users</a></li>
+    <% end %>
 </ul>
 <div id="file_upload_download">
     <div class="row">
@@ -54,7 +56,9 @@
                     <% end %>
                 <% end %>
                 <th>Edit</th>
-                <th>Delete</th>
+                <% if is_admin %>
+                    <th>Delete</th>
+                <% end %>
             </tr>
         </thead>
         <tbody>
@@ -73,20 +77,24 @@
                     <td class="assign-table-cell">
                         <%= link_to "Edit", edit_assign_path(assignment_parts[:id]), class:"btn delta-btn" %>
                     </td>
-                    <td class="assign-table-cell">
-                        <%= link_to "Delete", delete_assign_path(assignment_parts[:id]), method: :delete, class:"btn red" %>
-                    </td>
+                    <% if is_admin %>
+                        <td class="assign-table-cell">
+                            <%= link_to "Delete", delete_assign_path(assignment_parts[:id]), method: :delete, class:"btn red" %>
+                        </td>
+                    <% end %>
                 </tr>
             <% end %>
         </tbody>
     </table>
 </div>
-<div id="manage_users">
-    <div id="manage-users-table">
-        <%= render 'manage/users_table' %>
+<% if is_admin %>
+    <div id="manage_users">
+        <div id="manage-users-table">
+            <%= render 'manage/users_table' %>
+        </div>
+        <div id="new-user-button">
+            <%= link_to raw('<i class="fa fa-plus-square" aria-hidden="true"></i>'), new_user_registration_path, class: "btn green", remote: true %>
+        </div>
     </div>
-    <div id="new-user-button">
-        <%= link_to raw('<i class="fa fa-plus-square" aria-hidden="true"></i>'), new_user_registration_path, class: "btn green", remote: true %>
-    </div>
-</div>
-<div id="user-form" class="modal modal-fixed-footer"></div>
+    <div id="user-form" class="modal modal-fixed-footer"></div>
+<% end %>

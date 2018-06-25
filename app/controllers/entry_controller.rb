@@ -1,8 +1,12 @@
 class EntryController < ApplicationController
+    authorize_resource Key
+    authorize_resource EndUser
+    authorize_resource Purchaser 
+    authorize_resource PurchaseOrder
+    authorize_resource Relationship
 	before_action :set_variables, only: [:show, :edit, :update, :delete]
 
 	def show
-        authorize! :read, :all
         @entry = @class.find(params[:id])
 
 		@associations = get_associated_items(params[:type], params[:id])
@@ -16,7 +20,6 @@ class EntryController < ApplicationController
 	end
 
     def new
-        authorize! :create, :all
 		@columns = {
 			"keys" => {
                 "name" => "Key",
