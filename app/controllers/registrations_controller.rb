@@ -26,17 +26,17 @@ class RegistrationsController < Devise::RegistrationsController
         render "manage"
     end
 
-    def edit
+    def edit_users
         authorize! :update, User
         @user = User.find(params[:id])
         @role = @user.roles.first.name
     end
 
-    def update
+    def update_users
         authorize! :update, User
 		resource = User.find(params[:id])
 
-        resource_updated = update_resource(resource, update_params) && 
+        resource_updated = update_user(resource, update_params) && 
         update_role(resource, params[:role])
         yield resource if block_given?
         if resource_updated
@@ -54,7 +54,7 @@ class RegistrationsController < Devise::RegistrationsController
 		render "manage"
     end
 
-	def destroy
+	def destroy_users
         authorize! :destroy, User
         user = User.find(params[:id])
 
@@ -67,9 +67,6 @@ class RegistrationsController < Devise::RegistrationsController
     end
     
     protected
-    def authenticate_scope!
-    end
-
     def sign_up_params
         params.require(:user).permit(:username, :email, :password, :first_name, :last_name)
     end
@@ -78,7 +75,7 @@ class RegistrationsController < Devise::RegistrationsController
         params.require(:user).permit(:username, :email, :password, :first_name, :last_name)
     end
 
-    def update_resource(user, params)
+    def update_user(user, params)
         if params[:password].blank?
             params.delete(:password)
         end
