@@ -56,6 +56,12 @@ ColumnLabels.insert("operating_key", "Operating Key Code")
 ColumnLabels.insert("bitting", "Bitting")
 ColumnLabels.insert("system_name", "System Name")
 ColumnLabels.insert("comments", "Comments")
+ColumnLabels.insert("keycode_stamp", "Key Code Stamp")
+ColumnLabels.insert("reference_code", "Reference Code")
+ColumnLabels.insert("bitting_driver", "Driver")
+ColumnLabels.insert("bitting_control", "Control")
+ColumnLabels.insert("bitting_master", "Master")
+ColumnLabels.insert("bitting_bottom", "Bottom")
 
 # Purchase Orders
 ColumnLabels.insert("po_number", "Purchase Order #")

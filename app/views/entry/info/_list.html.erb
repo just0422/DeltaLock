@@ -1,12 +1,29 @@
 <ul>
 	<% @class.column_names.each do |title| %>
-		<% if ColumnLabels.column?(title) %>
-			<li class="delta-collection-item">
-				<div class="<%= @type %>-label">
-					<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
-					<span class="<%= @type %>-<%= title %>"><%= @entry[title] %></span>
-				</div>
-			</li>
-		<% end %>
-	<% end %>
+        <% if ColumnLabels.column?(title) %>
+            <% if title.include? "bitting" %>
+                <li class="row">
+                    <strong class="col push-s1 s3"><%= ColumnLabels.columnToLabel(title) %>: </strong>
+                    <% @entry[title].split('/', -1).each do |bit| %>
+                        <span class="col push-s1 s1"><%= bit %></span>
+                    <% end %>
+                </li>
+            <% else %>
+                <li class="delta-collection-item">
+                    <div class="<%= @type %>-label">
+                        <strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
+                        <span class="<%= @type %>-<%= title %>"><%= @entry[title] %></span>
+                    </div>
+                </li>
+            <% end %>
+        <% end %>
+        <% if title == "reference_code" %>
+            <li class="delta-collection-item"><strong>Bitting:</strong>
+                <ul>
+        <% end %>
+        <% if title == "bitting_bottom" %>
+                </ul>
+            </li>
+        <% end %>
+    <% end %>
 </ul>

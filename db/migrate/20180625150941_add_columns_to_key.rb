@@ -3,6 +3,7 @@ class AddColumnsToKey < ActiveRecord::Migration[5.0]
       remove_column :users, :username
 
       add_column :keys, :keycode_stamp, :string
+      add_column :keys, :reference_code, :string
       add_column :keys, :bitting_driver, :string
       add_column :keys, :bitting_control, :string
       add_column :keys, :bitting_master, :string

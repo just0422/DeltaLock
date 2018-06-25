@@ -159,6 +159,6 @@ class EntryController < ApplicationController
 	end
 
 	def key_parameters
-		params.permit(:keyway, :master_key, :control_key, :operating_key, :bitting, :system_name, :comments)
+		params.permit(:keyway, :master_key, :control_key, :operating_key, :bitting, :system_name, :comments, :keycode_stamp, :reference_code, :bitting_driver, :bitting_master, :bitting_control, :bitting_bottom)
 	end
 end
