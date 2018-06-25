@@ -10,6 +10,11 @@
 <body>
     <div id="homepage-vertical-align" class="container">
         <div id="homepage-container">
+            <% if user_signed_in? %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn delta-btn homepage-login-logout" %></li>
+            <% else %>
+                <%= link_to "Login", new_user_session_path, class: "btn delta-btn homepage-login-logout" %></li>
+            <% end %>
             <h1 id="homepage-logo-text"> DeltaLock </h1>
             
             <div class="home-buttons-row center">
