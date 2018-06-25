@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180621151032) do
+ActiveRecord::Schema.define(version: 20180625154135) do
 
   create_table "end_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at",                         null: false
@@ -35,15 +35,19 @@ ActiveRecord::Schema.define(version: 20180621151032) do
   end
 
   create_table "keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "system_name"
     t.string   "keyway"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "master_key"
     t.string   "control_key"
     t.string   "operating_key"
-    t.string   "bitting"
-    t.string   "system_name"
-    t.text     "comments",      limit: 4294967295
+    t.string   "keycode_stamp"
+    t.string   "bitting_driver"
+    t.string   "bitting_control"
+    t.string   "bitting_master"
+    t.string   "bitting_bottom"
+    t.text     "comments",        limit: 65535
     t.index ["id"], name: "index_keys_on_id", using: :btree
   end
 
@@ -90,6 +94,8 @@ ActiveRecord::Schema.define(version: 20180621151032) do
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "", null: false
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -101,9 +107,6 @@ ActiveRecord::Schema.define(version: 20180621151032) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "username"
-    t.string   "first_name"
-    t.string   "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
