@@ -4,6 +4,7 @@
             <% if title.include? "bitting" %>
                 <li class="row">
                     <strong class="col push-s1 s3"><%= ColumnLabels.columnToLabel(title) %>: </strong>
+                    <% @entry[title] = "//////" if @entry[title].nil? || @entry[title].blank? %>
                     <% @entry[title].split('/', -1).each do |bit| %>
                         <% if bit.blank? %>
                             <span class="col push-s1 s1" style="color: red">X</span>
