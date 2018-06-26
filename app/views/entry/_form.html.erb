@@ -2,6 +2,17 @@
     <% if ColumnLabels.column?(title) %>
         <% if title == "id" %>
             <% next %>
+        <% elsif title == "reference_code" %>
+            <strong>Bitting:</strong><br />
+        <% elsif title.include? "bitting" %>
+            <label><%= ColumnLabels.columnToLabel(title) %></label>
+            <div class="row">
+                <% entry[title] = "//////" if entry[title].blank? %>
+                <% (0..6).each do |i| %>
+                    <% tagName = title + "[" + i.to_s + "]" %>
+                    <%= text_field_tag tagName, entry[title].split('/', -1)[i], class:"col bitting-push-s1 bitting-s1", placeholder: 'X' %>
+                <% end %>
+            </div>
         <% else %>
             <div class="input-field">
                 <% case column.type %>

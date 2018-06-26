@@ -5,7 +5,11 @@
                 <li class="row">
                     <strong class="col push-s1 s3"><%= ColumnLabels.columnToLabel(title) %>: </strong>
                     <% @entry[title].split('/', -1).each do |bit| %>
-                        <span class="col push-s1 s1"><%= bit %></span>
+                        <% if bit.blank? %>
+                            <span class="col push-s1 s1" style="color: red">X</span>
+                        <% else  %>
+                            <span class="col push-s1 s1"><%= bit %></span>
+                        <% end %>
                     <% end %>
                 </li>
             <% else %>

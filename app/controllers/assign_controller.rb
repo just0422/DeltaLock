@@ -174,11 +174,19 @@ class AssignController < ApplicationController
 	end
 
 	def key_parameters
-		params.permit(:keyway, :master_key, :control_key, :operating_key, :bitting, :system_name, :comments)
+        params[:bitting_driver] = remap_bits(params[:bitting_driver])
+        params[:bitting_master] = remap_bits(params[:bitting_master])
+        params[:bitting_control] = remap_bits(params[:bitting_control])
+        params[:bitting_bottom] = remap_bits(params[:bitting_bottom])
+		params.permit(:keyway, :master_key, :control_key, :operating_key, :bitting, :system_name, :comments, :keycode_stamp, :reference_code, :bitting_driver, :bitting_master, :bitting_control, :bitting_bottom)
 	end
 
     def assignment_parameters
         params.permit(:purchaseorders, :purchasers, :endusers, :keys)
+    end
+
+    def remap_bits(bitting)
+        bitting.sort.map{|k,v| "#{v}"}.join('/')
     end
 
     def gather_map_border_paramters

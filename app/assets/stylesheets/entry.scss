@@ -1,0 +1,16 @@
+div.row .bitting-push-s1 {
+    left: 9%;
+}
+
+div.row .bitting-s1 {
+    width: 12%;
+    margin-left: auto;
+    right: auto;
+    text-align: center;
+    height: 2rem;
+    border: 1px solid black;
+}
+
+.bitting-s1::placeholder{
+    color: red;
+}
