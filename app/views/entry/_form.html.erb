@@ -1,32 +1,38 @@
-<% className.columns_hash.each do |title, column| %>
-    <% if ColumnLabels.column?(title) %>
-        <% if title == "id" %>
-            <% next %>
-        <% elsif title == "reference_code" %>
-            <strong>Bitting:</strong><br />
-        <% elsif title.include? "bitting" %>
-            <label><%= ColumnLabels.columnToLabel(title) %></label>
-            <div class="row">
-                <% entry[title] = "//////" if entry[title].blank? %>
-                <% (0..6).each do |i| %>
-                    <% tagName = title + "[" + i.to_s + "]" %>
-                    <%= text_field_tag tagName, entry[title].split('/', -1)[i], class:"col bitting-push-s1 bitting-s1", placeholder: 'X' %>
-                <% end %>
-            </div>
-        <% else %>
-            <div class="input-field">
-                <% case column.type %>
-                <% when :string %>
-                    <%= text_field_tag title, entry[title] %>
-                <% when :integer %>
-                    <%= number_field_tag title, entry[title] %>
-                <% when :text %>
-                    <%= text_area_tag title, entry[title], class:"materialize-textarea" %>
-                <% when :date %>
-                    <%= date_field_tag title, entry[title] %>
-                <% end %>
-                <%= label_tag title, ColumnLabels.columnToLabel(title) %>
-            </div>
+<div class="row entry-form-row">
+    <% className.columns_hash.each do |title, column| %>
+        <% if ColumnLabels.column?(title) %>
+            <% if title == "id" %>
+                <% next %>
+            <% elsif title == "reference_code" %>
+                <div class="col s12">
+                    <strong>Bitting:</strong>
+                </div>
+            <% elsif title.include? "bitting" %>
+                <div class="input-field class col s12">
+                    <label><%= ColumnLabels.columnToLabel(title) %></label>
+                    <div class="row">
+                        <% entry[title] = "//////" if entry[title].blank? %>
+                        <% (0..6).each do |i| %>
+                            <% tagName = title + "[" + i.to_s + "]" %>
+                            <%= text_field_tag tagName, entry[title].split('/', -1)[i], class:"col bitting-push-s1 bitting-s1", placeholder: 'X' %>
+                        <% end %>
+                    </div>
+                </div>
+            <% else %>
+                <div class="input-field class col s6">
+                    <% case column.type %>
+                    <% when :string %>
+                        <%= text_field_tag title, entry[title] %>
+                    <% when :integer %>
+                        <%= number_field_tag title, entry[title] %>
+                    <% when :text %>
+                        <%= text_area_tag title, entry[title], class:"materialize-textarea" %>
+                    <% when :date %>
+                        <%= date_field_tag title, entry[title] %>
+                    <% end %>
+                    <%= label_tag title, ColumnLabels.columnToLabel(title) %>
+                </div>
+            <% end %>
         <% end %>
     <% end %>
-<% end %>
+</div>
