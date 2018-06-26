@@ -47,7 +47,6 @@ class ManageController < ApplicationController
     end
 
     def download
-        authorize! :read, @class
         if params[:template] == "0"
             search = @class.search
             @result = search.result

@@ -34,6 +34,6 @@ Rails.application.routes.draw do
     delete '/assign/delete/:id', to: 'assign#delete', as: 'delete_assign'
 
     get '/manage', to: 'manage#index'
+    get '/manage/download/:template/:type', to: 'manage#download', as: 'download'
     post '/manage/upload', to: 'manage#upload', as: 'upload_manage'
-    post '/manage/download/:template/:type', to: 'manage#download', as: 'download'
 end

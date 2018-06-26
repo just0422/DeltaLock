@@ -131,21 +131,6 @@ class EntryController < ApplicationController
 		return associations
 	end
 
-	def set_variables
-		case params[:type]
-		when "keys"
-			@class = Key
-		when "endusers"
-			@class = EndUser
-		when "purchasers"
-			@class = Purchaser
-		when "purchaseorders"
-			@class = PurchaseOrder
-		end
-		@id = params[:id]
-		@type = params[:type]
-	end
-
 	def enduser_parameters
 		params.permit(:name, :address, :phone, :fax, :primary_contact, :primary_contact_type, :department, :store_number, :group_name, :lat, :lng, :sub_department_1, :sub_department_2, :sub_department_3, :sub_department_4)
 	end

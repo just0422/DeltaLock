@@ -38,8 +38,8 @@
                     <div class="row">
                         <div class="divider" style="margin-top:10px"></div>
                         <h5 style="margin-top:10px"><%= name %></h5>
-                        <%= link_to "Download All", download_path(template: "0", type: type, format: "csv"), :method => :post, class: "btn col s5 delta-btn" %>
-                        <%= link_to "Download Template", download_path(template: "1", type: type, format: "csv"), :method => :post, class: "btn col push-s2 s5 delta-btn" %>
+                        <%= link_to "Download All", download_path(template: "0", type: type, format: "csv"), class: "btn col s5 delta-btn" %>
+                        <%= link_to "Download Template", download_path(template: "1", type: type, format: "csv"), class: "btn col push-s2 s5 delta-btn" %>
                     </div>
                 <% end %>
             </div>

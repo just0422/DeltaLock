@@ -56,6 +56,8 @@ class ApplicationController < ActionController::Base
 			@class = Purchaser
 		when "purchaseorders"
 			@class = PurchaseOrder
+        when "assignments"
+            @class = Relationship
 		end
 		@id = params[:id]
 		@type = params[:type]
