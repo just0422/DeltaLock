@@ -25,7 +25,7 @@
 							<% if type != @type %>
 								<% if entry["name"] != ""%>
 									<td class="show-table-cell">
-										<a href="/show/<%= type %>/<%= entry["id"] %>">
+                                        <a href="<%= show_entry_path( type, entry["id"] ) %>">
 											<div class="show-table-link"><%= entry["name"] %></div>
 										</a>
 									</td>
