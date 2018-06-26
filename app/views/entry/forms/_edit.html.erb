@@ -1,6 +1,9 @@
-<%= form_tag( update_entry_path(@type, @id), method: :post, remote: true ) do |f| %>
-    <%= render 'form', className: @class, entry: @entry %>
-	<div class="card-action row edit-btn">
-		<%= submit_tag("Save", class:"btn col s12 delta-btn") %>
-	</div>
-<% end %>
+<div class="modal-content">
+    <h2 class="center">Edit <%= @class.name.underscore.humanize.split.map(&:capitalize).join(' ') %></h2>
+    <%= form_tag( update_entry_path(@type, @id), method: :post, remote: true ) do |f| %>
+        <%= render 'form', className: @class, entry: @entry %>
+        <div class="card-action row edit-btn">
+            <%= submit_tag("Save", class:"btn col s12 delta-btn modal-close") %>
+        </div>
+    <% end %>
+</div>

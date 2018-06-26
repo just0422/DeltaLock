@@ -1,7 +1,14 @@
-$("#entry-info").fadeOut(FADE_TIME, function(){
-	$("#entry-form").html("<%= j (render 'entry/forms/edit') %>");
+$("#entry-form").html("<%= j (render 'entry/forms/edit') %>");
+var modalElement = document.querySelector('#entry-form');
+var instance = M.Modal.init(modalElement, 
+    {
+        opacity: 0.9,
+        endingTop: '5%',
+        onCloseEnd: () => {
+            instance.destroy();
+        }
+    }
+);
 
-    M.updateTextFields();
-
-	$("#entry-form").fadeIn(FADE_TIME);
-});
+instance.open();
+M.updateTextFields();
