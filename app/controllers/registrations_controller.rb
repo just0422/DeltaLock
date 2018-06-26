@@ -1,8 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
+    authorize_resource User
     respond_to :js
 
 	def create
-        authorize! :create, User
         build_resource(sign_up_params)
         resource.save
 
@@ -27,13 +27,11 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def edit_users
-        authorize! :update, User
         @user = User.find(params[:id])
         @role = @user.roles.first.name
     end
 
     def update_users
-        authorize! :update, User
 		resource = User.find(params[:id])
 
         resource_updated = update_user(resource, update_params) && 
@@ -55,7 +53,6 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
 	def destroy_users
-        authorize! :destroy, User
         user = User.find(params[:id])
 
         user.destroy
@@ -68,11 +65,11 @@ class RegistrationsController < Devise::RegistrationsController
     
     protected
     def sign_up_params
-        params.require(:user).permit(:username, :email, :password, :first_name, :last_name)
+        params.require(:user).permit(:email, :password, :first_name, :last_name)
     end
 
     def update_params
-        params.require(:user).permit(:username, :email, :password, :first_name, :last_name)
+        params.require(:user).permit(:email, :password, :first_name, :last_name)
     end
 
     def update_user(user, params)
