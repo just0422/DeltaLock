@@ -8,7 +8,7 @@ module ImportFunctions
         row = Hash[[header, spreadsheet.row(i)].transpose]
 
         entry = model.find_by_id(row["id"]) || model.new
-        entry.attributes = row.to_hash.slice(*ColumnTypeXls.keys)
+        entry.attributes = row.to_hash.slice(*ColumnType.keys)
         entry.save!
 
         entries.push(entry)
