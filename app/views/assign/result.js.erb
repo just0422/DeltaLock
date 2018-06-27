@@ -1,44 +1,28 @@
-$("#assign-search-form").html("<%= j ( render 'assign/result_table' ) %>");
+$("#assign-search-form").html("<%= j ( render 'assign/partials/result_table' ) %>");
 
+// As soon as a row is clicked, select it
 $(".assign-row").click(function(){
     $(this).addClass("assign-row-active").siblings().removeClass("assign-row-active");
-
+    
+    // Assign value to assignment form
     $("input[name=<%= @css_class %>]").val(parseInt($(this).find(".<%= @css_class %>-id").html()));
     check_assign_ready();
     
-    $("#<%= @css_class %>-assign-selected").html(
-        '<a class="assign-change-button btn btn-flat delta-btn-flat" ' + 
-        'onclick="change_assign_entry(\'<%= @css_class %>\')">' +
-        'Change' + 
-        '</a>' +
-        '<ul></ul>'
-    );
-
-    let elementValue;
+    // Select the key and draw it in the quad
+    set_assign_selected("<%= @css_class %>");
     <% @class.column_names.each do |title| %>
-		<% if ColumnLabels.column?(title) %>
-            // Get <%= title %> value
-            elementValue = $.trim($(this).find(".<%= @css_class %>-<%= title %>").html());
-
-            if (elementValue != ""){
-                // Add it to the list
-                $("#<%= @css_class %>-assign-selected ul").append(
-                    '<li class="delta-collection-item">' +
-                        '<div class="<%= @css_class %>-label">' +
-                            '<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>' +
-                            '<span class="<%= @css_class %>-<%= title %>">' +
-                               elementValue +
-                            '</span>' +
-                        '</div>' +
-                    '</li>'
-                );
-            }
+        <% if ColumnLabels.column?(title) %>
+            add_element_to_assign_selected(this, "<%= @css_class %>", "<%= title %>", "<%= ColumnLabels.columnToLabel(title) %>")
         <% end %>
-	<% end %>
+    <% end %>
 
+    // If it's an enduser, update the session (if it's part of a group)
     <% @class.column_names.each do |title| %>
         <% if @css_class == "endusers" and title == "id" %>
-            elementValue = $.trim($(this).find(".<%= @css_class %>-<%= title %>").html());
+            if ($.trim($(this).find(".<%= @css_class %>-group_name").html()).length == 0)
+                elementValue = '0';
+            else
+                elementValue = $.trim($(this).find(".<%= @css_class %>-<%= title %>").html());
 
             $.ajax({
                 method: "POST",
@@ -49,7 +33,8 @@ $(".assign-row").click(function(){
             })
         <% end %>
 	<% end %>
-
+    
+    // Toggle views in quad
     $("#<%= @css_class %>-assign-new-or-search").hide();
     $("#<%= @css_class %>-assign-selected").show();
 });

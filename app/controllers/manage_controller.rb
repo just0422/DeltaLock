@@ -1,12 +1,18 @@
 class ManageController < ApplicationController
+    # Authorizes User based on roles defined in app/models/ability.rb
     authorize_resource Key
     authorize_resource EndUser
     authorize_resource Purchaser 
     authorize_resource PurchaseOrder
     authorize_resource Relationship
     authorize_resource User
+
+    # Authorizes User based on roles defined in app/models/ability.rb
     before_action :set_variables, only: [:upload, :download]
 
+    # Gather file options, assigments and users for landing page
+    #
+    # Associated view: manage/index.html.erb
     def index
         @file_options = [
             ["Keys", "keys"],
@@ -28,9 +34,13 @@ class ManageController < ApplicationController
         
         @users = User.all
     end
-
+    
+    # Upload a file of entries. Can be POs, End Users, Purchasers, Keys, or Assignments
+    # POST request
+    #
+    # Associated view: manage/upload.html.erb
     def upload
-        #check form requirements satisfied
+        # Check form requirements satisfied
         if !params.key?("file")
             @message = "Please select a file"
             respond_to do |format|
@@ -42,10 +52,17 @@ class ManageController < ApplicationController
                 format.js { render layout: "error" }
             end
         else
+            # Calls the model's import function
             @result = @class.import(params[:file])
         end
     end
-
+    
+    # Downloads a CSV file of the requested model type
+    # GET request
+    #
+    # Params:
+    #   template - determines whether or not to download template
+    #   type - element to search for (PO, Purchaser, End User, Key Code, Relationship)
     def download
         if params[:template] == "0"
             search = @class.search

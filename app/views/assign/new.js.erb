@@ -1,5 +1,7 @@
-$("#entry-new-form").html("<%= j (render 'assign/forms/new') %>");
+<%# Render new form %>
+$("#entry-new-form").html("<%= j (render 'assign/partials/new') %>");
 
+// Create the modal
 var modalElement = document.querySelector('#entry-new-form');
 var instance = M.Modal.init(modalElement, 
     {
@@ -11,4 +13,5 @@ var instance = M.Modal.init(modalElement,
     }
 );
 
+// Open the modal
 instance.open();

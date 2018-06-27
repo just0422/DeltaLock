@@ -1,5 +1,7 @@
+<%# Renders the edit user form %>
 $("#user-form").html("<%= j (render 'edit_user_form') %>");
 
+// Creates a modal
 let modalElement = document.querySelector('#user-form');
 let instance = M.Modal.init(modalElement, 
     {
@@ -11,8 +13,10 @@ let instance = M.Modal.init(modalElement,
     }
 );
 
+// Opens modal
 instance.open();
 
+// Initialize selects and text fields
 let elems = document.querySelector('#role');
 let instances = M.FormSelect.init(elems, {});
 M.updateTextFields();

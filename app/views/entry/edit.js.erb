@@ -1,4 +1,7 @@
-$("#entry-form").html("<%= j (render 'entry/forms/edit') %>");
+<%# Render the form and stick it in the form div -- entry/partials/_edit.html.erb %>
+$("#entry-form").html("<%= j (render 'entry/partials/edit') %>");
+
+// Create the modal
 var modalElement = document.querySelector('#entry-form');
 var instance = M.Modal.init(modalElement, 
     {
@@ -10,5 +13,6 @@ var instance = M.Modal.init(modalElement,
     }
 );
 
+// Open the modal and ensure text fields look good
 instance.open();
 M.updateTextFields();

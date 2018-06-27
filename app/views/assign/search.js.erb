@@ -1,5 +1,5 @@
-<% if @mapActive %>
-    $("#assign-search-form").html("<%= j ( render "assign/forms/map_form") %>");
+<% if @mapActive %> // Render initial map form html 
+    $("#assign-search-form").html("<%= j ( render "assign/partials/map_form") %>");
 
     // Init Map
     let map;
@@ -25,28 +25,55 @@
         content: '<div><strong><%= @enduser[:name] %></strong></div><div><%= @enduser[:address].squish %></div>' 
     });
 
-
+    // Add address to maker
     marker.addListener('click', function() { markerinfo.open(map, marker); } );
     marker.setIcon("http://maps.google.com/mapfiles/kml/paddle/blu-stars-lv.png");
-
+    
+    // Initialize circles -- app/assets/javascripts/search.js
     let yellow_circle = initCircle("#FFFF00", <%= @yellow * 1609.34 %>, enduserPosition, map);
     let red_circle = initCircle("#FF0000", <%= @red * 1609.34 %>, enduserPosition, map);
     
     // Setup extra end user markers
     var enduser_markers = {};
-
-<% @endusers_red.each do |enduser| %>
-        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= enduser[:name] %>", "<%= enduser[:address].squish %>", "<%= enduser[:id] %>", RED_ICON, map);
+    
+    // Add markers to map -- app/assets/javascripts/search.js
+    <% @endusers_red.each do |enduser| %>
+        enduser_markers[<%= enduser[:id] %>] = 
+            addMapMarker(
+                    <%= enduser[:lat] %>, 
+                    <%= enduser[:lng] %>, 
+                    "<%= enduser[:name] %>", 
+                    "<%= enduser[:address].squish %>", 
+                    "<%= enduser[:id] %>", 
+                    RED_ICON, 
+                    map);
     <% end %>
     <% @endusers_yellow.each do |enduser| %>
-        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= enduser[:name] %>", "<%= enduser[:address].squish %>", "<%= enduser[:id] %>", YELLOW_ICON, map);
+        enduser_markers[<%= enduser[:id] %>] = 
+            addMapMarker(
+                    <%= enduser[:lat] %>, 
+                    <%= enduser[:lng] %>, 
+                    "<%= enduser[:name] %>", 
+                    "<%= enduser[:address].squish %>", 
+                    "<%= enduser[:id] %>", 
+                    YELLOW_ICON, 
+                    map);
     <% end %>
     <% @endusers_green.each do |enduser| %>
-        enduser_markers[<%= enduser[:id] %>] = addMapMarker(<%= enduser[:lat] %>, <%= enduser[:lng] %>, "<%= enduser[:name] %>", "<%= enduser[:address].squish %>", "<%= enduser[:id] %>", GREEN_ICON, map);
+        enduser_markers[<%= enduser[:id] %>] = 
+            addMapMarker(
+                    <%= enduser[:lat] %>, 
+                    <%= enduser[:lng] %>, 
+                    "<%= enduser[:name] %>", 
+                    "<%= enduser[:address].squish %>", 
+                    "<%= enduser[:id] %>", 
+                    GREEN_ICON, 
+                    map);
     <% end %>
     
+    
+    // Create slider
     let assignMapSlider = document.getElementById('assign-map-slider');
-
     noUiSlider.create(assignMapSlider, {
         start: [<%= @red %>, <%= @yellow %>],
         connect: [true, true, true],
@@ -64,15 +91,16 @@
             density: 3
         }
     })
-    
+
+    // Color slider
 	let connect = assignMapSlider.querySelectorAll('.noUi-connect');
 	let classes = ["red-connect", "yellow-connect", "green-connect"];
 
 	for ( let i = 0; i < connect.length; i++ ) {
 		connect[i].classList.add(classes[i]);
     }
-
-
+    
+    // Connect slider to map
     assignMapSlider.noUiSlider.on("update", function(values, index){
         let value = values[index] * 1609.34;
 
@@ -85,7 +113,8 @@
                 break;
         }
     })
-
+    
+    // Update the keys as slider finishes moving
     assignMapSlider.noUiSlider.on("end", function(values, index){
         $.ajax({
             url: "<%= update_map_path %>",
@@ -97,67 +126,58 @@
         })
     })
 
+    // Define actions when collapsible opens or closes
     var elems = document.querySelectorAll(".collapsible");
     let instances = M.Collapsible.init(elems, {
         onOpenStart: function(element){
+            $(".assign-map-key-entry .collapsible-header").removeClass("assign-map-key-entry-active-header");
+            $(".assign-map-key-entry .collapsible-body").removeClass("assign-map-key-entry-active-body");
+            // Activate header
             let header = element.querySelector(".collapsible-header");
             header.classList.add("assign-map-key-entry-active-header");
-
+            
+            // Activate body
             let body = element.querySelector(".collapsible-body");
             body.classList.add("assign-map-key-entry-active-body");
-
+            
+            // Trigger click on associated end user marker
             new google.maps.event.trigger( enduser_markers[element.dataset.enduser], 'click' );
-
-
-            $("#keys-assign-selected").html(
-                '<a class="assign-change-button btn btn-flat delta-btn-flat" ' + 
-                'onclick="change_assign_entry(\'keys\')">' +
-                'Change' + 
-                '</a>' +
-                '<ul></ul>'
-            );
-
-            let elementValue;
+            
+            // Select the key and draw it in the quad
+            set_assign_selected("keys");
+            console.log($(body).find(".keys-id").html());
             <% Key.column_names.each do |title| %>
                 <% if ColumnLabels.column?(title) %>
-                    // Get <%= title %> value
-                    elementValue = $.trim($(body).find(".keys-<%= title %>").html());
-
-                    if (elementValue != ""){
-                        // Add it to the list
-                        $("#keys-assign-selected ul").append(
-                            '<li class="delta-collection-item">' +
-                                '<div class="keys-label">' +
-                                    '<strong><%= ColumnLabels.columnToLabel(title) %> : </strong>' +
-                                    '<span class="keys-<%= title %>">' +
-                                       elementValue +
-                                    '</span>' +
-                                '</div>' +
-                            '</li>'
-                        );
-                    }
+                    add_element_to_assign_selected(body, "keys", "<%= title %>", "<%= ColumnLabels.columnToLabel(title) %>");
                 <% end %>
             <% end %>
+            
+            
             $("#keys-assign-new-or-search").hide();
             $("#keys-assign-selected").show();
             $("input[name=keys]").val(parseInt($(body).find(".keys-id").html()));
-            check_assign_ready();
+            check_assign_ready(); // Defined in apps/assets/javascripts/search.js
         },
+        // When unclicked, reset the quad 
         onCloseStart: function(element){
-            $(".assign-map-key-entry .collapsible-header").removeClass("assign-map-key-entry-active-header");
-            $(".assign-map-key-entry .collapsible-body").removeClass("assign-map-key-entry-active-body");
+            let header = element.querySelector(".collapsible-header");
+            if (header.classList.contains("assign-map-key-entry-active-header")){
+                $(".assign-map-key-entry .collapsible-header").removeClass("assign-map-key-entry-active-header");
+                $(".assign-map-key-entry .collapsible-body").removeClass("assign-map-key-entry-active-body");
+            }
             $("#keys-assign-selected").html("");
             $("#keys-assign-new-or-search").show();
             $("#keys-assign-selected").hide();
             $("input[name=keys]").val("");
-            check_assign_ready();
+            check_assign_ready(); // Defined in apps/assets/javascripts/search.js
         }
     });
 
 <% else %>
-    $("#assign-search-form").html("<%= j (render 'assign/forms/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")
+    $("#assign-search-form").html("<%= j (render 'assign/partials/search_form', search_type: @categorySearch, search_id: @category, search_category: @categoryName) %>")
 <% end %>
 
+// Setup modal
 let modalElement = document.querySelector('#assign-search-form');
 let instance = M.Modal.init(modalElement, 
     {
@@ -171,14 +191,16 @@ let instance = M.Modal.init(modalElement,
     }
 );
 
+// Open Modal
 instance.open();
 
-// Functions locted in app/assets/javascripts/application.js
+// Setup search form if exists
+// Functions located in app/assets/javascripts/application.js
 $('#assign-search-form').on('click', '.remove_fields', remove_fields_click);
 $('#assign-search-form').on('click', '.add_fields', add_fields_click);
-
 $('.add_fields').click()
 
+// Initialize select fields in form
 let selectElements = document.querySelectorAll('select');
 for (let i = 0; i < selectElements.length; i++){
     M.FormSelect.init(selectElements[i]);

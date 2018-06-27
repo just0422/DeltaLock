@@ -1,6 +1,9 @@
+<%# Generate modal content for the form %>
 <div class="modal-content">
     <h2 class="center">Edit <%= @class.name.underscore.humanize.split.map(&:capitalize).join(' ') %></h2>
+    <%# Render form for /entry/update/:type/:id %>
     <%= form_tag( update_entry_path(@type, @id), method: :post, remote: true ) do |f| %>
+        <%# render views/entry/_form.html.erb %>
         <%= render 'form', className: @class, entry: @entry %>
         <div class="card-action row edit-btn">
             <%= submit_tag("Save", class:"btn col s12 delta-btn modal-close") %>

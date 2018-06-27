@@ -1,8 +1,0 @@
-<% entryClass.column_names.each do |column| %>
-	<% if ColumnLabels.column?(column) %> 
-		<td>
-	<% else %>
-		<td style="display:none;">
-	<% end %>
-	<%= entry[column] %></td>
-<% end %>

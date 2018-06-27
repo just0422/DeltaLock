@@ -1,12 +1,17 @@
-$("#<%= @type %>-assign-selected").html("<%= j (render 'assign/info/list', entryClass: @class, type: @type, entry: @entry) %>");
+<%# Render the element to the appropriate assign quad %>
+$("#<%= @type %>-assign-selected").html("<%= j (render 'assign/partials/list', entryClass: @class, type: @type, entry: @entry) %>");
 
+// Toggle the appropriate view
 $("#<%= @type %>-assign-new-or-search").hide();
 $("#<%= @type %>-assign-selected").show();
 
+// Assign value to hiddent form
 $("input[name=<%= @type %>]").val(<%= @entry["id"] %>);
 
+// Close the modal
 var element = document.querySelector("#entry-new-form");
 var instance = M.Modal.getInstance(element);
 instance.close();
 
+// Verify whether assignment is ready
 check_assign_ready();

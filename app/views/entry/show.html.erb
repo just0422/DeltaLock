@@ -1,15 +1,19 @@
+<%# Render header for this class %>
 <h1 class="show-header"><%= @column_names[@type] %>s</h1>
 <div class="row">
 	<div class="col s4 card">
 		<div id="entry-info">
-			<%= render 'entry/info/edit_list' %>
+            <%# Render info for this entry %>
+			<%= render 'entry/partials/edit_list' %>
 		</div>
 	</div>
-	<div class = "col s8 card">
-		<h3 class="show-header">Associations</h3>
+    <div class = "col s8 card">
+        <%# Render Assignments table %>
+		<h3 class="show-header">Assignments</h3>
 		<table class = "table bordered centered responsive-table show-table">
 			<thead class = "thead-inverse">
-				<tr>
+                <tr>
+                    <%# Setup each column name (unless it's this element) %>
 					<% @column_names.each do |type, name| %>
 						<% if type != @type %>
 							<th><%= name %></th>
@@ -17,13 +21,15 @@
 					<% end %>
 				</tr>
 			</thead>
-			<tbody>
-				<% @associations.each do |association| %>
+            <tbody>
+                <%# Render assignment %>
+				<% @assignments.each do |assignment| %>
 					<tr>
-						<% association.each do |type, entry| %>
+						<% assignment.each do |type, entry| %>
 							<% if type != @type %>
 								<% if entry["name"] != ""%>
-									<td class="show-table-cell">
+                                    <td class="show-table-cell">
+                                        <%# Each assignment is a link to it's own entry page %>
                                         <a href="<%= show_entry_path( type, entry["id"] ) %>">
 											<div class="show-table-link"><%= entry["name"] %></div>
 										</a>

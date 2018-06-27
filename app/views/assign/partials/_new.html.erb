@@ -1,7 +1,9 @@
+<%# Render form for create_assign_path -- /assign/create/:type %>
 <%= form_tag( create_assign_path(@type), method: :post, remote: true ) do |f| %>
     <div class="modal-content">
-        <h3 class="center-align">New <%= @class.name.underscore.split.map(&:capitalize).join(' ') %></h3>
+        <h3 class="center-align">New <%= @name %></h3>
         <div class= "row">
+            <%# Render new form fields for this entry %>
             <%= render 'entry/form', className: @class, entry:@entry %>
         </div>
     </div>

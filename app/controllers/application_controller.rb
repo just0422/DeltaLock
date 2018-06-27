@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     helper_method :is_editor
     helper_method :is_admin
 
+    protected
     def assign_parts(parts)
         assignment_parts = Hash.new
 
@@ -63,6 +64,24 @@ class ApplicationController < ActionController::Base
 		@type = params[:type]
 	end
 
+    def create_entry
+        # Determine the type and create it
+        case params[:type]
+        when "keys"
+            @entry = Key.create(key_parameters)
+        when "endusers"
+            geo = EndUser.geocode(params[:address])
+            params[:lat] = geo.lat
+            params[:lng] = geo.lng
+
+            @entry = EndUser.create(enduser_parameters)
+        when "purchasers"
+            @entry = Purchaser.create(purchaser_parameters)
+        when "purchaseorders"
+            @entry = PurchaseOrder.create(purchaseorder_parameters)
+        end
+    end
+
     def is_viewer
         return (can? :read, Key) && 
                (can? :read, EndUser) && 
@@ -85,9 +104,46 @@ class ApplicationController < ActionController::Base
         [Key, EndUser, Purchaser, PurchaseOrder, Relationship]
     end
 
-    protected
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:signup, keys: [:email, :password, :first_name, :last_name])
         devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :current_password, :first_name, :last_name])
+    end
+
+	def enduser_parameters
+		params.permit(:name, :address, :phone, :fax, :primary_contact, :primary_contact_type, :department, :store_number, :group_name, :lat, :lng, :sub_department_1, :sub_department_2, :sub_department_3, :sub_department_4)
+	end
+
+	def purchaser_parameters
+		params.permit(:name, :address, :email, :phone, :fax, :primary_contact, :primary_contact_type, :group_name)
+	end
+
+	def purchaseorder_parameters
+		params.permit(:po_number, :date_order, :so_number)
+	end
+
+	def key_parameters
+        params[:bitting_driver] = remap_bits(params[:bitting_driver])
+        params[:bitting_master] = remap_bits(params[:bitting_master])
+        params[:bitting_control] = remap_bits(params[:bitting_control])
+        params[:bitting_bottom] = remap_bits(params[:bitting_bottom])
+		params.permit(:keyway, :master_key, :control_key, :operating_key, :bitting, :system_name, :comments, :keycode_stamp, :reference_code, :bitting_driver, :bitting_master, :bitting_control, :bitting_bottom)
+	end
+    
+    def sign_up_params
+        params.require(:user).permit(:email, :password, :first_name, :last_name)
+    end
+
+    def update_params
+        params.require(:user).permit(:email, :password, :first_name, :last_name)
+    end
+
+    # Allowed parameters for updating or creating and end user
+    def assignment_parameters
+        params.permit(:purchaseorders, :purchasers, :endusers, :keys)
+    end
+    
+    private
+    def remap_bits(bitting)
+        bitting.sort.map{|k,v| "#{v}"}.join('/')
     end
 end

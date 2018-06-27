@@ -1,7 +1,8 @@
 <div class="modal-content">
-    <h3 class="center-align"><%= @class.name.underscore.split.map(&:capitalize).join(' ') %> Search</h3>
+    <h3 class="center-align"><%= @name %> Search</h3>
     <div id="assign-map"></div>
-
+    
+    <!-- Slider below Map -->
     <div class="row">
         <div class="col s2">
             <strong id="assign-map-slider-range">Range (mi):</strong>
@@ -11,15 +12,17 @@
         </div>
     </div>
     
+    <%# Render lists based on key location from central enduser %>
+    <!-- Lists below slider -->
     <div class="row" id="assign-map-keys">
         <div class="col s4" id="assign-map-red-keys">
-            <%= render "assign/info/keys_lists", keys: @red_keys, color: "Red" %>
+            <%= render "assign/partials/keys_lists", keys: @red_keys, color: "Red" %>
         </div>
         <div class="col s4" id="assign-map-yellow-keys">
-            <%= render "assign/info/keys_lists", keys: @yellow_keys, color: "Yellow" %>
+            <%= render "assign/partials/keys_lists", keys: @yellow_keys, color: "Yellow" %>
         </div>
         <div class="col s4" id="assign-map-green-keys">
-            <%= render "assign/info/keys_lists", keys: @green_keys, color: "Green" %>
+            <%= render "assign/partials/keys_lists", keys: @green_keys, color: "Green" %>
         </div>
     </div>
 </div>

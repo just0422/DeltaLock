@@ -1,22 +1,32 @@
+<%# Render Edit assignment page %>
 <div id="assign-container">
-    <% @categories.each do |category, categoryClass| %>
-        <% categoryName = categoryClass.name.underscore.humanize.split.map(&:capitalize).join(' ') %>
-        <% categoryLower = categoryClass.name.downcase + 's' %>
-        <% categoryNewField = "New " + categoryName %>
-        <% categorySearchField = "Search " + categoryName %>
-		<div class="assign-quad">
-			<div class="assign-new-or-search" id="<%= categoryLower %>-assign-new-or-search" <% if @assignment[category] != nil %> style="display:none;" <% end %> >
+    <% @categories.each do |category, cat| %>
+        <div class="assign-quad">
+            <%# Hide this div if an element already exists in its spot %>
+			<div class="assign-new-or-search" id="<%= category %>-assign-new-or-search" <% if @assignment[category] != nil %> style="display:none;" <% end %> >
                 <!-- This should be a form -->
-                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categoryNewField, new_assign_path(categoryLower), remote: true, class: "btn-large delta-btn modal-trigger" %></div></div>
-                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categorySearchField, search_assign_path(categoryLower), remote: true, class:"btn-large delta-btn modal-trigger" %></div></div>
+                <div class="assign-new-or-search-row">
+                    <div class="assign-btn-wrapper">
+                        <%= link_to "New " + cat[:name], new_assign_path(category), remote: true, class: "btn-large delta-btn modal-trigger" %>
+                    </div>
+                </div>
+                <div class="assign-new-or-search-row">
+                    <div class="assign-btn-wrapper">
+                        <%= link_to "Search " + cat[:name], search_assign_path(category), remote: true, class:"btn-large delta-btn modal-trigger" %>
+                    </div>
+                </div>
             </div>
-            <div id="<%= categoryLower %>-assign-selected" <% if @assignment[category] == nil %>style="display:none;"<% end %>>
+
+            <%# Render element if it exists %>
+            <div id="<%= category %>-assign-selected" <% if @assignment[category] == nil %>style="display:none;"<% end %>>
                 <% if @assignment[category] != nil %>
-                    <%= render 'assign/info/list', entryClass: categoryClass, type: categoryLower, entry: @assignment_parts[category] %>
+                    <%= render 'assign/partials/list', entryClass: cat[:class], type: category, entry: @assignment_parts[category] %>
                 <% end %>
             </div>
         </div>
-	<% end %>
+    <% end %>
+
+    <%# Form to update assignment %>
     <%= form_tag( update_assign_path(@assignment[:id]), method: :post ) do %>
         <input type="hidden" name="keys" <% if @assignment[:keys] != nil %> value="<%= @assignment[:keys] %>" <% end %> >
         <input type="hidden" name="endusers" <% if @assignment[:endusers] != nil %> value="<%= @assignment[:endusers] %>" <% end %> >
@@ -27,9 +37,6 @@
 	<% end %>
 </div>
 
-
-<div id="entry-new-form" class="modal modal-fixed-footer">
-</div>
-
-<div id="assign-search-form" class="modal modal-fixed-footer">
-</div>
+<!-- Reserveed for modals -->
+<div id="entry-new-form" class="modal modal-fixed-footer"></div>
+<div id="assign-search-form" class="modal modal-fixed-footer"></div>

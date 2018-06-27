@@ -1,3 +1,4 @@
+<%# Recolor markers based on new distance %>
 <% @endusers_red.each do |enduser| %>
     enduser_markers[<%= enduser[:id] %>].setIcon(RED_ICON);
 <% end %>
@@ -8,6 +9,7 @@
     enduser_markers[<%= enduser[:id] %>].setIcon(GREEN_ICON);
 <% end %>
 
-$("#assign-map-red-keys").html("<%= j ( render "assign/info/keys_lists", keys: @red_keys, color: "Red" ) %>")
-$("#assign-map-yellow-keys").html("<%= j ( render "assign/info/keys_lists", keys: @yellow_keys, color: "Yellow" ) %>")
-$("#assign-map-green-keys").html("<%= j ( render "assign/info/keys_lists", keys: @green_keys, color: "Green" ) %>")
+<%# Redraw key lists based on distance %>
+$("#assign-map-red-keys").html("<%= j ( render "assign/partials/keys_lists", keys: @red_keys, color: "Red" ) %>")
+$("#assign-map-yellow-keys").html("<%= j ( render "assign/partials/keys_lists", keys: @yellow_keys, color: "Yellow" ) %>")
+$("#assign-map-green-keys").html("<%= j ( render "assign/partials/keys_lists", keys: @green_keys, color: "Green" ) %>")

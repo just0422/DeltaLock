@@ -1,16 +1,30 @@
 class EntryController < ApplicationController
+    # Authorizes User based on roles defined in app/models/ability.rb
     authorize_resource Key
     authorize_resource EndUser
     authorize_resource Purchaser 
     authorize_resource PurchaseOrder
     authorize_resource Relationship
+
+    # Execute preliminary function before the following actions
 	before_action :set_variables, only: [:show, :edit, :update, :delete]
-
+    
+    # Shows the entry page for any element specified in the url
+    # GET request
+    #
+    # Params:
+    #   type - element to search for (PO, Purchaser, End User, Key Code)
+    #   id - unique identfier for the database to return
+    #
+    # Associated View: entry/show.html.erb
 	def show
-        @entry = @class.find(params[:id])
-
-		@associations = get_associated_items(params[:type], params[:id])
-
+        # Find the element and assign it to a global variable
+        @entry = @class.find(params[:id]) 
+    
+        # Get all assigned items
+		@assignments = get_assignments(params[:type], params[:id])
+        
+        # Setup column names for assignments table
 		@column_names = {
 			"keys" => "Key",
 			"endusers" => "End User",
@@ -18,8 +32,13 @@ class EntryController < ApplicationController
 			"purchaseorders" => "Purchase Order"
 		}
 	end
-
+    
+    # Generates the form for a new entry
+    # GET request
+    #
+    # Associated View: entry/new.html.erb
     def new
+        # Necessary data to render a new form for each type
 		@columns = {
 			"keys" => {
                 "name" => "Key",
@@ -43,40 +62,52 @@ class EntryController < ApplicationController
             }
 		}
     end
-
+    
+    # Creates the new entry
+    # POST request
+    #
+    # Params:
+    #   type - element to create (PO, Purchaser, End User, Key Code)
+    #
+    # Redirects to show_entry_path -- /entry/show/:type/:id
     def create
-        authorize! :create, :all
-        case params[:type]
-        when "keys"
-            @entry = Key.create(key_parameters)
-        when "endusers"
-            geo = EndUser.geocode(params[:address])
-            params[:lat] = geo.lat
-            params[:lng] = geo.lng
-
-            @entry = EndUser.create(enduser_parameters)
-        when "purchasers"
-            @entry = Purchaser.create(purchaser_parameters)
-        when "purchaseorders"
-            @entry = PurchaseOrder.create(purchaseorder_parameters)
-        end
-
+        create_entry
+        
+        # Redirect to entry view to show the new element
         redirect_to show_entry_path(params[:type], @entry[:id])
     end
-
+    
+    # Generates edit form for an entry
+    # AJAX GET request
+    #
+    # Params:
+    #   type - element to edit (PO, Purchaser, End User, Key Code)
+    #   id - unique identfier for the database fetch
+    #
+    # Associated "view" - entry/edit.js.erb
 	def edit 
-        authorize! :update, :all
+        #Find the entry
         @entry = @class.find(params[:id])
     end
-
+    
+    # Updates the entry being edited
+    # AJAX POST request
+    #
+    # Params:
+    #   type - element to update (PO, Purchaser, End User, Key Code)
+    #   id - unique identfier for the database to update 
+    #
+    # Associated "view" - entry/update.js.erb
 	def update
-        authorize! :update, :all
+        # Retrieve entry before update
         @entry = @class.find(params[:id])
-
+        
+        # Update correct entry base on type
 		case params[:type]
 		when "keys"
 			@entry.update_attributes(key_parameters)
 		when "endusers"
+            # Geocode address (for mapping feature)
             geo = EndUser.geocode(params[:address])
             @entry[:lat] = geo.lat
             @entry[:lng] = geo.lng
@@ -88,17 +119,29 @@ class EntryController < ApplicationController
 			@entry.update_attributes(purchaseorder_parameters)
 		end
 
+        # Retrieve newly saved entry
         @entry = @class.find(params[:id])
 	end
-
+    
+    # Deletes a specified entry
+    # DELETE request
+    #
+    # Params:
+    #   type - element to delete (PO, Purchaser, End User, Key Code)
+    #   id - unique identfier for the database to delete
+    #
+    # Associated View: entry/delete.html.erb
     def delete
-        authorize! :destroy, :all
         ignore_columns = ["id", "created_at", "updated_at"]
+        # Find all assignments associated with this element
 		list = Relationship.where({ @type.to_s => @id })
-
+    
+        # For each assignment
 		list.each do |assignment|
+            # Remove this element from the assigment
             assignment[type] = nil
-
+            
+            # Count how many elements are left
             count = 0
             Relationship.column_names.each do |column|
                 if assignment[column] != nil and not ignore_columns.include?(column)
@@ -106,52 +149,42 @@ class EntryController < ApplicationController
                 end
             end
             
+            # If only one element is left, destroy the assignment
             if count <= 1
                 assignment.destroy
+            # Otherwise, save
             else
                 assignment.save
             end
         end
-
+        
+        # Destroy the desired element
         @class.destroy(@id)
     end
 
 	private
-	def get_associated_items(type, id)
-		associations = Array.new
+    # Gets all the assigments that 'id' is a part of
+    #
+    # Params:
+    #   type - assignments column to query (PO, Purchaser, End User, Key Code)
+    #   id - unique identifier belonging to an assignment type
+    #
+    # Returns:
+    #   A list of assignments where each 'type' field is a human readable element
+    #       instead of an arbitrary 'id'
+	def get_assignments(type, id)
+		assignments = Array.new
 		
+        # Gather all assignments with this 'id' in the 'type' column
 		list = Relationship.where({ type.to_s => id })
 
-		list.each do |assignment|
-            association = assign_parts(assignment)
-
-			associations.push(association)
+        # In each assignment
+		list.each do |relationship|
+            # Gather human readable parts
+            assignment = assign_parts(relationship)
+			assignments.push(assignment)
 		end
 
-		return associations
+		return assignments
 	end
-
-	def enduser_parameters
-		params.permit(:name, :address, :phone, :fax, :primary_contact, :primary_contact_type, :department, :store_number, :group_name, :lat, :lng, :sub_department_1, :sub_department_2, :sub_department_3, :sub_department_4)
-	end
-
-	def purchaser_parameters
-		params.permit(:name, :address, :email, :phone, :fax, :primary_contact, :primary_contact_type, :group_name)
-	end
-
-	def purchaseorder_parameters
-		params.permit(:po_number, :date_order, :so_number)
-	end
-
-	def key_parameters
-        params[:bitting_driver] = remap_bits(params[:bitting_driver])
-        params[:bitting_master] = remap_bits(params[:bitting_master])
-        params[:bitting_control] = remap_bits(params[:bitting_control])
-        params[:bitting_bottom] = remap_bits(params[:bitting_bottom])
-		params.permit(:keyway, :master_key, :control_key, :operating_key, :bitting, :system_name, :comments, :keycode_stamp, :reference_code, :bitting_driver, :bitting_master, :bitting_control, :bitting_bottom)
-	end
-
-    def remap_bits(bitting)
-        bitting.sort.map{|k,v| "#{v}"}.join('/')
-    end
 end

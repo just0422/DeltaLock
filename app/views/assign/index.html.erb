@@ -1,34 +1,40 @@
 <div id="assign-container">
-    <% @categories.each do |category, categoryClass| %>
-        <% categoryName = categoryClass.name.underscore.humanize.split.map(&:capitalize).join(' ') %>
-        <% categoryLower = categoryClass.name.downcase + 's' %>
-        <% categoryNewField = "New " + categoryName %>
-        <% categorySearchField = "Search " + categoryName %>
-		<div class="assign-quad">
-			<div class="assign-title" id="<%= categoryLower %>-assign-title">
-				<h3><%= categoryName %></h3>
-			</div>
-			<div class="assign-new-or-search" id="<%= categoryLower %>-assign-new-or-search" style="display:none;">
-                <!-- This should be a form -->
-                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categoryNewField, new_assign_path(categoryLower, "assign"), remote: true, class: "btn-large delta-btn modal-trigger" %></div></div>
-                <div class="assign-new-or-search-row"><div class="assign-btn-wrapper"><%= link_to categorySearchField, search_assign_path(categoryLower), remote: true, class:"btn-large delta-btn modal-trigger" %></div></div>
+    <%# Generate a box for each category %>
+    <% @categories.each do |category, cat| %>
+        <div class="assign-quad">
+            <%# Name the box %>
+            <div class="assign-title" id="<%= category %>-assign-title"><h3><%= cat[:name] %></h3></div>
+            
+            <%# Build New and Search buttons %>
+			<div class="assign-new-or-search" id="<%= category %>-assign-new-or-search" style="display:none;">
+                <div class="assign-new-or-search-row">
+                    <div class="assign-btn-wrapper">
+                        <%= link_to "New " + cat[:name], new_assign_path(category), remote: true, class: "btn-large delta-btn modal-trigger" %>
+                    </div>
+                </div>
+                <div class="assign-new-or-search-row">
+                    <div class="assign-btn-wrapper">
+                        <%= link_to "Search " + cat[:name], search_assign_path(category), remote: true, class:"btn-large delta-btn modal-trigger" %>
+                    </div>
+                </div>
             </div>
-            <ul id="<%= categoryLower %>-assign-selected" style="display:none;"></ul>
+
+            <%# Reserve area for selected element %>
+            <ul id="<%= category %>-assign-selected" style="display:none;"></ul>
         </div>
-	<% end %>
-    <form action="/assign/assignment" method="POST">
+    <% end %>
+
+    <%# Form used to submit assigment %>
+    <%= form_tag(assignment_path, method: :post) do |f| %>
         <input type="hidden" name="purchaseorders">
         <input type="hidden" name="purchasers">
         <input type="hidden" name="endusers">
         <input type="hidden" name="keys">
 	    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <input type="submit" id="assign-button" class="btn-large delta-btn" value="ASSIGN" />
-    </form>
+    <% end %>
 </div>
 
-
-<div id="entry-new-form" class="modal modal-fixed-footer">
-</div>
-
-<div id="assign-search-form" class="modal modal-fixed-footer">
-</div>
+<!-- Reserveed for modals -->
+<div id="entry-new-form" class="modal modal-fixed-footer"></div>
+<div id="assign-search-form" class="modal modal-fixed-footer"></div>

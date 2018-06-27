@@ -1,5 +1,8 @@
+<%# Renders updated user table %>
+
 $("#manage-users-table").html("<%= j (render 'manage/users_table') %>")
 
+// Close modal
 var element = document.querySelector("#user-form");
 var instance = M.Modal.getInstance(element);
 if (instance)

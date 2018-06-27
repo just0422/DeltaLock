@@ -1,0 +1,38 @@
+<%# Render each piece of the entry %>
+<ul>
+    <% className.column_names.each do |title| %>
+        <%# Special formatting for bitting %>
+        <% if title.include? "bitting" %>
+            <li class="row">
+                <strong class="col push-s1 s3"><%= ColumnLabels.columnToLabel(title) %>: </strong>
+                <span class="<%= type %>-<%= title %>" style="display:none;"><%= entry[title] %></span>
+                <%# Remove / marks from bitting %>
+                <% entry[title] = "//////" if entry[title].nil? || entry[title].blank? %>
+                <% entry[title].split('/', -1).each do |bit| %>
+                    <% if bit.blank? %>
+                        <span class="col push-s1 s1" style="color: red">X</span>
+                    <% else  %>
+                        <span class="col push-s1 s1"><%= bit %></span>
+                    <% end %>
+                <% end %>
+            </li>
+        <%# Otherwise, format normally -- name: value %>
+        <% elsif ColumnLabels.column?(title) and not entry[title].blank? %>
+            <li class="delta-collection-item">
+                <div class="<%= type %>-label">
+                    <strong><%= ColumnLabels.columnToLabel(title) %> : </strong>
+                    <span class="<%= type %>-<%= title %>"><%= entry[title] %></span>
+                </div>
+            </li>
+        <% end %>
+        <% if title == "reference_code" %>
+            <li class="delta-collection-item"><strong>Bitting:</strong>
+                <ul>
+        <% end %>
+        <%# Close off bitting when it's done %> 
+        <% if title == "bitting_bottom" %>
+                </ul>
+            </li>
+        <% end %>
+    <% end %>
+</ul>

@@ -1,5 +1,7 @@
-$("#<%= @css_class %>-table").html("<%= j (render '/search/tables/generic', list: @list, name: @name, classObject: @class, type: @css_class); %>");
+<%# Re-render appropriate table with search results %>
+$("#<%= @css_class %>-table").html("<%= j (render '/search/partials/table', list: @list, name: @name, classObject: @class, type: @css_class); %>");
 
+// Reinitialize rows so that they are clickable
 $(".search-row").click(function() {
     window.location = $(this).data("href");
 });

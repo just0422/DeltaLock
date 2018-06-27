@@ -1,0 +1,6 @@
+<%# Render the quadlist (with a change button just in case %>
+<!-- change_assign_entry(...) defined in - app/assets/javaascripts/assign.js -->
+<a class="assign-change-button btn btn-flat delta-btn-flat" onclick="change_assign_entry('<%= type %>')">Change</a>
+
+<%# Render the list %>
+<%= render "assign/partials/modal_list", className: entryClass, type: type, entry: entry %>

@@ -1,3 +1,4 @@
+<%# Tab headers %>
 <ul class="tabs tabs-fixed-width" >
     <li class="tab"><a id="keycodes_header" href="#keys" class="active">Keys</a></li>
     <li class="tab"><a id="end_user_header" href="#endusers">End Users</a></li>
@@ -6,10 +7,13 @@
 </ul>
 
 <div class= "row">
+    <%# Render each tab body %>
     <% @columns.each do |type, attributes| %>
         <div id="<%= type %>">
+            <%# Render the form that will submit a POST request to /entry/create/:type' %>
             <%= form_tag( create_entry_path(type), method: :post, remote: true ) do |f| %>
                 <h3 class="center-align">New <%= attributes["name"] %></h3>
+                <%# Render form elements -- entry/_form.html.erb %>
                 <%= render 'form', className: attributes["class"], entry: attributes["entry"] %>
                 <%= submit_tag("Create", class:"btn col s12 delta-btn") %>
             <% end %>

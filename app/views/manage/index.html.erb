@@ -1,10 +1,14 @@
+<%# Render Manage page %>
 <ul class="tabs tabs-fixed-width">
+    <li class="tab"><a href="#manage_assignments">Assignments</a></li>
     <li class="tab"><a href="#file_upload_download">Files</a></li>
-    <li class="tab"><a href="#manage_assignments">Manage Assignments</a></li>
+    <%# Only admins should be able to see this tabl %>
     <% if is_admin %>
         <li class="tab"><a href="#manage_users">Manage Users</a></li>
     <% end %>
 </ul>
+
+<%# File management tab %>
 <div id="file_upload_download">
     <div class="row">
         <div class="col s6 card">
@@ -46,6 +50,8 @@
         </div>
     </div>
 </div>
+
+<%# Assignments tab %>
 <div id="manage_assignments">
     <table class = "table bordered centered responsive-table show-table">
         <thead class = "thead-inverse">
@@ -62,6 +68,7 @@
             </tr>
         </thead>
         <tbody>
+            <%# Render each assignment along with an edit / delete option %>
             <% @assignments.each do |assignment_parts| %>
                 <tr>
                     <td class="assign-table-cell"><%= assignment_parts[:id] %></td>
@@ -77,6 +84,7 @@
                     <td class="assign-table-cell">
                         <%= link_to "Edit", edit_assign_path(assignment_parts[:id]), class:"btn delta-btn" %>
                     </td>
+                    <%# Only admins can delete %>
                     <% if is_admin %>
                         <td class="assign-table-cell">
                             <%= link_to "Delete", delete_assign_path(assignment_parts[:id]), method: :delete, class:"btn red" %>
@@ -87,11 +95,13 @@
         </tbody>
     </table>
 </div>
+<%# If admin, render the users tab %>
 <% if is_admin %>
     <div id="manage_users">
         <div id="manage-users-table">
             <%= render 'manage/users_table' %>
         </div>
+        <%# Link to add a new user %>
         <div id="new-user-button">
             <%= link_to raw('<i class="fa fa-plus-square" aria-hidden="true"></i>'), new_user_registration_path, class: "btn green", remote: true %>
         </div>

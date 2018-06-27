@@ -1,9 +1,14 @@
+<%# Renders the actual info for any entry %>
 <ul>
-	<% @class.column_names.each do |title| %>
+    <%# Go through each column name of the model (class) %>
+    <% @class.column_names.each do |title| %>
+        <%# Check for a pretty print version of the column_name %>
         <% if ColumnLabels.column?(title) %>
+            <%# Special formatting for bitting %>
             <% if title.include? "bitting" %>
                 <li class="row">
                     <strong class="col push-s1 s3"><%= ColumnLabels.columnToLabel(title) %>: </strong>
+                    <%# Remove / marks from bitting %>
                     <% @entry[title] = "//////" if @entry[title].nil? || @entry[title].blank? %>
                     <% @entry[title].split('/', -1).each do |bit| %>
                         <% if bit.blank? %>
@@ -13,6 +18,7 @@
                         <% end %>
                     <% end %>
                 </li>
+            <%# Otherwise, format normally -- name: value %>
             <% else %>
                 <li class="delta-collection-item">
                     <div class="<%= @type %>-label">
@@ -22,10 +28,12 @@
                 </li>
             <% end %>
         <% end %>
+        <%# Setup for bitting to come next %>
         <% if title == "reference_code" %>
             <li class="delta-collection-item"><strong>Bitting:</strong>
                 <ul>
         <% end %>
+        <%# Close off bitting when it's done %> 
         <% if title == "bitting_bottom" %>
                 </ul>
             </li>

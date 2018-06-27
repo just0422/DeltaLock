@@ -1,13 +1,21 @@
 class SearchController < ApplicationController
+    # Authorizes User based on roles defined in app/models/ability.rb
     authorize_resource Key
     authorize_resource EndUser
     authorize_resource Purchaser 
     authorize_resource PurchaseOrder
     authorize_resource Relationship
-	before_action :set_arrays
-	after_action :uniq_arrays
-
+    
+    # Gather all initial searches for each element
+    #
+    # Associated view: search/index.html.erb
     def index
+        @end_users_list = Array.new
+        @key_codes_list = Array.new
+        @purchase_orders_list = Array.new
+        @purchasers_list = Array.new
+
+        # Create a search object and initial search result (returns all elements)
         @purchase_order_search = PurchaseOrder.search
 		@purchase_orders_list = @purchase_order_search.result
 
@@ -19,9 +27,23 @@ class SearchController < ApplicationController
 
 		@purchasers_search = Purchaser.search
 		@purchasers_list = @purchasers_search.result
+        
+        # Filter out dupblicates and nulls
+        @end_users_list = @end_users_list.uniq.compact
+        @key_codes_list = @key_codes_list.uniq.compact
+        @purchase_orders_list = @purchase_orders_list.uniq.compact
+        @purchasers_list = @purchasers_list.uniq.compact
     end
-
+    
+    # Search based on parameters and render the result
+    # AJAX POST request
+    #
+    # Params:
+    #   type - element to search for (PO, Purchaser, End User, Key Code)
+    #
+    # Associated "view": search/result.js.erb
 	def result 
+        # Get appropriate search types
         case params[:search_type]
         when "purchase_order_search"
             @class = PurchaseOrder
@@ -45,30 +67,10 @@ class SearchController < ApplicationController
             @name = "Assignments"
         end
         
+        # Execute search and sort results based on selected model
         @search = @class.search(params[:q])
         @list = @search.result
         @search.build_condition if @search.conditions.empty?
         @search.build_sort if @search.sorts.empty?
-
-        respond_to do |format|
-            format.js
-        end
     end
-
-	private
-	def set_arrays
-        @end_users_list = Array.new
-        @key_codes_list = Array.new
-        @purchase_orders_list = Array.new
-        @purchasers_list = Array.new
-        @assignments_list = Array.new
-	end
-
-	def uniq_arrays
-        @end_users_list = @end_users_list.uniq.compact
-        @key_codes_list = @key_codes_list.uniq.compact
-        @purchase_orders_list = @purchase_orders_list.uniq.compact
-        @purchasers_list = @purchasers_list.uniq.compact
-        @assignments_list = @purchasers_list.uniq.compact
-	end
 end

@@ -1,10 +1,10 @@
 <div class="modal-content">
-    <h3 class="center-align"><%= @class.name.underscore.split.map(&:capitalize).join(' ') %> Search</h3>
+    <h3 class="center-align"><%= @class.name.underscore.humanize.split.map(&:capitalize).join(' ') %> Search</h3>
     <%= search_form_for search_type, url: result_assign_path, remote: true, method: :post do |f| %>
         <%= f.condition_fields do |c| %>
-            <%= render "assign/forms/condition_fields", f: c %>
+            <%= render "assign/partials/condition_fields", f: c %>
         <% end %>
-        <%= link_to_add_fields '<i class="fa fa-plus-square" aria-hidden="true"></i>', f, :condition %>
+        <%= link_to_add_fields '<i class="fa fa-plus-square" aria-hidden="true"></i>', f, :assign, :condition %>
 
         <div class="row">
             <div class="actions"><%= f.submit "Search", class:"btn col s6 push-s3 delta-btn" %></div>

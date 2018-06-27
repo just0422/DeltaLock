@@ -87,3 +87,62 @@ function addMapMarker(lat, lng, name, address, id, icon, map){
     } );
     return marker
 }
+
+function set_assign_selected(css_class){
+    $("#" + css_class + "-assign-selected").html(
+        '<a class="assign-change-button btn btn-flat delta-btn-flat" ' + 
+        'onclick="change_assign_entry(\'' + css_class + '\')">' +
+        'Change' + 
+        '</a>' +
+        '<ul></ul>'
+    );
+}
+
+function add_element_to_assign_selected(element, css_class, title, title_pretty){
+    let xPlaceholder = '<span class="col push-s1 s1" style="color: red">X</span>';
+    let elementValue = $.trim($(element).find("." + css_class + "-" + title).html());
+
+    if (title.includes("bitting")){
+        if (elementValue.length == 0)
+            elementValue = "//////";
+        bits = elementValue.split('/');
+
+        elementValue = "";
+        for (let i = 0; i < bits.length; i++){
+            if(bits[i].length == 0)
+                elementValue += xPlaceholder;
+            else
+                elementValue += '<span class="col push-s1 s1">' + bits[i] + '</span>'
+        }
+        $("#" + css_class + "-assign-selected ul li ul").append(
+            '<li class="row">'+
+                '<strong class="col push-s1 s3">' + title_pretty + ': </strong>' +
+                elementValue + 
+            '</li>');
+    }
+    else{
+        if (elementValue != ""){
+            // Add it to the list
+            $("#" + css_class + "-assign-selected ul").append(
+                '<li class="delta-collection-item">' +
+                    '<div class="" + css_class + "-label">' +
+                        '<strong>' + title_pretty + ': </strong>' +
+                        '<span class="' + css_class + "-" + title + '">' +
+                           elementValue +
+                        '</span>' +
+                    '</div>' +
+                '</li>'
+            );
+        }
+    }
+    if(title === "reference_code"){
+        $("#" + css_class + "-assign-selected ul").append(
+            '<li class="delta-collection-item"><strong>Bitting:</strong>' +
+                '<ul>')
+    }
+    if(title === "bitting_bottom"){
+        $("#" + css_class + "-assign-selected ul").append(
+                '</ul>' +
+            '</li>');
+    }
+}

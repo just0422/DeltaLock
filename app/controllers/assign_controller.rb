@@ -1,47 +1,59 @@
 class AssignController < ApplicationController
+    # Authorizes User based on roles defined in app/models/ability.rb
     authorize_resource Key
     authorize_resource EndUser
     authorize_resource Purchaser 
     authorize_resource PurchaseOrder
     authorize_resource Relationship
+
+    # Execute preliminary function before the following actions
 	before_action :set_variables, only: [:create, :new, :search]
-
+    before_action :set_hash, only: [:index, :edit]
+    
+    # Renders the initial page when assign is triggered
+    # GET request
+    #
+    # Associated view - assign/index.html.erb
 	def index
-		@categories = [ Purchaser, EndUser, PurchaseOrder, Key ]
-
-		@categories = Hash.new
-        @categories['purchasers'] = Purchaser
-        @categories['endusers'] = EndUser
-        @categories['purchaseorders'] = PurchaseOrder
-        @categories['keys'] = Key
-
-        session[:enduser] = 0
+        # Reset the session enduser
+        session[:enduser] = '0'
 	end
     
+    # Renders the a new form for any class
+    # AJAX GET request
+    #
+    # Params:
+    #   type - element to search for (PO, Purchaser, End User, Key Code)
+    #
+    # Associated "view" - assign/new.js.erb
     def new
         @entry = @class.new
+        @name = @class.name.underscore.humanize.split.map(&:capitalize).join(' ')
     end
 
+    # Creates the new element and renders it back to the screen
+    # AJAX POST request
+    #
+    # Params
+    #   type - element to create (PO, Purchaser, End User, Key Code)
+    #
+    # Associated "view" - assign/create.js.erb
     def create
-        case params[:type]
-        when "keys"
-            @entry = Key.create(key_parameters)
-        when "endusers"
-            geo = EndUser.geocode(params[:address])
-            params[:lat] = geo.lat
-            params[:lng] = geo.lng
-
-            @entry = EndUser.create(enduser_parameters)
-        when "purchasers"
-            @entry = Purchaser.create(purchaser_parameters)
-        when "purchaseorders"
-            @entry = PurchaseOrder.create(purchaseorder_parameters)
-        end
+        create_entry
     end
-
+    
+    # Creates a search form for the elements
+    # AJAX GET request
+    #
+    # Params
+    #   type - element to create (PO, Purchaser, End User, Key Code)
+    #
+    # Associated "view" - assign/search.js.erb
     def search
         @category = params[:type]
-
+        @name = @class.name.underscore.humanize.split.map(&:capitalize).join(' ')
+        
+        # Search for correct item
         case params[:type]
         when 'purchasers'
             @categoryName = "Purchaser"
@@ -53,7 +65,8 @@ class AssignController < ApplicationController
             @categoryName = "PurchaseOrder"
             @categorySearch = PurchaseOrder.search
         when 'keys'
-            @mapActive = session[:enduser] != 0
+            # if the map is active, render that instead of search form
+            @mapActive = session[:enduser] != '0'
 
             if @mapActive 
                 @enduser = EndUser.find(session[:enduser])
@@ -66,20 +79,32 @@ class AssignController < ApplicationController
             end
         end
     end
-
+    
+    # Redrafts map keys based on distance from center
+    # AJAX POST request
+    #
+    # Params:
+    #   red - size of the red circle
+    #   yellow - size of the yellow circle
+    #
+    # Associated "view" - assign/update_map.js.erb
     def update_map
         @class = Key
         @css_class = "keys"
         @enduser = EndUser.find(session[:enduser])
         
+        # Verify the parameters and collect the keys
         gather_map_border_paramters()
         gather_group_end_users_and_keys()
-
-        respond_to do |format|
-            format.js
-        end
     end
-
+    
+    # Return search result
+    # AJAX POST request
+    #
+    # Params:
+    #   search_type - element to search for (PO, Purchaser, End User, Key Code)
+    #
+    # Associated view: assign/result.js.erb
     def result
         case params[:search_type]
         when "purchaseorders"
@@ -104,54 +129,80 @@ class AssignController < ApplicationController
             format.js
         end
     end
-
+    
+    # Create the assignment and confirm with user
+    # POST request
+    #
+    # Params:
+    #   key - id for Key
+    #   endusers - id for End User
+    #   purchasers - id for Purchaser
+    #   purchaseorders - id for purchaseorders
+    #
+    # Associated view - assign/assignment.html.erb
     def assignment
+        # Create assignment
         Relationship.create(assignment_parameters)
-
+        
+        # Get human readable assignment values
         @assignment_parts = assign_parts(params)
     end
 
-    def manage
-        @assignments = Array.new
-        list = Relationship.all
-
-        list.each do |assignment|
-            assigned_parts = Hash.new
-            assigned_parts[:data] = assign_parts(assignment)
-            assigned_parts[:id] = assignment[:id]
-            @assignments.push(assigned_parts)
-        end
-    end
-
+    # Get edit page for assignments
+    # GET request
+    #
+    # Params:
+    #   id - uniqued identifier of assignemtn to edit
+    #
+    # Associated view - assign/edit.html.erb
     def edit
         @assignment_parts = Hash.new
+        # Retrieve assignment
         @assignment = Relationship.find(params[:id])
 
+        # Retrieve each part of assignment (if it exists)
         @assignment_parts["purchasers"] = @assignment[:purchasers].nil? ? nil :  Purchaser.find(@assignment[:purchasers])
         @assignment_parts["endusers"] = @assignment[:endusers].nil? ? nil :  EndUser.find(@assignment[:endusers])
         @assignment_parts["purchaseorders"] = @assignment[:purchaseorders].nil? ? nil : PurchaseOrder.find(@assignment[:purchaseorders])
         @assignment_parts["keys"] = @assignment[:keys].nil? ? nil : Key.find(@assignment[:keys])
-
-		@categories = Hash.new
-        @categories['keys'] = Key
-        @categories['endusers'] = EndUser
-        @categories['purchasers'] = Purchaser
-        @categories['purchaseorders'] = PurchaseOrder
     end
-
+    
+    # Update assignment entry
+    # POST request
+    #
+    # Params:
+    #   id - unique identifier of assignment to update
+    #
+    # Redirects to view/manage/index.html.erb
     def update
+        # Find the assignment and update it
         entry = Relationship.find(params[:id])
         entry.update_attributes(assignment_parameters)
-
+        
+        @active="assignments"
         redirect_to "/manage"
     end
-
+    
+    # Delete assignment entry
+    # DELETE request
+    #
+    # Params:
+    #   id - unique identifier of assignment to delete
+    #
+    # Redirects to view/manage/index.html.erb
     def delete
+        # Delete the assignment
         Relationship.delete(params[:id])
 
+        @active="assignments"
         redirect_to "/manage"
     end
-
+    
+    # Updates the enduser whenever it is clicked. It should only update to a value if the end user is part of a group.
+    # AJAX POST request
+    #
+    # Params:
+    #   enduser - id of enduser to update the sesion with
     def session_enduser
         session[:enduser] = params[:enduser]
 
@@ -161,34 +212,31 @@ class AssignController < ApplicationController
     end
 
     private
-	def enduser_parameters
-		params.permit(:name, :address, :phone, :fax, :primary_contact, :primary_contact_type, :department, :store_number, :group_name, :lat, :lng, :sub_department_1, :sub_department_2, :sub_department_3, :sub_department_4)
-	end
-
-	def purchaser_parameters
-		params.permit(:name, :address, :email, :phone, :fax, :primary_contact, :primary_contact_type, :group_name)
-	end
-
-	def purchaseorder_parameters
-		params.permit(:po_number, :date_order, :so_number)
-	end
-
-	def key_parameters
-        params[:bitting_driver] = remap_bits(params[:bitting_driver])
-        params[:bitting_master] = remap_bits(params[:bitting_master])
-        params[:bitting_control] = remap_bits(params[:bitting_control])
-        params[:bitting_bottom] = remap_bits(params[:bitting_bottom])
-		params.permit(:keyway, :master_key, :control_key, :operating_key, :bitting, :system_name, :comments, :keycode_stamp, :reference_code, :bitting_driver, :bitting_master, :bitting_control, :bitting_bottom)
-	end
-
-    def assignment_parameters
-        params.permit(:purchaseorders, :purchasers, :endusers, :keys)
+    # Sets up global variables used by index and edit
+    def set_hash
+        # Create a new hash for the renderd boxes
+		@categories = {
+            'purchasers' => {
+                "class": Purchaser,
+                "name": 'Purchaser'
+            },
+            'endusers' => {
+                "class": EndUser,
+                "name":'End User'
+            },
+            'purchaseorders' => {
+                "class": PurchaseOrder,
+                "name": 'Purchase Order'
+            },
+            'keys' => {
+                "class": Key,
+                "name": 'Key'
+            }
+        }
     end
-
-    def remap_bits(bitting)
-        bitting.sort.map{|k,v| "#{v}"}.join('/')
-    end
-
+    
+    # Ensures that circle parameters are valid and secure. Sets global variables to the values of
+    #   yellow and red
     def gather_map_border_paramters
         if not params.key?("red")
             params[:red] = 25
@@ -198,23 +246,36 @@ class AssignController < ApplicationController
         @yellow = params[:yellow]
     end
 
+    # Collects end users and keys and groups them based off of distance from the center
     def gather_group_end_users_and_keys
+        # Group associated with center enduser
         end_user_group = EndUser.where(group_name: @enduser[:group_name])
+
+        # Sort all end users by distance 
         @endusers_red = end_user_group.within(@red, :origin => @enduser[:address]);
         @endusers_yellow = end_user_group.in_range(@red..@yellow, :origin => @enduser[:address]);
         @endusers_green = end_user_group.beyond(@yellow, :origin => @enduser[:address]);
-
+        
+        # Remove @enduser
         @endusers_red = @endusers_red.to_a - [@enduser] 
         @endusers_yellow = @endusers_yellow.to_a - [@enduser]
         @endusers_green = @endusers_green.to_a - [@enduser]	
         
-        @red_keys = get_associated_keys(@endusers_red)
-        @yellow_keys = get_associated_keys(@endusers_yellow)
-        @green_keys = get_associated_keys(@endusers_green)
+        # Gather keys assigned to these endusers
+        @red_keys = get_assigned_keys(@endusers_red)
+        @yellow_keys = get_assigned_keys(@endusers_yellow)
+        @green_keys = get_assigned_keys(@endusers_green)
     end
-
-    def get_associated_keys(endusers)
-        keycodes = Array.new
+    
+    # Gather all keys assigned to the endusers specified
+    #
+    # Params:
+    #   endusers - list of endusers to find keys from
+    #
+    # Returns:
+    #   list of keys
+    def get_assigned_keys(endusers)
+        keys = Array.new
         endusers.each do |enduser|
             relationships = Relationship.where("endusers like?", "%#{enduser[:id]}")
             relationships.each do |relationship|
@@ -222,11 +283,11 @@ class AssignController < ApplicationController
                     key = Key.find(relationship[:keys])
                     key = key.as_json
                     key["enduser"] = enduser[:id]
-                    keycodes.push(key)
+                    keys.push(key)
                 end
             end
         end
 
-        return keycodes
+        return keys
     end
 end
