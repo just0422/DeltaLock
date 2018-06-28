@@ -1,13 +1,12 @@
 GIT
   remote: git://github.com/activerecord-hackery/ransack.git
-  revision: 581bcd8a788fae3147fab873311fa9c60ae3c41c
+  revision: 85fc41b329ca2b316bab32c464dd8920fae74998
   specs:
     ransack (1.8.8)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       i18n
-      polyamorous (~> 1.3.2)
 
 GIT
   remote: git://github.com/rweng/jquery-datatables-rails.git
@@ -18,6 +17,13 @@ GIT
       jquery-rails
       railties (>= 3.1)
       sass-rails
+
+GIT
+  remote: https://github.com/stympy/faker
+  revision: 21c66bafbd1371b74c0e7a87a71658b08c607c7f
+  specs:
+    faker (1.8.7)
+      i18n (>= 0.7)
 
 GEM
   remote: https://rubygems.org/
@@ -59,10 +65,12 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    ajax-datatables-rails (0.4.0)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
+    ajax-datatables-rails (0.4.3)
       railties (>= 4.0)
     arel (7.1.4)
-    autoprefixer-rails (8.3.0)
+    autoprefixer-rails (8.6.4)
       execjs
     bcrypt (3.1.12)
     binding_of_caller (0.8.0)
@@ -73,6 +81,13 @@ GEM
     builder (3.2.3)
     byebug (10.0.2)
     cancancan (1.17.0)
+    capybara (2.18.0)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (>= 2.0, < 4.0)
     carrierwave (0.11.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -88,6 +103,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
+    database_cleaner (1.7.0)
     debug_inspector (0.0.3)
     devise (4.4.3)
       bcrypt (~> 3.0)
@@ -95,19 +111,25 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.3)
     erubis (2.7.0)
     execjs (2.7.0)
-    ffi (1.9.23)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
+    ffi (1.9.25)
     font-awesome-sass (4.6.2)
       sass (>= 3.2)
-    geokit (1.11.0)
-    geokit-rails (2.3.0)
+    geokit (1.13.0)
+    geokit-rails (2.3.1)
       geokit (~> 1.5)
       rails (>= 3.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     gmaps4rails (2.1.2)
-    i18n (1.0.1)
+    i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -125,7 +147,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
-    materialize-sass (1.0.0.beta)
+    materialize-sass (1.0.0.rc2)
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.5.2)
     method_source (0.9.0)
@@ -137,13 +159,12 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
-    mysql2 (0.4.10)
-    nio4r (2.3.0)
-    nokogiri (1.8.2)
+    mysql2 (0.5.1)
+    nio4r (2.3.1)
+    nokogiri (1.8.3)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    polyamorous (1.3.3)
-      activerecord (>= 3.0)
+    public_suffix (3.0.2)
     rack (2.0.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -183,6 +204,23 @@ GEM
     roo (2.7.1)
       nokogiri (~> 1)
       rubyzip (~> 1.1, < 2.0.0)
+    rspec-core (3.7.1)
+      rspec-support (~> 3.7.0)
+    rspec-expectations (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-mocks (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-rails (3.7.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.7.0)
+      rspec-expectations (~> 3.7.0)
+      rspec-mocks (~> 3.7.0)
+      rspec-support (~> 3.7.0)
+    rspec-support (3.7.1)
     rubyzip (1.2.1)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
@@ -198,9 +236,11 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    shoulda-matchers (3.1.2)
+      activesupport (>= 4.0.0)
     spring (2.0.2)
       activesupport (>= 4.2)
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -215,7 +255,7 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.10)
+    uglifier (4.1.12)
       execjs (>= 0.3.0, < 3)
     underscore-rails (1.8.3)
     unicorn (5.4.0)
@@ -231,6 +271,8 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    xpath (3.1.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   ruby
@@ -241,9 +283,13 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   cancancan (~> 1.10)
+  capybara (~> 2.5)
   carrierwave (~> 0.9)
   coffee-rails (~> 4.1.0)
+  database_cleaner (~> 1.5)
   devise
+  factory_girl_rails (~> 4.5.0)
+  faker!
   font-awesome-sass (~> 4.6.2)
   geokit-rails
   gmaps4rails
@@ -258,8 +304,10 @@ DEPENDENCIES
   responders
   rolify
   roo
+  rspec-rails (~> 3.7)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  shoulda-matchers (~> 3.0)
   spring
   turbolinks
   uglifier (>= 1.3.0)

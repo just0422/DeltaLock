@@ -2,14 +2,6 @@ class Key < ApplicationRecord
 	include ImportFunctions
     resourcify
 
-	has_many :po_ks
-	has_many :purchase_orders, through: :po_ks
-
-	#mount_uploader :keyfile, KeyfileUploader
-	#validates :name, presence: true
-
-	#attr_accessible :name, :line1
-	# TODO: Fix this!!!!!!
 	def self.ransackable_attributes(auth_object = nil)
 		super - ['created_at', 'updated_at']
 	end

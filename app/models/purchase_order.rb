@@ -1,16 +1,10 @@
 class PurchaseOrder < ApplicationRecord
   include ImportFunctions
     resourcify
+    validates_presence_of :po_number, :so_number, :date_order
 
-    belongs_to :purchaser
-	belongs_to :end_user
-    has_many :po_ks
-    has_many :keys, through: :po_ks
-
-    #attr_accessible :name, :line1
-    # TODO: Fix this!!!!!!
 	def self.ransackable_attributes(auth_object = nil)
-		super - ['created_at', 'updated_at', 'end_user_id', 'purchaser_id']
+		super - ['created_at', 'updated_at']
 	end
 
     def self.import(file)

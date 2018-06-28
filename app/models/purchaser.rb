@@ -2,13 +2,8 @@ class Purchaser < ApplicationRecord
   include ImportFunctions
     resourcify
 
-    has_many :purchase_orders
-
-
 	validates :name, presence: true
 
-  #attr_accessible :name, :line1
-  # TODO: Fix this!!!!!!
 	def self.ransackable_attributes(auth_object = nil)
 		super - ['created_at', 'updated_at']
 	end
