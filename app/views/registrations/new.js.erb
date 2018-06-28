@@ -1,4 +1,4 @@
-$("#user-form").html("<%= j (render 'new_user_form') %>")
+$("#user-form").html("<%= j (render 'registrations/partials/new_user_form') %>")
 
 var modalElement = document.querySelector('#user-form');
 var instance = M.Modal.init(modalElement, 
