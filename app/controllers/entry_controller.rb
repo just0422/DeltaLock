@@ -139,7 +139,7 @@ class EntryController < ApplicationController
         # For each assignment
 		list.each do |assignment|
             # Remove this element from the assigment
-            assignment[type] = nil
+            assignment[@type] = nil
             
             # Count how many elements are left
             count = 0
