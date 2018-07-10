@@ -51,7 +51,6 @@ echo -e "${BLUE}Installing Unicorn Gem${NC}"
 bundle install
 echo -e "${BLUE}Installing Unicorn configuration file${NC}"
 cp install/special_files/unicorn.rb config/unicorn.rb
-sed -i 's/DELTALOCK_USERNAME_PLACEHOLDER/$DELTAUSER/g'
 echo -e "${GREEN}Unicorn file configuration installed${NC}"
 
 mkdir -p shared/pids shared/sockets shared/log
