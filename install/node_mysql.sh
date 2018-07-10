@@ -6,7 +6,7 @@ apt-get install -yq nodejs
 ## Make sure DB is Setup HERE***********************************
 echo -e "${BLUE}Checking to see if MySQL is installed${NC}"
 if mysql --version; then
-	echo -e "${GREEN}MySQL is installed!"
+	echo -e "${GREEN}MySQL is already installed!"
 else
 	echo -e "${RED}MySQL is not installed${NC}"
 	echo -e "${BLUE}Installing MySQL${NC}"
@@ -14,6 +14,40 @@ else
 	apt-get install -y mysql-server mysql-client libmysqlclient-dev
 	mysql_install_db
 	mysql_secure_installation
+	echo -e "${GREEN}MySQL successfully installed!"
 fi
-service mysql start
 
+echo -e "${BLUE}Starting MySQL${NC}"
+service mysql start
+if systemctl is-active --quiet mysql
+    echo -e "${GREEN}MySQL successfully started!"
+else
+    echo -e "${RED}There was an issue starting MySQL. Abort..."
+    exit 1
+fi
+
+echo -e "\n${BLUE}Creating DeltaLock MySQL user (different than root created before)${NC}"
+echo -e "${BLUE}Please enter DeltaLock MySQL username:${NC}"
+read deltauser
+echo -e "${BLUE}Please enter DeltaLock MySQL password:${NC}"
+read deltapass
+
+echo -e "${BLUE}Please enter MySQL root password (same as install):${NC}"
+read rootpass
+
+echo -e "${BLUE}Createing rails MySQL user${NC}"
+mysql -uroot -p${rootpass} "GRANT ALL PRIVILEGES ON *.* TO '${deltauser}'@'localhost' IDENTIFIED BY '${deltapass}';"
+
+USER_EXISTS="$(mysql -uroot -p${rootpass} -sse "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user ='${deltauser}')")"
+
+if [ "$USER_EXISTS" = 1]; then
+    echo "${BLUE}${deltauser} ${GREEN}successfully created!"
+else
+    echo -e "${RED}There was an issue creating user. Abort..."
+    exit 1
+fi
+
+echo 'export RAILSUSER=${deltauser}' >> ~/.bashrc
+echo 'export RAILSPASS=${deltapass}' >> ~/.bashrc
+echo 'export RAILSUSER=${deltauser}' >> ~/.profile
+echo 'export RAILSPASS=${deltapass}' >> ~/.profile

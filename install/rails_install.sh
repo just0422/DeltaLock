@@ -42,10 +42,10 @@ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
 echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.profile
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-echo -e "${BLUE}Installing ruby (this make take a while...)${NC}"
+echo -e "${BLUE}Installing ruby (this wll take a while...)${NC}"
 #source ~/.bashrc
 
-rbenv install --verbose 2.3.1
+rbenv install 2.3.1
 rbenv global 2.3.1
 install 'ruby -v' 'ruby'
 if ruby -v; then
