@@ -39,19 +39,20 @@ cd ~/DeltaLock
 secret_key="$(rake secret)"
 
 echo "SECRET_KEY_BASE=$secret_key" >> .rbenv-vars
-echo "DELTALOCK_DATABASE_PASSWORD=\$0v3rFl0w" >> .rbenv-vars
+echo "DELTALOCK_DATABASE_USERNAME=$DELTAUSER" >> .rbenv-vars
+echo "DELTALOCK_DATABASE_PASSWORD=$DELTAPASS" >> .rbenv-vars
 
-echo -e "${BLUE}rake db:create${NC}"
+echo -e "${BLUE}Creating DeltaLock database and tables${NC}"
 RAILS_ENV=production rake db:create db:schema:load
-echo -e "${BLUE}rake assets:precompile${NC}"
+echo -e "${BLUE}Compiling stylesheets and javascripts${NC}"
 RAILS_ENV=production rake assets:precompile
-#RAILS_ENV=production rails server --binding= #PUBLIC IP
 
 echo -e "${BLUE}Installing Unicorn Gem${NC}"
-# echo "gem 'unicorn'" >> Gemfile
-bundle
+bundle install
+echo -e "${BLUE}Installing Unicorn configuration file${NC}"
 cp install/special_files/unicorn.rb config/unicorn.rb
-echo -e "${GREEN}Unicorn file installed${NC}"
+sed -i 's/DELTALOCK_USERNAME_PLACEHOLDER/$DELTAUSER/g'
+echo -e "${GREEN}Unicorn file configuration installed${NC}"
 
 mkdir -p shared/pids shared/sockets shared/log
 

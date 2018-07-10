@@ -20,9 +20,9 @@ fi
 echo -e "${BLUE}Starting MySQL${NC}"
 service mysql start
 if systemctl is-active --quiet mysql
-    echo -e "${GREEN}MySQL successfully started!"
+    echo -e "${GREEN}MySQL successfully started!${NC}"
 else
-    echo -e "${RED}There was an issue starting MySQL. Abort..."
+    echo -e "${RED}There was an issue starting MySQL. Abort...${NC}"
     exit 1
 fi
 
@@ -47,7 +47,7 @@ else
     exit 1
 fi
 
-echo 'export RAILSUSER=${deltauser}' >> ~/.bashrc
-echo 'export RAILSPASS=${deltapass}' >> ~/.bashrc
-echo 'export RAILSUSER=${deltauser}' >> ~/.profile
-echo 'export RAILSPASS=${deltapass}' >> ~/.profile
+echo 'export DELTAUSER=${deltauser}' >> ~/.bashrc
+echo 'export DELTAPASS=${deltapass}' >> ~/.bashrc
+echo 'export DELTAUSER=${deltauser}' >> ~/.profile
+echo 'export DELTAPASS=${deltapass}' >> ~/.profile
