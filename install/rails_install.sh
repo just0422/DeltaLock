@@ -34,12 +34,8 @@ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.profile
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-#install 'source ~/.bashrc'
-#if source ~/.bashrc; then
-#	echo -e "${GREEN}rbenv successfully installed${NC}"
-#else
-#	echo -e "${RED}rbenv not installed${NC}"
-#fi
+# Check rbenv installation
+curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 
 echo -e "${BLUE}Cloning ruby build into rbenv${NC}"
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
@@ -52,12 +48,12 @@ echo -e "${BLUE}Installing ruby (this make take a while...)${NC}"
 rbenv install --verbose 2.3.1
 rbenv global 2.3.1
 install 'ruby -v' 'ruby'
-#if ruby -v; then
-#	echo -e "${GREEN}Ruby successfully installed${NC}"
-#else
-#	echo -e "${RED}Ruby not installed. Abort...${NC}"
-#	exit 1
-#fi
+if ruby -v; then
+	echo -e "${GREEN}Ruby successfully installed${NC}"
+else
+	echo -e "${RED}Ruby not installed. Abort...${NC}"
+	exit 1
+fi
 
 
 echo -e "${BLUE}Installing bundle${NC}"
