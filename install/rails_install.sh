@@ -48,20 +48,12 @@ echo -e "${BLUE}Installing ruby (this wll take a while...)${NC}"
 rbenv install 2.3.1
 rbenv global 2.3.1
 install 'ruby -v' 'ruby'
-if ruby -v; then
-	echo -e "${GREEN}Ruby successfully installed${NC}"
-else
-	echo -e "${RED}Ruby not installed. Abort...${NC}"
-	exit 1
-fi
-
 
 echo -e "${BLUE}Installing bundle${NC}"
-install 'gem install bundler' 'bundle'
-
+install 'gem install bundler' 'bundle' >/dev/null
 
 echo -e "${BLUE}Install Rails${NC}"
-gem install rails -v 4.2.6
+gem install rails -v 4.2.6 >/dev/null
 rbenv rehash
 install 'rails -v' 'Rails'
 

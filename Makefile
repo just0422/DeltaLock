@@ -5,6 +5,7 @@ dependencies:
 
 rails:
 	./install/rails_install.sh
+	source ~/.bashrc
 
 node_mysql:
 	sudo ./install/node_mysql.sh
