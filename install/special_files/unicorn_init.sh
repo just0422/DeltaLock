@@ -15,12 +15,13 @@ set -e
 USAGE="Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
 
 # app settings
+USER="DELTALOCK_USERNAME_PLACEHOLDER"
 APP_NAME="DeltaLock" 
-APP_ROOT="/home/$DELTAUSER/$APP_NAME"
+APP_ROOT="APPLICATION_ROOT_DIRECTORY"
 ENV="production"
 
 # environment settings
-PATH="/home/$DELTAUSER/.rbenv/shims:/home/$DELTAUSER/.rbenv/bin:$PATH"
+PATH="/home/$USER/.rbenv/shims:/home/$USER/.rbenv/bin:$PATH"
 CMD="cd $APP_ROOT && bundle exec unicorn -c config/unicorn.rb -E $ENV -D"
 PID="$APP_ROOT/shared/pids/unicorn.pid"
 OLD_PID="$PID.oldbin"
@@ -40,7 +41,7 @@ case $1 in
   start)
     sig 0 && echo >&2 "Already running" && exit 0
     echo "Starting $APP_NAME"
-    su - $DELTAUSER -c "$CMD"
+    su - $USER -c "$CMD"
     ;;
   stop)
     echo "Stopping $APP_NAME"
