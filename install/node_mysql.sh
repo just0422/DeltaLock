@@ -37,6 +37,7 @@ fi
 
 echo -e "${BLUE}Starting MySQL${NC}"
 service mysql start
+sleep 1
 if systemctl is-active --quiet mysql; then
     echo -e "${GREEN}MySQL successfully started!${NC}"
 else
@@ -44,6 +45,7 @@ else
     exit 1
 fi
 
+sleep 1
 echo -e "\n${BLUE}Ruby on rails suggests creating another user specifically for the application. For security, this user is different than root.${NC}"
 printf "${YELLOW}Please enter DeltaLock MySQL username:${NC} "
 read deltauser
