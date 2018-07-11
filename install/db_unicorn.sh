@@ -44,16 +44,13 @@ echo "DELTALOCK_DATABASE_PASSWORD=$DELTAPASS" >> .rbenv-vars
 echo -e "${BLUE}Creating DeltaLock database and tables${NC}"
 sleep 1
 RAILS_ENV=production rake db:create db:schema:load
-echo -3 "${BLUE}Installing devise library (user for user management}${NC}"
+echo -e "${BLUE}Installing devise library (user for user management}${NC}"
 sleep 1
 RAILS_ENV=production rails generate devise:install
 echo -e "${BLUE}Compiling stylesheets and javascripts${NC}"
 sleep 1
 RAILS_ENV=production rake assets:precompile
 
-echo -e "${BLUE}Installing Unicorn Gem${NC}"
-sleep 1
-bundle install
 echo -e "${BLUE}Installing Unicorn configuration file${NC}"
 sleep 0.25
 cp install/special_files/unicorn.rb config/unicorn.rb

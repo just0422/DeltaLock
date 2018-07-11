@@ -88,7 +88,7 @@ echo "export DELTAPASS=${deltapass}" >> ~/.bashrc
 echo "export DELTAUSER=${deltauser}" >> ~/.profile
 echo "export DELTAPASS=${deltapass}" >> ~/.profile
 
-export "DELTAUSER=${deltauser}"
-export "DELTAPASS=${deltapass}"
+export DELTAUSER="${deltauser}"
+export DELTAPASS="${deltapass}"
 
 source ~/.bashrc
