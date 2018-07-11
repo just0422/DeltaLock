@@ -35,18 +35,18 @@ echo -e "${BLUE}Generating secret key${NC}"
 sleep 0.25
 cd ~/DeltaLock
 secret_key="$(rake secret)"
-rm .rbenv-vars
+rm -f .rbenv-vars
 
 echo "SECRET_KEY_BASE=$secret_key" >> .rbenv-vars
 echo "DELTALOCK_DATABASE_USERNAME=$DELTAUSER" >> .rbenv-vars
 echo "DELTALOCK_DATABASE_PASSWORD=$DELTAPASS" >> .rbenv-vars
 
-echo -e "${BLUE}Creating DeltaLock database and tables${NC}"
-sleep 1
-RAILS_ENV=production rake db:create db:schema:load
 echo -e "${BLUE}Installing devise library (user for user management}${NC}"
 sleep 1
 RAILS_ENV=production rails generate devise:install
+echo -e "${BLUE}Creating DeltaLock database and tables${NC}"
+sleep 1
+RAILS_ENV=production rake db:create db:schema:load
 echo -e "${BLUE}Compiling stylesheets and javascripts${NC}"
 sleep 1
 RAILS_ENV=production rake assets:precompile
