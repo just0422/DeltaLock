@@ -29,7 +29,7 @@ else
 	echo -e "${BLUE}Installing MySQL${NC}"
 	sleep 1
 
-	apt-get install -qq mysql-server mysql-client libmysqlclient-dev >/dev/null
+	apt-get install -qq mysql-server mysql-client libmysqlclient-dev
 	mysql_install_db
 	mysql_secure_installation
 	echo -e "${GREEN}MySQL successfully installed!"
