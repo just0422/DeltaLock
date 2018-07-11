@@ -6,10 +6,18 @@ GREEN='\033[0;32m'
 BLUE='\033[0;36m'
 NC='\033[0m'
 
+function install(){
+	if $1; then
+		echo -e "${GREEN}$2 successfully installed!${NC}"
+	else
+		echo -e "${RED}$2 not installed${NC}. Aborting..."
+		exit 1
+	fi
+}
+
 echo -e "${BLUE}Installing Node.js${NC}"
-apt-add-repository ppa:chris-lea/node.js >/dev/null
 apt-get install -yq nodejs >/dev/null
-echo -e "${GREEN}Successfully installed Node.js${NC}"
+install 'nodejs -v' 'Node.js'
 
 ## Make sure DB is Setup HERE***********************************
 echo -e "${BLUE}Checking to see if MySQL is installed${NC}"
