@@ -16,6 +16,7 @@ function install(){
 }
 
 echo -e "${BLUE}Configuring git...${NC}"
+sleep 0.25
 git config --global color.ui true
 git config --global user.name "DeltaLock"
 git config --global user.email "delta@deltalock.biz"
@@ -26,6 +27,7 @@ cd ~
 echo -e "${BLUE}Removing previous .rbenv directory (if it exists)${NC}"
 rm -rf .rbenv
 echo -e "${BLUE}Cloning rbenv repository${NC}"
+sleep 0.25
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 echo -e "${BLUE}Installing rbenv${NC}"
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
@@ -38,30 +40,26 @@ eval "$(rbenv init -)"
 curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 
 echo -e "${BLUE}Cloning ruby build into rbenv${NC}"
+sleep 0.25
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
 echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.profile
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 echo -e "${BLUE}Installing ruby (this wll take a while...)${NC}"
+sleep 1
 #source ~/.bashrc
-
-rbenv install 2.3.1
+rbenv install --verbose 2.3.1
 rbenv global 2.3.1
 install 'ruby -v' 'ruby'
-if ruby -v; then
-	echo -e "${GREEN}Ruby successfully installed${NC}"
-else
-	echo -e "${RED}Ruby not installed. Abort...${NC}"
-	exit 1
-fi
-
 
 echo -e "${BLUE}Installing bundle${NC}"
-install 'gem install bundler' 'bundle'
+sleep 0.25
+install 'gem install bundler' 'bundle' >/dev/null
 
-
-echo -e "${BLUE}Install Rails${NC}"
-gem install rails -v 4.2.6
+echo -e "${BLUE}Installing Rails (this will take a while too..)${NC}"
+sleep 1
+gem install rails -v 4.2.6 >/dev/null
 rbenv rehash
 install 'rails -v' 'Rails'
 
+source ~/.bashrc
