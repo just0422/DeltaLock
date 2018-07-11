@@ -41,15 +41,34 @@ echo "SECRET_KEY_BASE=$secret_key" >> .rbenv-vars
 echo "DELTALOCK_DATABASE_USERNAME=$DELTAUSER" >> .rbenv-vars
 echo "DELTALOCK_DATABASE_PASSWORD=$DELTAPASS" >> .rbenv-vars
 
+echo -e "${BLUE}Removing devise methods from routes and user${NC}"
+sleep 1
+sed -n '5,10 s/^/#/' config/routes.rb
+sed -n '3,4 s/^/#/' app/models/user.rb
+echo -e "${GREEN}Removed devise methods sucessfully${NC}"
+sleep 0.5
+
 echo -e "${BLUE}Installing devise library (user for user management}${NC}"
 sleep 1
 RAILS_ENV=production rails generate devise:install
+echo -e "${GREEN}Installed devise library successfully${NC}"
+
+sleep 0.25
+echo -e "${BLUE}Adding devise methods back to routes and user${NC}"
+sleep 1
+sed -n '5,10 s/#//' config/routes.rb
+sed -n '3,4 s/#//' app/models/user.rb
+sleep 0.5
+echo -e "${GREEN}Added devise methods back sucessfully${NC}"
+
 echo -e "${BLUE}Creating DeltaLock database and tables${NC}"
 sleep 1
 RAILS_ENV=production rake db:create db:schema:load
+echo -e "${GREEN}Created DeltaLock database and tables successfully${NC}"
 echo -e "${BLUE}Compiling stylesheets and javascripts${NC}"
 sleep 1
 RAILS_ENV=production rake assets:precompile
+echo -e "${GREEN}Compiled stylesheets and javascripts successfully${NC}"
 
 echo -e "${BLUE}Installing Unicorn configuration file${NC}"
 sleep 0.25
