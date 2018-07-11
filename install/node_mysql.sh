@@ -16,7 +16,8 @@ function install(){
 }
 
 echo -e "${BLUE}Installing Node.js${NC}"
-apt-get install -yq nodejs >/dev/null
+sleep 1
+apt-get install -qq nodejs
 install 'nodejs -v' 'Node.js'
 
 ## Make sure DB is Setup HERE***********************************
@@ -26,8 +27,9 @@ if mysql --version; then
 else
 	echo -e "${RED}MySQL is not installed${NC}"
 	echo -e "${BLUE}Installing MySQL${NC}"
+	sleep 1
 
-	apt-get install -y mysql-server mysql-client libmysqlclient-dev >/dev/null
+	apt-get install -qq mysql-server mysql-client libmysqlclient-dev >/dev/null
 	mysql_install_db
 	mysql_secure_installation
 	echo -e "${GREEN}MySQL successfully installed!"
