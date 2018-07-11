@@ -1,7 +1,15 @@
 #!/bin/bash
-echo -e "${BLUE}Install Node.js${NC}"
-apt-add-repository ppa:chris-lea/node.js
-apt-get install -yq nodejs
+
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+GREEN='\033[0;32m'
+BLUE='\033[0;36m'
+NC='\033[0m'
+
+echo -e "${BLUE}Installing Node.js${NC}"
+apt-add-repository ppa:chris-lea/node.js >/dev/null
+apt-get install -yq nodejs >/dev/null
+echo -e "${GREEN}Successfully installed Node.js${NC}"
 
 ## Make sure DB is Setup HERE***********************************
 echo -e "${BLUE}Checking to see if MySQL is installed${NC}"
@@ -11,7 +19,7 @@ else
 	echo -e "${RED}MySQL is not installed${NC}"
 	echo -e "${BLUE}Installing MySQL${NC}"
 
-	apt-get install -y mysql-server mysql-client libmysqlclient-dev
+	apt-get install -y mysql-server mysql-client libmysqlclient-dev >/dev/null
 	mysql_install_db
 	mysql_secure_installation
 	echo -e "${GREEN}MySQL successfully installed!"
@@ -19,7 +27,7 @@ fi
 
 echo -e "${BLUE}Starting MySQL${NC}"
 service mysql start
-if systemctl is-active --quiet mysql
+if systemctl is-active --quiet mysql; then
     echo -e "${GREEN}MySQL successfully started!${NC}"
 else
     echo -e "${RED}There was an issue starting MySQL. Abort...${NC}"
@@ -27,21 +35,31 @@ else
 fi
 
 echo -e "\n${BLUE}Creating DeltaLock MySQL user (different than root created before)${NC}"
-echo -e "${BLUE}Please enter DeltaLock MySQL username:${NC}"
+printf "${YELLOW}Please enter DeltaLock MySQL username:${NC} "
 read deltauser
-echo -e "${BLUE}Please enter DeltaLock MySQL password:${NC}"
-read deltapass
+printf "${YELLOW}Please enter DeltaLock MySQL password:${NC} "
+read -s deltapass
+printf "\n${YELLOW}Please confirm DeltaLock MySQL password:${NC} "
+read -s deltapassConfirm
 
-echo -e "${BLUE}Please enter MySQL root password (same as install):${NC}"
-read rootpass
+while [ "$deltapass" != "$deltapassConfirm" ]; do
+    echo -e "\n\n${RED}Passwords do not match. Please try again..."
+    printf "${YELLOW}Please enter DeltaLock MySQL password:${NC} "
+    read -s deltapass
+    printf "\n${YELLOW}Please confirm DeltaLock MySQL password:${NC} "
+    read -s deltapassConfirm
+done
+
+mysql_config_editor remove --login-path=root
+echo -e "\n\n${YELLOW}Please enter root user MySQL password. This is the same one entered when the screen turned pink. ${NC}"
+mysql_config_editor set --login-path=root --host=localhost --user=root --password
 
 echo -e "${BLUE}Createing rails MySQL user${NC}"
-mysql -uroot -p${rootpass} "GRANT ALL PRIVILEGES ON *.* TO '${deltauser}'@'localhost' IDENTIFIED BY '${deltapass}';"
+mysql --login-path=root -e "GRANT ALL PRIVILEGES ON *.* TO '${deltauser}'@'localhost' IDENTIFIED BY '${deltapass}';"
 
-USER_EXISTS="$(mysql -uroot -p${rootpass} -sse "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user ='${deltauser}')")"
-
-if [ "$USER_EXISTS" = 1]; then
-    echo "${BLUE}${deltauser} ${GREEN}successfully created!"
+USER_EXISTS="$(mysql --login-path=root -sse "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user ='${deltauser}')")"
+if [ "$USER_EXISTS" = 1 ]; then
+    echo -e "${BLUE}${deltauser} ${GREEN}successfully created!"
 else
     echo -e "${RED}There was an issue creating user. Abort..."
     exit 1
@@ -51,3 +69,5 @@ echo 'export DELTAUSER=${deltauser}' >> ~/.bashrc
 echo 'export DELTAPASS=${deltapass}' >> ~/.bashrc
 echo 'export DELTAUSER=${deltauser}' >> ~/.profile
 echo 'export DELTAPASS=${deltapass}' >> ~/.profile
+
+source ~/.bashrc
