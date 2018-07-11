@@ -44,9 +44,15 @@ else
     exit 1
 fi
 
-echo -e "\n${BLUE}Creating DeltaLock MySQL user (different than root created before)${NC}"
+echo -e "\n${BLUE}Ruby on rails suggests creating another user specifically for the application. For security, this user is different than root.${NC}"
 printf "${YELLOW}Please enter DeltaLock MySQL username:${NC} "
 read deltauser
+while [ "$deltauser" = "root" ]; do
+    echo -e "\n\n${RED}Cannot use 'root' username"
+    printf "${YELLOW}Please enter DeltaLock MySQL username:${NC} "
+    read deltauser
+done
+
 printf "${YELLOW}Please enter DeltaLock MySQL password:${NC} "
 read -s deltapass
 printf "\n${YELLOW}Please confirm DeltaLock MySQL password:${NC} "
