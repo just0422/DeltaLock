@@ -14,13 +14,13 @@ pkgs=(git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyam
 
 for pkg in "${pkgs[@]}"
 do
-	echo -e "${BLUE}Installing $pkg"
+	echo -e "${BLUE}Installing $pkg${NC}"
 	if dpkg -s "$pkg" >/dev/null; then
-		echo -e "${YELLOW}$pkg already installed"
+		echo -e "${YELLOW}$pkg already installed${NC}"
 	elif apt-get -qq -y install "$pkg"; then
-		echo -e "${GREEN}$pkg sucessfully installed"
+		echo -e "${GREEN}$pkg sucessfully installed${NC}"
 	else
-		echo -e "\t${RED}$pkg not installed"
+		echo -e "\t${RED}$pkg not installed${NC}"
 	fi
 
 	sleep 0.25
@@ -30,13 +30,13 @@ pkgs=(autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zli
 
 for pkg in "${pkgs[@]}"
 do
-	echo -e "${BLUE}Installing $pkg"
+	echo -e "${BLUE}Installing $pkg${NC}"
 	if dpkg -s "$pkg" >/dev/null; then
-		echo -e "${YELLOW}$pkg already installed"
+		echo -e "${YELLOW}$pkg already installed${NC}"
 	elif apt-get -qq -y install "$pkg"; then
-		echo -e "${GREEN}$pkg sucessfully installed"
+		echo -e "${GREEN}$pkg sucessfully installed${NC}"
 	else
-		echo -e "\t${RED}$pkg not installed"
+		echo -e "\t${RED}$pkg not installed${NC}"
 	fi
 
 	sleep 0.25
