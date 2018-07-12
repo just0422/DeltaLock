@@ -47,6 +47,7 @@ sed -i '5,10 s/^/#/' config/routes.rb
 sed -i '3,4 s/^/#/' app/models/user.rb
 sed -i '7 s/^/#/' app/controllers/manage_controller.rb
 sed -i '7 s/^/#/' app/controllers/registrations_controller.rb
+rm config/initializers/devise.rb
 sleep 0.5
 
 echo -e "${BLUE}Installing devise library (for user management}${NC}"
@@ -73,11 +74,54 @@ sleep 1
 RAILS_ENV=production rake assets:precompile
 echo -e "${GREEN}Compiled stylesheets and javascripts successfully${NC}"
 
-echo -e "\n${BLUE}Installing Unicorn configuration file${NC}"
-sleep 0.25
-cp install/special_files/unicorn.rb config/unicorn.rb
-echo -e "${GREEN}Unicorn file configuration installed${NC}"
+echo -e "\n${BLUE}Please enter information for default administrator user. If left blank, default will be used (in parentheses). ${NC}"
+printf "${YELLOW}First name (Admin): ${NC}"
+read adminfirst
+printf "${YELLOW}Last name (User): ${NC}"
+read adminlast
+printf "${YELLOW}Email (admin@deltalock.biz): ${NC}"
+read adminuser
+echo -e "${YELLOW}Password must contain at least 6 characters${NC}"
+printf "${YELLOW}Password (abc123): ${NC}"
+read -s adminpass
+printf "\n${YELLOW}Password confirmation: ${NC}"
+read -s adminpassConfirm
 
-mkdir -p shared/pids shared/sockets shared/log
+echo ""
+
+while [[ "$adminpass" != "$adminpassConfirm" ||  ${#adminpass} -lt 6 ]]; do
+    if [ ${#adminpass} -eq 0 ]; then
+        break
+    fi
+    if [ ${#adminpass} -lt 6 ]; then
+        echo -e "${RED}Password must contain at least 6 characters${NC}"
+    fi
+    if [ "$adminpass" != "$adminpassConfirm" ]; then
+        echo -e "${RED}Passwords do not match. Please try again..."
+    fi
+    printf "${YELLOW}Password (abc123): ${NC}"
+    read -s adminpass
+    printf "\n${YELLOW}Password confirmation: ${NC}"
+    read -s adminpassConfirm
+
+    echo ""
+done
+
+adminfirst=${adminfirst:-Admin}
+adminlast=${adminlast:-User}
+adminuser=${adminuser:-admin@deltalock.biz}
+adminpass=${adminpass:-abc123}
+
+echo -e "\n${BLUE}Creating User - ${adminfirst} ${adminlast}${NC}"
+RAILS_ENV=production rails runner 'User.destroy_all'
+RAILS_ENV=production rails runner 'User.create!(first_name: "'"$adminfirst"'", last_name:"'"$adminlast"'", email:"'"$adminuser"'", password:"'"$adminpass"'").add_role("admin")'
+echo -e "${YELLOW}Validating User - ${adminfirst} ${adminlast}${NC}"
+RAILS_ENV=production rails runner 'User.first'
+if [ $? == 0 ]; then
+    echo -e "${GREEN}User (${adminfirst} ${adminlast}) successfully created${NC}"
+else
+    echo -e "${RED}User not created. Abort...${NC}"
+    exit 1
+fi
 
 exit 0

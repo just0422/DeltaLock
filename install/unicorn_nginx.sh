@@ -9,6 +9,12 @@ NC='\033[0m'
 printf "${YELLOW}Please enter your username:${NC} "
 read username
 
+echo -e "\n${BLUE}Installing Unicorn configuration file${NC}"
+sleep 0.1
+cp install/special_files/unicorn.rb config/unicorn.rb
+echo -e "${GREEN}Unicorn file configuration installed${NC}"
+
+mkdir -p shared/pids shared/sockets shared/log
 echo -e "${BLUE}Copying unicorn startup script to /etc/init.d${NC}"
 sleep 1
 cp install/special_files/unicorn_init.sh /etc/init.d/unicorn_deltalock
