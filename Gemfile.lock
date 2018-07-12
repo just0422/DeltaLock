@@ -1,22 +1,12 @@
 GIT
-  remote: git://github.com/activerecord-hackery/ransack.git
-  revision: 85fc41b329ca2b316bab32c464dd8920fae74998
+  remote: https://github.com/activerecord-hackery/ransack.git
+  revision: 437f642c553c56de1b0f9a1569eaa5496d9552f4
   specs:
     ransack (1.8.8)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       i18n
-
-GIT
-  remote: git://github.com/rweng/jquery-datatables-rails.git
-  revision: d486b31b192a2924b1913e080ad23460e6b96d31
-  specs:
-    jquery-datatables-rails (3.4.0)
-      actionpack (>= 3.1)
-      jquery-rails
-      railties (>= 3.1)
-      sass-rails
 
 GIT
   remote: https://github.com/stympy/faker
@@ -67,8 +57,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    ajax-datatables-rails (0.4.3)
-      railties (>= 4.0)
     arel (7.1.4)
     autoprefixer-rails (8.6.4)
       execjs
@@ -88,12 +76,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
-    carrierwave (0.11.2)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
-      mimemagic (>= 0.3.0)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -151,10 +133,6 @@ GEM
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.5.2)
     method_source (0.9.0)
-    mime-types (3.1)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0521)
-    mimemagic (0.3.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
@@ -278,13 +256,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ajax-datatables-rails
   autoprefixer-rails
   bootstrap-sass
   byebug
   cancancan (~> 1.10)
   capybara (~> 2.5)
-  carrierwave (~> 0.9)
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.5)
   devise
@@ -294,7 +270,6 @@ DEPENDENCIES
   geokit-rails
   gmaps4rails
   jbuilder (~> 2.0)
-  jquery-datatables-rails!
   jquery-rails
   jquery-ui-rails
   materialize-sass (~> 1.0.0.beta)

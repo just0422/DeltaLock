@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo ./install/dependencies.sh
+
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
 GREEN='\033[0;32m'
@@ -31,9 +33,7 @@ sleep 0.25
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 echo -e "${BLUE}Installing rbenv${NC}"
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.profile
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-echo 'eval "$(rbenv init -)"' >> ~/.profile
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 # Check rbenv installation
@@ -43,7 +43,6 @@ echo -e "${BLUE}Cloning ruby build into rbenv${NC}"
 sleep 0.25
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
-echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.profile
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 echo -e "${BLUE}Installing ruby (this wll take a while...)${NC}"
 sleep 1
@@ -62,4 +61,3 @@ gem install rails -v 4.2.6 >/dev/null
 rbenv rehash
 install 'rails -v' 'Rails'
 
-source ~/.bashrc

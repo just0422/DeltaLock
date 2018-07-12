@@ -1,4 +1,5 @@
 #!/bin/bash
+. ./install/application.sh
 
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
@@ -37,10 +38,6 @@ else
     echo -e "${RED}There was an issue starting Unicorn. Abort...${NC}"
     exit 1
 fi
-
-echo -e "${BLUE}Installing nginx${NC}"
-apt-get -qq install nginx
-echo -e "${GREEN}Installed nginx${NC}"
 
 echo -e "${BLUE}Copying configuration file to Nginx${NC}"
 cp install/special_files/nginx_config /etc/nginx/sites-available/default
