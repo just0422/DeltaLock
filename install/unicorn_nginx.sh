@@ -1,5 +1,6 @@
 #!/bin/bash
-. ./install/application.sh
+
+source ~/.bashrc
 
 RED='\033[0;31m'
 YELLOW='\033[0;33m'

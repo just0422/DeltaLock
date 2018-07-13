@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./install/rails_install.sh
+source ~/.bashrc
 
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
@@ -50,7 +50,7 @@ sudo mysql_config_editor set --login-path=root --host=localhost --user=root --pa
 echo -e "${BLUE}Createing rails MySQL user${NC}"
 sudo mysql --login-path=root -e "GRANT ALL PRIVILEGES ON *.* TO '${deltauser}'@'localhost' IDENTIFIED BY '${deltapass}';"
 
-USER_EXISTS="$(mysql --login-path=root -sse "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user ='${deltauser}')")"
+USER_EXISTS="$(sudo mysql --login-path=root -sse "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user ='${deltauser}')")"
 if [ "$USER_EXISTS" = 1 ]; then
     echo -e "${BLUE}${deltauser} ${GREEN}successfully created!"
 else

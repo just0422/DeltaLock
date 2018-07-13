@@ -1,5 +1,5 @@
 # Each script begins the previous script before it starts it's own
-all: unicorn_nginx
+all: dependencies rails node_mysql application unicorn_nginx
 
 dependencies:
 	sudo ./install/dependencies.sh

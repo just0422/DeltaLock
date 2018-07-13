@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo ./install/dependencies.sh
+source ~/.bashrc
 
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
@@ -44,20 +44,28 @@ sleep 0.25
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
 echo -e "${BLUE}Installing ruby (this wll take a while...)${NC}"
-sleep 1
-#source ~/.bashrc
-rbenv install --verbose 2.3.1
-rbenv global 2.3.1
-install 'ruby -v' 'ruby'
+if ruby -v; then
+	echo -e "${GREEN}Ruby already installed${NC}"
+else
+	sleep 1
+	#source ~/.bashrc
+	rbenv install --verbose 2.3.1
+	rbenv global 2.3.1
+	install 'ruby -v' 'ruby'
+fi
 
 echo -e "${BLUE}Installing bundle${NC}"
 sleep 0.25
 install 'gem install --verbose bundler' 'bundle'
 
 echo -e "${BLUE}Installing Rails (this will take a while too..)${NC}"
-sleep 1
-gem install --verbose rails -v 4.2.6
-rbenv rehash
-install 'rails -v' 'Rails'
-
+if rails -v; then
+	echo -e "${GREEN}Rails already installed${NC}"
+then
+	sleep 1
+	gem install --verbose rails -v 4.2.6
+	rbenv rehash
+	install 'rails -v' 'Rails'
+fi

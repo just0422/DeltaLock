@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./install/node_mysql.sh
+source ~/.bashrc
 
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
@@ -8,10 +8,6 @@ GREEN='\033[0;32m'
 BLUE='\033[0;36m'
 NC='\033[0m'
 
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
 function install(){
 	if $1; then
