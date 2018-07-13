@@ -53,11 +53,11 @@ install 'ruby -v' 'ruby'
 
 echo -e "${BLUE}Installing bundle${NC}"
 sleep 0.25
-install 'gem install bundler' 'bundle' >/dev/null
+install 'gem install --verbose bundler' 'bundle'
 
 echo -e "${BLUE}Installing Rails (this will take a while too..)${NC}"
 sleep 1
-gem install rails -v 4.2.6 >/dev/null
+gem install --verbose rails -v 4.2.6
 rbenv rehash
 install 'rails -v' 'Rails'
 
