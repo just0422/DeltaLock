@@ -1,17 +1,8 @@
 # Each script begins the previous script before it starts it's own
-all: dependencies rails node_mysql application unicorn_nginx
+all: production 
 
-dependencies:
-	sudo ./install/dependencies.sh
+production:
+	./install/production.sh
 
-rails:
-	./install/rails_install.sh
-
-node_mysql:
-	./install/node_mysql.sh
-
-application:
-	./install/application.sh
-
-unicorn_nginx:
-	./install/unicorn_nginx.sh
+develop:
+	./install/develop.sh
