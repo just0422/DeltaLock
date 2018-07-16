@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
     # Prevent CSRF attacks by raising an exception.
     # For APIs, you may want to use :null_session instead.
     protect_from_forgery with: :exception
-
+    
+    # Check that a user is signed in. If not, redirect to login page
     before_action :configure_permitted_parameters, if: :devise_controller?
     rescue_from CanCan::AccessDenied do |exception|
         redirect_to new_user_session_url
@@ -13,6 +14,21 @@ class ApplicationController < ActionController::Base
     helper_method :is_admin
 
     protected
+    # Gathers the human readable parts of an assignment.
+    #
+    # Used by:
+    #   - assign_controller [ assignment() ]
+    #   - entry_controller [ get_assignemts(...) ]
+    #   - manage_controller [ index() ]
+    #
+    # Params:
+    #   parts - the IDs of each part of a given assignment (Key, EndUser, Purchaser, PurchaseOrder)
+    #
+    # Returns:
+    #   Upon completion, each field in the returned hash will either be a nil or another hash.
+    #       If the assignment contained no key, then the returned hash will have a key field value
+    #       of nil. If the assignment contained a key, then the returned hash will have a sub-hash
+    #       for key that contains the name and id of that key
     def assign_parts(parts)
         assignment_parts = Hash.new
 
@@ -47,6 +63,13 @@ class ApplicationController < ActionController::Base
         return assignment_parts
     end
 	
+    # Sets global variables that are used by many different functions in different controllers
+    #   based off of the parameters defined in the request
+    #
+    # Used by:
+    # - assign_controller [ create(), new(), search() ]
+    # - entry_controller [ show(), edit(), update(), delete() ]
+    # - manage_controller [ upload(), download() ]
     def set_variables
 		case params[:type]
 		when "keys"
@@ -63,7 +86,12 @@ class ApplicationController < ActionController::Base
 		@id = params[:id]
 		@type = params[:type]
 	end
-
+    
+    # Creates an entry (Key, EndUser, Purchaser, PurchaseOrder) based off of the parameters
+    #
+    # Used by:
+    # - assign_controller [ create() ]
+    # - entry_controller [ create() ]
     def create_entry
         # Determine the type and create it
         case params[:type]
@@ -82,6 +110,11 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    # Checks if a user is a viewer based off of permissions defined in app/models/User.rb
+    # 
+    # Used by:
+    # - application.html.erb
+    # - home_page/index.html.erb
     def is_viewer
         return (can? :read, Key) && 
                (can? :read, EndUser) && 
@@ -89,6 +122,12 @@ class ApplicationController < ActionController::Base
                (can? :read, PurchaseOrder) && 
                (can? :read, Relationship)
     end
+
+    # Checks if a user is an editor based off of permissions defined in app/models/User.rb
+    # 
+    # Used by:
+    # - application.html.erb
+    # - home_page/index.html.erb
     def is_editor
         return (can? :create, Key) && 
                (can? :create, EndUser) && 
@@ -96,12 +135,14 @@ class ApplicationController < ActionController::Base
                (can? :create, PurchaseOrder) && 
                (can? :create, Relationship)
     end
+
+    # Checks if a user is an admin based off of permissions defined in app/models/User.rb
+    # 
+    # Used by:
+    # - application.html.erb
+    # - home_page/index.html.erb
     def is_admin
         return (can? :manage, :all)
-    end
-
-    def readable_classes
-        [Key, EndUser, Purchaser, PurchaseOrder, Relationship]
     end
 
     def configure_permitted_parameters
