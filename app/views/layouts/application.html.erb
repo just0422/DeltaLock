@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>DeltaLock</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSpBVcEmUnLMXS1wN9Mx8JcOhWvLA0kvY&v=3" async defer type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&v=3" async defer type="text/javascript"></script>
 
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>

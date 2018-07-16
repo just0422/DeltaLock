@@ -177,6 +177,7 @@ sudo rm -f .rbenv-vars
 echo "SECRET_KEY_BASE=$secret_key" >> .rbenv-vars
 echo "DELTALOCK_DATABASE_USERNAME=$DELTAUSER" >> .rbenv-vars
 echo "DELTALOCK_DATABASE_PASSWORD=$DELTAPASS" >> .rbenv-vars
+echo "GOOGLE_MAPS_API_KEY=AIzaSyDwblQx2yG6IcFY3o5UFcpfrp3xSW3U5uw" >> .rbenv-vars
 
 echo -e "\n${BLUE}Removing devise methods from routes and user${NC}"
 sleep 1

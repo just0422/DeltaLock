@@ -178,10 +178,11 @@ cd ~/DeltaLock
 secret_key="$(rake secret)"
 sudo rm -f .rbenv-vars
 
-# Save the key and Username/password
+# Save the key, Username/password, and private google maps API Key
 echo "SECRET_KEY_BASE=$secret_key" >> .rbenv-vars
 echo "DELTALOCK_DATABASE_USERNAME=$DELTAUSER" >> .rbenv-vars
 echo "DELTALOCK_DATABASE_PASSWORD=$DELTAPASS" >> .rbenv-vars
+echo "GOOGLE_MAPS_API_KEY=AIzaSyDwblQx2yG6IcFY3o5UFcpfrp3xSW3U5uw" >> .rbenv-vars
 
 # Comment out devise references in the app
 echo -e "\n${BLUE}Removing devise methods from routes and user${NC}"
