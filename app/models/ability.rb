@@ -1,6 +1,7 @@
 class Ability
   include CanCan::Ability
-
+  
+  # Defines what a user permission is capapable of reading/writing to
   def initialize(user)
       user ||= User.new
       if user.admin?
