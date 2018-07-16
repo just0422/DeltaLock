@@ -12,8 +12,52 @@ Welcome to DeltaLock's key management software. This software is designed and im
 * Root access to a server running Ubuntu 16.04
 
 ## Installation
-Installation should be a very simply setup. There are installation scripts in the install directory that will install all necessary files. 
+Installation should be a very simply setup. There are two installation scripts in the install directory that will install all necessary files. 
 
+### Installation details
+This will install every aspect of the application. There are, however, individual aspects that can be installed for development purposes. These are the important files for installation:
+```
+Makefile
+install/
+|--- development.sh
+|--- production.sh
+|--- special_files/
+|    |--- nginx_config
+|    |--- unicorn_init.sh
+|    |--- unicorn.rb
+```
+The installation script begins by installing all necessary libraries for rails to function. During the installation, the MySQL database software is installed. There will be a default user named `root` that is created. The installer will ask for a password for `root`. For development, this password need not be secure. For production however, this should be a very secure password. After the software is installed, it's security is checked. The `root` password must be entered once. There will be a list of questions to answer based off of how secure you need the database to be.
+Following the database install, `ruby` and `rails` get installed. Both of these take a long time. If seems like either one is stuck, give it a few more minutes before attempting to restart. After `ruby` and `rails` are installed, MySQL is started. It is recommended by `rails` that the database user for the applicationis *not* `root`. Therefore, the installation will prompt for a `DeltaLock MySQL username`:
+```
+$ Please enter DeltaLock MySQL username: SAMPLE_USERNAME
+$ Please enter DeltaLock MySQL password:
+$ Please confirm DeltaLock MySQL password:
+```
+This will be unique to the application. It will also prompt for a password. After the database user is created, the application can be installed. The DeltaLock database tables can be created and assets compiled. The next thing that the install script will ask for is the default admin user. Since the DeltaLock app needs to be logged into to be used, the app can't be created without any users. The script provides a default first name, last name, email, and password, but they may be changed if desired.
+```
+$ First name (Admin): SAMPLE_FIRST_NAME
+$ Last name (User):
+$ Email (admin@deltalock.biz):
+$ Password (abc123):
+$ Password confirmation:
+...
+$ Creating User - SAMPLE_FIRST_NAME User
+```
+At this point, the development installation is over. You can open another terminal, navigate to the DeltaLock directory and type `rails server`. The rails server will start and you can visit the local website at this URL address: [http://localhost:3000](http://localhost:3000).
+For production, rails will install unicorn and nginx.
+
+### Development
+The `Makefile` is the simplest way to install any of these pieces. To setup for development run:
+```
+$ make development
+```
+If installation is successful, this will be displayed:
+```
+------------------------------------------------------------
+| DeltaLock Development Environment Successfuly Installed! |
+------------------------------------------------------------
+You can start the rails development server by executing the command: 'rails server'. Then navigate to http://localhost:3000 in a web browser
+```
 ### Production
 For a complete installation:
 ```
@@ -22,60 +66,13 @@ $ cd DeltaLock
 $ make
 ```
 *Note: the program `make` needs to be installed prior to executing any of the install scripts. If it is not, simply issue the command `sudo apt install make`. Then, enter the user password. `make` will install.*
-This will install every aspect of the application. There are, however, individual aspects that can be installed for development purposes. These are the important files for installation:
-```
-Makefile
-install/
-|--- db_unicorn.sh
-|--- dependencies.sh
-|--- node_mysql.sh
-|--- rails_install.sh
-|--- special_files/
-|    |--- nginx_config
-|    |--- unicorn_init.sh
-|    |--- unicorn.rb
-|--- unicorn_nginx.sh
-```
-### Development
-The `Makefile` is the simplest way to install any of these pieces. For development purposes, the `unicorn_nginx.sh` file does not need to be run. To setup for development run:
-```
-$ make dependencies
-```
-This will install all the libraries that rails is dependent on. The next step is to install rails:
-```
-$ make rails
-```
-This may take a while, but will completely install `ruby` and `rails`. The next command sets up the database:
-```
-$ make node_mysql
 
-** At some point, the installer will ask for a database user and password. 
-** Simply supply the following information
-Username: root
-Password: 12345
+If installation is successful, this will be displayed:
 ```
-After the database is installed, it is time to set it up. There is one small disclaimer though. Running the setup script may also install a gem called `unicorn`. If it installs, there is no issue. It will not affect anything unless it is configured (which happens in `unicorn_ngnx.sh`). However, if you don't want it installed, make sure that this line is commented out in `db_unicorn.sh`:
+----------------------------------------------------------------
+|           DeltaLock Software Successfuly Installed!          |
+----------------------------------------------------------------
 ```
-*** install/db_unicorn.sh ***
-
-51: # echo "gem 'unicorn'" >> Gemfile
-```
-After this, run the following script to configure the database:
-```
-$ make db_unicorn
-```
-After all of this has completed,  you should be able to run the follow command:
-```
-$ rails server
-```
-If all is well this will start up a server that begins listening on port 3000. You can't navigate there in a browser just yet. Although the appropriate software has been installed, the application software has yet to be installed. Stop the server by typing `CTRL + C`. Execute the following commands to make sure that the application gets installed successfully:
-```
-$ bundle install
-...
-$ rails db:create
-$ rails db:migrate
-```
-At this point, the application should be all set up. Start the server once more with `rails server`, open a browser and navigate to [localhost:3000](http://localhost:3000).
 
 ## Important Files
 At this point, the app has been installed and is running. Take a look the directories and files that rails contains:

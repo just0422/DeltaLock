@@ -4,5 +4,5 @@ all: production
 production:
 	./install/production.sh
 
-develop:
-	./install/develop.sh
+development:
+	./install/development.sh
