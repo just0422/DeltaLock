@@ -127,82 +127,83 @@ unicorn.rb      # unicorn setup
 This file looks like this:
 ```
 default: &default
-  adapter: mysql2
-    encoding: utf8
-      pool: 5
-        username: root
-          password: 12345
+adapter: mysql2
+encoding: utf8
+pool: 5
+username: root
+password: 12345
 
-          development:
-            <<: *default
-              database: DeltaLock_development
+development:
+<<: *default
+database: DeltaLock_development
 
-              test:
-                <<: *default
-                  database: DeltaLock_test
+test:
+<<: *default
+database: DeltaLock_test
 
-                  production:
-                    <<: *default
-                      database: DeltaLock_production
-                        username: administrator
-                          password: <%= ENV['DELTALOCK_DATABASE_PASSWORD'] %>
-                            socket: /var/run/mysqld/mysqld.sock
-                            ```
-                            It contains all the info for connecting with the database
+production:
+<<: *default
+database: DeltaLock_production
+username: administrator
+password: <%= ENV['DELTALOCK_DATABASE_PASSWORD'] %>
+socket: /var/run/mysqld/mysqld.sock
+```
+It contains all the info for connecting with the database
+
 #### routes.rb
-                            The routes file looks liek this:
-                            ```
-                            Rails.application.routes.draw do
-                                # Routing for user management.
-                                    # This is handled by a separate library. There are a few overridden functions
-                                        #   that are setup to allow user management by an admin
-                                            devise_for :users, :controllers => { registrations: 'registrations' }
-                                                devise_scope :user do
-                                                        get "users/edit/:id"    => "registrations#edit_users",      :as => :edit_user
-                                                                put "users/update"      => "registrations#update_users",    :as => :update_user
-                                                                        delete "users/:id"      => "registrations#destroy_users",   :as => :delete_user
-                                                                            end
+The routes file looks liek this:
+```
+Rails.application.routes.draw do
+    # Routing for user management.
+    # This is handled by a separate library. There are a few overridden functions
+    #   that are setup to allow user management by an admin
+    devise_for :users, :controllers => { registrations: 'registrations' }
+    devise_scope :user do
+        get "users/edit/:id"    => "registrations#edit_users",      :as => :edit_user
+        put "users/update"      => "registrations#update_users",    :as => :update_user
+        delete "users/:id"      => "registrations#destroy_users",   :as => :delete_user
+    end
 
-                                                                                # Starting point of the app. app/controller/home_page_controller.rb - index()
-                                                                                    root to: "home_page#index"
-                                                                                        get '' => 'home_page#index'
-                                                                                            
-                                                                                                # These are all the routes for the individual pages of each element (standard rails CRUD routes)
-                                                                                                    get '/entry/show/:type/:id',        to: 'entry#show',   as: 'show_entry'
-                                                                                                        get '/entry/new',                   to: 'entry#new',    as: 'new_entry'
-                                                                                                            get '/entry/edit/:type/:id',        to: 'entry#edit',   as: 'edit_entry'
-                                                                                                                post '/entry/create/:type',         to: 'entry#create', as: 'create_entry'
-                                                                                                                    post '/entry/update/:type/:id',     to: 'entry#update', as: 'update_entry'
-                                                                                                                        delete '/entry/delete/:type/:id',   to: 'entry#delete', as: 'delete_entry'
+    # Starting point of the app. app/controller/home_page_controller.rb - index()
+    root to: "home_page#index"
+    get '' => 'home_page#index'
+                                                                                                
+    # These are all the routes for the individual pages of each element (standard rails CRUD routes)
+    get '/entry/show/:type/:id',        to: 'entry#show',   as: 'show_entry'
+    get '/entry/new',                   to: 'entry#new',    as: 'new_entry'
+    get '/entry/edit/:type/:id',        to: 'entry#edit',   as: 'edit_entry'
+    post '/entry/create/:type',         to: 'entry#create', as: 'create_entry'
+    post '/entry/update/:type/:id',     to: 'entry#update', as: 'update_entry'
+    delete '/entry/delete/:type/:id',   to: 'entry#delete', as: 'delete_entry'
 
-                                                                                                                            # These are all the routes for the search pages
-                                                                                                                                get '/search',         to: 'search#index',  as: 'search'
-                                                                                                                                    post '/search/result', to: 'search#result', as: 'search_result'
-                                                                                                                                        
-                                                                                                                                            # These are all the routes for the assign page
-                                                                                                                                                get '/assign',                  to: 'assign#index'
-                                                                                                                                                    get '/assign/new/:type',        to: 'assign#new',               as: 'new_assign'
-                                                                                                                                                        get '/assign/search/:type',     to: 'assign#search',            as: 'search_assign'
-                                                                                                                                                            get '/assign/edit/:id',         to: 'assign#edit',              as: 'edit_assign'
-                                                                                                                                                                get '/assign/filter/map',       to: 'assign#filter_map',        as: 'filter_map'
-                                                                                                                                                                    post '/assign/create/:type',    to: 'assign#create',            as: 'create_assign'
-                                                                                                                                                                        post '/assign/result/:type',    to: 'assign#result',            as: 'result_assign'
-                                                                                                                                                                            post '/assign/update/:id',      to: 'assign#update',            as: 'update_assign'
-                                                                                                                                                                                post '/assign/enduser',         to: 'assign#session_enduser',   as: 'session_enduser'
-                                                                                                                                                                                    post '/assign/update_map',      to: 'assign#update_map',        as: 'update_map'
-                                                                                                                                                                                        post '/assign/assignment',      to: 'assign#assignment',        as: 'assignment'
-                                                                                                                                                                                            delete '/assign/delete/:id',    to: 'assign#delete',            as: 'delete_assign'
+    # These are all the routes for the search pages
+    get '/search',         to: 'search#index',  as: 'search'
+    post '/search/result', to: 'search#result', as: 'search_result'
+                                                                                                                                            
+    # These are all the routes for the assign page
+    get '/assign',                  to: 'assign#index'
+    get '/assign/new/:type',        to: 'assign#new',               as: 'new_assign'
+    get '/assign/search/:type',     to: 'assign#search',            as: 'search_assign'
+    get '/assign/edit/:id',         to: 'assign#edit',              as: 'edit_assign'
+    get '/assign/filter/map',       to: 'assign#filter_map',        as: 'filter_map'
+    post '/assign/create/:type',    to: 'assign#create',            as: 'create_assign'
+    post '/assign/result/:type',    to: 'assign#result',            as: 'result_assign'
+    post '/assign/update/:id',      to: 'assign#update',            as: 'update_assign'
+    post '/assign/enduser',         to: 'assign#session_enduser',   as: 'session_enduser'
+    post '/assign/update_map',      to: 'assign#update_map',        as: 'update_map'
+    post '/assign/assignment',      to: 'assign#assignment',        as: 'assignment'
+    delete '/assign/delete/:id',    to: 'assign#delete',            as: 'delete_assign'
 
-                                                                                                                                                                                                get '/manage',                          to: 'manage#index'
-                                                                                                                                                                                                    get '/manage/download/:template/:type', to: 'manage#download',  as: 'download'
-                                                                                                                                                                                                        post '/manage/upload',                  to: 'manage#upload',    as: 'upload_manage'
-                                                                                                                                                                                                        end
-                                                                                                                                                                                                        ```
-                                                                                                                                                                                                        This file is pivotal  in the function of the app. Every single request that comes from the browser stops at this file before figuring out where to go next. It matches with a path above and then enders the controller at the function indicated by `to:`.
+    get '/manage',                          to: 'manage#index'
+    get '/manage/download/:template/:type', to: 'manage#download',  as: 'download'
+    post '/manage/upload',                  to: 'manage#upload',    as: 'upload_manage'
+end
+```
+This file is pivotal  in the function of the app. Every single request that comes from the browser stops at this file before figuring out where to go next. It matches with a path above and then enders the controller at the function indicated by `to:`.
 
-                                                                                                                                                                                                        For instance [localhost:3000/entry/show/endusers/1](http://localhost:3000/entry/show/endusers/1) will match with the `/entry/show/:type/:id` route. It will be passed to the entry conroller (`app/controllers/entry_controller.rb`) to the `show()` function. The app will pass "endusers" and "1" as parameters to the `show()` function. After this, unless otherwise specified, the show view for the entry controller (`app/views/enntry/show.html.erb`) will be rendered.
+For instance [localhost:3000/entry/show/endusers/1](http://localhost:3000/entry/show/endusers/1) will match with the `/entry/show/:type/:id` route. It will be passed to the entry conroller (`app/controllers/entry_controller.rb`) to the `show()` function. The app will pass "endusers" and "1" as parameters to the `show()` function. After this, unless otherwise specified, the show view for the entry controller (`app/views/enntry/show.html.erb`) will be rendered.
 
-                                                                                                                                                                                                        *Files with an extension `.erb` will have ruby inserted inside of them. This allows the controller to pass information to the view*
+*Files with an extension `.erb` will have ruby inserted inside of them. This allows the controller to pass information to the view*
 
 
 ### db/
