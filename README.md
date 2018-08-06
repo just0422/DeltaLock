@@ -58,8 +58,9 @@ If installation is successful, this will be displayed:
 ------------------------------------------------------------
 | DeltaLock Development Environment Successfuly Installed! |
 ------------------------------------------------------------
-You can start the rails development server by executing the command: 'rails server'. Then navigate to http://localhost:3000 in a web browser
 ```
+You can start the rails development server by executing the command: 'rails server'. Then navigate to http://localhost:3000 in a web browser
+
 ### Production
 For a complete installation:
 ```
@@ -74,6 +75,7 @@ If installation is successful, this will be displayed:
 |           DeltaLock Software Successfuly Installed!          |
 ----------------------------------------------------------------
 ```
+You should then be able to nagivate to http://IP_ADDRESS/ and view the website
 
 ## Important Files
 At this point, the app has been installed and is running. Take a look the directories and files that rails contains:
