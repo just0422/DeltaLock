@@ -14,6 +14,8 @@ Welcome to DeltaLock's key management software. This software is designed and im
 ## Installation
 Installation should be a very simply setup. There are two installation scripts in the install directory that will install all necessary files. 
 
+*Note: the program `make` needs to be installed prior to executing any of the install scripts. If it is not, simply issue the command `sudo apt install make`. Then, enter the user password. `make` will install.*
+
 ### Installation details
 This will install every aspect of the application. There are, however, individual aspects that can be installed for development purposes. These are the important files for installation:
 ```
@@ -65,7 +67,6 @@ $ git clone git@github.com:just0422/DeltaLock.git
 $ cd DeltaLock
 $ make
 ```
-*Note: the program `make` needs to be installed prior to executing any of the install scripts. If it is not, simply issue the command `sudo apt install make`. Then, enter the user password. `make` will install.*
 
 If installation is successful, this will be displayed:
 ```
